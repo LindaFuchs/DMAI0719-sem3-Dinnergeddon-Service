@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dinnergeddon", "Dinnergeddon\Dinnergeddon.csproj", "{A81E40F8-B895-48DC-B2BF-269E217D4C85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerGeddonWeb", "DinnerGeddonWeb\DinnerGeddonWeb.csproj", "{F340E9F8-05EC-4E3D-B95E-8BAB9492A2DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerGeddonWeb.Tests", "DinnerGeddonWeb.Tests\DinnerGeddonWeb.Tests.csproj", "{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{A81E40F8-B895-48DC-B2BF-269E217D4C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A81E40F8-B895-48DC-B2BF-269E217D4C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A81E40F8-B895-48DC-B2BF-269E217D4C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F340E9F8-05EC-4E3D-B95E-8BAB9492A2DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F340E9F8-05EC-4E3D-B95E-8BAB9492A2DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F340E9F8-05EC-4E3D-B95E-8BAB9492A2DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F340E9F8-05EC-4E3D-B95E-8BAB9492A2DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

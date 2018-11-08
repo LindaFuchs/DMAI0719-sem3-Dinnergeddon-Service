@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerGeddonWeb", "DinnerGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerGeddonWeb.Tests", "DinnerGeddonWeb.Tests\DinnerGeddonWeb.Tests.csproj", "{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBLayer", "DBLayer\DBLayer.csproj", "{B9657908-0A19-4931-8C84-3993BA1E60B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9657908-0A19-4931-8C84-3993BA1E60B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9657908-0A19-4931-8C84-3993BA1E60B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9657908-0A19-4931-8C84-3993BA1E60B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9657908-0A19-4931-8C84-3993BA1E60B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

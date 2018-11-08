@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using DBLayer;
 
 namespace Dinnergeddon
 {
@@ -6,7 +8,7 @@ namespace Dinnergeddon
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world!");
+            Console.WriteLine("Hello world");
         }
     }
 }

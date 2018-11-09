@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using Model;
 
 namespace DinnergeddonService
 {
@@ -6,6 +7,16 @@ namespace DinnergeddonService
     public interface IAccountService
     {
         [OperationContract]
-        bool Registration(string name, string email, string password, int id);
+        bool Register(string username, string email, string password, int id);
+        [OperationContract]
+        bool CheckUsername(string username);
+        [OperationContract]
+        bool CheckEmail(string email);
+        [OperationContract]
+        Account GetInfo();
+        [OperationContract]
+        bool EditAccount(string username, string email, string password);
+        [OperationContract]
+        bool Login(string username, string password);
     }
 }

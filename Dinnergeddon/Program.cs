@@ -11,24 +11,24 @@ namespace Dinnergeddon
         {
             Uri baseAddress = new Uri("http://localhost:8733/DinnergeddonService/");
 
-            ServiceHost proxy = new ServiceHost(typeof(AccountService), baseAddress);
+            ServiceHost host = new ServiceHost(typeof(AccountService), baseAddress);
 
             try
             {
-                proxy.AddServiceEndpoint(typeof(IAccountService), new BasicHttpBinding(), "AccountService");
+                host.AddServiceEndpoint(typeof(IAccountService), new BasicHttpBinding(), "AccountService");
 
-                proxy.Open();
+                host.Open();
 
                 Console.WriteLine("Service has been started");
                 Console.WriteLine("Press enter to terminate service...");
                 Console.ReadLine();
                 
-                proxy.Close();
+                host.Close();
             }
             catch(CommunicationException e)
             {
                 Console.WriteLine(e.Message);
-                proxy.Abort();
+                host.Abort();
             }
         }
     }

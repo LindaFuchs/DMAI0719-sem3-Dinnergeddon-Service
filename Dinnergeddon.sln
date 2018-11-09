@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonService", "DinnergeddonService\DinnergeddonService.csproj", "{9139FBB0-7245-42EB-A5C7-54248C5DFA6D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceClientTest", "ServiceClientTest\ServiceClientTest.csproj", "{6D1F6AA9-C673-46FD-AE2C-272CD4E088CB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9139FBB0-7245-42EB-A5C7-54248C5DFA6D} = {9139FBB0-7245-42EB-A5C7-54248C5DFA6D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

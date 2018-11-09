@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="EditAccountTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterAccountTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -32,7 +32,11 @@ namespace DinnerGeddonWeb.Tests.Controllers
         [TestMethod]
         public void ShouldReturnTrueIfAccountRegistered()
         {
-           
+            var proxy = new AccountService();
+
+            bool accountRegisterStatus = proxy.Register("A Nice gay", "me@me.me", "1234");
+
+            Assert.IsTrue(accountRegisterStatus);
         }
     }
 }

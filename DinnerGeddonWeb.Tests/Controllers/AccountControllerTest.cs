@@ -30,14 +30,9 @@ namespace DinnerGeddonWeb.Tests.Controllers
         }
 
         [TestMethod]
-        public void ShouldBeRegisteredWhenUserRegisters()
+        public void ShouldReturnTrueIfAccountRegistered()
         {
-            //AccountController controller = new AccountController();
-
-            //controller.Register()
-
-            
+           
         }
-
     }
 }

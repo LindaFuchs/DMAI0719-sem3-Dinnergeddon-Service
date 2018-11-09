@@ -9,7 +9,7 @@ namespace Dinnergeddon
     {
         static void Main(string[] args)
         {
-            Uri baseAddress = new Uri("http://localhost:8733/DinnergeddonService/AccountService/");
+            Uri baseAddress = new Uri("http://localhost:8733/DinnergeddonService/");
 
             ServiceHost proxy = new ServiceHost(typeof(AccountService), baseAddress);
 

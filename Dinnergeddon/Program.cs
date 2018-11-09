@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using DBLayer;
+using System.ServiceModel;
+using DinnergeddonService;
 
 namespace Dinnergeddon
 {
@@ -8,7 +9,27 @@ namespace Dinnergeddon
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world");
+            Uri baseAddress = new Uri("http://localhost:8733/DinnergeddonService/AccountService/");
+
+            ServiceHost proxy = new ServiceHost(typeof(AccountService), baseAddress);
+
+            try
+            {
+                proxy.AddServiceEndpoint(typeof(IAccountService), new BasicHttpBinding(), "AccountService");
+
+                proxy.Open();
+
+                Console.WriteLine("Service has been started");
+                Console.WriteLine("Press enter to terminate service...");
+                Console.ReadLine();
+                
+                proxy.Close();
+            }
+            catch(CommunicationException e)
+            {
+                Console.WriteLine(e.Message);
+                proxy.Abort();
+            }
         }
     }
 }

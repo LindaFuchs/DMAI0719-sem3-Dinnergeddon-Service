@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DinnerGeddonWeb;
-using DinnerGeddonWeb.Controllers;
+using DinnergeddonWeb;
+using DinnergeddonWeb.Controllers;
 
 namespace DinnerGeddonWeb.Tests.Controllers {
     [TestClass]

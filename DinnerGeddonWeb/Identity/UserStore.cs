@@ -26,7 +26,8 @@ namespace DinnergeddonWeb.Identity
             if (user == null)
                 throw new ArgumentNullException("user");
 
-            return Task.Factory.StartNew(() => {
+            return Task.Factory.StartNew(() =>
+            {
 
                 //converting Identity model to the Account class in the project Model
                 Account account = new Account()
@@ -41,33 +42,104 @@ namespace DinnergeddonWeb.Identity
 
                 //the service interface Register method should accept Account model object instead of parameters
                 _proxy.Register(account);
-              
+
             });
         }
 
         public Task DeleteAsync(User user)
         {
-            
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            return Task.Factory.StartNew(() =>
+            {
+                //delete account
+            });
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public Task<User> FindByIdAsync(string userId)
         {
-            throw new NotImplementedException();
+
+            if (string.IsNullOrWhiteSpace(userId))
+                throw new ArgumentNullException("userId");
+
+            Guid parsedUserId;
+            if (!Guid.TryParse(userId, out parsedUserId))
+                throw new ArgumentOutOfRangeException("userId", string.Format("'{0}' is not a valid GUID.", new { userId }));
+
+            //return Task.Factory.StartNew(() =>
+            //{
+            //   //return user 
+            //});
         }
 
         public Task<User> FindByNameAsync(string userName)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(userName))
+                throw new ArgumentNullException("userName");
+
+            //return Task.Factory.StartNew(() =>
+            //{
+            //    return user
+            //});
         }
 
         public Task UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            //return Task.Factory.StartNew(() =>
+            //{
+            //    //update user
+            //});
         }
+
+        public Task<string> GetPasswordHashAsync(User user)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            return Task.FromResult(user.PasswordHash);
+        }
+
+        public virtual Task<bool> HasPasswordAsync(User user)
+        {
+            return Task.FromResult(!string.IsNullOrEmpty(user.PasswordHash));
+        }
+
+        public virtual Task SetPasswordHashAsync(User user, string passwordHash)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            user.PasswordHash = passwordHash;
+
+            return Task.FromResult(0);
+        }
+
+        public virtual Task<string> GetSecurityStampAsync(User user)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            return Task.FromResult(user.SecurityStamp);
+        }
+
+        public virtual Task SetSecurityStampAsync(User user, string stamp)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            user.SecurityStamp = stamp;
+
+            return Task.FromResult(0);
+        }
+
+
     }
 }

@@ -2,24 +2,24 @@
 {
     public class Account
     {
-        private string username;
-        private string email;
-        private string password;
-        private int ID;
-
         public Account(string username, string email, string password, int ID)
         {
-            this.username = username;
-            this.email = email;
-            this.password = password;
+            Username = username;
+            Email = email;
+            Password = password;
             this.ID = ID;
         }
 
         public Account(string username, string email, string password)
         {
-            this.username = username;
-            this.email = email;
-            this.password = password;
+            Username = username;
+            Email = email;
+            Password = password;
         }
+
+        public string Username { get; }
+        public string Email { get; }
+        public string Password { get; }
+        private int ID { get; }
     }
 }

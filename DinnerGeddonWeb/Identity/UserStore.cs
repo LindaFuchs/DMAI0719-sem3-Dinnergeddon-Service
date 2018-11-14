@@ -41,7 +41,8 @@ namespace DinnergeddonWeb.Identity
                 };
 
                 //the service interface Register method should accept Account model object instead of parameters
-              //  _proxy.Register(account);
+                //  _proxy.Register(account);
+                return IdentityResult.Success;
 
             });
         }
@@ -83,11 +84,12 @@ namespace DinnergeddonWeb.Identity
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentNullException("userName");
 
-            //return Task.Factory.StartNew(() =>
-            //{
+            return Task.Factory.StartNew(() =>
+            { 
             //    return user
-            return null;
-            //});
+            // get and return a user if it exists, if not create an empty one
+            return new User();
+            });
         }
 
         public Task UpdateAsync(User user)

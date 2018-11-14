@@ -33,7 +33,7 @@ namespace DinnergeddonUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            UsernameTextBox.Text = "sadsad";
+            UsernameTextBox.Text = "Log in button pressed";
         }
     }
 

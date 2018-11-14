@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DinnerGeddonWeb.Models;
 
 namespace DinnerGeddonWeb.Controllers
 {
@@ -14,14 +15,76 @@ namespace DinnerGeddonWeb.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Display the register page and form
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Register()
+        // GET: Account/Details/5
+        public ActionResult Details(int id)
         {
-            ViewBag.Message = "You're on the register page now!";
             return View();
+        }
+
+        // GET: Account/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Account/Create
+        [HttpPost]
+        public ActionResult Create(Account account)
+        {
+            try
+            {
+
+                // insert registration logic here
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Account/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: Account/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Account/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Account/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

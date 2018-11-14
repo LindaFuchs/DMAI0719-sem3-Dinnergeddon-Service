@@ -40,5 +40,11 @@ namespace DinnergeddonService.Tests
             var infoChecker = new AccountService();
             Assert.IsFalse(infoChecker.EditAccount(username, password, ""));
         }
+
+        [TestMethod]
+        public void Test_Something()
+        {
+
+        }
     }
 }

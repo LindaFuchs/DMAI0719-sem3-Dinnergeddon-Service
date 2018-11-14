@@ -1,13 +1,10 @@
 ﻿body {
-  
-    
-    
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
-
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-top:20px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -23,12 +20,37 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+   
 }
 
 .btn-reg {
     margin-top:10px;
-    background: #2A2323;
+    background: #c36800;
     color:white;
     width:inherit;
+}
+
+
+li.nav-item > a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.nav-item:hover{
+background:white;
+
+}
+.nav-item:hover a{
+    color:black;
+}
+.card-footer{
+    background-color:#282828;
+}
+.card-footer p {
+    color:white;
+}
+.nav-link{
+    padding:1rem;
 }

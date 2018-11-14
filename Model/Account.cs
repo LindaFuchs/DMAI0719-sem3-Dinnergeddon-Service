@@ -1,18 +1,13 @@
-﻿namespace Model
-{
-    public class Account
-    {
-        private string username;
-        private string email;
-        private string password;
-        private int ID;
+﻿using System;
 
-        public Account(string username, string email, string password, int ID)
-        {
-            this.username = username;
-            this.email = email;
-            this.password = password;
-            this.ID = ID;
-        }
+namespace Model {
+    public class Account{
+
+        public Guid UserId { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
+        public string SecurityStamp { get; set; }
+        
     }
 }

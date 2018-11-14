@@ -13,7 +13,7 @@ namespace DinnergeddonService.Tests
             var proxy = new AccountService();
 
             // Act
-            bool accountRegisterStatus = proxy.RegisterAccount("A Nice gay", "me@me.me", "1234");
+            bool accountRegisterStatus = proxy.Register("A Nice gay", "me@me.me", "1234");
 
             // Assert
             Assert.IsTrue(accountRegisterStatus);

@@ -134,7 +134,7 @@ namespace DinnergeddonWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { UserName = model.Email };
+                var user = new User() { Email = model.Email, UserName=model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -331,7 +331,7 @@ namespace DinnergeddonWeb.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        
+
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]

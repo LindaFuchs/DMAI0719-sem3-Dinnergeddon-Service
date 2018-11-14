@@ -41,7 +41,7 @@ namespace DinnergeddonWeb.Identity
                 };
 
                 //the service interface Register method should accept Account model object instead of parameters
-                _proxy.Register(account);
+              //  _proxy.Register(account);
 
             });
         }
@@ -74,6 +74,7 @@ namespace DinnergeddonWeb.Identity
             //return Task.Factory.StartNew(() =>
             //{
             //   //return user 
+            return null;
             //});
         }
 
@@ -85,6 +86,7 @@ namespace DinnergeddonWeb.Identity
             //return Task.Factory.StartNew(() =>
             //{
             //    return user
+            return null;
             //});
         }
 
@@ -96,6 +98,7 @@ namespace DinnergeddonWeb.Identity
             //return Task.Factory.StartNew(() =>
             //{
             //    //update user
+            return null;
             //});
         }
 

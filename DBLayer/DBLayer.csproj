@@ -42,8 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBComponents.cs" />
+    <Compile Include="AccountRepo.cs" />
+    <Compile Include="DbComponents.cs" />
+    <Compile Include="IAccountRepo.cs" />
+    <Compile Include="IDbComponents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{17556139-cc1d-48dd-a770-39f33ee57a75}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

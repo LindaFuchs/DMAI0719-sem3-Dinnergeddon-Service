@@ -4,11 +4,11 @@ using System.Data.Common;
 
 namespace DBLayer
 {
-    public class DBComponents
+    public class DbComponents : IDbComponents
     {
-        private static DBComponents instance;
+        private static DbComponents instance;
         
-        private DBComponents()
+        private DbComponents()
         {
             string provider = ConfigurationManager.ConnectionStrings["auto"].ProviderName;
             string connectionString = ConfigurationManager.ConnectionStrings["auto"].ConnectionString;
@@ -18,10 +18,10 @@ namespace DBLayer
             Connection.ConnectionString = connectionString;
         }
 
-        public static DBComponents GetInstance()
+        public static DbComponents GetInstance()
         {
             if (instance == null)
-                instance = new DBComponents();
+                instance = new DbComponents();
 
             return instance;
         }

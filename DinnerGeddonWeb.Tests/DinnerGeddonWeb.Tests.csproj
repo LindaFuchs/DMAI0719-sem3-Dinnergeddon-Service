@@ -100,9 +100,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DinnerGeddonWeb\DinnerGeddonWeb.csproj">
-      <Project>{F340E9F8-05EC-4E3D-B95E-8BAB9492A2DD}</Project>
-      <Name>DinnerGeddonWeb</Name>
+    <ProjectReference Include="..\DinnergeddonWeb\DinnergeddonWeb.csproj">
+      <Project>{a4704818-f962-42a1-8154-5a9489b35f0e}</Project>
+      <Name>DinnergeddonWeb</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

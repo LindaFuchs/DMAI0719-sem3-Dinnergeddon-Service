@@ -14,5 +14,12 @@
             this.password = password;
             this.ID = ID;
         }
+
+        public Account(string username, string email, string password)
+        {
+            this.username = username;
+            this.email = email;
+            this.password = password;
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace DinnergeddonService
     public interface IAccountService
     {
         [OperationContract]
-        bool Register(string username, string email, string password, int id);
+        bool RegisterAccount(string username, string email, string password);
         [OperationContract]
         bool CheckUsername(string username);
         [OperationContract]

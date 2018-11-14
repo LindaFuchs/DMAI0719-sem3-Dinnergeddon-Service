@@ -35,7 +35,7 @@ namespace DinnergeddonService
 
         public bool EditAccount(string username, string email, string password)
         {
-            if(!CheckUsername(username) || !CheckEmail(email) || !CheckPassword(password))
+            if()
             {
                 throw new ArgumentException();
             }

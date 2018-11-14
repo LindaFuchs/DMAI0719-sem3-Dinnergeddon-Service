@@ -7,9 +7,9 @@ namespace DinnergeddonService.Tests
     [TestClass]
     public class EditAccountTests
     {
-        String username = "us-er.name_1234";
+        String username = "userName1";
         String email = "testname@email.com";
-        String password = "testPass1@#$%";
+        String password = "testPass1";
 
 
         [TestMethod]

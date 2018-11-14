@@ -6,36 +6,53 @@ namespace DinnergeddonService
 {
     public class AccountService : IAccountService
     {
+
+        /*
+         * Checks if the email is valid for the given format: [string]@[string].
+         */
         public bool CheckEmail(string email)
         {
+            //Surrounded in a try catch block because the constructor throws exceptions when the email is invalid.
             try
             {
+                //Uses the MailAddress class to verify the email format.
                 var addr = new System.Net.Mail.MailAddress(email);
+                //Returns true if the check passes.
                 return addr.Address == email;
             }
+            //When an exception is thrown, we assume that the email address is not valid and returns false.
             catch
             {
                 return false;
             }
         }
-
+        /*
+         * Checks the username to ensure it only contains the permitted symbols
+         */
         public bool CheckUsername(string username)
         {
-            if(username.Length < 3 || username.Length > 32)
-            {
-                return false;
-            }
-            return Regex.IsMatch(username, "^[a-zA-Z0-9._-]+$");
+            //Uses Regular Expressions to validate that the username only contains the permitted characters.
+            //Verifies that the length of the string is at least 3 characters and at most 32 characters.
+            //Checks if the contained characters are lowercase letters, uppercase letters, numbers, or the symbols.
+            //Checks the whole string and gurantees at least one occurance.
+            return Regex.IsMatch(username, @"^(?=.{3,32}$)[A-Za-z0-9]*$");
         }
 
+        /*
+         * Checks the password to ensure that it fulfills the required criteria.
+         */
         public bool CheckPassword(string password)
         {
-            return Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$");
+            //Uses Regular Expressions to validate that the username only contains the permitted characters.
+            //Verifies that the length of the string is at least 6 and at most 12 characters.
+            //Checks if the contained characters have at least one uppercase letter, one lowercase letter, one number and no special characters.
+            //Checks the whole string for at least one occurance.
+            return Regex.IsMatch(password, @"^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]{6,12}$");
         }
 
         public bool EditAccount(string username, string email, string password)
         {
-            if(!CheckUsername(username) || !CheckEmail(email) || !CheckPassword(password))
+            if (!CheckUsername(username) || !CheckEmail(email) || !CheckPassword(password))
             {
                 throw new ArgumentException();
             }

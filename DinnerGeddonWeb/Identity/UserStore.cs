@@ -72,14 +72,19 @@ namespace DinnergeddonWeb.Identity
         /// <returns>Identity Model user object</returns>
         private User ModelAccountToIdentityUser(Account account)
         {
-            User user = new User()
+            if (account != null)
             {
-                UserId = account.Id,
-                Email = account.Email,
-                PasswordHash = account.PasswordHash,
-                SecurityStamp = account.SecurityStamp
-            };
-            return user;
+                User user = new User()
+                {
+                    UserId = account.Id,
+                    Email = account.Email,
+                    PasswordHash = account.PasswordHash,
+                    SecurityStamp = account.SecurityStamp
+                };
+                return user;
+            }
+            return null;
+
         }
         /// <summary>
         /// Converts the Identity User to Model Account. They have the same properties
@@ -88,15 +93,20 @@ namespace DinnergeddonWeb.Identity
         /// <returns>Model account object</returns>
         private Account IdentityUserToModelAccount(User user)
         {
-            Account account = new Account()
+            if (user != null)
             {
-                Id = new Guid(user.Id),
-                Email = user.Email,
-                PasswordHash = user.PasswordHash,
-                SecurityStamp = user.SecurityStamp
+                Account account = new Account()
+                {
+                    Id = new Guid(user.Id),
+                    Email = user.Email,
+                    PasswordHash = user.PasswordHash,
+                    SecurityStamp = user.SecurityStamp
 
-            };
-            return account;
+                };
+                return account;
+            }
+            return null;
+
         }
 
         /// <summary>
@@ -106,12 +116,12 @@ namespace DinnergeddonWeb.Identity
         /// <returns></returns>
         public Task<User> FindByNameAsync(string userName)
         {
-            if (string.IsNullOrWhiteSpace(userName))
-                throw new ArgumentNullException("userName");
+            //if (string.IsNullOrWhiteSpace(userName))
+            //    throw new ArgumentNullException("userName");
 
-            Account account = _proxy.FindByName(userName);
-            User user = ModelAccountToIdentityUser(account);
-            return Task.FromResult<User>(user);
+            //Account account = _proxy.FindByName(userName);
+            //User user = ModelAccountToIdentityUser(account);
+            return Task.FromResult<User>(null);
         }
 
         public Task UpdateAsync(User user)

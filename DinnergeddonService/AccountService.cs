@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Model;
 using DBLayer;
+using System.Collections.Generic;
 
 namespace DinnergeddonService
 {
@@ -91,11 +92,24 @@ namespace DinnergeddonService
             throw new NotImplementedException();
         }
 
-
+        /// <summary>
+        /// Get an Account from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Null if no accounts found in the database</returns>
         public Account FindById(Guid id)
         {
+            Account account = null;
+            try
+            {
+                account = accountRepo.GetAccountByID(id);
+                return account;
 
-            return accountRepo.GetAccountByID(id);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return account;
+            }
 
         }
 
@@ -105,9 +119,9 @@ namespace DinnergeddonService
         /// <param name="account"></param>
         /// <returns>True if the affected row is 1 </returns>
         public bool InsertAccount(Account account)
-        { 
-           int i= accountRepo.InsertAccount(account);
-           return (i==1) ? true : false;
+        {
+            int i = accountRepo.InsertAccount(account);
+            return (i == 1) ? true : false;
         }
     }
 }

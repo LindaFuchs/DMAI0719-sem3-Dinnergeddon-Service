@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dinnergeddon", "Dinnergeddon\Dinnergeddon.csproj", "{A81E40F8-B895-48DC-B2BF-269E217D4C85}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerGeddonWeb.Tests", "DinnerGeddonWeb.Tests\DinnerGeddonWeb.Tests.csproj", "{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBLayer", "DBLayer\DBLayer.csproj", "{B9657908-0A19-4931-8C84-3993BA1E60B6}"
@@ -21,16 +19,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonWeb", "Dinnerge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBLayer.Tests", "DBLayer.Tests\DBLayer.Tests.csproj", "{E865A3DB-AE02-4B57-B1AA-51680D755E7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonHost", "DinnergeddonHost\DinnergeddonHost.csproj", "{B126B46A-A332-4C7B-A814-D1DBAD9B4712}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A81E40F8-B895-48DC-B2BF-269E217D4C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A81E40F8-B895-48DC-B2BF-269E217D4C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A81E40F8-B895-48DC-B2BF-269E217D4C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A81E40F8-B895-48DC-B2BF-269E217D4C85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +59,10 @@ Global
 		{E865A3DB-AE02-4B57-B1AA-51680D755E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E865A3DB-AE02-4B57-B1AA-51680D755E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E865A3DB-AE02-4B57-B1AA-51680D755E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B126B46A-A332-4C7B-A814-D1DBAD9B4712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B126B46A-A332-4C7B-A814-D1DBAD9B4712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B126B46A-A332-4C7B-A814-D1DBAD9B4712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B126B46A-A332-4C7B-A814-D1DBAD9B4712}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

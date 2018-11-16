@@ -7,7 +7,7 @@ namespace DinnergeddonService.Tests
     public class RegisterAccountTests
     {
         [TestMethod]
-        public void ShouldReturnTrueIfAccountRegistered()
+        public void Test_RegisterAccount_Correct_Info_Passes()
         {
             // Arrange
             var proxy = new AccountService();
@@ -20,7 +20,7 @@ namespace DinnergeddonService.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnFalseWhenUsernameTaken()
+        public void Test_CheckUsername_Taken_Username_Fails()
         {
             // Arrange
             var proxy = new AccountService();
@@ -35,7 +35,7 @@ namespace DinnergeddonService.Tests
 
         }
         [TestMethod]
-        public void ShouldReturnTrueWhenUsernameNotTaken()
+        public void Test_CheckUsername_Username_Available_Passes()
         {
             // Arrange
             var proxy = new AccountService();
@@ -48,7 +48,7 @@ namespace DinnergeddonService.Tests
         }
 
         [TestMethod]
-        public void ShouldReturnTrueWhenEmailNotTaken()
+        public void Test_CheckEmail_Email_Available_Passes()
         {
             // Arrange
             var proxy = new AccountService();
@@ -60,7 +60,7 @@ namespace DinnergeddonService.Tests
 
         }
         [TestMethod]
-        public void ShouldReturnTrueWhenEmailTaken()
+        public void Test_CheckEmail_Email_Taken_Fails()
         {
             // Arrange
             var proxy = new AccountService();

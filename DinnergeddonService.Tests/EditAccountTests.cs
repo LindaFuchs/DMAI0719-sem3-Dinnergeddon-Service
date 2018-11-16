@@ -7,9 +7,9 @@ namespace DinnergeddonService.Tests
     [TestClass]
     public class EditAccountTests
     {
-        String username = "us-er.name_1234";
+        String username = "userName1";
         String email = "testname@email.com";
-        String password = "testPass1@#$%";
+        String password = "testPass1";
 
 
         [TestMethod]
@@ -122,7 +122,7 @@ namespace DinnergeddonService.Tests
         }
 
         [TestMethod]
-        public void Test_CheckPassword_Characters_Not_Permitted()
+        public void Test_CheckPassword_Characters_Not_Permitted_Fails()
         {
             var infoChecker = new AccountService();
             Assert.IsFalse(infoChecker.CheckPassword("ÆÆÆ"));

@@ -10,7 +10,7 @@ namespace DinnergeddonService
         /// Checks if the email is valid for the given format: [string]@[string].
         /// </summary>
         /// <param name="email"></param>
-        /// <returns></returns>
+        /// <returns>Returns if the check was passed.</returns>
         public bool CheckEmail(string email)
         {
             //Surrounded in a try catch block because the constructor throws exceptions when the email is invalid.
@@ -29,10 +29,10 @@ namespace DinnergeddonService
         }
 
         /// <summary>
-        /// Checks the username to ensure it only contains the permitted symbols
+        /// Checks the username to ensure it only contains the permitted symbols.
         /// </summary>
         /// <param name="username"></param>
-        /// <returns></returns>
+        /// <returns>Returns if the check was passed.</returns>
         public bool CheckUsername(string username)
         {
             //Uses Regular Expressions to validate that the username only contains the permitted characters.
@@ -46,7 +46,7 @@ namespace DinnergeddonService
         /// Checks the password to ensure that it fulfills the required criteria.
         /// </summary>
         /// <param name="password"></param>
-        /// <returns></returns>
+        /// <returns>Returns if the check was passed.</returns>
         public bool CheckPassword(string password)
         {
             //Uses Regular Expressions to validate that the username only contains the permitted characters.
@@ -62,7 +62,7 @@ namespace DinnergeddonService
         /// <param name="username"></param>
         /// <param name="email"></param>
         /// <param name="password"></param>
-        /// <returns></returns>
+        /// <returns>Returns if the account data was validated and passed onto the DB.</returns>
         public bool EditAccount(string username, string email, string password)
         {
             if (!CheckUsername(username) || !CheckEmail(email) || !CheckPassword(password))

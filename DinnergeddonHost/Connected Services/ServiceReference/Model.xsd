@@ -4,9 +4,9 @@
   <xs:complexType name="Account">
     <xs:sequence>
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="PasswordHash" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SecurityStamp" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UserId" type="ser:guid" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

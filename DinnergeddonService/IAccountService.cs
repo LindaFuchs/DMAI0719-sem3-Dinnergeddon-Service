@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using Model;
 
 namespace DinnergeddonService
@@ -18,5 +19,9 @@ namespace DinnergeddonService
         bool EditAccount(string username, string email, string password);
         [OperationContract]
         bool Login(string username, string password);
+        [OperationContract]
+        Account FindById(Guid id);
+
+        
     }
 }

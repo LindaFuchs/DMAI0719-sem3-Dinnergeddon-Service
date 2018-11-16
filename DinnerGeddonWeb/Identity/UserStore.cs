@@ -28,12 +28,12 @@ namespace DinnergeddonWeb.Identity
 
             return Task.Factory.StartNew(() =>
             {
-
+                
                 //converting Identity model to the Account class in the project Model
                 Account account = new Account()
                 {
 
-                    UserId = Guid.NewGuid(),
+                    Id = Guid.NewGuid(),
                     Username = user.UserName,
                     Email = user.Email,
                     PasswordHash = user.PasswordHash,
@@ -72,11 +72,10 @@ namespace DinnergeddonWeb.Identity
             if (!Guid.TryParse(userId, out parsedUserId))
                 throw new ArgumentOutOfRangeException("userId", string.Format("'{0}' is not a valid GUID.", new { userId }));
 
-            //return Task.Factory.StartNew(() =>
-            //{
-            //   //return user 
-            return null;
-            //});
+            return Task.Factory.StartNew(() =>
+            {
+                //
+            });
         }
 
         public Task<User> FindByNameAsync(string userName)

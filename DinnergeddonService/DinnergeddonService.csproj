@@ -56,6 +56,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DBLayer\DBLayer.csproj">
+      <Project>{b9657908-0a19-4931-8c84-3993ba1e60b6}</Project>
+      <Name>DBLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{17556139-cc1d-48dd-a770-39f33ee57a75}</Project>
       <Name>Model</Name>

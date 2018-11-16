@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using Model;
+using DBLayer;
 
 namespace DinnergeddonService
 {
     public class AccountService : IAccountService
     {
+        IAccountRepo accountRepo = new AccountRepo(DbComponents.GetInstance());
+
         /// <summary>
         /// Checks if the email is valid for the given format: [string]@[string].
         /// </summary>
@@ -87,5 +90,13 @@ namespace DinnergeddonService
         {
             throw new NotImplementedException();
         }
+
+        public Account FindById(Guid id)
+        {
+
+            accountRepo.GetAccountByID(id);
+        }
+
+        
     }
 }

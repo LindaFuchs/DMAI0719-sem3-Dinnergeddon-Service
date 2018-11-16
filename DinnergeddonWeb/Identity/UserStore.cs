@@ -116,12 +116,12 @@ namespace DinnergeddonWeb.Identity
         /// <returns></returns>
         public Task<User> FindByNameAsync(string userName)
         {
-            if (string.IsNullOrWhiteSpace(userName))
-                throw new ArgumentNullException("userName");
+            //if (string.IsNullOrWhiteSpace(userName))
+            //    throw new ArgumentNullException("userName");
 
-            Account account = _proxy.FindByName(userName);
-            User user = ModelAccountToIdentityUser(account);
-            return Task.FromResult<User>(user);
+            //Account account = _proxy.FindByName(userName);
+            //User user = ModelAccountToIdentityUser(account);
+            return Task.FromResult<User>(null);
         }
 
         public Task UpdateAsync(User user)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace DBLayer
 {
@@ -27,7 +28,7 @@ namespace DBLayer
             throw new NotImplementedException();
         }
 
-        public Account GetAccountByID(int ID)
+        public Account GetAccountByID(Guid ID)
         {
             throw new NotImplementedException();
         }
@@ -42,15 +43,58 @@ namespace DBLayer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The method tries to insert a new row into the database
+        /// !!!THIS NEEDS TO BE REFACTORED TO THE NEW ACCOUNT!!!
+        /// </summary>
+        /// <param name="a">The account to be inserted in the database</param>
+        /// <returns>The number of rows affected in the database</returns>
         public int InsertAccount(Account a)
         {
+            int affected = 0;
             connection.Open();
             using (IDbTransaction transaction = connection.BeginTransaction())
             {
-                transaction.Commit();
+                IDbCommand command = connection.CreateCommand();
+                command.CommandText = "insert into Accounts(id, username, email, passwordhash, securitystamp)" +
+                    "values(@id, @username, @email, @passwordhash, @securitystamp)";
+
+                // Create and add parameters for the SQL query
+                IDbDataParameter param = command.CreateParameter();
+                param.ParameterName = "@id";
+                param.Value = a.Id;
+                command.Parameters.Add(param);
+                
+                param.ParameterName = "@username";
+                param.Value = a.Username;
+                command.Parameters.Add(param);
+                
+                param.ParameterName = "@email";
+                param.Value = a.Email;
+                command.Parameters.Add(param);
+
+                param.ParameterName = "@passwordhash";
+                param.Value = a.PasswordHash;
+                command.Parameters.Add(param);
+
+                param.ParameterName = "@securitystamp";
+                param.Value = a.SecurityStamp;
+                command.Parameters.Add(param);
+
+                // Execute query in a try-catch block
+                try
+                {
+                    affected = command.ExecuteNonQuery();
+                    transaction.Commit();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                    transaction.Rollback();
+                }
             }
             connection.Close();
-            return 0;
+            return affected;
         }
 
         public int UpdateAccount(Account oldAccount, Account newAccount)

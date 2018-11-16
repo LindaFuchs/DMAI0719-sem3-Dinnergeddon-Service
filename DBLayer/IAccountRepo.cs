@@ -1,5 +1,6 @@
 ﻿using Model;
 using System.Collections.Generic;
+using System;
 
 namespace DBLayer
 {
@@ -7,7 +8,7 @@ namespace DBLayer
     {
         IEnumerable<Account> GetAccounts();
 
-        Account GetAccountByID(int ID);
+        Account GetAccountByID(Guid ID);
         Account GetAccountByUsername(string username);
         Account GetAccountByEmail(string email);
 

@@ -1,10 +1,7 @@
-﻿using DinnergeddonService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+using System.ServiceModel.Description;
+using DinnergeddonService;
 
 namespace DinnergeddonHost
 {
@@ -14,7 +11,7 @@ namespace DinnergeddonHost
         {
             Uri baseAddress = new Uri("http://localhost:8733/DinnergeddonService/");
 
-            ServiceHost host = new ServiceHost(typeof(IAccountService), baseAddress);
+            ServiceHost host = new ServiceHost(typeof(AccountService), baseAddress);
 
             try
             {

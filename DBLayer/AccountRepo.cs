@@ -53,8 +53,11 @@ namespace DBLayer
         {
             int affected = 0;
             connection.Open();
+            
+            // Use transaction in an using block so that it's disposed after the query
             using (IDbTransaction transaction = connection.BeginTransaction())
             {
+                // Create sql command
                 IDbCommand command = connection.CreateCommand();
                 command.CommandText = "insert into Accounts(id, username, email, passwordhash, securitystamp)" +
                     "values(@id, @username, @email, @passwordhash, @securitystamp)";

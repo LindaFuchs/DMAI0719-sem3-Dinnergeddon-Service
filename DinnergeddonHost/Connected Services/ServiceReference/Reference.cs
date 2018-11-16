@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DinnergeddonHost.AccountService {
+namespace DinnergeddonHost.ServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -26,13 +26,13 @@ namespace DinnergeddonHost.AccountService {
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordHashField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SecurityStampField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid UserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
@@ -56,6 +56,19 @@ namespace DinnergeddonHost.AccountService {
                 if ((object.ReferenceEquals(this.EmailField, value) != true)) {
                     this.EmailField = value;
                     this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -87,19 +100,6 @@ namespace DinnergeddonHost.AccountService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Username {
             get {
                 return this.UsernameField;
@@ -123,7 +123,7 @@ namespace DinnergeddonHost.AccountService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AccountService.IAccountService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IAccountService")]
     public interface IAccountService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/RegisterAccount", ReplyAction="http://tempuri.org/IAccountService/RegisterAccountResponse")]
@@ -145,10 +145,10 @@ namespace DinnergeddonHost.AccountService {
         System.Threading.Tasks.Task<bool> CheckEmailAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetInfo", ReplyAction="http://tempuri.org/IAccountService/GetInfoResponse")]
-        DinnergeddonHost.AccountService.Account GetInfo();
+        DinnergeddonHost.ServiceReference.Account GetInfo();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetInfo", ReplyAction="http://tempuri.org/IAccountService/GetInfoResponse")]
-        System.Threading.Tasks.Task<DinnergeddonHost.AccountService.Account> GetInfoAsync();
+        System.Threading.Tasks.Task<DinnergeddonHost.ServiceReference.Account> GetInfoAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/EditAccount", ReplyAction="http://tempuri.org/IAccountService/EditAccountResponse")]
         bool EditAccount(string username, string email, string password);
@@ -164,12 +164,12 @@ namespace DinnergeddonHost.AccountService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IAccountServiceChannel : DinnergeddonHost.AccountService.IAccountService, System.ServiceModel.IClientChannel {
+    public interface IAccountServiceChannel : DinnergeddonHost.ServiceReference.IAccountService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class AccountServiceClient : System.ServiceModel.ClientBase<DinnergeddonHost.AccountService.IAccountService>, DinnergeddonHost.AccountService.IAccountService {
+    public partial class AccountServiceClient : System.ServiceModel.ClientBase<DinnergeddonHost.ServiceReference.IAccountService>, DinnergeddonHost.ServiceReference.IAccountService {
         
         public AccountServiceClient() {
         }
@@ -214,11 +214,11 @@ namespace DinnergeddonHost.AccountService {
             return base.Channel.CheckEmailAsync(email);
         }
         
-        public DinnergeddonHost.AccountService.Account GetInfo() {
+        public DinnergeddonHost.ServiceReference.Account GetInfo() {
             return base.Channel.GetInfo();
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonHost.AccountService.Account> GetInfoAsync() {
+        public System.Threading.Tasks.Task<DinnergeddonHost.ServiceReference.Account> GetInfoAsync() {
             return base.Channel.GetInfoAsync();
         }
         

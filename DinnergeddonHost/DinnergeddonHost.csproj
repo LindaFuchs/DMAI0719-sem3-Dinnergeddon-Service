@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\AccountService\Reference.cs">
+    <Compile Include="Connected Services\ServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -55,18 +55,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Connected Services\AccountService\DinnergeddonHost.AccountService.Account.datasource">
+    <None Include="Connected Services\ServiceReference\DinnergeddonHost.ServiceReference.Account.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\AccountService\Model.xsd">
+    <None Include="Connected Services\ServiceReference\Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountService\service.wsdl" />
-    <None Include="Connected Services\AccountService\service.xsd">
+    <None Include="Connected Services\ServiceReference\service.wsdl" />
+    <None Include="Connected Services\ServiceReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountService\service1.xsd">
+    <None Include="Connected Services\ServiceReference\service1.xsd">
       <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -74,24 +92,6 @@
       <Project>{9139fbb0-7245-42eb-a5c7-54248c5dfa6d}</Project>
       <Name>DinnergeddonService</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\AccountService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\AccountService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\AccountService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\AccountService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

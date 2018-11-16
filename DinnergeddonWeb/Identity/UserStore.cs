@@ -15,6 +15,7 @@ namespace DinnergeddonWeb.Identity
     {
         private readonly AccountServiceReference.AccountServiceClient _proxy;
 
+
         public UserStore()
         {
             this._proxy = new AccountServiceReference.AccountServiceClient();
@@ -76,6 +77,7 @@ namespace DinnergeddonWeb.Identity
             {
                 User user = new User()
                 {
+                    UserName = account.Username,
                     UserId = account.Id,
                     Email = account.Email,
                     PasswordHash = account.PasswordHash,
@@ -97,6 +99,7 @@ namespace DinnergeddonWeb.Identity
             {
                 Account account = new Account()
                 {
+                    Username = user.UserName,
                     Id = new Guid(user.Id),
                     Email = user.Email,
                     PasswordHash = user.PasswordHash,
@@ -117,7 +120,7 @@ namespace DinnergeddonWeb.Identity
         public Task<User> FindByNameAsync(string userName)
         {
             //if (string.IsNullOrWhiteSpace(userName))
-            //    throw new ArgumentNullException("userName");
+            //  throw new ArgumentNullException("userName");
 
             //Account account = _proxy.FindByName(userName);
             //User user = ModelAccountToIdentityUser(account);

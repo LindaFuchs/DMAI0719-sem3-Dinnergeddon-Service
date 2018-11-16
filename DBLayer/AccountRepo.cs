@@ -40,11 +40,11 @@ namespace DBLayer
 
             using (IDbCommand command = connection.CreateCommand())
             {
-                command.CommandText = "select * from Accounts where id=@aid";
+                command.CommandText = "select * from Accounts where id=@id";
 
                 // Escape SQL injections
                 IDbDataParameter param = command.CreateParameter();
-                param.ParameterName = "@aid";
+                param.ParameterName = "@id";
                 param.Value = ID;
                 command.Parameters.Add(param);
 
@@ -52,7 +52,10 @@ namespace DBLayer
                 {
                     // Check if we actually have a row from the DB, if not throw an exception
                     if (!reader.Read())
+                    {
+                        connection.Close();
                         throw new KeyNotFoundException("An account with this ID was not found");
+                    }
 
                     account = Build(reader);
                 }

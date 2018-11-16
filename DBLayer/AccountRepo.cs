@@ -28,9 +28,38 @@ namespace DBLayer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// This method tries to find an account in the database given an ID
+        /// </summary>
+        /// <param name="ID">The ID of the account that's to be found in the database</param>
+        /// <returns>An account with ID</returns>
         public Account GetAccountByID(Guid ID)
         {
-            throw new NotImplementedException();
+            Account account = null;
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "select * from Accounts where id=@aid";
+
+                // Escape SQL injections
+                IDbDataParameter param = command.CreateParameter();
+                param.ParameterName = "@aid";
+                param.Value = ID;
+                command.Parameters.Add(param);
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    // Check if we actually have a row from the DB, if not throw an exception
+                    if (!reader.Read())
+                        throw new KeyNotFoundException("An account with this ID was not found");
+
+                    account = Build(reader);
+                }
+            }
+
+            connection.Close();
+            return account;
         }
 
         public Account GetAccountByUsername(string username)
@@ -45,7 +74,6 @@ namespace DBLayer
 
         /// <summary>
         /// The method tries to insert a new row into the database
-        /// !!!THIS NEEDS TO BE REFACTORED TO THE NEW ACCOUNT!!!
         /// </summary>
         /// <param name="a">The account to be inserted in the database</param>
         /// <returns>The number of rows affected in the database</returns>
@@ -53,7 +81,7 @@ namespace DBLayer
         {
             int affected = 0;
             connection.Open();
-            
+
             // Use transaction in an using block so that it's disposed after the query
             using (IDbTransaction transaction = connection.BeginTransaction())
             {
@@ -108,6 +136,20 @@ namespace DBLayer
         public int UpdateAccount(Account oldAccount, Account newAccount)
         {
             throw new NotImplementedException();
+        }
+
+        private Account Build(IDataReader reader)
+        {
+            Account a = new Account()
+            {
+                Id = reader.GetGuid(0),
+                Username = reader.GetString(1),
+                Email = reader.GetString(2),
+                PasswordHash = reader.GetString(3),
+                SecurityStamp = reader.GetString(4),
+            };
+
+            return a;
         }
     }
 }

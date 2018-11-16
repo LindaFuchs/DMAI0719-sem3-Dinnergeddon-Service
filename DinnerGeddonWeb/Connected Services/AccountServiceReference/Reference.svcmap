@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bdfc44a3-8781-4b0c-8b99-3794438d7edb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="89fdb0d9-a00c-449d-b47d-a86c790749ce" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:8733/DinnergeddonService/AccountService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="b8ee2b9f-0f6b-4268-a2c9-da9501b159cf" SourceId="1" SourceUrl="http://localhost:8733/DinnergeddonService/AccountService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="1a384d2c-3a22-4ce9-b884-8201cd81ff4c" SourceId="1" SourceUrl="http://localhost:8733/DinnergeddonService/AccountService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="6c19a9d7-5004-46fe-a0dc-460268e84e67" SourceId="1" SourceUrl="http://localhost:8733/DinnergeddonService/AccountService/mex" />
-    <MetadataFile FileName="Model.xsd" MetadataType="Schema" ID="89597a8e-c617-49bb-8a77-3cbff3475a86" SourceId="1" SourceUrl="http://localhost:8733/DinnergeddonService/AccountService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="dce8ddf3-7eea-4893-a9eb-152aa152a219" SourceId="1" SourceUrl="http://localhost:8733/DinnergeddonService/AccountService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f355c2e3-b302-4dd6-b5cd-eed0004c7436" SourceId="1" SourceUrl="http://localhost:8733/DinnergeddonService/AccountService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="742aa6c3-8c55-4509-94a6-586cae02ad22" SourceId="1" SourceUrl="http://localhost:8733/DinnergeddonService/AccountService/mex" />
+    <MetadataFile FileName="Model.xsd" MetadataType="Schema" ID="15b961f3-db95-4d7e-814b-b95f2504c412" SourceId="1" SourceUrl="http://localhost:8733/DinnergeddonService/AccountService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

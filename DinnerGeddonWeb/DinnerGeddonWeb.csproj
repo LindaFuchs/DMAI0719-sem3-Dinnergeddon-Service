@@ -222,6 +222,7 @@
     </Content>
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Properties\DataSources\Model.Account.datasource" />
     <None Include="Connected Services\AccountServiceReference\Model.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -232,7 +233,6 @@
     <None Include="Connected Services\AccountServiceReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Properties\DataSources\Model.Account.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

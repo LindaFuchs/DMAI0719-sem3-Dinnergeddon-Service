@@ -15,11 +15,11 @@ namespace DinnergeddonWeb.AccountServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AccountServiceReference.IAccountService")]
     public interface IAccountService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Register", ReplyAction="http://tempuri.org/IAccountService/RegisterResponse")]
-        bool Register(string username, string email, string password, int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/RegisterAccount", ReplyAction="http://tempuri.org/IAccountService/RegisterAccountResponse")]
+        bool RegisterAccount(string username, string email, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Register", ReplyAction="http://tempuri.org/IAccountService/RegisterResponse")]
-        System.Threading.Tasks.Task<bool> RegisterAsync(string username, string email, string password, int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/RegisterAccount", ReplyAction="http://tempuri.org/IAccountService/RegisterAccountResponse")]
+        System.Threading.Tasks.Task<bool> RegisterAccountAsync(string username, string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/CheckUsername", ReplyAction="http://tempuri.org/IAccountService/CheckUsernameResponse")]
         bool CheckUsername(string username);
@@ -50,6 +50,18 @@ namespace DinnergeddonWeb.AccountServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/Login", ReplyAction="http://tempuri.org/IAccountService/LoginResponse")]
         System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindById", ReplyAction="http://tempuri.org/IAccountService/FindByIdResponse")]
+        Model.Account FindById(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindById", ReplyAction="http://tempuri.org/IAccountService/FindByIdResponse")]
+        System.Threading.Tasks.Task<Model.Account> FindByIdAsync(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/InsertAccount", ReplyAction="http://tempuri.org/IAccountService/InsertAccountResponse")]
+        bool InsertAccount(Model.Account account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/InsertAccount", ReplyAction="http://tempuri.org/IAccountService/InsertAccountResponse")]
+        System.Threading.Tasks.Task<bool> InsertAccountAsync(Model.Account account);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -79,12 +91,12 @@ namespace DinnergeddonWeb.AccountServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public bool Register(string username, string email, string password, int id) {
-            return base.Channel.Register(username, email, password, id);
+        public bool RegisterAccount(string username, string email, string password) {
+            return base.Channel.RegisterAccount(username, email, password);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterAsync(string username, string email, string password, int id) {
-            return base.Channel.RegisterAsync(username, email, password, id);
+        public System.Threading.Tasks.Task<bool> RegisterAccountAsync(string username, string email, string password) {
+            return base.Channel.RegisterAccountAsync(username, email, password);
         }
         
         public bool CheckUsername(string username) {
@@ -125,6 +137,22 @@ namespace DinnergeddonWeb.AccountServiceReference {
         
         public System.Threading.Tasks.Task<bool> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
+        }
+        
+        public Model.Account FindById(System.Guid id) {
+            return base.Channel.FindById(id);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Account> FindByIdAsync(System.Guid id) {
+            return base.Channel.FindByIdAsync(id);
+        }
+        
+        public bool InsertAccount(Model.Account account) {
+            return base.Channel.InsertAccount(account);
+        }
+        
+        public System.Threading.Tasks.Task<bool> InsertAccountAsync(Model.Account account) {
+            return base.Channel.InsertAccountAsync(account);
         }
     }
 }

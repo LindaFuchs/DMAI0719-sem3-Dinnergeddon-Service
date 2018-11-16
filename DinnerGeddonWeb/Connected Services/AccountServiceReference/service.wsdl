@@ -7,11 +7,11 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Model" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IAccountService_Register_InputMessage">
-    <wsdl:part name="parameters" element="tns:Register" />
+  <wsdl:message name="IAccountService_RegisterAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterAccount" />
   </wsdl:message>
-  <wsdl:message name="IAccountService_Register_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  <wsdl:message name="IAccountService_RegisterAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterAccountResponse" />
   </wsdl:message>
   <wsdl:message name="IAccountService_CheckUsername_InputMessage">
     <wsdl:part name="parameters" element="tns:CheckUsername" />
@@ -43,10 +43,22 @@
   <wsdl:message name="IAccountService_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccountService_FindById_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindById" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_FindById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_InsertAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertAccount" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_InsertAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertAccountResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAccountService">
-    <wsdl:operation name="Register">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/Register" message="tns:IAccountService_Register_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/RegisterResponse" message="tns:IAccountService_Register_OutputMessage" />
+    <wsdl:operation name="RegisterAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/RegisterAccount" message="tns:IAccountService_RegisterAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/RegisterAccountResponse" message="tns:IAccountService_RegisterAccount_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CheckUsername">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/CheckUsername" message="tns:IAccountService_CheckUsername_InputMessage" />
@@ -68,11 +80,19 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/Login" message="tns:IAccountService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/LoginResponse" message="tns:IAccountService_Login_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="FindById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/FindById" message="tns:IAccountService_FindById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/FindByIdResponse" message="tns:IAccountService_FindById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/InsertAccount" message="tns:IAccountService_InsertAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/InsertAccountResponse" message="tns:IAccountService_InsertAccount_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IAccountService" type="tns:IAccountService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="Register">
-      <soap:operation soapAction="http://tempuri.org/IAccountService/Register" style="document" />
+    <wsdl:operation name="RegisterAccount">
+      <soap:operation soapAction="http://tempuri.org/IAccountService/RegisterAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -118,6 +138,24 @@
     </wsdl:operation>
     <wsdl:operation name="Login">
       <soap:operation soapAction="http://tempuri.org/IAccountService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindById">
+      <soap:operation soapAction="http://tempuri.org/IAccountService/FindById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertAccount">
+      <soap:operation soapAction="http://tempuri.org/IAccountService/InsertAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

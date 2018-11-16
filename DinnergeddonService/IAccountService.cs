@@ -21,6 +21,8 @@ namespace DinnergeddonService
         bool Login(string username, string password);
         [OperationContract]
         Account FindById(Guid id);
+        [OperationContract]
+        bool InsertAccount(Account account);
 
         
     }

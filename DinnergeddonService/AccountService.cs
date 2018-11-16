@@ -91,12 +91,23 @@ namespace DinnergeddonService
             throw new NotImplementedException();
         }
 
+
         public Account FindById(Guid id)
         {
 
-            accountRepo.GetAccountByID(id);
+            return accountRepo.GetAccountByID(id);
+
         }
 
-        
+        /// <summary>
+        /// Inserts the account into the database
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns>True if the affected row is 1 </returns>
+        public bool InsertAccount(Account account)
+        { 
+           int i= accountRepo.InsertAccount(account);
+           return (i==1) ? true : false;
+        }
     }
 }

@@ -64,19 +64,23 @@ namespace DBLayer
                 param.ParameterName = "@id";
                 param.Value = a.Id;
                 command.Parameters.Add(param);
-                
+
+                param = command.CreateParameter();
                 param.ParameterName = "@username";
                 param.Value = a.Username;
                 command.Parameters.Add(param);
-                
+
+                param = command.CreateParameter();
                 param.ParameterName = "@email";
                 param.Value = a.Email;
                 command.Parameters.Add(param);
 
+                param = command.CreateParameter();
                 param.ParameterName = "@passwordhash";
                 param.Value = a.PasswordHash;
                 command.Parameters.Add(param);
 
+                param = command.CreateParameter();
                 param.ParameterName = "@securitystamp";
                 param.Value = a.SecurityStamp;
                 command.Parameters.Add(param);
@@ -84,6 +88,7 @@ namespace DBLayer
                 // Execute query in a try-catch block
                 try
                 {
+                    command.Transaction = transaction;
                     affected = command.ExecuteNonQuery();
                     transaction.Commit();
                 }

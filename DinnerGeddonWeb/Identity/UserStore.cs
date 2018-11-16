@@ -33,7 +33,7 @@ namespace DinnergeddonWeb.Identity
                 Account account = new Account()
                 {
 
-                    UserId = Guid.NewGuid(),
+                    Id = Guid.NewGuid(),
                     Username = user.UserName,
                     Email = user.Email,
                     PasswordHash = user.PasswordHash,

@@ -85,10 +85,10 @@ namespace DinnergeddonWeb.Identity
                 throw new ArgumentNullException("userName");
 
             return Task.Factory.StartNew(() =>
-            { 
-            //    return user
-            // get and return a user if it exists, if not create an empty one
-            return new User();
+            {
+                //    return user
+                // get and return a user if it exists, if not create an empty one
+                return new User();
             });
         }
 
@@ -147,4 +147,151 @@ namespace DinnergeddonWeb.Identity
 
 
     }
+    //public class CustomUserStore : IUserStore<User>, IUserPasswordStore<User>,
+    //       IUserSecurityStampStore<User>, IUserLockoutStore<User, string>,
+    //       IUserTwoFactorStore<User, string>
+    //{
+    //    public System.Threading.Tasks.Task<User> FindByNameAsync(string userName)
+    //    {
+    //        //Account account;
+    //        ////User user = InMemoryUserList.DummyUsersList.Find(item => item.Username == userName);
+    //        //User u = null;
+    //        //if (account != null)
+    //        //{
+    //        //    u = new ApplicationUser()
+    //        //    {
+    //        //        Id = user.UserId.ToString(),
+    //        //        Email = user.Email,
+    //        //        PasswordHash = user.PasswordHash,
+    //        //        SecurityStamp = user.SecurityStamp
+    //        //    };
+    //        //}
+
+    //        return Task.FromResult<User>(u);
+    //    }
+
+    //    public System.Threading.Tasks.Task CreateAsync(User user)
+    //    {
+    //        //User u = new User()
+    //        //{
+    //        //    UserId = user.UserId,
+    //        //    Email = user.Email,
+    //        //    Username = user.UserName,
+    //        //    PasswordHash = user.PasswordHash,
+    //        //    SecurityStamp = user.SecurityStamp
+
+    //        //};
+    //        return Task.FromResult<bool>(InMemoryUserList.Add(u));
+    //    }
+
+    //    public Task<string> GetPasswordHashAsync(User user)
+    //    {
+    //        return Task.FromResult<string>(user.PasswordHash.ToString());
+    //    }
+    //    public Task SetPasswordHashAsync(User user, string passwordHash)
+    //    {
+    //        return Task.FromResult<string>(user.PasswordHash = passwordHash);
+    //    }
+
+    //    #region Not implemented methods     
+    //    public System.Threading.Tasks.Task DeleteAsync(User user)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public System.Threading.Tasks.Task<User> FindByIdAsync(string userId)
+    //    {
+    //        //User user = InMemoryUserList.DummyUsersList.Find(item => item.UserId.ToString() == userId);
+    //        //ApplicationUser u = null;
+    //        //if (user != null)
+    //        //{
+    //        //    u = new ApplicationUser()
+    //        //    {
+    //        //        UserId = user.UserId,
+    //        //        Id = user.UserId.ToString(),
+    //        //        Email = user.Email,
+    //        //        PasswordHash = user.PasswordHash,
+    //        //        SecurityStamp = user.SecurityStamp
+    //        //    };
+    //        //}
+
+    //        //return Task.FromResult<ApplicationUser>(u);
+    //    }
+
+    //    public System.Threading.Tasks.Task UpdateAsync(User user)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public Task<bool> HasPasswordAsync(User user)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void Dispose()
+    //    {
+    //    }
+
+    //    public Task SetSecurityStampAsync(User user, string stamp)
+    //    {
+    //        return Task.FromResult<string>(user.SecurityStamp = stamp);
+    //    }
+
+    //    public Task<string> GetSecurityStampAsync(User user)
+    //    {
+    //        return Task.FromResult<string>(user.SecurityStamp.ToString());
+
+    //    }
+
+    //    public Task<DateTimeOffset> GetLockoutEndDateAsync(User user)
+    //    {
+    //        return Task.FromResult<DateTimeOffset>(DateTimeOffset.UtcNow);
+    //    }
+
+    //    public Task SetLockoutEndDateAsync(User user, DateTimeOffset lockoutEnd)
+    //    {
+    //        return Task.FromResult<int>(0);
+
+    //    }
+
+    //    public Task<int> IncrementAccessFailedCountAsync(User user)
+    //    {
+    //        return Task.FromResult<int>(0);
+    //    }
+
+    //    public Task ResetAccessFailedCountAsync(User user)
+    //    {
+    //        return Task.FromResult<int>(0);
+
+    //    }
+
+    //    public Task<int> GetAccessFailedCountAsync(User user)
+    //    {
+    //        return Task.FromResult<int>(0);
+    //    }
+
+    //    public Task<bool> GetLockoutEnabledAsync(User user)
+    //    {
+    //        return Task.FromResult<bool>(false);
+    //    }
+
+    //    public Task SetLockoutEnabledAsync(User user, bool enabled)
+    //    {
+    //        return Task.FromResult<int>(0);
+
+    //    }
+
+    //    public Task SetTwoFactorEnabledAsync(User user, bool enabled)
+    //    {
+    //        return Task.FromResult(0);
+
+    //    }
+
+    //    public Task<bool> GetTwoFactorEnabledAsync(User user)
+    //    {
+    //        return Task.FromResult(false);
+    //    }
+    //    #endregion
+    //}
 }
+

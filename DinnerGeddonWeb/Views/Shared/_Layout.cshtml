@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
 
@@ -20,18 +19,17 @@
                     @Html.ActionLink("Home", "Index", "Home")
                 </li>
                 <li class="nav-item nav-link">
-                    @Html.ActionLink("Register", "Create", "Account")
+                    @Html.ActionLink("Register", "Register", "Account")
                 </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
                 <li class="nav-item nav-link">
-                    <a href="@Url.Action("Create", "Account")">Register</a>
+                    @Html.ActionLink("Log in", "Login", "Account")
                 </li>
             </ul>
+           
         </div>
     </nav>
 
-   
+
 
     <div class="container body-content">
         @RenderBody()

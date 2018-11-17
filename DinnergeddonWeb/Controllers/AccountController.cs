@@ -44,7 +44,7 @@ namespace DinnergeddonWeb.Controllers
         }
 
 
-        public ApplicationSignInManager signInManager
+        public ApplicationSignInManager SignInManager
         {
             get
             {
@@ -62,8 +62,16 @@ namespace DinnergeddonWeb.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.ReturnUrl = returnUrl ?? Url.Action("Index", "Home");
             return View();
+
+            //    ViewBag.ReturnUrl = returnUrl;
+            //    return View();
+            //
         }
 
         //
@@ -73,26 +81,27 @@ namespace DinnergeddonWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //switch (result)
+            //if (!ModelState.IsValid)
             //{
-            //    case SignInStatus.Success:
-            //        return RedirectToLocal(returnUrl);
-            //    case SignInStatus.LockedOut:
-            //        return View("Lockout");
-            //    case SignInStatus.RequiresVerification:
-            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            //    case SignInStatus.Failure:
-            //    default:
-            //        ModelState.AddModelError("", "Invalid login attempt.");
-            //        return View(model);
+            //    return View(model);
+            //}
+
+            //This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //    switch (result)
+            //    {
+            //        case SignInStatus.Success:
+            //            return RedirectToLocal(returnUrl);
+            //        case SignInStatus.LockedOut:
+            //            return View("Lockout");
+            //        case SignInStatus.RequiresVerification:
+            //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //        case SignInStatus.Failure:
+            //        default:
+            //            ModelState.AddModelError("", "Invalid login attempt.");
+            //            return View(model);
+            //    }
             //}
 
             if (ModelState.IsValid)
@@ -105,11 +114,11 @@ namespace DinnergeddonWeb.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("", "invalid username or password.");
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+           // if we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -122,6 +131,11 @@ namespace DinnergeddonWeb.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
             return View();
         }
 
@@ -134,7 +148,7 @@ namespace DinnergeddonWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { Email = model.Email, UserName=model.Email };
+                var user = new User() { UserId= Guid.NewGuid(), Email = model.Email, UserName=model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -321,7 +335,7 @@ namespace DinnergeddonWeb.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
-            var userId = await signInManager.GetVerifiedUserIdAsync();
+            var userId = await SignInManager.GetVerifiedUserIdAsync();
             if (userId == null)
             {
                 return View("Error");
@@ -344,7 +358,7 @@ namespace DinnergeddonWeb.Controllers
             }
 
             // Generate the token and send it
-            if (!await signInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
+            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
             {
                 return View("Error");
             }

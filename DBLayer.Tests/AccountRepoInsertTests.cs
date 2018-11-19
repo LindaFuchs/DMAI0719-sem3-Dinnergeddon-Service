@@ -56,8 +56,8 @@ namespace DBLayer.Tests
         {
             // Setup
             IAccountRepo accountRepo = new AccountRepo(componentsMock);
-            Account a = new Account() { UserId = new Guid("123") };
-            Account b = new Account() { UserId = new Guid("123") };
+            Account a = new Account() { Id = new Guid("123") };
+            Account b = new Account() { Id = new Guid("123") };
             
             // Action
             accountRepo.InsertAccount(a);

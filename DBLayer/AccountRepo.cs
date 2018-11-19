@@ -23,9 +23,41 @@ namespace DBLayer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// This method tries to find an account in the database given an email
+        /// </summary>
+        /// <param name="email">The email of the account that's to be found in the database</param>
+        /// <returns>An account with email</returns>
         public Account GetAccountByEmail(string email)
         {
-            throw new NotImplementedException();
+            Account account = null;
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "select * from Accounts where email=@email";
+
+                // Escape SQL injections
+                IDbDataParameter param = command.CreateParameter();
+                param.ParameterName = "@email";
+                param.Value = email;
+                command.Parameters.Add(param);
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    // Check if we actually have a row from the DB, if not throw an exception
+                    if (!reader.Read())
+                    {
+                        connection.Close();
+                        throw new KeyNotFoundException("An account with this email was not found");
+                    }
+
+                    account = Build(reader);
+                }
+            }
+
+            connection.Close();
+            return account;
         }
 
         /// <summary>
@@ -40,11 +72,11 @@ namespace DBLayer
 
             using (IDbCommand command = connection.CreateCommand())
             {
-                command.CommandText = "select * from Accounts where id=@aid";
+                command.CommandText = "select * from Accounts where id=@id";
 
                 // Escape SQL injections
                 IDbDataParameter param = command.CreateParameter();
-                param.ParameterName = "@aid";
+                param.ParameterName = "@id";
                 param.Value = ID;
                 command.Parameters.Add(param);
 
@@ -52,7 +84,10 @@ namespace DBLayer
                 {
                     // Check if we actually have a row from the DB, if not throw an exception
                     if (!reader.Read())
+                    {
+                        connection.Close();
                         throw new KeyNotFoundException("An account with this ID was not found");
+                    }
 
                     account = Build(reader);
                 }

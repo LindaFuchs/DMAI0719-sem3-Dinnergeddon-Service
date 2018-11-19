@@ -134,7 +134,7 @@ namespace DinnergeddonWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { Email = model.Email, UserName=model.Email };
+                var user = new User() { UserId= Guid.NewGuid(), Email = model.Email, UserName=model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

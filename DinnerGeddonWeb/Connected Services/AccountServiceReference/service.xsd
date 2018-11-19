@@ -117,4 +117,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="FindByEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindByEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="FindByEmailResult" nillable="true" type="q5:Account" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

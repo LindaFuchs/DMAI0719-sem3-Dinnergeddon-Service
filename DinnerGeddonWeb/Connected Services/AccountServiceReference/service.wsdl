@@ -55,6 +55,12 @@
   <wsdl:message name="IAccountService_InsertAccount_OutputMessage">
     <wsdl:part name="parameters" element="tns:InsertAccountResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccountService_FindByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindByEmail" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_FindByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindByEmailResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAccountService">
     <wsdl:operation name="RegisterAccount">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/RegisterAccount" message="tns:IAccountService_RegisterAccount_InputMessage" />
@@ -87,6 +93,10 @@
     <wsdl:operation name="InsertAccount">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/InsertAccount" message="tns:IAccountService_InsertAccount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/InsertAccountResponse" message="tns:IAccountService_InsertAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/FindByEmail" message="tns:IAccountService_FindByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/FindByEmailResponse" message="tns:IAccountService_FindByEmail_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IAccountService" type="tns:IAccountService">
@@ -156,6 +166,15 @@
     </wsdl:operation>
     <wsdl:operation name="InsertAccount">
       <soap:operation soapAction="http://tempuri.org/IAccountService/InsertAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByEmail">
+      <soap:operation soapAction="http://tempuri.org/IAccountService/FindByEmail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

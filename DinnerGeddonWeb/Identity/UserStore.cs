@@ -113,18 +113,20 @@ namespace DinnergeddonWeb.Identity
         }
 
         /// <summary>
-        /// 
+        /// We use email as the account name
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
         public Task<User> FindByNameAsync(string userName)
         {
-            //if (string.IsNullOrWhiteSpace(userName))
-            //  throw new ArgumentNullException("userName");
+            if (string.IsNullOrWhiteSpace(userName))
+                throw new ArgumentNullException("userName");
 
-            //Account account = _proxy.FindByName(userName);
-            //User user = ModelAccountToIdentityUser(account);
-            return Task.FromResult<User>(null);
+            Account account = _proxy.FindByEmail(userName);
+
+            User user = ModelAccountToIdentityUser(account);
+
+            return Task.FromResult<User>(user);
         }
 
         public Task UpdateAsync(User user)

@@ -100,10 +100,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DinnergeddonService\DinnergeddonService.csproj">
-      <Project>{9139FBB0-7245-42EB-A5C7-54248C5DFA6D}</Project>
-      <Name>DinnergeddonService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DinnergeddonWeb\DinnergeddonWeb.csproj">
       <Project>{a4704818-f962-42a1-8154-5a9489b35f0e}</Project>
       <Name>DinnergeddonWeb</Name>

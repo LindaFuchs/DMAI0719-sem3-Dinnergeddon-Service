@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using DinnergeddonWeb.Models;
 using Model;
 
 namespace DinnergeddonWeb.Identity
 {
-    public class UserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>
+    public class UserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>,IUserEmailStore<User>
     {
         private readonly AccountServiceReference.AccountServiceClient _proxy;
 
@@ -66,6 +61,23 @@ namespace DinnergeddonWeb.Identity
 
             return Task.FromResult<User>(user);
         }
+
+        public Task<User> FindByIdAsyncOld(User oldUser)
+        {
+
+            if (string.IsNullOrWhiteSpace(oldUser.Id))
+                throw new ArgumentNullException("userId");
+
+            Guid parsedUserId = new Guid(oldUser.Id);
+            if (!Guid.TryParse(oldUser.Id, out parsedUserId))
+                throw new ArgumentOutOfRangeException("userId", string.Format("'{0}' is not a valid GUID.", new { oldUser.Id }));
+
+            Account account = _proxy.FindById(parsedUserId);
+            User user = ModelAccountToIdentityUser(account);
+
+
+            return Task.FromResult<User>(user);
+        }
         /// <summary>
         /// Converts the Model Account to Identity User. They have the same properties
         /// </summary>
@@ -113,7 +125,7 @@ namespace DinnergeddonWeb.Identity
         }
 
         /// <summary>
-        /// 
+        /// We use email as the account name
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
@@ -122,22 +134,9 @@ namespace DinnergeddonWeb.Identity
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentNullException("userName");
 
-            //Account account = _proxy.FindByEmail(userName);
-            Guid g = Guid.Parse("2960F57B-17E2-425D-B14D-6455ED0FCB58");
-            string userId = g.ToString("D");
-            User user = new User()
+            Account account = _proxy.FindByEmail(userName);
 
-            {
-
-                UserId = g,
-                Email = "attempt@asd.asd",
-                UserName = "att",
-                PasswordHash = "AExs/o1tmVYJQr6Dxc9oPd9rloky7EXL5ULanZ7oRX0LkG+ZIF+l0iyaHRmf8fjLuQ==",
-                SecurityStamp = "64e962f9-23a0-47ad-b61d-abc7966dd99f"
-
-
-
-            };
+            User user = ModelAccountToIdentityUser(account);
 
             return Task.FromResult<User>(user);
         }
@@ -149,7 +148,8 @@ namespace DinnergeddonWeb.Identity
 
             //return Task.Factory.StartNew(() =>
             //{
-            //    //update user
+            //    
+            //_proxy.UpdateAccount();
             return null;
             //});
         }
@@ -195,6 +195,40 @@ namespace DinnergeddonWeb.Identity
             return Task.FromResult(0);
         }
 
+        public Task SetEmailAsync(User user, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> GetEmailAsync(User user)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            return Task.FromResult(user.Email);
+        }
+
+        public Task<bool> GetEmailConfirmedAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetEmailConfirmedAsync(User user, bool confirmed)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> FindByEmailAsync(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentNullException("email");
+
+            Account account = _proxy.FindByEmail(email);
+
+            User user = ModelAccountToIdentityUser(account);
+
+            return Task.FromResult<User>(user);
+        }
     }
 }
 //public class CustomUserStore : IUserStore<User>, IUserPasswordStore<User>,

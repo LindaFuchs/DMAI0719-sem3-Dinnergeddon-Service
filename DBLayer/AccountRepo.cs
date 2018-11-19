@@ -99,7 +99,34 @@ namespace DBLayer
 
         public Account GetAccountByUsername(string username)
         {
-            throw new NotImplementedException();
+            Account account = null;
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "select * from Accounts where username=@username";
+
+                // Escape SQL injections
+                IDbDataParameter param = command.CreateParameter();
+                param.ParameterName = "@username";
+                param.Value = username;
+                command.Parameters.Add(param);
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    // Check if we actually have a row from the DB, if not throw an exception
+                    if (!reader.Read())
+                    {
+                        connection.Close();
+                        throw new KeyNotFoundException("An account with this username was not found");
+                    }
+
+                    account = Build(reader);
+                }
+            }
+
+            connection.Close();
+            return account;
         }
 
         public IEnumerable<Account> GetAccounts()

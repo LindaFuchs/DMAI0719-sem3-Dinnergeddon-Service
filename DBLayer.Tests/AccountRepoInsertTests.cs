@@ -22,7 +22,7 @@ namespace DBLayer.Tests
         }
 
         [TestMethod]
-        public void InsertAccountOpensAndClosesConneciton()
+        public void Test_InsertAccount_OpensAndClosesConneciton_Passes()
         {
             // Setup
             IAccountRepo accountRepo = new AccountRepo(componentsMock);
@@ -37,7 +37,7 @@ namespace DBLayer.Tests
         }
 
         [TestMethod]
-        public void InsertAccountUsesTransactionAndCommits()
+        public void Test_InsertAccount_UsesTransactionAndCommits_Passes()
         {
             // Setup
             IAccountRepo accountRepo = new AccountRepo(componentsMock);
@@ -52,7 +52,7 @@ namespace DBLayer.Tests
         }
 
         [TestMethod]
-        public void InsertAccountTransactionRolledBackAfterSqlFail()
+        public void Test_InsertAccount_TransactionRolledBackAfterSqlFail_Passes()
         {
             // Setup
             IAccountRepo accountRepo = new AccountRepo(componentsMock);
@@ -70,7 +70,7 @@ namespace DBLayer.Tests
         }
 
         [TestMethod]
-        public void InsertAccountInsertedSuccessful()
+        public void Test_InsertAccount_Passes()
         {
             throw new NotImplementedException();
         }

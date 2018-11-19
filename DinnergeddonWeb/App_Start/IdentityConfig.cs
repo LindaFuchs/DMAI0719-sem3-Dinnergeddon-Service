@@ -45,6 +45,7 @@ namespace DinnergeddonWeb
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<User>(manager)
             {
+                
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
@@ -58,6 +59,8 @@ namespace DinnergeddonWeb
                 RequireLowercase = true,
                 RequireUppercase = true,
             };
+
+            
 
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;

@@ -12,9 +12,12 @@ namespace DinnergeddonWeb.Models
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
+        public User OldUser { get; set; }
 
         // Might be problematic
         public string Id => UserId.ToString();
+
+
 
        
 

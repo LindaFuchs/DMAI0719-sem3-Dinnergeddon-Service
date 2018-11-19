@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
-using DinnerGeddonWeb.Controllers;
+using DinnergeddonService;
+using DinnergeddonWeb.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DinnerGeddonWeb.Tests.Controllers
@@ -9,10 +10,6 @@ namespace DinnerGeddonWeb.Tests.Controllers
     public class AccountControllerTest
 
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
 
         [TestMethod]
         public void ShouldDisplayRegisterView()
@@ -34,7 +31,7 @@ namespace DinnerGeddonWeb.Tests.Controllers
         {
             var proxy = new AccountService();
 
-            bool accountRegisterStatus = proxy.Register("A Nice gay", "me@me.me", "1234");
+            bool accountRegisterStatus = proxy.RegisterAccount("A Nice gay", "me@me.me", "1234");
 
             Assert.IsTrue(accountRegisterStatus);
         }

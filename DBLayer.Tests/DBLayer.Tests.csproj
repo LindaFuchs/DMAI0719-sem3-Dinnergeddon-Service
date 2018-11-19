@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountRepoInsertTests.cs" />
+    <Compile Include="AccountRepoMocks.cs" />
+    <Compile Include="AccountRepoUpdateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

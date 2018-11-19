@@ -113,7 +113,7 @@ namespace DinnergeddonWeb.Identity
         }
 
         /// <summary>
-        /// 
+        /// We use email as the account name
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
@@ -122,22 +122,9 @@ namespace DinnergeddonWeb.Identity
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentNullException("userName");
 
-            //Account account = _proxy.FindByEmail(userName);
-            Guid g = Guid.Parse("2960F57B-17E2-425D-B14D-6455ED0FCB58");
-            string userId = g.ToString("D");
-            User user = new User()
+            Account account = _proxy.FindByEmail(userName);
 
-            {
-
-                UserId = g,
-                Email = "attempt@asd.asd",
-                UserName = "att",
-                PasswordHash = "AExs/o1tmVYJQr6Dxc9oPd9rloky7EXL5ULanZ7oRX0LkG+ZIF+l0iyaHRmf8fjLuQ==",
-                SecurityStamp = "64e962f9-23a0-47ad-b61d-abc7966dd99f"
-
-
-
-            };
+            User user = ModelAccountToIdentityUser(account);
 
             return Task.FromResult<User>(user);
         }

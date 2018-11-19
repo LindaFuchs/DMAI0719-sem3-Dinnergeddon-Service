@@ -123,5 +123,20 @@ namespace DinnergeddonService
             int i = accountRepo.InsertAccount(account);
             return (i == 1) ? true : false;
         }
+
+        public Account FindByEmail(string email)
+        {
+            Account account = null;
+            try
+            {
+                account = accountRepo.GetAccountByEmail(email);
+                return account;
+
+            }
+            catch (KeyNotFoundException e)
+            {
+                return account;
+            }
+        }
     }
 }

@@ -23,6 +23,8 @@ namespace DinnergeddonService
         Account FindById(Guid id);
         [OperationContract]
         bool InsertAccount(Account account);
+        [OperationContract]
+        Account FindByEmail(string email);
 
         
     }

@@ -17,6 +17,11 @@ namespace DBLayer
             connection = components.Connection;
         }
 
+        public int AddToRole(Guid accountID, string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// This method tries to delete a row in the database given an account information
         /// </summary>
@@ -280,6 +285,11 @@ namespace DBLayer
             }
             connection.Close();
             return affected;
+        }
+
+        public bool IsInsideRole(Guid accountID, string roleName)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

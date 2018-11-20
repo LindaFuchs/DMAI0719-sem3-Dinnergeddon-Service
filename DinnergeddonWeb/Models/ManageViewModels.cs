@@ -67,6 +67,8 @@ namespace DinnergeddonWeb.Models
         [Display(Name = "Username")]
         public string NewUserName { get; set; }
 
+        public string CurrentUserName { get; set; }
+
     
     }
 

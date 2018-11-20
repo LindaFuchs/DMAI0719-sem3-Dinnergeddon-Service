@@ -32,9 +32,9 @@ namespace DinnergeddonWeb.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -61,15 +61,16 @@ namespace DinnergeddonWeb.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeUserNameSuccess ? "Your username has been changed."
                 : "";
 
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-               // PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                // PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 //TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-               // Logins = await UserManager.GetLoginsAsync(userId),
+                // Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
@@ -221,10 +222,46 @@ namespace DinnergeddonWeb.Controllers
         }
 
         //
+        // POST: /Manage/Changeusername
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeUsername(ChangeUsernameViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            if (UserManager.FindByName(model.NewUserName) != null)
+            {
+                TempData["UserNameTaken"] = "Username is already taken";
+
+                return RedirectToAction("ChangeUsername");
+            }
+
+
+            User user = UserManager.FindById(User.Identity.GetUserId());
+            user.UserName = model.NewUserName;
+            var result = await UserManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                var u = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (u != null && u.UserName == model.NewUserName)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    return RedirectToAction("Index", new { Message = ManageMessageId.ChangeUserNameSuccess });
+
+                }
+            }
+
+            return View(model);
+        }
+
+        //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
-           //User user = UserManager.FindById(User.Identity.GetUserId());
+            //User user = UserManager.FindById(User.Identity.GetUserId());
             return View();
         }
 
@@ -307,7 +344,7 @@ namespace DinnergeddonWeb.Controllers
             });
         }
 
-      
+
 
         //
         // GET: /Manage/LinkLoginCallback
@@ -333,7 +370,7 @@ namespace DinnergeddonWeb.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -363,7 +400,7 @@ namespace DinnergeddonWeb.Controllers
             return false;
         }
 
-       
+
 
         public enum ManageMessageId
         {
@@ -373,9 +410,11 @@ namespace DinnergeddonWeb.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            ChangeUserNameSuccess,
+            UserNameTaken,
             Error
         }
 
-#endregion
+        #endregion
     }
 }

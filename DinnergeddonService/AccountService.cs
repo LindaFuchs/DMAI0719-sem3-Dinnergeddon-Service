@@ -179,5 +179,20 @@ namespace DinnergeddonService
             int i = _accountRepo.UpdateAccount(updatedAccount);
             return (i == 1) ? true : false;
         }
+
+        public Account FindByName(string userName)
+        {
+            Account account = null;
+            try
+            {
+                account = _accountRepo.GetAccountByUsername(userName);
+                return account;
+
+            }
+            catch (KeyNotFoundException)
+            {
+                return account;
+            }
+        }
     }
 }

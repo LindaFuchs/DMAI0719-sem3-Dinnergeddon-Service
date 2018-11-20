@@ -5,7 +5,9 @@
 }
 
 <h2>@ViewBag.Title</h2>
-
+<p class="text-danger">
+    @TempData["UserNameTaken"]
+</p>
 @using (Html.BeginForm("ChangeUsername", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -13,7 +15,7 @@
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         <div class="col-md-6">
-            @Html.TextBoxFor(m => m.NewUserName, new { @class = "form-control", placeholder = Model.NewUserName })
+            @Html.TextBoxFor(m => m.NewUserName, new { @class = "form-control", placeholder = Model.CurrentUserName })
         </div>
     </div>
    

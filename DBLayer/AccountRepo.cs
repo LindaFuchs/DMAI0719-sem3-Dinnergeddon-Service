@@ -23,6 +23,54 @@ namespace DBLayer
         }
 
         /// <summary>
+        /// This method adds a role to an already existing account with accountID
+        /// </summary>
+        /// <param name="accountID">The ID of the account</param>
+        /// <param name="roleName">The name of the role</param>
+        /// <returns>Number of rows affected</returns>
+        public int AddToRole(Guid accountID, string roleName)
+        {
+            int affected = 0;
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "insert into accountroles(accountid, roleid)" +
+                    "values(@accountid, (select id from roles where name=@rolename))";
+
+                // Create parameters, escape SQL injection
+                IDataParameter param = command.CreateParameter();
+                param.ParameterName = "@accountid";
+                param.Value = accountID;
+                command.Parameters.Add(param);
+
+                param = command.CreateParameter();
+                param.ParameterName = "@rolename";
+                param.Value = roleName;
+                command.Parameters.Add(param);
+
+                using (IDbTransaction transaction = connection.BeginTransaction())
+                {
+                    command.Transaction = transaction;
+
+                    try
+                    {
+                        affected = command.ExecuteNonQuery();
+                        transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            }
+
+            connection.Close();
+            return affected;
+        }
+
+        /// <summary>
         /// This method tries to delete a row in the database given an account information
         /// </summary>
         /// <param name="a">The account that's to be deleted from the database</param>
@@ -223,6 +271,11 @@ namespace DBLayer
             connection.Close();
 
             return accounts;
+        }
+
+        public IEnumerable<string> GetRoles(Guid accountID)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

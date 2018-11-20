@@ -224,7 +224,7 @@ namespace DinnergeddonWeb.Controllers
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
-            User user = UserManager.FindById(User.Identity.GetUserId());
+           //User user = UserManager.FindById(User.Identity.GetUserId());
             return View();
         }
 

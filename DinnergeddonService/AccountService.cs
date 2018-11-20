@@ -17,6 +17,7 @@ namespace DinnergeddonService
         
         public AccountService()
         {
+            _accountRepo = new AccountRepo(DbComponents.GetInstance());
 
         }
 

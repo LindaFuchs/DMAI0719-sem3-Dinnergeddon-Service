@@ -18,7 +18,11 @@
                 <li class="nav-item nav-link">
                     @Html.ActionLink("Home", "Index", "Home")
                 </li>
-               
+                @if(Request.IsAuthenticated && User.IsInRole("admin")) { 
+                <li class="nav-item nav-link">
+                    @Html.ActionLink("Admin", "Index", "Admin")
+                </li>
+                }
                 @Html.Partial("_LoginPartial")
             </ul>
         

@@ -5,7 +5,9 @@
 }
 
 <h2>@ViewBag.Title</h2>
-
+<p class="text-danger">
+    @TempData["UserNameTaken"]
+</p>
 @using (Html.BeginForm("ChangeUsername", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()

@@ -134,12 +134,17 @@ namespace DinnergeddonWeb.Identity
         {
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentNullException("userName");
-
+            //has to be changed to FindByName
             Account account = _proxy.FindByEmail(userName);
 
             User user = ModelAccountToIdentityUser(account);
 
             return Task.FromResult<User>(user);
+        }
+
+        public void checkName()
+        {
+
         }
 
         public Task UpdateAsync(User user)

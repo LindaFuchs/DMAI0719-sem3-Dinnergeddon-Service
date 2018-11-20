@@ -135,7 +135,7 @@ namespace DinnergeddonWeb.Identity
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentNullException("userName");
             //has to be changed to FindByName
-            Account account = _proxy.FindByEmail(userName);
+            Account account = _proxy.FindByName(userName);
 
             User user = ModelAccountToIdentityUser(account);
 

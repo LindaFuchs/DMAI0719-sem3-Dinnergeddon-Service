@@ -29,6 +29,8 @@ namespace DinnergeddonService
         [OperationContract]
         Account FindByEmail(string email);
         [OperationContract]
+        Account FindByName(string userName);
+        [OperationContract]
         IEnumerable<Account> GetAccounts();
         [OperationContract]
         bool UpdateAccount(Account updatedAccount);

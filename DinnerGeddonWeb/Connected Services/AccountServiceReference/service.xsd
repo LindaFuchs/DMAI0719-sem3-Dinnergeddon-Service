@@ -146,6 +146,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="FindByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="FindByNameResult" nillable="true" type="q6:Account" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetAccounts">
     <xs:complexType>
       <xs:sequence />
@@ -154,14 +168,14 @@
   <xs:element name="GetAccountsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetAccountsResult" nillable="true" type="q6:ArrayOfAccount" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetAccountsResult" nillable="true" type="q7:ArrayOfAccount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateAccount">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="updatedAccount" nillable="true" type="q7:Account" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="updatedAccount" nillable="true" type="q8:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -175,7 +189,7 @@
   <xs:element name="IsInRole">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q8:guid" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q9:guid" />
         <xs:element minOccurs="0" name="roleName" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -190,7 +204,7 @@
   <xs:element name="AddToRole">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q9:guid" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q10:guid" />
         <xs:element minOccurs="0" name="roleName" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -205,14 +219,14 @@
   <xs:element name="GetRoles">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q10:guid" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q11:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetRolesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetRolesResult" nillable="true" type="q11:ArrayOfstring" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetRolesResult" nillable="true" type="q12:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

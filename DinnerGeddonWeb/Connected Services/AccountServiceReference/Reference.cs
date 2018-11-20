@@ -75,6 +75,12 @@ namespace DinnergeddonWeb.AccountServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByEmail", ReplyAction="http://tempuri.org/IAccountService/FindByEmailResponse")]
         System.Threading.Tasks.Task<Model.Account> FindByEmailAsync(string email);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByName", ReplyAction="http://tempuri.org/IAccountService/FindByNameResponse")]
+        Model.Account FindByName(string userName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByName", ReplyAction="http://tempuri.org/IAccountService/FindByNameResponse")]
+        System.Threading.Tasks.Task<Model.Account> FindByNameAsync(string userName);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetAccounts", ReplyAction="http://tempuri.org/IAccountService/GetAccountsResponse")]
         Model.Account[] GetAccounts();
         
@@ -211,6 +217,14 @@ namespace DinnergeddonWeb.AccountServiceReference {
         
         public System.Threading.Tasks.Task<Model.Account> FindByEmailAsync(string email) {
             return base.Channel.FindByEmailAsync(email);
+        }
+        
+        public Model.Account FindByName(string userName) {
+            return base.Channel.FindByName(userName);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Account> FindByNameAsync(string userName) {
+            return base.Channel.FindByNameAsync(userName);
         }
         
         public Model.Account[] GetAccounts() {

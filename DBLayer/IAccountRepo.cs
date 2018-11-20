@@ -16,7 +16,7 @@ namespace DBLayer
         int DeleteAccount(Account a);
         int UpdateAccount(Account oldAccount, Account newAccount);
 
-        void AddToRole(Guid accountID, string roleName);
+        int AddToRole(Guid accountID, string roleName);
         bool IsInsideRole(Guid accountID, string roleName);
     }
 }

@@ -440,59 +440,51 @@ namespace DBLayer
 
         [Obsolete("This method needs to be refactored, please don't use until the obsolete attribute is removed", true)]
         /// <summary>
-        /// This method tries to update an account in the table. It uses the optimistic concurrency approach
+        /// This method tries to update an account in the table.
         /// </summary>
-        /// <param name="oldAccount">The information of the old account</param>
-        /// <param name="newAccount">The new information of the same account</param>
+        /// <param name="account">The new information of accont, ID is kept the same</param>
         /// <returns>Number of rows affected</returns>
-        public int UpdateAccount(Account newAccount)
+        public int UpdateAccount(Account account)
         {
-            // TODO: redo this method to only use the new account, ID stays the same
-            // Use a column lock
             int affected = 0;
             connection.Open();
 
             using (IDbCommand command = connection.CreateCommand())
             {
-                command.CommandText = "update Accounts set" +
-                        "id=@nid," +
-                        "username=@nusername," +
-                        "email=@nemail," +
-                        "passwordhash=@npasswordhash," +
-                        "securitystamp=@nsecuritystamp," +
+                command.CommandText = "update Accounts set " +
+                        "username=@username, " +
+                        "email=@email, " +
+                        "passwordhash=@passwordhash, " +
+                        "securitystamp=@securitystamp, " +
                     "where " +
-                        "id=@oid," +
-                        "username=@ousername," +
-                        "email=@oemail," +
-                        "passwordhash=@opasswordhash," +
-                        "securitystamp=@osecuritystamp";
+                        "id=@id";
 
                 IDataParameter param = command.CreateParameter();
-                param.ParameterName = "@nid";
-                param.Value = newAccount.Id;
+                param.ParameterName = "@id";
+                param.Value = account.Id;
                 command.Parameters.Add(param);
 
                 param = command.CreateParameter();
-                param.ParameterName = "@nusername";
-                param.Value = newAccount.Username;
+                param.ParameterName = "@username";
+                param.Value = account.Username;
                 command.Parameters.Add(param);
 
                 param = command.CreateParameter();
-                param.ParameterName = "@nemail";
-                param.Value = newAccount.Email;
+                param.ParameterName = "@email";
+                param.Value = account.Email;
                 command.Parameters.Add(param);
 
                 param = command.CreateParameter();
-                param.ParameterName = "@npasswordhash";
-                param.Value = newAccount.PasswordHash;
+                param.ParameterName = "@passwordhash";
+                param.Value = account.PasswordHash;
                 command.Parameters.Add(param);
 
                 param = command.CreateParameter();
-                param.ParameterName = "@nsecuritystamp";
-                param.Value = newAccount.SecurityStamp;
+                param.ParameterName = "@securitystamp";
+                param.Value = account.SecurityStamp;
                 command.Parameters.Add(param);
 
-                using (IDbTransaction transaction = connection.BeginTransaction())
+                using (IDbTransaction transaction = connection.BeginTransaction(IsolationLevel.Serializable))
                 {
                     command.Transaction = transaction;
 
@@ -508,7 +500,6 @@ namespace DBLayer
                     }
                 }
             }
-
             connection.Close();
             return affected;
         }

@@ -146,20 +146,26 @@ namespace DinnergeddonService
 
         public bool IsInRole(Guid accountId, string roleName)
         {
-            return accountRepo.IsInsideRole(accountId, roleName);
+            return _accountRepo.IsInsideRole(accountId, roleName);
         }
 
         public bool AddToRole(Guid accountId, string roleName)
         {
-            int i = accountRepo.AddToRole(accountId, roleName);
+            int i = _accountRepo.AddToRole(accountId, roleName);
             return (i == 1) ? true : false;
         }
 
 
         public IEnumerable<string> GetRoles(Guid accountId)
         {
-            IEnumerable<string> roles = accountRepo.GetRoles(accountId);
+            IEnumerable<string> roles = _accountRepo.GetRoles(accountId);
             return roles;
+        }
+
+        public IEnumerable<Account> GetAccounts()
+        {
+            IEnumerable<Account> accounts = _accountRepo.GetAccounts();
+            return accounts;
         }
     }
 }

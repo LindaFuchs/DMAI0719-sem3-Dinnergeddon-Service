@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DinnergeddonWeb.Models
 {
+
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

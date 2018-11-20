@@ -253,7 +253,8 @@ namespace DinnergeddonWeb.Identity
 
         Task<IdentityRole> IRoleStore<IdentityRole, string>.FindByIdAsync(string roleId)
         {
-            // 
+            throw new NotImplementedException();
+
         }
 
         Task<IdentityRole> IRoleStore<IdentityRole, string>.FindByNameAsync(string roleName)
@@ -263,7 +264,10 @@ namespace DinnergeddonWeb.Identity
 
         public Task AddToRoleAsync(User user, string roleName)
         {
-            throw new NotImplementedException();
+            Guid userId = user.UserId;
+            _proxy.AddToRole(userId, roleName);
+            return Task.FromResult(0);
+
         }
 
         public Task RemoveFromRoleAsync(User user, string roleName)
@@ -273,14 +277,15 @@ namespace DinnergeddonWeb.Identity
 
         public Task<IList<string>> GetRolesAsync(User user)
         {
-            throw new NotImplementedException();
+            Guid userId = user.UserId;
+            List<string> roleList = new List<string>(_proxy.GetRoles(userId));
+            return Task.FromResult<IList<string>>(roleList);
         }
 
         public Task<bool> IsInRoleAsync(User user, string roleName)
         {
-            Guid userId = user.UserId;
+            throw new NotImplementedException();
 
-            
         }
     }
 }

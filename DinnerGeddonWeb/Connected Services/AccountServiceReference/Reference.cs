@@ -68,6 +68,24 @@ namespace DinnergeddonWeb.AccountServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByEmail", ReplyAction="http://tempuri.org/IAccountService/FindByEmailResponse")]
         System.Threading.Tasks.Task<Model.Account> FindByEmailAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/IsInRole", ReplyAction="http://tempuri.org/IAccountService/IsInRoleResponse")]
+        bool IsInRole(System.Guid accountId, string roleName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/IsInRole", ReplyAction="http://tempuri.org/IAccountService/IsInRoleResponse")]
+        System.Threading.Tasks.Task<bool> IsInRoleAsync(System.Guid accountId, string roleName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/AddToRole", ReplyAction="http://tempuri.org/IAccountService/AddToRoleResponse")]
+        bool AddToRole(System.Guid accountId, string roleName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/AddToRole", ReplyAction="http://tempuri.org/IAccountService/AddToRoleResponse")]
+        System.Threading.Tasks.Task<bool> AddToRoleAsync(System.Guid accountId, string roleName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetRoles", ReplyAction="http://tempuri.org/IAccountService/GetRolesResponse")]
+        string[] GetRoles(System.Guid accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetRoles", ReplyAction="http://tempuri.org/IAccountService/GetRolesResponse")]
+        System.Threading.Tasks.Task<string[]> GetRolesAsync(System.Guid accountId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -167,6 +185,30 @@ namespace DinnergeddonWeb.AccountServiceReference {
         
         public System.Threading.Tasks.Task<Model.Account> FindByEmailAsync(string email) {
             return base.Channel.FindByEmailAsync(email);
+        }
+        
+        public bool IsInRole(System.Guid accountId, string roleName) {
+            return base.Channel.IsInRole(accountId, roleName);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsInRoleAsync(System.Guid accountId, string roleName) {
+            return base.Channel.IsInRoleAsync(accountId, roleName);
+        }
+        
+        public bool AddToRole(System.Guid accountId, string roleName) {
+            return base.Channel.AddToRole(accountId, roleName);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddToRoleAsync(System.Guid accountId, string roleName) {
+            return base.Channel.AddToRoleAsync(accountId, roleName);
+        }
+        
+        public string[] GetRoles(System.Guid accountId) {
+            return base.Channel.GetRoles(accountId);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetRolesAsync(System.Guid accountId) {
+            return base.Channel.GetRolesAsync(accountId);
         }
     }
 }

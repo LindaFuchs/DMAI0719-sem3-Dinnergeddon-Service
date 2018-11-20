@@ -141,7 +141,7 @@ namespace DinnergeddonService
 
         public bool IsInRole(Guid accountId, string roleName)
         {
-           return accountRepo.IsInsideRole(accountId, roleName);
+            return accountRepo.IsInsideRole(accountId, roleName);
         }
 
         public bool AddToRole(Guid accountId, string roleName)
@@ -150,9 +150,11 @@ namespace DinnergeddonService
             return (i == 1) ? true : false;
         }
 
-        public List<string> GetRoles(Guid accountId)
+
+        public IEnumerable<string> GetRoles(Guid accountId)
         {
-            throw new NotImplementedException();
+            IEnumerable<string> roles = accountRepo.GetRoles(accountId);
+            return roles;
         }
     }
 }

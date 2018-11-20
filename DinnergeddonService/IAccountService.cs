@@ -32,6 +32,6 @@ namespace DinnergeddonService
         [OperationContract]
         bool AddToRole(Guid accountId, string roleName);
         [OperationContract]
-        List<string> GetRoles(Guid accountId);
+        IEnumerable<string> GetRoles(Guid accountId);
     }
 }

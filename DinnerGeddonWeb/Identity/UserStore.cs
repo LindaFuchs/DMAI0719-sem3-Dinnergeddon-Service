@@ -265,8 +265,9 @@ namespace DinnergeddonWeb.Identity
         public Task AddToRoleAsync(User user, string roleName)
         {
             Guid userId = user.UserId;
-            _proxy
-        
+            _proxy.AddToRole(userId, roleName);
+            return Task.FromResult(0);
+
         }
 
         public Task RemoveFromRoleAsync(User user, string roleName)
@@ -277,15 +278,13 @@ namespace DinnergeddonWeb.Identity
         public Task<IList<string>> GetRolesAsync(User user)
         {
             Guid userId = user.UserId;
-           List<string> roleList = _proxy.GetRoles(userId);
+            List<string> roleList = new List<string>(_proxy.GetRoles(userId));
             return Task.FromResult<IList<string>>(roleList);
         }
 
         public Task<bool> IsInRoleAsync(User user, string roleName)
         {
             throw new NotImplementedException();
-
-
 
         }
     }

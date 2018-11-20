@@ -212,6 +212,13 @@ namespace DinnergeddonWeb.Controllers
             }
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
+        // GET: /Manage/ChangeUsername
+        public ActionResult ChangeUsername()
+        {
+            User user = UserManager.FindById(User.Identity.GetUserId());
+
+            return View(new ChangeUsernameViewModel { NewUserName = user.UserName });
+        }
 
         //
         // GET: /Manage/ChangePassword

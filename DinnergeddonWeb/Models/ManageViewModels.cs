@@ -58,6 +58,18 @@ namespace DinnergeddonWeb.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ChangeUsernameViewModel
+    {
+     
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+        [Display(Name = "Username")]
+        public string NewUserName { get; set; }
+
+    
+    }
+
     public class AddPhoneNumberViewModel
     {
         [Required]

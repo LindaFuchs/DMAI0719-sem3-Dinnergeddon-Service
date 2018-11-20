@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="909928e3-e3b4-4e70-a32c-64020acc0abd" SourceId="1" SourceUrl="http://localhost:8000/DinnergeddonService/AccountService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="cd3419de-ce2d-40a9-8dff-085bbda5a5a3" SourceId="1" SourceUrl="http://localhost:8000/DinnergeddonService/AccountService/mex" />
     <MetadataFile FileName="Model.xsd" MetadataType="Schema" ID="467d581b-9a3e-44c0-9316-04b3ef1d07f9" SourceId="1" SourceUrl="http://localhost:8000/DinnergeddonService/AccountService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="b5117565-111f-4190-99fa-66b261b84953" SourceId="1" SourceUrl="http://localhost:8000/DinnergeddonService/AccountService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

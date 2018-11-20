@@ -27,13 +27,14 @@ namespace DBLayer.Tests
         [TestMethod]
         public void Test_UpdateAccount_UsesTransaction_Passes()
         {
+            //TODO: fix
             // Setup
             IAccountRepo accountRepo = new AccountRepo(componentsMock);
             Account a = new Account();
             Account b = new Account();
 
             // Action
-            accountRepo.UpdateAccount(a, b);
+            accountRepo.UpdateAccount(a);
             
             // Assert
             Assert.IsTrue(connectionMock.transactionUsed);
@@ -42,13 +43,14 @@ namespace DBLayer.Tests
         [TestMethod]
         public void Test_UpdateAccount_UsesCommit_Passes()
         {
+            // TODO: fix
             // Setup
             IAccountRepo accountRepo = new AccountRepo(componentsMock);
             Account a = new Account();
             Account b = new Account();
 
             // Action
-            accountRepo.UpdateAccount(a, b);
+            accountRepo.UpdateAccount(a);
 
             // Assert
             Assert.IsTrue(connectionMock.transaction.commited);

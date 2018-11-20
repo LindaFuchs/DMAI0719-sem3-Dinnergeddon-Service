@@ -12,7 +12,7 @@ namespace DinnerGeddonWeb.Tests.Controllers
     {
 
         [TestMethod]
-        public void ShouldDisplayRegisterView()
+        public void Test_Register_Display_Register_View_Passes()
         {
             // Arrange
             AccountController controller = new AccountController();
@@ -21,19 +21,34 @@ namespace DinnerGeddonWeb.Tests.Controllers
             ViewResult result = controller.Register() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
             Assert.AreEqual("You're on the register page now!", result.ViewBag.Message);
 
         }
 
         [TestMethod]
-        public void ShouldReturnTrueIfAccountRegistered()
+        public void Test_Login_User_Passes()
         {
-            var proxy = new AccountService();
+            // Arrange
+            AccountController controller = new AccountController();
 
-            bool accountRegisterStatus = proxy.RegisterAccount("A Nice gay", "me@me.me", "1234");
+            // Act
+            ViewResult result = controller.Login() as ViewResult;
 
-            Assert.IsTrue(accountRegisterStatus);
+            // Assert
+            Assert.AreEqual("UserView", result.ViewName);
+        }
+
+        [TestMethod]
+        public void Test_Login_User_Passes()
+        {
+            // Arrange
+            AccountController controller = new AccountController();
+
+            // Act
+            ViewResult result = controller.Login() as ViewResult;
+
+            // Assert
+            Assert.AreEqual("AdminView", result.ViewName);
         }
     }
 }

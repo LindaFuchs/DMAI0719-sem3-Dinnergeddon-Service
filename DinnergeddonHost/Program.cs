@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using DinnergeddonService;
 
 
@@ -15,7 +16,12 @@ namespace DinnergeddonHost
 
             try
             {
-                host.AddServiceEndpoint(typeof(IAccountService), new BasicHttpBinding(), "AccountService");
+                host.AddServiceEndpoint(typeof(IAccountService), new WSHttpBinding(), "AccountService");
+
+
+                ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+                smb.HttpGetEnabled = true;
+                host.Description.Behaviors.Add(smb);
 
                 host.Open();
 

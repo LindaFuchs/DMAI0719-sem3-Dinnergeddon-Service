@@ -455,7 +455,7 @@ namespace DBLayer
                         "username=@username, " +
                         "email=@email, " +
                         "passwordhash=@passwordhash, " +
-                        "securitystamp=@securitystamp, " +
+                        "securitystamp=@securitystamp " +
                     "where " +
                         "id=@id";
 

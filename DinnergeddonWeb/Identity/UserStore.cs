@@ -144,15 +144,11 @@ namespace DinnergeddonWeb.Identity
 
         public Task UpdateAsync(User user)
         {
+            Account newAccount = IdentityUserToModelAccount(user);
             if (user == null)
                 throw new ArgumentNullException("user");
-
-            //return Task.Factory.StartNew(() =>
-            //{
-            //    
-            //_proxy.UpdateAccount();
-            return null;
-            //});
+                _proxy.UpdateAccount(newAccount);
+            return Task.FromResult(0);
         }
 
         public Task<string> GetPasswordHashAsync(User user)
@@ -278,8 +274,8 @@ namespace DinnergeddonWeb.Identity
         public Task<IList<string>> GetRolesAsync(User user)
         {
             Guid userId = user.UserId;
-            //List<string> roleList = new List<string>(_proxy.GetRoles(userId));
-            List<string> roleList = new List<string> { "admin"};
+            List<string> roleList = new List<string>(_proxy.GetRoles(userId));
+            //List<string> roleList = new List<string> { "admin"};
             return Task.FromResult<IList<string>>(roleList);
         }
 

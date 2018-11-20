@@ -293,6 +293,7 @@ namespace DBLayer
                 // Create SQL command
                 command.CommandText = "insert into Accounts(id, username, email, passwordhash, securitystamp)" +
                     "values(@id, @username, @email, @passwordhash, @securitystamp)";
+                
 
                 // Create and add parameters for the SQL query
                 IDbDataParameter param = command.CreateParameter();
@@ -353,23 +354,36 @@ namespace DBLayer
             connection.Open();
 
             using (IDbCommand command = connection.CreateCommand())
-            { 
+            {
+                command.CommandText = "select * from Roles as r " +
+                    "join AccountRoles as ar on r.id = ar.roleid " +
+                    "join Accounts as a on ar.accountid = a.ID " +
+                    "where a.id=@id and r.name=@rolename";
 
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
 
+                    }
+                }
             }
 
             connection.Close();
             return hasRole;
         }
 
+        [Obsolete("This method needs to be refactored, please don't use until the obsolete attribute is removed", true)]
         /// <summary>
         /// This method tries to update an account in the table. It uses the optimistic concurrency approach
         /// </summary>
         /// <param name="oldAccount">The information of the old account</param>
         /// <param name="newAccount">The new information of the same account</param>
         /// <returns>Number of rows affected</returns>
-        public int UpdateAccount(Account oldAccount, Account newAccount)
+        public int UpdateAccount(Account newAccount)
         {
+            // TODO: redo this method to only use the new account, ID stays the same
+            // Use a column lock
             int affected = 0;
             connection.Open();
 
@@ -412,32 +426,7 @@ namespace DBLayer
                 param.ParameterName = "@nsecuritystamp";
                 param.Value = newAccount.SecurityStamp;
                 command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@oid";
-                param.Value = oldAccount.Id;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@ousername";
-                param.Value = oldAccount.Username;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@oemail";
-                param.Value = oldAccount.Email;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@opasswordhash";
-                param.Value = oldAccount.PasswordHash;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@osecuritystamp";
-                param.Value = oldAccount.SecurityStamp;
-                command.Parameters.Add(param);
-
+                
                 using (IDbTransaction transaction = connection.BeginTransaction())
                 {
                     command.Transaction = transaction;

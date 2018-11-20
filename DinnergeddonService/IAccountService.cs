@@ -14,6 +14,8 @@ namespace DinnergeddonService
         [OperationContract]
         bool CheckEmail(string email);
         [OperationContract]
+        bool CheckPassword(string password);
+        [OperationContract]
         Account GetInfo();
         [OperationContract]
         bool EditAccount(string username, string email, string password);

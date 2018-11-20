@@ -8,7 +8,26 @@ namespace DinnergeddonService
 {
     public class AccountService : IAccountService
     {
-        IAccountRepo accountRepo = new AccountRepo(DbComponents.GetInstance());
+        IAccountRepo _accountRepo;
+
+        public AccountService(IAccountRepo accountRepo)
+        {
+            this._accountRepo = accountRepo;
+        }
+
+        /// <summary>
+        /// Checks the username to ensure it only contains the permitted symbols.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>Returns if the check was passed.</returns>
+        public bool CheckUsername(string username)
+        {
+            //Uses Regular Expressions to validate that the username only contains the permitted characters.
+            //Verifies that the length of the string is at least 3 characters and at most 32 characters.
+            //Checks if the contained characters are lowercase letters, uppercase letters, numbers, or the symbols.
+            //Checks the whole string and gurantees at least one occurance.
+            return Regex.IsMatch(username, @"^(?=.{3,32}$)[A-Za-z0-9]*$");
+        }
 
         /// <summary>
         /// Checks if the email is valid for the given format: [string]@[string].
@@ -30,20 +49,6 @@ namespace DinnergeddonService
             {
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Checks the username to ensure it only contains the permitted symbols.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns>Returns if the check was passed.</returns>
-        public bool CheckUsername(string username)
-        {
-            //Uses Regular Expressions to validate that the username only contains the permitted characters.
-            //Verifies that the length of the string is at least 3 characters and at most 32 characters.
-            //Checks if the contained characters are lowercase letters, uppercase letters, numbers, or the symbols.
-            //Checks the whole string and gurantees at least one occurance.
-            return Regex.IsMatch(username, @"^(?=.{3,32}$)[A-Za-z0-9]*$");
         }
 
         /// <summary>
@@ -102,7 +107,7 @@ namespace DinnergeddonService
             Account account = null;
             try
             {
-                account = accountRepo.GetAccountByID(id);
+                account = _accountRepo.GetAccountByID(id);
                 return account;
 
             }
@@ -120,7 +125,7 @@ namespace DinnergeddonService
         /// <returns>True if the affected row is 1 </returns>
         public bool InsertAccount(Account account)
         {
-            int i = accountRepo.InsertAccount(account);
+            int i = _accountRepo.InsertAccount(account);
             return (i == 1) ? true : false;
         }
 
@@ -129,7 +134,7 @@ namespace DinnergeddonService
             Account account = null;
             try
             {
-                account = accountRepo.GetAccountByEmail(email);
+                account = _accountRepo.GetAccountByEmail(email);
                 return account;
 
             }

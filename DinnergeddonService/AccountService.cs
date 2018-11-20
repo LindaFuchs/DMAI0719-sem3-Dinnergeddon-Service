@@ -107,7 +107,7 @@ namespace DinnergeddonService
             Account account = null;
             try
             {
-                account = accountRepo.GetAccountByID(id);
+                account = _accountRepo.GetAccountByID(id);
                 return account;
 
             }
@@ -125,7 +125,7 @@ namespace DinnergeddonService
         /// <returns>True if the affected row is 1 </returns>
         public bool InsertAccount(Account account)
         {
-            int i = accountRepo.InsertAccount(account);
+            int i = _accountRepo.InsertAccount(account);
             return (i == 1) ? true : false;
         }
 
@@ -134,7 +134,7 @@ namespace DinnergeddonService
             Account account = null;
             try
             {
-                account = accountRepo.GetAccountByEmail(email);
+                account = _accountRepo.GetAccountByEmail(email);
                 return account;
 
             }

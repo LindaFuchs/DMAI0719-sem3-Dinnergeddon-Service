@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerGeddonWeb.Tests", "DinnerGeddonWeb.Tests\DinnerGeddonWeb.Tests.csproj", "{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonWeb.Tests", "DinnerGeddonWeb.Tests\DinnergeddonWeb.Tests.csproj", "{294A3CF6-5929-49E5-B2C5-AD5BAEC2FA55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBLayer", "DBLayer\DBLayer.csproj", "{B9657908-0A19-4931-8C84-3993BA1E60B6}"
 EndProject

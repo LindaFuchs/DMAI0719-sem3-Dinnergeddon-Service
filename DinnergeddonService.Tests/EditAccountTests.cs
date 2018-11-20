@@ -1,6 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DinnergeddonService;
+using DBLayer;
+using System.Data;
+using System.Data.Common;
 
 namespace DinnergeddonService.Tests
 {
@@ -127,5 +130,12 @@ namespace DinnergeddonService.Tests
             var infoChecker = new AccountService();
             Assert.IsFalse(infoChecker.CheckPassword("ÆÆÆ"));
         }
+    }
+
+    public class DbComponentsMock : IDbComponents
+    {
+        public IDbConnection Connection => throw new NotImplementedException();
+
+        public DbProviderFactory Factory => throw new NotImplementedException();
     }
 }

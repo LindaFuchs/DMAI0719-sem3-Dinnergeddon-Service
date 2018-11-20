@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditAccountTests.cs" />
@@ -56,6 +57,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBLayer\DBLayer.csproj">
+      <Project>{B9657908-0A19-4931-8C84-3993BA1E60B6}</Project>
+      <Name>DBLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DinnergeddonService\DinnergeddonService.csproj">
+      <Project>{f72fc4a0-61f8-482e-946b-12071f5a4ea7}</Project>
+      <Name>DinnergeddonService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

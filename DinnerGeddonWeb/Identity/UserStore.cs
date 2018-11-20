@@ -142,11 +142,6 @@ namespace DinnergeddonWeb.Identity
             return Task.FromResult<User>(user);
         }
 
-        public void checkName()
-        {
-
-        }
-
         public Task UpdateAsync(User user)
         {
             Account newAccount = IdentityUserToModelAccount(user);

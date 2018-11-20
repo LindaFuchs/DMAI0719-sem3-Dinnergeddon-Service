@@ -17,11 +17,6 @@ namespace DBLayer
             connection = components.Connection;
         }
 
-        public int AddToRole(Guid accountID, string roleName)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// This method adds a role to an already existing account with accountID
         /// </summary>

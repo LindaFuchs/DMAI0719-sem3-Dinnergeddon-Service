@@ -30,7 +30,7 @@ namespace DBLayer
 
             using (IDbCommand command = connection.CreateCommand())
             {
-                command.CommandText = "insert into accountroles(accountid, roleid)" +
+                command.CommandText = "insert into accountroles(accountid, roleid) " +
                     "values(@accountid, (select id from roles where name=@rolename))";
 
                 // Create parameters, escape SQL injection
@@ -150,16 +150,23 @@ namespace DBLayer
                 param.Value = email;
                 command.Parameters.Add(param);
 
-                using (IDataReader reader = command.ExecuteReader())
+                try
                 {
-                    // Check if we actually have a row from the DB, if not throw an exception
-                    if (!reader.Read())
+                    using (IDataReader reader = command.ExecuteReader())
                     {
-                        connection.Close();
-                        throw new KeyNotFoundException("An account with this email was not found");
-                    }
+                        // Check if we actually have a row from the DB, if not throw an exception
+                        if (!reader.Read())
+                        {
+                            connection.Close();
+                            throw new KeyNotFoundException("An account with this email was not found");
+                        }
 
-                    account = Build(reader);
+                        account = Build(reader);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
 
@@ -187,16 +194,23 @@ namespace DBLayer
                 param.Value = ID;
                 command.Parameters.Add(param);
 
-                using (IDataReader reader = command.ExecuteReader())
+                try
                 {
-                    // Check if we actually have a row from the DB, if not throw an exception
-                    if (!reader.Read())
+                    using (IDataReader reader = command.ExecuteReader())
                     {
-                        connection.Close();
-                        throw new KeyNotFoundException("An account with this ID was not found");
-                    }
+                        // Check if we actually have a row from the DB, if not throw an exception
+                        if (!reader.Read())
+                        {
+                            connection.Close();
+                            throw new KeyNotFoundException("An account with this ID was not found");
+                        }
 
-                    account = Build(reader);
+                        account = Build(reader);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
 
@@ -223,17 +237,23 @@ namespace DBLayer
                 param.ParameterName = "@username";
                 param.Value = username;
                 command.Parameters.Add(param);
-
-                using (IDataReader reader = command.ExecuteReader())
+                try
                 {
-                    // Check if we actually have a row from the DB, if not throw an exception
-                    if (!reader.Read())
+                    using (IDataReader reader = command.ExecuteReader())
                     {
-                        connection.Close();
-                        throw new KeyNotFoundException("An account with this username was not found");
-                    }
+                        // Check if we actually have a row from the DB, if not throw an exception
+                        if (!reader.Read())
+                        {
+                            connection.Close();
+                            throw new KeyNotFoundException("An account with this username was not found");
+                        }
 
-                    account = Build(reader);
+                        account = Build(reader);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
 
@@ -254,13 +274,19 @@ namespace DBLayer
             using (IDbCommand command = connection.CreateCommand())
             {
                 command.CommandText = "select * from Accounts";
-
-                using (IDataReader reader = command.ExecuteReader())
+                try
                 {
-                    while (reader.Read())
+                    using (IDataReader reader = command.ExecuteReader())
                     {
-                        accounts.Add(Build(reader));
+                        while (reader.Read())
+                        {
+                            accounts.Add(Build(reader));
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
             connection.Close();
@@ -275,7 +301,40 @@ namespace DBLayer
         /// <returns>A list of all the roles an account has</returns>
         public IEnumerable<string> GetRoles(Guid accountID)
         {
-            throw new NotImplementedException();
+            List<string> roles = new List<string>();
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "select r.Name " +
+                    "from roles as r " +
+                    "join accountRoles as ar on r.id = ar.roleid " +
+                    "join accounts as a on a.id = ar.accountid " +
+                    "where a.id=@id";
+
+                IDataParameter param = command.CreateParameter();
+                param.ParameterName = "@id";
+                param.Value = accountID;
+                command.Parameters.Add(param);
+
+                try
+                {
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            roles.Add(reader.GetString(0));
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            connection.Close();
+            return roles;
         }
 
         /// <summary>
@@ -291,9 +350,9 @@ namespace DBLayer
             using (IDbCommand command = connection.CreateCommand())
             {
                 // Create SQL command
-                command.CommandText = "insert into Accounts(id, username, email, passwordhash, securitystamp)" +
+                command.CommandText = "insert into Accounts(id, username, email, passwordhash, securitystamp) " +
                     "values(@id, @username, @email, @passwordhash, @securitystamp)";
-                
+
 
                 // Create and add parameters for the SQL query
                 IDbDataParameter param = command.CreateParameter();
@@ -360,15 +419,21 @@ namespace DBLayer
                     "join Accounts as a on ar.accountid = a.ID " +
                     "where a.id=@id and r.name=@rolename";
 
-                using (IDataReader reader = command.ExecuteReader())
+                try
                 {
-                    if (reader.Read())
+                    using (IDataReader reader = command.ExecuteReader())
                     {
-
+                        if (reader.Read())
+                        {
+                            hasRole = true;
+                        }
                     }
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-
             connection.Close();
             return hasRole;
         }
@@ -426,7 +491,7 @@ namespace DBLayer
                 param.ParameterName = "@nsecuritystamp";
                 param.Value = newAccount.SecurityStamp;
                 command.Parameters.Add(param);
-                
+
                 using (IDbTransaction transaction = connection.BeginTransaction())
                 {
                     command.Transaction = transaction;

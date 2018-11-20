@@ -1,5 +1,6 @@
 ﻿using Model;
 using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace DinnergeddonService
@@ -25,5 +26,12 @@ namespace DinnergeddonService
         bool InsertAccount(Account account);
         [OperationContract]
         Account FindByEmail(string email);
+
+        [OperationContract]
+        bool IsInRole(Guid accountId, string roleName);
+        [OperationContract]
+        bool AddToRole(Guid accountId, string roleName);
+        [OperationContract]
+        List<string> GetRoles(Guid accountId);
     }
 }

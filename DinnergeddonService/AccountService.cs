@@ -138,5 +138,21 @@ namespace DinnergeddonService
                 return account;
             }
         }
+
+        public bool IsInRole(Guid accountId, string roleName)
+        {
+           return accountRepo.IsInsideRole(accountId, roleName);
+        }
+
+        public bool AddToRole(Guid accountId, string roleName)
+        {
+            int i = accountRepo.AddToRole(accountId, roleName);
+            return (i == 1) ? true : false;
+        }
+
+        public List<string> GetRoles(Guid accountId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

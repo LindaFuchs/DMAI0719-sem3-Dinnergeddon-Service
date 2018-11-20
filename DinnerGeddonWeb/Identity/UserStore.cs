@@ -3,10 +3,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using DinnergeddonWeb.Models;
 using Model;
+using System.Collections.Generic;
 
 namespace DinnergeddonWeb.Identity
 {
-    public class UserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>,IUserEmailStore<User>
+    public class UserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>,IUserEmailStore<User>, IRoleStore<IdentityRole>, IUserRoleStore<User>
     {
         private readonly AccountServiceReference.AccountServiceClient _proxy;
 
@@ -228,6 +229,64 @@ namespace DinnergeddonWeb.Identity
             User user = ModelAccountToIdentityUser(account);
 
             return Task.FromResult<User>(user);
+        }
+
+        // RoleStore
+
+        public Task CreateAsync(IdentityRole role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(IdentityRole role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(IdentityRole role)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        //  UserRoleStore
+
+        Task<IdentityRole> IRoleStore<IdentityRole, string>.FindByIdAsync(string roleId)
+        {
+            throw new NotImplementedException();
+
+        }
+
+        Task<IdentityRole> IRoleStore<IdentityRole, string>.FindByNameAsync(string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddToRoleAsync(User user, string roleName)
+        {
+            Guid userId = user.UserId;
+            _proxy
+        
+        }
+
+        public Task RemoveFromRoleAsync(User user, string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<string>> GetRolesAsync(User user)
+        {
+            Guid userId = user.UserId;
+           List<string> roleList = _proxy.GetRoles(userId);
+            return Task.FromResult<IList<string>>(roleList);
+        }
+
+        public Task<bool> IsInRoleAsync(User user, string roleName)
+        {
+            throw new NotImplementedException();
+
+
+
         }
     }
 }

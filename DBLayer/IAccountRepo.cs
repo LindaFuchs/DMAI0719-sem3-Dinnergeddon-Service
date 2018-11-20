@@ -18,5 +18,6 @@ namespace DBLayer
 
         int AddToRole(Guid accountID, string roleName);
         bool IsInsideRole(Guid accountID, string roleName);
+        IEnumerable<string> GetRoles(Guid accountID);
     }
 }

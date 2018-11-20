@@ -16,11 +16,13 @@ namespace DinnergeddonWeb.Models
 
         // Might be problematic
         public string Id => UserId.ToString();
-
-
-
-       
-
     }
-   
+
+    public class IdentityRole : IRole
+    {
+        
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+
 }

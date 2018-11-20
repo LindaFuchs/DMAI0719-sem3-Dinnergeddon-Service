@@ -14,9 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonService.Tests", "DinnergeddonService.Tests\DinnergeddonService.Tests.csproj", "{AA2D6153-85F5-43C8-89B4-1D663B9D431D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonWeb", "DinnergeddonWeb\DinnergeddonWeb.csproj", "{A4704818-F962-42A1-8154-5A9489B35F0E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F72FC4A0-61F8-482E-946B-12071F5A4EA7} = {F72FC4A0-61F8-482E-946B-12071F5A4EA7}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBLayer.Tests", "DBLayer.Tests\DBLayer.Tests.csproj", "{E865A3DB-AE02-4B57-B1AA-51680D755E7B}"
 EndProject

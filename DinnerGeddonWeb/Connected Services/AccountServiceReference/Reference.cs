@@ -81,6 +81,12 @@ namespace DinnergeddonWeb.AccountServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetAccounts", ReplyAction="http://tempuri.org/IAccountService/GetAccountsResponse")]
         System.Threading.Tasks.Task<Model.Account[]> GetAccountsAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/UpdateAccount", ReplyAction="http://tempuri.org/IAccountService/UpdateAccountResponse")]
+        bool UpdateAccount(Model.Account updatedAccount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/UpdateAccount", ReplyAction="http://tempuri.org/IAccountService/UpdateAccountResponse")]
+        System.Threading.Tasks.Task<bool> UpdateAccountAsync(Model.Account updatedAccount);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/IsInRole", ReplyAction="http://tempuri.org/IAccountService/IsInRoleResponse")]
         bool IsInRole(System.Guid accountId, string roleName);
         
@@ -213,6 +219,14 @@ namespace DinnergeddonWeb.AccountServiceReference {
         
         public System.Threading.Tasks.Task<Model.Account[]> GetAccountsAsync() {
             return base.Channel.GetAccountsAsync();
+        }
+        
+        public bool UpdateAccount(Model.Account updatedAccount) {
+            return base.Channel.UpdateAccount(updatedAccount);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateAccountAsync(Model.Account updatedAccount) {
+            return base.Channel.UpdateAccountAsync(updatedAccount);
         }
         
         public bool IsInRole(System.Guid accountId, string roleName) {

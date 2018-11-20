@@ -30,6 +30,8 @@ namespace DinnergeddonService
         Account FindByEmail(string email);
         [OperationContract]
         IEnumerable<Account> GetAccounts();
+        [OperationContract]
+        bool UpdateAccount(Account updatedAccount);
 
         [OperationContract]
         bool IsInRole(Guid accountId, string roleName);

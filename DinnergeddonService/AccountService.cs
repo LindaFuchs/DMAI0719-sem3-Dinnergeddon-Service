@@ -173,5 +173,11 @@ namespace DinnergeddonService
             IEnumerable<Account> accounts = _accountRepo.GetAccounts();
             return accounts;
         }
+
+        public bool UpdateAccount(Account updatedAccount)
+        {
+            int i = _accountRepo.UpdateAccount(updatedAccount);
+            return (i == 1) ? true : false;
+        }
     }
 }

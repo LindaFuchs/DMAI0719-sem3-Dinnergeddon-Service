@@ -12,7 +12,7 @@ namespace DinnergeddonService.Tests
         [TestMethod]
         public void Test_Login_All_Correct_Info_Succeeds()
         {
-            var infoChecker = new AccountService();
+            var infoChecker = new AccountService(new AccountRepoMock());
             Assert.IsTrue(infoChecker.Login(email, password));
         }
 
@@ -20,7 +20,7 @@ namespace DinnergeddonService.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void Test_Login_Incorrect_Email_ThrowsException()
         {
-            var infoChecker = new AccountService();
+            var infoChecker = new AccountService(new AccountRepoMock());
             infoChecker.Login("wrongemail", password);
         }
 
@@ -28,7 +28,7 @@ namespace DinnergeddonService.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void Test_Login_Incorrect_Password_ThrowsException()
         {
-            var infoChecker = new AccountService();
+            var infoChecker = new AccountService(new AccountRepoMock());
             infoChecker.Login(email, "wrongpassword");
         }
 
@@ -36,7 +36,7 @@ namespace DinnergeddonService.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Test_Login_Blank_Email_Field_ThrowsException()
         {
-            var infoChecker = new AccountService();
+            var infoChecker = new AccountService(new AccountRepoMock());
             infoChecker.Login(" ", password);
         }
 
@@ -44,7 +44,7 @@ namespace DinnergeddonService.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Test_Login_Blank_Password_Field_ThrowsException()
         {
-            var infoChecker = new AccountService();
+            var infoChecker = new AccountService(new AccountRepoMock());
             infoChecker.Login(email, " ");
         }
     }

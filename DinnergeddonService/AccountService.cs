@@ -14,6 +14,11 @@ namespace DinnergeddonService
         {
             this._accountRepo = accountRepo;
         }
+        
+        public AccountService()
+        {
+
+        }
 
         /// <summary>
         /// Checks the username to ensure it only contains the permitted symbols.

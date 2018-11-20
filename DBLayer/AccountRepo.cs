@@ -268,6 +268,11 @@ namespace DBLayer
             return accounts;
         }
 
+        /// <summary>
+        /// This method gets all the roles an account currently has
+        /// </summary>
+        /// <param name="accountID">The account ID to check</param>
+        /// <returns>A list of all the roles an account has</returns>
         public IEnumerable<string> GetRoles(Guid accountID)
         {
             throw new NotImplementedException();
@@ -335,9 +340,26 @@ namespace DBLayer
             return affected;
         }
 
+        /// <summary>
+        /// This method checks if an account has a role
+        /// </summary>
+        /// <param name="accountID">The account ID to check</param>
+        /// <param name="roleName">The name of the role to check</param>
+        /// <returns>If an account with accountID has a role with roleName</returns>
         public bool IsInsideRole(Guid accountID, string roleName)
         {
-            throw new NotImplementedException();
+            // Assume that the user doesn't have it until proven wrong
+            bool hasRole = false;
+            connection.Open();
+
+            using (IDbCommand command = connection.CreateCommand())
+            { 
+
+
+            }
+
+            connection.Close();
+            return hasRole;
         }
 
         /// <summary>

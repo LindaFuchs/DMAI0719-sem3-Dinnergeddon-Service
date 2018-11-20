@@ -19,8 +19,9 @@ namespace DinnergeddonService.Tests
             Assert.IsTrue(accountRegisterStatus);
         }
 
+        // TODO: Change the method its using or change the method itself, might be integration test
         [TestMethod]
-        public void Test_CheckUsername_Taken_Username_Fails()
+        public void Test_CheckUsername_Username_Taken_Fails()
         {
             // Arrange
             var proxy = new AccountService(new AccountRepoMock());
@@ -59,6 +60,8 @@ namespace DinnergeddonService.Tests
             Assert.IsTrue(checkEmail);
 
         }
+
+        // TODO: Change the method its using or change the method itself, might be integration test
         [TestMethod]
         public void Test_CheckEmail_Email_Taken_Fails()
         {

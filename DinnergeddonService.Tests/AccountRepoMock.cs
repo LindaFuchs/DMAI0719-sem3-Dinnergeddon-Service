@@ -55,7 +55,7 @@ namespace DinnergeddonService.Tests
             throw new NotImplementedException();
         }
 
-        public int UpdateAccount(Account oldAccount, Account newAccount)
+        public int UpdateAccount(Account newAccount)
         {
             throw new NotImplementedException();
         }

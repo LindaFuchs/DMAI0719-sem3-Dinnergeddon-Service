@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:DinnergeddonUI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="MainResourceDictionary.xaml" ></ResourceDictionary>
+
     </Application.Resources>
 </Application>

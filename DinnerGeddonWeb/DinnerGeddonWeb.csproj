@@ -210,6 +210,9 @@
   <ItemGroup>
     <None Include="Connected Services\AccountServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\AccountServiceReference\configuration.svcinfo" />
+    <Content Include="Connected Services\AccountServiceReference\DinnergeddonWeb.AccountServiceReference.Account.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\AccountServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -295,12 +298,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{17556139-cc1d-48dd-a770-39f33ee57a75}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

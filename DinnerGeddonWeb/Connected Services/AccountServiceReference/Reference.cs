@@ -9,7 +9,118 @@
 //------------------------------------------------------------------------------
 
 namespace DinnergeddonWeb.AccountServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Account", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+    [System.SerializableAttribute()]
+    public partial class Account : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordHashField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SecurityStampField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PasswordHash {
+            get {
+                return this.PasswordHashField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordHashField, value) != true)) {
+                    this.PasswordHashField = value;
+                    this.RaisePropertyChanged("PasswordHash");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SecurityStamp {
+            get {
+                return this.SecurityStampField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SecurityStampField, value) != true)) {
+                    this.SecurityStampField = value;
+                    this.RaisePropertyChanged("SecurityStamp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AccountServiceReference.IAccountService")]
@@ -40,10 +151,10 @@ namespace DinnergeddonWeb.AccountServiceReference {
         System.Threading.Tasks.Task<bool> CheckPasswordAsync(string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetInfo", ReplyAction="http://tempuri.org/IAccountService/GetInfoResponse")]
-        Model.Account GetInfo();
+        DinnergeddonWeb.AccountServiceReference.Account GetInfo();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetInfo", ReplyAction="http://tempuri.org/IAccountService/GetInfoResponse")]
-        System.Threading.Tasks.Task<Model.Account> GetInfoAsync();
+        System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account> GetInfoAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/EditAccount", ReplyAction="http://tempuri.org/IAccountService/EditAccountResponse")]
         bool EditAccount(string username, string email, string password);
@@ -58,40 +169,40 @@ namespace DinnergeddonWeb.AccountServiceReference {
         System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindById", ReplyAction="http://tempuri.org/IAccountService/FindByIdResponse")]
-        Model.Account FindById(System.Guid id);
+        DinnergeddonWeb.AccountServiceReference.Account FindById(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindById", ReplyAction="http://tempuri.org/IAccountService/FindByIdResponse")]
-        System.Threading.Tasks.Task<Model.Account> FindByIdAsync(System.Guid id);
+        System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account> FindByIdAsync(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/InsertAccount", ReplyAction="http://tempuri.org/IAccountService/InsertAccountResponse")]
-        bool InsertAccount(Model.Account account);
+        bool InsertAccount(DinnergeddonWeb.AccountServiceReference.Account account);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/InsertAccount", ReplyAction="http://tempuri.org/IAccountService/InsertAccountResponse")]
-        System.Threading.Tasks.Task<bool> InsertAccountAsync(Model.Account account);
+        System.Threading.Tasks.Task<bool> InsertAccountAsync(DinnergeddonWeb.AccountServiceReference.Account account);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByEmail", ReplyAction="http://tempuri.org/IAccountService/FindByEmailResponse")]
-        Model.Account FindByEmail(string email);
+        DinnergeddonWeb.AccountServiceReference.Account FindByEmail(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByEmail", ReplyAction="http://tempuri.org/IAccountService/FindByEmailResponse")]
-        System.Threading.Tasks.Task<Model.Account> FindByEmailAsync(string email);
+        System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account> FindByEmailAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByName", ReplyAction="http://tempuri.org/IAccountService/FindByNameResponse")]
-        Model.Account FindByName(string userName);
+        DinnergeddonWeb.AccountServiceReference.Account FindByName(string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByName", ReplyAction="http://tempuri.org/IAccountService/FindByNameResponse")]
-        System.Threading.Tasks.Task<Model.Account> FindByNameAsync(string userName);
+        System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account> FindByNameAsync(string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetAccounts", ReplyAction="http://tempuri.org/IAccountService/GetAccountsResponse")]
-        Model.Account[] GetAccounts();
+        DinnergeddonWeb.AccountServiceReference.Account[] GetAccounts();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetAccounts", ReplyAction="http://tempuri.org/IAccountService/GetAccountsResponse")]
-        System.Threading.Tasks.Task<Model.Account[]> GetAccountsAsync();
+        System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account[]> GetAccountsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/UpdateAccount", ReplyAction="http://tempuri.org/IAccountService/UpdateAccountResponse")]
-        bool UpdateAccount(Model.Account updatedAccount);
+        bool UpdateAccount(DinnergeddonWeb.AccountServiceReference.Account updatedAccount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/UpdateAccount", ReplyAction="http://tempuri.org/IAccountService/UpdateAccountResponse")]
-        System.Threading.Tasks.Task<bool> UpdateAccountAsync(Model.Account updatedAccount);
+        System.Threading.Tasks.Task<bool> UpdateAccountAsync(DinnergeddonWeb.AccountServiceReference.Account updatedAccount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/IsInRole", ReplyAction="http://tempuri.org/IAccountService/IsInRoleResponse")]
         bool IsInRole(System.Guid accountId, string roleName);
@@ -171,11 +282,11 @@ namespace DinnergeddonWeb.AccountServiceReference {
             return base.Channel.CheckPasswordAsync(password);
         }
         
-        public Model.Account GetInfo() {
+        public DinnergeddonWeb.AccountServiceReference.Account GetInfo() {
             return base.Channel.GetInfo();
         }
         
-        public System.Threading.Tasks.Task<Model.Account> GetInfoAsync() {
+        public System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account> GetInfoAsync() {
             return base.Channel.GetInfoAsync();
         }
         
@@ -195,51 +306,51 @@ namespace DinnergeddonWeb.AccountServiceReference {
             return base.Channel.LoginAsync(username, password);
         }
         
-        public Model.Account FindById(System.Guid id) {
+        public DinnergeddonWeb.AccountServiceReference.Account FindById(System.Guid id) {
             return base.Channel.FindById(id);
         }
         
-        public System.Threading.Tasks.Task<Model.Account> FindByIdAsync(System.Guid id) {
+        public System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account> FindByIdAsync(System.Guid id) {
             return base.Channel.FindByIdAsync(id);
         }
         
-        public bool InsertAccount(Model.Account account) {
+        public bool InsertAccount(DinnergeddonWeb.AccountServiceReference.Account account) {
             return base.Channel.InsertAccount(account);
         }
         
-        public System.Threading.Tasks.Task<bool> InsertAccountAsync(Model.Account account) {
+        public System.Threading.Tasks.Task<bool> InsertAccountAsync(DinnergeddonWeb.AccountServiceReference.Account account) {
             return base.Channel.InsertAccountAsync(account);
         }
         
-        public Model.Account FindByEmail(string email) {
+        public DinnergeddonWeb.AccountServiceReference.Account FindByEmail(string email) {
             return base.Channel.FindByEmail(email);
         }
         
-        public System.Threading.Tasks.Task<Model.Account> FindByEmailAsync(string email) {
+        public System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account> FindByEmailAsync(string email) {
             return base.Channel.FindByEmailAsync(email);
         }
         
-        public Model.Account FindByName(string userName) {
+        public DinnergeddonWeb.AccountServiceReference.Account FindByName(string userName) {
             return base.Channel.FindByName(userName);
         }
         
-        public System.Threading.Tasks.Task<Model.Account> FindByNameAsync(string userName) {
+        public System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account> FindByNameAsync(string userName) {
             return base.Channel.FindByNameAsync(userName);
         }
         
-        public Model.Account[] GetAccounts() {
+        public DinnergeddonWeb.AccountServiceReference.Account[] GetAccounts() {
             return base.Channel.GetAccounts();
         }
         
-        public System.Threading.Tasks.Task<Model.Account[]> GetAccountsAsync() {
+        public System.Threading.Tasks.Task<DinnergeddonWeb.AccountServiceReference.Account[]> GetAccountsAsync() {
             return base.Channel.GetAccountsAsync();
         }
         
-        public bool UpdateAccount(Model.Account updatedAccount) {
+        public bool UpdateAccount(DinnergeddonWeb.AccountServiceReference.Account updatedAccount) {
             return base.Channel.UpdateAccount(updatedAccount);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateAccountAsync(Model.Account updatedAccount) {
+        public System.Threading.Tasks.Task<bool> UpdateAccountAsync(DinnergeddonWeb.AccountServiceReference.Account updatedAccount) {
             return base.Channel.UpdateAccountAsync(updatedAccount);
         }
         

@@ -8,40 +8,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600  " Width="500"
         ResizeMode="CanResize"
-        Background="#2A2323">
+        Background="{StaticResource ResourceKey=BackgroundColor}">
     <Window.Resources>
-        <SolidColorBrush x:Key="InputFormColor">#858585</SolidColorBrush>
-        <SolidColorBrush x:Key="ButtonColor">#703913</SolidColorBrush>
-        <SolidColorBrush x:Key="PressedButtonColor">#9C5C31</SolidColorBrush>
-        <SolidColorBrush x:Key="IncorrectColor">#B41B1B</SolidColorBrush>
-
-        <Style x:Key="RoundButtonTemplate" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Background" Value="{DynamicResource ButtonColor}"></Setter>
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="6" Background="{TemplateBinding Background}"
-                                BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
-
-                            </ContentPresenter>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource PressedButtonColor}"></Setter>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"></Setter>
-
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-        </Style>
+      
         <Style x:Key="{x:Type Hyperlink}" TargetType="{x:Type Hyperlink}">
             <Setter Property="Foreground" Value="{StaticResource InputFormColor}"/>
             <Setter Property="TextDecorations" Value="none"/>
@@ -177,7 +146,7 @@
         </TextBlock>
 
 
-        <Button IsDefault="True" Style="{StaticResource RoundButtonTemplate}" Click="Button_Click"  FontSize="18" Height="40" BorderThickness="0" 
+        <Button IsDefault="True" Style="{StaticResource RoundButtonTemplate}" Click="Button_Click"  FontSize="18" Height="40"  
                  Foreground="White" Content="LOG IN" Margin="0,0,0,15"/>
 
         <TextBlock Foreground="{StaticResource InputFormColor}" FontSize="13" HorizontalAlignment="Center" >

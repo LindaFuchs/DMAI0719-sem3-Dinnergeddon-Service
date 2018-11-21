@@ -106,7 +106,14 @@ namespace DinnergeddonWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
+                string userName = model.Email;
+                var userForEmail = await UserManager.FindByEmailAsync(model.Email);
+                if (userForEmail != null)
+                {
+                    userName = userForEmail.UserName;
+                }
+
+                var user = await UserManager.FindAsync(userName, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
@@ -114,11 +121,11 @@ namespace DinnergeddonWeb.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "invalid username or password.");
+                    ModelState.AddModelError("", "invalid email or password.");
                 }
             }
 
-           // if we got this far, something failed, redisplay form
+            // if we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -135,7 +142,7 @@ namespace DinnergeddonWeb.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-           
+
             return View();
         }
 
@@ -148,17 +155,27 @@ namespace DinnergeddonWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { UserId= Guid.NewGuid(), Email = model.Email, UserName=model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var user = new User() { UserId = Guid.NewGuid(), Email = model.Email, UserName = model.UserName };
+                var findUser = UserManager.FindByEmail(model.Email);
+                if (findUser != null)
                 {
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError("", "Email already taken");
                 }
                 else
                 {
-                    AddErrors(result);
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded && findUser == null)
+                    {
+
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
                 }
+
             }
 
             // If we got this far, something failed, redisplay form

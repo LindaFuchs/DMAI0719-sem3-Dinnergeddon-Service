@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using DinnergeddonWeb.Models;
-using Model;
 using System.Collections.Generic;
+using DinnergeddonWeb.AccountServiceReference;
 
 namespace DinnergeddonWeb.Identity
 {

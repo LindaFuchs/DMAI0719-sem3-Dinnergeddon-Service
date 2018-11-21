@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DinnerGeddonWeb.Controllers {
+namespace DinnergeddonWeb.Controllers {
     public class HomeController : Controller {
         public ActionResult Index() {
             return View();
@@ -16,6 +16,7 @@ namespace DinnerGeddonWeb.Controllers {
             return View();
         }
 
+        [Authorize(Roles ="admin")]
         public ActionResult Contact() {
             ViewBag.Message = "Your contact page.";
 

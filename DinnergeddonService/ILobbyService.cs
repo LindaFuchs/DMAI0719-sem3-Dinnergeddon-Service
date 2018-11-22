@@ -10,7 +10,7 @@ namespace DinnergeddonService
         [OperationContract]
         Lobby CreateLobby(string name, int playerLimit);
         [OperationContract]
-        Lobby CreateLobby(string name, int playerLimit, string password);
+        Lobby CreatePrivateLobby(string name, int playerLimit, string password);
         [OperationContract]
         IEnumerable<Lobby> GetLobbies();
     }

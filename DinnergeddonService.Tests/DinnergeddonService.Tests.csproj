@@ -64,10 +64,6 @@
       <Project>{B9657908-0A19-4931-8C84-3993BA1E60B6}</Project>
       <Name>DBLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DinnergeddonService\DinnergeddonService.csproj">
-      <Project>{f72fc4a0-61f8-482e-946b-12071f5a4ea7}</Project>
-      <Name>DinnergeddonService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{17556139-cc1d-48dd-a770-39f33ee57a75}</Project>
       <Name>Model</Name>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DinnergeddonWeb.AccountServiceReference;
@@ -14,20 +15,27 @@ namespace DinnergeddonWeb.Controllers
         private readonly AccountServiceReference.AccountServiceClient _proxy;
         private ApplicationUserManager _userManager;
 
+        public AdminController()
+        {
+            _proxy = new AccountServiceReference.AccountServiceClient();
+        }
+
         public AdminController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
-            _proxy = new AccountServiceReference.AccountServiceClient();
         }
 
         /// <summary>
         /// Initialize User Manager
         /// </summary>
-        public ApplicationUserManager UserManager {
-            get {
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
-            private set {
+            private set
+            {
                 _userManager = value;
             }
         }
@@ -45,10 +53,7 @@ namespace DinnergeddonWeb.Controllers
             ICollection<DisplayUserModel> displayUserModels = new List<DisplayUserModel>();
             foreach (Account account in accounts)
             {
-                if(_proxy.IsInRole(account.Id, "admin")) {
-                    displayUserModels.Add(new DisplayUserModel { Email = account.Email, UserName = account.Username });
-                }
-                
+                    displayUserModels.Add(new DisplayUserModel { Id = account.Id, Email = account.Email, UserName = account.Username });
             }
             return View(displayUserModels);
         }
@@ -58,11 +63,32 @@ namespace DinnergeddonWeb.Controllers
         /// Edit User account with chosen id
         /// </summary>
         /// <returns></returns>
-        public ActionResult Edit(int? id) {
-            if(id == null) {
+        public async Task<ActionResult> Edit(Guid? id)
+        {
+            //Checks if the id is null and checks for an error if it is.
+            if (id == null)
+            {
+                // TODO: Show error as opposed to returning to Index.
                 return RedirectToAction("Index");
             }
 
+            //Safely casts the id to a non-nullable Guid after the check.
+            id = (Guid) id;
+            
+            //Finds the user by id and stores it in an object instance.
+            User user = await UserManager.FindByIdAsync(id.ToString());
+
+            //Checks if the user is null and produces an error in the case that it is.
+            if (user == null)
+            {
+                // TODO: Show error as opposed to returning to Index.
+                return RedirectToAction("Index");
+            }
+
+            //Creates a page with the found user information.
+            EditUserModel editUserModel = new EditUserModel { Id = user.UserId, Email = user.Email, UserName = user.UserName};
+
+            return View(editUserModel);
         }
 
 

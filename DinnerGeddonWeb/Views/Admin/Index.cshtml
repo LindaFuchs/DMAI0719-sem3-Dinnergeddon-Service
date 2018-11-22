@@ -20,18 +20,18 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var account in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
+            @Html.DisplayFor(modelItem => account.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserName)
+            @Html.DisplayFor(modelItem => account.UserName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { account.Id }) |
+            @Html.ActionLink("Details", "Details", new { account.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { account.Id })
         </td>
     </tr>
 }

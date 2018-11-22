@@ -1,22 +1,25 @@
-﻿using Model;
-using Controller;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Model;
+using DBLayer;
 
-namespace DinnergeddonService
+namespace Controller
 {
-    public class AccountService : IAccontService
+    public class AccountController : IAccountController
     {
-        private readonly IAccountController accountController;
-        
-        public AccountService()
-        {
-            accountController = new AccountController();
-        }
+        private readonly IAccountRepo accountRepo = new AccountRepo(DbComponents.GetInstance());
 
         public bool AddToRole(Guid accountId, string roleName)
         {
-            return accountController.AddToRole(accountId, roleName);
+            int affectedRows = accountRepo.AddToRole(accountId, roleName);
+
+            if (affectedRows > 1)
+                throw new Exception("More than one rows were changed in the database");
+            
+            return affectedRows == 1;
         }
 
         public Account FindByEmail(string email)
@@ -34,12 +37,12 @@ namespace DinnergeddonService
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Account> GetAccounts()
+        public IEnumerable<string> GetAccountRoles(Guid accountId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<string> GetRoles(Guid accountId)
+        public IEnumerable<Account> GetAccounts()
         {
             throw new NotImplementedException();
         }

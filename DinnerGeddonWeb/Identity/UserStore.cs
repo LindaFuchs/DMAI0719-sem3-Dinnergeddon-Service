@@ -36,10 +36,11 @@ namespace DinnergeddonWeb.Identity
             if (user == null)
                 throw new ArgumentNullException("user");
 
-            return Task.Factory.StartNew(() =>
-            {
+         
                 //delete account
-            });
+                Account account = IdentityUserToModelAccount(user);
+
+            return Task.FromResult<bool>(_proxy.(account));
         }
 
         public void Dispose()

@@ -34,6 +34,8 @@ namespace DinnergeddonService
         IEnumerable<Account> GetAccounts();
         [OperationContract]
         bool UpdateAccount(Account updatedAccount);
+        [OperationContract]
+        bool DeleteAccount(Account account);
 
         [OperationContract]
         bool IsInRole(Guid accountId, string roleName);

@@ -130,5 +130,31 @@ namespace DinnergeddonWeb.Controllers
             //When an error or unexpected thing occurs it redisplays the page.
             return View(model);
         }
+        
+        public async Task<ActionResult> Delete(Guid? id)
+        {
+            //Checks if the id is null and checks for an error if it is.
+            if (id == null)
+            {
+                // TODO: Show error as opposed to returning to Index.
+                return RedirectToAction("Index");
+            }
+
+            //Safely casts the id to a non-nullable Guid after the check.
+            id = (Guid)id;
+
+            //Finds the user by id and stores it in an object instance.
+            User user = await UserManager.FindByIdAsync(id.ToString());
+
+            //Checks if the user is null and produces an error in the case that it is.
+            if (user != null)
+            {
+                //Deletes the user.
+                await UserManager.DeleteAsync(user);
+            }
+
+
+            return RedirectToAction("Index");
+        }
     }
 }

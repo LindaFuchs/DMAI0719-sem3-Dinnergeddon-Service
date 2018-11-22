@@ -1,198 +1,111 @@
-﻿using DBLayer;
-using Model;
+﻿using Model;
+using Controller;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace DinnergeddonService
 {
-    public class AccountService : IAccountService
+    public class AccountService : IAccontService
     {
-        IAccountRepo _accountRepo;
-
-        public AccountService(IAccountRepo accountRepo)
-        {
-            this._accountRepo = accountRepo;
-        }
+        private readonly IAccountController accountController;
         
         public AccountService()
         {
-            _accountRepo = new AccountRepo(DbComponents.GetInstance());
-
+            accountController = new AccountController();
         }
 
         /// <summary>
-        /// Checks the username to ensure it only contains the permitted symbols.
+        /// This method adds a role to an account with accountId
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns>Returns if the check was passed.</returns>
-        public bool CheckUsername(string username)
-        {
-            //Uses Regular Expressions to validate that the username only contains the permitted characters.
-            //Verifies that the length of the string is at least 3 characters and at most 32 characters.
-            //Checks if the contained characters are lowercase letters, uppercase letters, numbers, or the symbols.
-            //Checks the whole string and gurantees at least one occurance.
-            return Regex.IsMatch(username, @"^(?=.{3,32}$)[A-Za-z0-9]*$");
-        }
-
-        /// <summary>
-        /// Checks if the email is valid for the given format: [string]@[string].
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns>Returns if the check was passed.</returns>
-        public bool CheckEmail(string email)
-        {
-            //Surrounded in a try catch block because the constructor throws exceptions when the email is invalid.
-            try
-            {
-                //Uses the MailAddress class to verify the email format.
-                System.Net.Mail.MailAddress addr = new System.Net.Mail.MailAddress(email);
-                //Returns true if the check passes.
-                return addr.Address == email;
-            }
-            //When an exception is thrown, we assume that the email address is not valid and returns false.
-            catch
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Checks the password to ensure that it fulfills the required criteria.
-        /// </summary>
-        /// <param name="password"></param>
-        /// <returns>Returns if the check was passed.</returns>
-        public bool CheckPassword(string password)
-        {
-            //Uses Regular Expressions to validate that the username only contains the permitted characters.
-            //Verifies that the length of the string is at least 6 and at most 12 characters.
-            //Checks if the contained characters have at least one uppercase letter, one lowercase letter, one number and no special characters.
-            //Checks the whole string for at least one occurance.
-            return Regex.IsMatch(password, @"^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]{6,12}$");
-        }
-
-        /// <summary>
-        /// Validates the inputs for account editing and passes them to the DB layer for handling.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="email"></param>
-        /// <param name="password"></param>
-        /// <returns>Returns if the account data was validated and passed onto the DB.</returns>
-        public bool EditAccount(string username, string email, string password)
-        {
-            if (!CheckUsername(username) || !CheckEmail(email) || !CheckPassword(password))
-            {
-                throw new ArgumentException();
-            }
-
-            return true;
-        }
-
-        public Account GetInfo()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Login(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool RegisterAccount(string username, string email, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Get an Account from the database
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Null if no accounts found in the database</returns>
-        public Account FindById(Guid id)
-        {
-            Account account = null;
-            try
-            {
-                account = _accountRepo.GetAccountByID(id);
-                return account;
-
-            }
-            catch (KeyNotFoundException)
-            {
-                return account;
-            }
-
-        }
-
-        /// <summary>
-        /// Inserts the account into the database
-        /// </summary>
-        /// <param name="account"></param>
-        /// <returns>True if the affected row is 1 </returns>
-        public bool InsertAccount(Account account)
-        {
-            int i = _accountRepo.InsertAccount(account);
-            return (i == 1) ? true : false;
-        }
-
-        public Account FindByEmail(string email)
-        {
-            Account account = null;
-            try
-            {
-                account = _accountRepo.GetAccountByEmail(email);
-                return account;
-
-            }
-            catch (KeyNotFoundException)
-            {
-                return account;
-            }
-        }
-
-        public bool IsInRole(Guid accountId, string roleName)
-        {
-            return _accountRepo.IsInsideRole(accountId, roleName);
-        }
-
+        /// <param name="accountId">The id of the account that's to be added a role</param>
+        /// <param name="roleName">The name of the role</param>
+        /// <returns>If the operation was successful</returns>
         public bool AddToRole(Guid accountId, string roleName)
         {
-            int i = _accountRepo.AddToRole(accountId, roleName);
-            return (i == 1) ? true : false;
+            return accountController.AddToRole(accountId, roleName);
         }
 
-
-        public IEnumerable<string> GetRoles(Guid accountId)
+        /// <summary>
+        /// This method tries to find an account by searching for the email
+        /// </summary>
+        /// <param name="email">The email to be found</param>
+        /// <returns>An account with email</returns>
+        public Account FindByEmail(string email)
         {
-            IEnumerable<string> roles = _accountRepo.GetRoles(accountId);
-            return roles;
+            return accountController.FindByEmail(email);
         }
 
+        /// <summary>
+        /// This method tries to find an account by it's ID
+        /// </summary>
+        /// <param name="id">The id of an account</param>
+        /// <returns>An account with ID</returns>
+        public Account FindById(Guid id)
+        {
+            return accountController.FindById(id);
+        }
+
+        /// <summary>
+        /// This method tries to find an acount by it's username
+        /// </summary>
+        /// <param name="username">The username of the account</param>
+        /// <returns>An account with username</returns>
+        public Account FindByUsername(string username)
+        {
+            return accountController.FindByUsername(username);
+        }
+
+        /// <summary>
+        /// Gets all accounts on the system
+        /// TODO: Make this method secure without exposing all the accounts to unwanted callers
+        /// </summary>
+        /// <returns>A list of all accounts saved on the database</returns>
         public IEnumerable<Account> GetAccounts()
         {
-            IEnumerable<Account> accounts = _accountRepo.GetAccounts();
-            return accounts;
+            return accountController.GetAccounts();
         }
 
+        /// <summary>
+        /// Gets all roles an account with accountId has
+        /// </summary>
+        /// <param name="accountId">The id of account</param>
+        /// <returns>A list of all the roles an account with accountId has</returns>
+        public IEnumerable<string> GetRoles(Guid accountId)
+        {
+            return accountController.GetAccountRoles(accountId);
+        }
+
+        /// <summary>
+        /// This method adds a new account to the system
+        /// </summary>
+        /// <param name="account">An account to be added</param>
+        /// <returns>If the account was added</returns>
+        public bool InsertAccount(Account account)
+        {
+            return accountController.InsertAccount(account);
+        }
+
+        /// <summary>
+        /// Checks if an account with accountId has a role with roleName
+        /// </summary>
+        /// <param name="accountId">The id of the account to be checked</param>
+        /// <param name="roleName">The name of the role</param>
+        /// <returns>If the account has this role</returns>
+        public bool IsInRole(Guid accountId, string roleName)
+        {
+            return accountController.IsInRole(accountId, roleName);
+        }
+
+        /// <summary>
+        /// Updates an account with new it's new information.
+        /// Since the ID of an account is immutable (cannot change), the account that's going to be changed will be the one
+        /// that has the ID of the account passed to this method
+        /// </summary>
+        /// <param name="updatedAccount">The new account informaiton</param>
+        /// <returns>If the account was changed</returns>
         public bool UpdateAccount(Account updatedAccount)
         {
-            int i = _accountRepo.UpdateAccount(updatedAccount);
-            return (i == 1) ? true : false;
-        }
-
-        public Account FindByName(string userName)
-        {
-            Account account = null;
-            try
-            {
-                account = _accountRepo.GetAccountByUsername(userName);
-                return account;
-
-            }
-            catch (KeyNotFoundException)
-            {
-                return account;
-            }
+            return accountController.UpdateAccount(updatedAccount);
         }
     }
 }

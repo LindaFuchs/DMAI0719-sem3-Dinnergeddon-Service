@@ -6,17 +6,64 @@
         xmlns:local="clr-namespace:DinnergeddonUI"
         mc:Ignorable="d"
         Title="Dashboard" Height="450" Width="800"
-        Background="{StaticResource BackgroundColor}">
-    <StackPanel>
-        <WrapPanel HorizontalAlignment="Right">
+        Background="{DynamicResource BackgroundColor}">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
             <Button 
-            Style="{StaticResource RoundButtonTemplate}"
-            Background="{StaticResource ButtonColor}"
+                               Background="Gray"
+ FontSize="14" DockPanel.Dock="Left" Content="Back" 
+                    HorizontalAlignment="Left"  
+                    Margin="15"  
+                    Click="Button_Click_1" Style="{StaticResource RoundButtonTemplate}"></Button>
+            <Button 
+                FontSize="14"
+                Margin="15"
+                HorizontalAlignment="Right"
+                DockPanel.Dock="Right"
+            Style="{DynamicResource RoundButtonTemplate}"
             Foreground="White"
-            Height="50"
-            Width="90"
-            Content="Create lobby" Click="Button_Click"/>
-        </WrapPanel>
-        <Button Content="Back" HorizontalAlignment="Left" Height="29" Margin="32,0,0,0" Width="75" Click="Button_Click_1"/>
-    </StackPanel>
+            Content="Create lobby" Click="Button_Click">
+            </Button>
+        </DockPanel>
+        
+        <!--Lobby text-->
+        <TextBlock Margin="20,0,0,0" FontSize="16" Foreground="White" Background="{StaticResource BackgroundColor}" DockPanel.Dock="Top" Text="Lobbies"></TextBlock>
+       
+        <ListView ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="20,10,20,20" ScrollViewer.CanContentScroll="False"
+             BorderThickness="0" Name="LobbiesListView" Background="{DynamicResource BackgroundColor}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Focusable" Value="false"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel Orientation="Vertical" Background="Wheat">
+                        <Border Width="200" Margin="10" BorderBrush="#362e2e" BorderThickness="2" CornerRadius="8,8,8,8">
+                            <DockPanel Background="#362e2e" >
+                                <StackPanel>
+                                    <TextBlock Foreground="White" Margin="10" Text="{Binding Name}" />
+                                    <TextBlock Foreground="White" Margin="10,0,10,10" Text="{Binding Limit, StringFormat='Player limit: {0}'}"  />
+                                </StackPanel>
+                                <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                    <Button FontWeight="Bold" Foreground="Black" Background="#fff7ed" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" Content="Join"></Button>
+                                </WrapPanel>
+                            </DockPanel>
+                        </Border>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+
+        </ListView>
+
+    </DockPanel>
 </Window>

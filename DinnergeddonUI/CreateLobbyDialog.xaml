@@ -61,18 +61,18 @@
         <!--Create button panel-->
         <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Right">
             <Button    Click="CreateLobby"
-           
+           IsDefault="True"
               
                  Content="Create"
                        Style="{StaticResource RoundButtonTemplate}"
                  FontSize="18"
                        Padding="30"
-                       Margin="10" Width="103" Height="36"></Button>
+                       Margin="10" ></Button>
         </WrapPanel>
 
         <StackPanel  Margin="50,25,50,50">
 
-            <Label Content="Create a lobby" HorizontalAlignment="Center" FontSize="23" Margin="0,0,0,40"></Label>
+            <Label Content="Create a lobby" HorizontalAlignment="Left" FontSize="23" Margin="0,0,0,40"></Label>
             
             <!--Lobby name field-->
             <Border

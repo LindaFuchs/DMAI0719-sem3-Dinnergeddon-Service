@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,19 +24,25 @@ namespace DinnergeddonUI
         public Dashboard()
         {
             InitializeComponent();
+            LobbyCreateTest lb = LobbyCreateTest.Instance;
+            ObservableCollection<Lobby> items = lb.lobbies;
+            LobbiesListView.ItemsSource = items;
         }
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
 
 
 
             // Open the child window
             CreateLobbyDialog createLobbyDialog = new CreateLobbyDialog();
-           
+
 
             createLobbyDialog.ShowDialog();
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

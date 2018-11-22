@@ -12,12 +12,12 @@ namespace DinnergeddonWeb.Controllers
     [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
-        private readonly AccountServiceReference.AccountServiceClient _proxy;
+        private readonly AccontServiceClient _proxy;
         private ApplicationUserManager _userManager;
 
         public AdminController()
         {
-            _proxy = new AccountServiceReference.AccountServiceClient();
+            _proxy = new AccontServiceClient();
         }
 
         public AdminController(ApplicationUserManager userManager)

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DinnergeddonService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:52999/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:52999/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:52999/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model" />
+      <xsd:import schemaLocation="http://localhost:52999/Service.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IAccontService_FindById_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindById" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_FindById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_FindByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindByEmail" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_FindByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_FindByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_FindByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_InsertAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertAccount" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_InsertAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_UpdateAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccount" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_UpdateAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_DeleteAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAccount" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_DeleteAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_GetAccounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccounts" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_GetAccounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_IsInRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsInRole" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_IsInRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsInRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_AddToRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddToRole" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_AddToRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddToRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_GetRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoles" />
+  </wsdl:message>
+  <wsdl:message name="IAccontService_GetRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_CreateLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateLobby" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_CreateLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_CreatePrivateLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePrivateLobby" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_CreatePrivateLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePrivateLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_GetLobbies_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLobbies" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_GetLobbies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLobbiesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IAccontService">
+    <wsdl:operation name="FindById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/FindById" message="tns:IAccontService_FindById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/FindByIdResponse" message="tns:IAccontService_FindById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/FindByEmail" message="tns:IAccontService_FindByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/FindByEmailResponse" message="tns:IAccontService_FindByEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/FindByUsername" message="tns:IAccontService_FindByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/FindByUsernameResponse" message="tns:IAccontService_FindByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/InsertAccount" message="tns:IAccontService_InsertAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/InsertAccountResponse" message="tns:IAccontService_InsertAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/UpdateAccount" message="tns:IAccontService_UpdateAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/UpdateAccountResponse" message="tns:IAccontService_UpdateAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/DeleteAccount" message="tns:IAccontService_DeleteAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/DeleteAccountResponse" message="tns:IAccontService_DeleteAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccounts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/GetAccounts" message="tns:IAccontService_GetAccounts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/GetAccountsResponse" message="tns:IAccontService_GetAccounts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsInRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/IsInRole" message="tns:IAccontService_IsInRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/IsInRoleResponse" message="tns:IAccontService_IsInRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/AddToRole" message="tns:IAccontService_AddToRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/AddToRoleResponse" message="tns:IAccontService_AddToRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/GetRoles" message="tns:IAccontService_GetRoles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccontService/GetRolesResponse" message="tns:IAccontService_GetRoles_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ILobbyService">
+    <wsdl:operation name="CreateLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/CreateLobby" message="tns:ILobbyService_CreateLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/CreateLobbyResponse" message="tns:ILobbyService_CreateLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePrivateLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/CreatePrivateLobby" message="tns:ILobbyService_CreatePrivateLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/CreatePrivateLobbyResponse" message="tns:ILobbyService_CreatePrivateLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLobbies">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/GetLobbies" message="tns:ILobbyService_GetLobbies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/GetLobbiesResponse" message="tns:ILobbyService_GetLobbies_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IAccontService" type="tns:IAccontService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindById">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/FindById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByEmail">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/FindByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByUsername">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/FindByUsername" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertAccount">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/InsertAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/UpdateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccount">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/DeleteAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccounts">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/GetAccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsInRole">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/IsInRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToRole">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/AddToRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <soap:operation soapAction="http://tempuri.org/IAccontService/GetRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_ILobbyService" type="tns:ILobbyService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateLobby">
+      <soap:operation soapAction="http://tempuri.org/ILobbyService/CreateLobby" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePrivateLobby">
+      <soap:operation soapAction="http://tempuri.org/ILobbyService/CreatePrivateLobby" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLobbies">
+      <soap:operation soapAction="http://tempuri.org/ILobbyService/GetLobbies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DinnergeddonService">
+    <wsdl:port name="BasicHttpBinding_IAccontService" binding="tns:BasicHttpBinding_IAccontService">
+      <soap:address location="http://localhost:52999/Service.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_ILobbyService" binding="tns:BasicHttpBinding_ILobbyService">
+      <soap:address location="http://localhost:52999/Service.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

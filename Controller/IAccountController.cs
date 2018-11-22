@@ -12,6 +12,7 @@ namespace Controller
 
         bool InsertAccount(Account account);
         bool UpdateAccount(Account updatedAccount);
+        bool DeleteAccount(Account account);
 
         IEnumerable<Account> GetAccounts();
 

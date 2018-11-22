@@ -101,5 +101,15 @@ namespace Controller
         {
             return accountRepo.UpdateAccount(updatedAccount) == 1;
         }
+
+        /// <summary>
+        /// Deletes an account from the database.
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        public bool DeleteAccount(Account account)
+        {
+            return accountRepo.DeleteAccount(account) == 1;
+        }
     }
 }

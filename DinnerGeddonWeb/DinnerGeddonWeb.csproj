@@ -208,11 +208,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\AccountServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\AccountServiceReference\configuration.svcinfo" />
     <Content Include="Connected Services\AccountServiceReference\DinnergeddonWeb.AccountServiceReference.Account.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\AccountServiceReference\DinnergeddonWeb.AccountServiceReference.Lobby.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\AccountServiceReference\Service.disco" />
+    <None Include="Connected Services\AccountServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\AccountServiceReference\configuration.svcinfo" />
     <None Include="Connected Services\AccountServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -228,17 +232,17 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Properties\DataSources\Model.Account.datasource" />
-    <None Include="Connected Services\AccountServiceReference\Arrays.xsd">
+    <None Include="Connected Services\AccountServiceReference\DinnergeddonService.wsdl" />
+    <None Include="Connected Services\AccountServiceReference\Service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountServiceReference\Model.xsd">
+    <None Include="Connected Services\AccountServiceReference\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountServiceReference\service.wsdl" />
-    <None Include="Connected Services\AccountServiceReference\service.xsd">
+    <None Include="Connected Services\AccountServiceReference\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountServiceReference\service1.xsd">
+    <None Include="Connected Services\AccountServiceReference\Service3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

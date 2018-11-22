@@ -124,5 +124,10 @@ namespace DinnergeddonService
         {
             throw new NotImplementedException();
         }
+
+        public bool DeleteAccount(Account account)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

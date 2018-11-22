@@ -127,7 +127,7 @@ namespace DinnergeddonService
 
         public bool DeleteAccount(Account account)
         {
-            throw new NotImplementedException();
+            return accountController.DeleteAccount(account);
         }
     }
 }

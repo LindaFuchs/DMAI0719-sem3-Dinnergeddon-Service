@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DBLayer;
 using Model;
-using DBLayer;
+using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -20,12 +17,7 @@ namespace Controller
         /// <returns>If the operation was successful</returns>
         public bool AddToRole(Guid accountId, string roleName)
         {
-            int affectedRows = accountRepo.AddToRole(accountId, roleName);
-
-            if (affectedRows > 1)
-                throw new Exception("More than one rows were changed in the database");
-            
-            return affectedRows == 1;
+            return accountRepo.AddToRole(accountId, roleName) == 1;
         }
 
         /// <summary>
@@ -35,7 +27,7 @@ namespace Controller
         /// <returns>An account with email</returns>
         public Account FindByEmail(string email)
         {
-            throw new NotImplementedException();
+            return accountRepo.GetAccountByEmail(email);
         }
 
         /// <summary>
@@ -45,7 +37,7 @@ namespace Controller
         /// <returns>An account with id</returns>
         public Account FindById(Guid id)
         {
-            throw new NotImplementedException();
+            return accountRepo.GetAccountByID(id);
         }
 
         /// <summary>
@@ -55,7 +47,7 @@ namespace Controller
         /// <returns>An account with username</returns>
         public Account FindByUsername(string username)
         {
-            throw new NotImplementedException();
+            return accountRepo.GetAccountByUsername(username);
         }
 
         /// <summary>
@@ -65,7 +57,7 @@ namespace Controller
         /// <returns>A list of all the roles an account has</returns>
         public IEnumerable<string> GetAccountRoles(Guid accountId)
         {
-            throw new NotImplementedException();
+            return accountRepo.GetRoles(accountId);
         }
 
         /// <summary>
@@ -74,7 +66,7 @@ namespace Controller
         /// <returns>A list of all accounts saved on the system</returns>
         public IEnumerable<Account> GetAccounts()
         {
-            throw new NotImplementedException();
+            return accountRepo.GetAccounts();
         }
 
         /// <summary>
@@ -84,7 +76,7 @@ namespace Controller
         /// <returns>If the operation was successful</returns>
         public bool InsertAccount(Account account)
         {
-            throw new NotImplementedException();
+            return accountRepo.InsertAccount(account) == 1;
         }
 
         /// <summary>
@@ -95,7 +87,7 @@ namespace Controller
         /// <returns>If the account has a role</returns>
         public bool IsInRole(Guid accountId, string roleName)
         {
-            throw new NotImplementedException();
+            return accountRepo.IsInsideRole(accountId, roleName);
         }
 
         /// <summary>
@@ -107,7 +99,7 @@ namespace Controller
         /// <returns>If the operation was successful</returns>
         public bool UpdateAccount(Account updatedAccount)
         {
-            throw new NotImplementedException();
+            return accountRepo.UpdateAccount(updatedAccount) == 1;
         }
     }
 }

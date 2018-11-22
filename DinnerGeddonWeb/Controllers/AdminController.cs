@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DinnergeddonWeb.AccountServiceReference;
+using DinnergeddonWeb.Models;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using DinnergeddonWeb.AccountServiceReference;
-using DinnergeddonWeb.Models;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace DinnergeddonWeb.Controllers
 {
@@ -91,6 +91,44 @@ namespace DinnergeddonWeb.Controllers
             return View(editUserModel);
         }
 
+        // POST: /Admin/Edit/5
+        /// <summary>
+        /// Posts the changes to the database.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(EditUserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //Retrieves the user object from the database.
+                User dbUser = await UserManager.FindByIdAsync(model.StringId);
+                if (dbUser != null)
+                {
+                    //Changes the editable variables.
+                    dbUser.UserName = model.UserName;
+                    dbUser.Email = model.Email;
 
+                    //Updates the user information in the database.
+                    var result = await UserManager.UpdateAsync(dbUser);
+                    
+                    //Checks that the update was successful.
+                    if (result.Succeeded)
+                    {
+                        //If it was successful it checks if the fields were updated.
+                        var changedUser = await UserManager.FindByIdAsync(model.StringId);
+                        if (changedUser != null && changedUser.UserName == model.UserName)
+                        {
+                            //Goes to the Index page upon successful validation.
+                            return RedirectToAction("Index");
+                        }
+                    }
+                }
+            }
+            //When an error or unexpected thing occurs it redisplays the page.
+            return View(model);
+        }
     }
 }

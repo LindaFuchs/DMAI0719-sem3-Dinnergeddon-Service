@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AccountController.cs" />
     <Compile Include="IAccountController.cs" />
+    <Compile Include="ILobbyController.cs" />
+    <Compile Include="LobbyController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

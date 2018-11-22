@@ -67,6 +67,8 @@
   <ItemGroup>
     <Compile Include="AccountService.cs" />
     <Compile Include="IAccontService.cs" />
+    <Compile Include="ILobbyService.cs" />
+    <Compile Include="LobbyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>

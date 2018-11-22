@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Model
 {
     [DataContract]
-    class Lobby
+    public class Lobby
     {
         [DataMember]
         public Guid Id { get; set; }

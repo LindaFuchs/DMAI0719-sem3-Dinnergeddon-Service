@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonService", "Dinn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Controller.csproj", "{38E19C8C-67A2-42A1-BCED-01498AB06372}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller.Tests", "Controller.Tests\Controller.Tests.csproj", "{6EF254CA-E8AE-41CD-BDDC-42ED7F51C16B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{38E19C8C-67A2-42A1-BCED-01498AB06372}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38E19C8C-67A2-42A1-BCED-01498AB06372}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38E19C8C-67A2-42A1-BCED-01498AB06372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF254CA-E8AE-41CD-BDDC-42ED7F51C16B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF254CA-E8AE-41CD-BDDC-42ED7F51C16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF254CA-E8AE-41CD-BDDC-42ED7F51C16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF254CA-E8AE-41CD-BDDC-42ED7F51C16B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

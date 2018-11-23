@@ -2,19 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 
 namespace DBLayer
 {
     public class AccountRepo : IAccountRepo
     {
-        private readonly DbProviderFactory factory;
-        private readonly IDbConnection connection;
+        private readonly IDbComponents components;
 
         public AccountRepo(IDbComponents components)
         {
-            factory = components.Factory;
-            connection = components.Connection;
+            this.components = components;
         }
 
         /// <summary>
@@ -26,42 +23,42 @@ namespace DBLayer
         public int AddToRole(Guid accountID, string roleName)
         {
             int affected = 0;
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                command.CommandText = "insert into accountroles(accountid, roleid) " +
-                    "values(@accountid, (select id from roles where name=@rolename))";
-
-                // Create parameters, escape SQL injection
-                IDataParameter param = command.CreateParameter();
-                param.ParameterName = "@accountid";
-                param.Value = accountID;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@rolename";
-                param.Value = roleName;
-                command.Parameters.Add(param);
-
-                using (IDbTransaction transaction = connection.BeginTransaction())
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    command.Transaction = transaction;
+                    command.CommandText = "insert into accountroles(accountid, roleid) " +
+                        "values(@accountid, (select id from roles where name=@rolename))";
 
-                    try
+                    // Create parameters, escape SQL injection
+                    IDataParameter param = command.CreateParameter();
+                    param.ParameterName = "@accountid";
+                    param.Value = accountID;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@rolename";
+                    param.Value = roleName;
+                    command.Parameters.Add(param);
+
+                    using (IDbTransaction transaction = connection.BeginTransaction())
                     {
-                        affected = command.ExecuteNonQuery();
-                        transaction.Commit();
-                    }
-                    catch (Exception e)
-                    {
-                        transaction.Rollback();
-                        Console.WriteLine(e.Message);
+                        command.Transaction = transaction;
+
+                        try
+                        {
+                            affected = command.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        catch (Exception e)
+                        {
+                            transaction.Rollback();
+                            Console.WriteLine(e.Message);
+                        }
                     }
                 }
             }
-
-            connection.Close();
             return affected;
         }
 
@@ -73,60 +70,61 @@ namespace DBLayer
         public int DeleteAccount(Account a)
         {
             int affected = 0;
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                command.CommandText = "delete from accounts where " +
-                    "id=@id and " +
-                    "username=@username and " +
-                    "email=@email and " +
-                    "passwordhash=@passwordhash and " +
-                    "securitystamp=@securitystamp";
-
-                // Create parameters, escape SQL injections
-                IDataParameter param = command.CreateParameter();
-                param.ParameterName = "@id";
-                param.Value = a.Id;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@username";
-                param.Value = a.Username;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@email";
-                param.Value = a.Email;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@passwordhash";
-                param.Value = a.PasswordHash;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@securitystamp";
-                param.Value = a.SecurityStamp;
-                command.Parameters.Add(param);
-
-                // Execute query with transaction
-                using (IDbTransaction transaction = connection.BeginTransaction())
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    command.Transaction = transaction;
-                    try
+                    command.CommandText = "delete from accounts where " +
+                        "id=@id and " +
+                        "username=@username and " +
+                        "email=@email and " +
+                        "passwordhash=@passwordhash and " +
+                        "securitystamp=@securitystamp";
+
+                    // Create parameters, escape SQL injections
+                    IDataParameter param = command.CreateParameter();
+                    param.ParameterName = "@id";
+                    param.Value = a.Id;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@username";
+                    param.Value = a.Username;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@email";
+                    param.Value = a.Email;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@passwordhash";
+                    param.Value = a.PasswordHash;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@securitystamp";
+                    param.Value = a.SecurityStamp;
+                    command.Parameters.Add(param);
+
+                    // Execute query with transaction
+                    using (IDbTransaction transaction = connection.BeginTransaction())
                     {
-                        affected = command.ExecuteNonQuery();
-                        transaction.Commit();
-                    }
-                    catch (Exception e)
-                    {
-                        transaction.Rollback();
-                        Console.WriteLine(e.Message);
+                        command.Transaction = transaction;
+                        try
+                        {
+                            affected = command.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        catch (Exception e)
+                        {
+                            transaction.Rollback();
+                            Console.WriteLine(e.Message);
+                        }
                     }
                 }
             }
-            connection.Close();
             return affected;
         }
 
@@ -138,39 +136,39 @@ namespace DBLayer
         public Account GetAccountByEmail(string email)
         {
             Account account = null;
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                command.CommandText = "select * from Accounts where email=@email";
-
-                // Escape SQL injections
-                IDbDataParameter param = command.CreateParameter();
-                param.ParameterName = "@email";
-                param.Value = email;
-                command.Parameters.Add(param);
-
-                try
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    using (IDataReader reader = command.ExecuteReader())
-                    {
-                        // Check if we actually have a row from the DB, if not throw an exception
-                        if (!reader.Read())
-                        {
-                            connection.Close();
-                            throw new KeyNotFoundException("An account with this email was not found");
-                        }
+                    command.CommandText = "select * from Accounts where email=@email";
 
-                        account = Build(reader);
+                    // Escape SQL injections
+                    IDbDataParameter param = command.CreateParameter();
+                    param.ParameterName = "@email";
+                    param.Value = email;
+                    command.Parameters.Add(param);
+
+                    try
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            // Check if we actually have a row from the DB, if not throw an exception
+                            if (!reader.Read())
+                            {
+                                connection.Close();
+                                throw new KeyNotFoundException("An account with this email was not found");
+                            }
+
+                            account = Build(reader);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
             }
-
-            connection.Close();
             return account;
         }
 
@@ -182,39 +180,38 @@ namespace DBLayer
         public Account GetAccountByID(Guid ID)
         {
             Account account = null;
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                command.CommandText = "select * from Accounts where id=@id";
-
-                // Escape SQL injections
-                IDbDataParameter param = command.CreateParameter();
-                param.ParameterName = "@id";
-                param.Value = ID;
-                command.Parameters.Add(param);
-
-                try
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    using (IDataReader reader = command.ExecuteReader())
-                    {
-                        // Check if we actually have a row from the DB, if not throw an exception
-                        if (!reader.Read())
-                        {
-                            connection.Close();
-                            throw new KeyNotFoundException("An account with this ID was not found");
-                        }
+                    command.CommandText = "select * from Accounts where id=@id";
 
-                        account = Build(reader);
+                    // Escape SQL injections
+                    IDbDataParameter param = command.CreateParameter();
+                    param.ParameterName = "@id";
+                    param.Value = ID;
+                    command.Parameters.Add(param);
+
+                    try
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            // Check if we actually have a row from the DB, if not throw an exception
+                            if (!reader.Read())
+                            {
+                                throw new KeyNotFoundException("An account with this ID was not found");
+                            }
+
+                            account = Build(reader);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
             }
-
-            connection.Close();
             return account;
         }
 
@@ -226,38 +223,37 @@ namespace DBLayer
         public Account GetAccountByUsername(string username)
         {
             Account account = null;
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                command.CommandText = "select * from Accounts where username=@username";
-
-                // Escape SQL injections
-                IDbDataParameter param = command.CreateParameter();
-                param.ParameterName = "@username";
-                param.Value = username;
-                command.Parameters.Add(param);
-                try
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    using (IDataReader reader = command.ExecuteReader())
-                    {
-                        // Check if we actually have a row from the DB, if not throw an exception
-                        if (!reader.Read())
-                        {
-                            connection.Close();
-                            throw new KeyNotFoundException("An account with this username was not found");
-                        }
+                    command.CommandText = "select * from Accounts where username=@username";
 
-                        account = Build(reader);
+                    // Escape SQL injections
+                    IDbDataParameter param = command.CreateParameter();
+                    param.ParameterName = "@username";
+                    param.Value = username;
+                    command.Parameters.Add(param);
+                    try
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            // Check if we actually have a row from the DB, if not throw an exception
+                            if (!reader.Read())
+                            {
+                                throw new KeyNotFoundException("An account with this username was not found");
+                            }
+
+                            account = Build(reader);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
             }
-
-            connection.Close();
             return account;
         }
 
@@ -268,29 +264,28 @@ namespace DBLayer
         public IEnumerable<Account> GetAccounts()
         {
             List<Account> accounts = new List<Account>();
-
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                command.CommandText = "select * from Accounts";
-                try
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    using (IDataReader reader = command.ExecuteReader())
+                    command.CommandText = "select * from Accounts";
+                    try
                     {
-                        while (reader.Read())
+                        using (IDataReader reader = command.ExecuteReader())
                         {
-                            accounts.Add(Build(reader));
+                            while (reader.Read())
+                            {
+                                accounts.Add(Build(reader));
+                            }
                         }
                     }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
-            connection.Close();
-
             return accounts;
         }
 
@@ -302,38 +297,38 @@ namespace DBLayer
         public IEnumerable<string> GetRoles(Guid accountID)
         {
             List<string> roles = new List<string>();
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                command.CommandText = "select r.Name " +
-                    "from roles as r " +
-                    "join accountRoles as ar on r.id = ar.roleid " +
-                    "join accounts as a on a.id = ar.accountid " +
-                    "where a.id=@id";
-
-                IDataParameter param = command.CreateParameter();
-                param.ParameterName = "@id";
-                param.Value = accountID;
-                command.Parameters.Add(param);
-
-                try
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    using (IDataReader reader = command.ExecuteReader())
+                    command.CommandText = "select r.Name " +
+                        "from roles as r " +
+                        "join accountRoles as ar on r.id = ar.roleid " +
+                        "join accounts as a on a.id = ar.accountid " +
+                        "where a.id=@id";
+
+                    IDataParameter param = command.CreateParameter();
+                    param.ParameterName = "@id";
+                    param.Value = accountID;
+                    command.Parameters.Add(param);
+
+                    try
                     {
-                        while(reader.Read())
+                        using (IDataReader reader = command.ExecuteReader())
                         {
-                            roles.Add(reader.GetString(0));
+                            while (reader.Read())
+                            {
+                                roles.Add(reader.GetString(0));
+                            }
                         }
                     }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
-
-            connection.Close();
             return roles;
         }
 
@@ -345,58 +340,59 @@ namespace DBLayer
         public int InsertAccount(Account a)
         {
             int affected = 0;
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                // Create SQL command
-                command.CommandText = "insert into Accounts(id, username, email, passwordhash, securitystamp) " +
-                    "values(@id, @username, @email, @passwordhash, @securitystamp)";
-
-
-                // Create and add parameters for the SQL query
-                IDbDataParameter param = command.CreateParameter();
-                param.ParameterName = "@id";
-                param.Value = a.Id;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@username";
-                param.Value = a.Username;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@email";
-                param.Value = a.Email;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@passwordhash";
-                param.Value = a.PasswordHash;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@securitystamp";
-                param.Value = a.SecurityStamp;
-                command.Parameters.Add(param);
-
-                // Use transaction in an using block so that it's disposed after the query
-                using (IDbTransaction transaction = connection.BeginTransaction())
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    command.Transaction = transaction;
-                    try
+                    // Create SQL command
+                    command.CommandText = "insert into Accounts(id, username, email, passwordhash, securitystamp) " +
+                        "values(@id, @username, @email, @passwordhash, @securitystamp)";
+
+
+                    // Create and add parameters for the SQL query
+                    IDbDataParameter param = command.CreateParameter();
+                    param.ParameterName = "@id";
+                    param.Value = a.Id;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@username";
+                    param.Value = a.Username;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@email";
+                    param.Value = a.Email;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@passwordhash";
+                    param.Value = a.PasswordHash;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@securitystamp";
+                    param.Value = a.SecurityStamp;
+                    command.Parameters.Add(param);
+
+                    // Use transaction in an using block so that it's disposed after the query
+                    using (IDbTransaction transaction = connection.BeginTransaction())
                     {
-                        affected = command.ExecuteNonQuery();
-                        transaction.Commit();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                        transaction.Rollback();
+                        command.Transaction = transaction;
+                        try
+                        {
+                            affected = command.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            transaction.Rollback();
+                        }
                     }
                 }
             }
-            connection.Close();
             return affected;
         }
 
@@ -410,31 +406,31 @@ namespace DBLayer
         {
             // Assume that the user doesn't have it until proven wrong
             bool hasRole = false;
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                command.CommandText = "select * from Roles as r " +
-                    "join AccountRoles as ar on r.id = ar.roleid " +
-                    "join Accounts as a on ar.accountid = a.ID " +
-                    "where a.id=@id and r.name=@rolename";
-
-                try
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    using (IDataReader reader = command.ExecuteReader())
+                    command.CommandText = "select * from Roles as r " +
+                        "join AccountRoles as ar on r.id = ar.roleid " +
+                        "join Accounts as a on ar.accountid = a.ID " +
+                        "where a.id=@id and r.name=@rolename";
+                    try
                     {
-                        if (reader.Read())
+                        using (IDataReader reader = command.ExecuteReader())
                         {
-                            hasRole = true;
+                            if (reader.Read())
+                            {
+                                hasRole = true;
+                            }
                         }
                     }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
-            connection.Close();
             return hasRole;
         }
 
@@ -447,60 +443,60 @@ namespace DBLayer
         public int UpdateAccount(Account account)
         {
             int affected = 0;
-            connection.Open();
-
-            using (IDbCommand command = connection.CreateCommand())
+            using (IDbConnection connection = components.Connection)
             {
-                command.CommandText = "update Accounts set " +
-                        "username=@username, " +
-                        "email=@email, " +
-                        "passwordhash=@passwordhash, " +
-                        "securitystamp=@securitystamp " +
-                    "where " +
-                        "id=@id";
-
-                IDataParameter param = command.CreateParameter();
-                param.ParameterName = "@id";
-                param.Value = account.Id;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@username";
-                param.Value = account.Username;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@email";
-                param.Value = account.Email;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@passwordhash";
-                param.Value = account.PasswordHash;
-                command.Parameters.Add(param);
-
-                param = command.CreateParameter();
-                param.ParameterName = "@securitystamp";
-                param.Value = account.SecurityStamp;
-                command.Parameters.Add(param);
-
-                using (IDbTransaction transaction = connection.BeginTransaction(IsolationLevel.Serializable))
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
                 {
-                    command.Transaction = transaction;
+                    command.CommandText = "update Accounts set " +
+                            "username=@username, " +
+                            "email=@email, " +
+                            "passwordhash=@passwordhash, " +
+                            "securitystamp=@securitystamp " +
+                        "where " +
+                            "id=@id";
 
-                    try
+                    IDataParameter param = command.CreateParameter();
+                    param.ParameterName = "@id";
+                    param.Value = account.Id;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@username";
+                    param.Value = account.Username;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@email";
+                    param.Value = account.Email;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@passwordhash";
+                    param.Value = account.PasswordHash;
+                    command.Parameters.Add(param);
+
+                    param = command.CreateParameter();
+                    param.ParameterName = "@securitystamp";
+                    param.Value = account.SecurityStamp;
+                    command.Parameters.Add(param);
+
+                    using (IDbTransaction transaction = connection.BeginTransaction(IsolationLevel.Serializable))
                     {
-                        affected = command.ExecuteNonQuery();
-                        transaction.Commit();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                        transaction.Rollback();
+                        command.Transaction = transaction;
+                        try
+                        {
+                            affected = command.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            transaction.Rollback();
+                        }
                     }
                 }
             }
-            connection.Close();
             return affected;
         }
 

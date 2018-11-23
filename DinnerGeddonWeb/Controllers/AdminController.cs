@@ -68,8 +68,9 @@ namespace DinnergeddonWeb.Controllers
             //Checks if the id is null and checks for an error if it is.
             if (id == null)
             {
-                // TODO: Show error as opposed to returning to Index.
-                return RedirectToAction("Index");
+                // TODO: Show error as opposed to returning to Index. Possibly implemented, no idea how to test practically.
+                ViewBag.Message = "Error finding user, please try again.";
+                return View();
             }
 
             //Safely casts the id to a non-nullable Guid after the check.
@@ -81,8 +82,9 @@ namespace DinnergeddonWeb.Controllers
             //Checks if the user is null and produces an error in the case that it is.
             if (user == null)
             {
-                // TODO: Show error as opposed to returning to Index.
-                return RedirectToAction("Index");
+                // TODO: Show error as opposed to returning to Index. Possibly implemented, no idea how to test practically.
+                ViewBag.Message = "Error finding user. Refresh the page and try again.";
+                return View();
             }
 
             //Creates a page with the found user information.
@@ -136,8 +138,9 @@ namespace DinnergeddonWeb.Controllers
             //Checks if the id is null and checks for an error if it is.
             if (id == null)
             {
-                // TODO: Show error as opposed to returning to Index.
-                return RedirectToAction("Index");
+                // TODO: Show error as opposed to returning to Index. Possibly implemented, no idea how to test practically.
+                ViewBag.Message = "Error finding user, please try again.";
+                return View();
             }
 
             //Safely casts the id to a non-nullable Guid after the check.

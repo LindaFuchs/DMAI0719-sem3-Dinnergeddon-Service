@@ -120,16 +120,19 @@ namespace DinnergeddonService
             return accountController.DeleteAccount(account);
         }
 
+        //TODO: implement and document
         public Lobby CreateLobby(string name, int playerLimit)
         {
             throw new NotImplementedException();
         }
 
+        //TODO: implement and document
         public IEnumerable<Lobby> GetLobbies()
         {
             throw new NotImplementedException();
         }
 
+        //TODO: implement and document
         public Lobby CreatePrivateLobby(string name, int playerLimit, string password)
         {
             throw new NotImplementedException();

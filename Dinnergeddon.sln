@@ -14,12 +14,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonService.Tests", "DinnergeddonService.Tests\DinnergeddonService.Tests.csproj", "{AA2D6153-85F5-43C8-89B4-1D663B9D431D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonWeb", "DinnergeddonWeb\DinnergeddonWeb.csproj", "{A4704818-F962-42A1-8154-5A9489B35F0E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D6CBD052-5F9B-43D5-BCF2-FF839414025F} = {D6CBD052-5F9B-43D5-BCF2-FF839414025F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBLayer.Tests", "DBLayer.Tests\DBLayer.Tests.csproj", "{E865A3DB-AE02-4B57-B1AA-51680D755E7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonService", "DinnergeddonService\DinnergeddonService.csproj", "{F72FC4A0-61F8-482E-946B-12071F5A4EA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonService", "DinnergeddonService\DinnergeddonService.csproj", "{D6CBD052-5F9B-43D5-BCF2-FF839414025F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonHost", "DinnergeddonHost\DinnergeddonHost.csproj", "{0328855D-CB83-43E4-8549-43F8B5B762AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Controller.csproj", "{38E19C8C-67A2-42A1-BCED-01498AB06372}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,14 +58,14 @@ Global
 		{E865A3DB-AE02-4B57-B1AA-51680D755E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E865A3DB-AE02-4B57-B1AA-51680D755E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E865A3DB-AE02-4B57-B1AA-51680D755E7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F72FC4A0-61F8-482E-946B-12071F5A4EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F72FC4A0-61F8-482E-946B-12071F5A4EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F72FC4A0-61F8-482E-946B-12071F5A4EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F72FC4A0-61F8-482E-946B-12071F5A4EA7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0328855D-CB83-43E4-8549-43F8B5B762AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0328855D-CB83-43E4-8549-43F8B5B762AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0328855D-CB83-43E4-8549-43F8B5B762AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0328855D-CB83-43E4-8549-43F8B5B762AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6CBD052-5F9B-43D5-BCF2-FF839414025F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6CBD052-5F9B-43D5-BCF2-FF839414025F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6CBD052-5F9B-43D5-BCF2-FF839414025F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6CBD052-5F9B-43D5-BCF2-FF839414025F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38E19C8C-67A2-42A1-BCED-01498AB06372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38E19C8C-67A2-42A1-BCED-01498AB06372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38E19C8C-67A2-42A1-BCED-01498AB06372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38E19C8C-67A2-42A1-BCED-01498AB06372}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

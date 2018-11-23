@@ -9,12 +9,12 @@ namespace DinnergeddonWeb.Identity
 {
     public class UserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>,IUserEmailStore<User>, IRoleStore<IdentityRole>, IUserRoleStore<User>
     {
-        private readonly AccountServiceReference.AccountServiceClient _proxy;
+        private readonly AccontServiceClient _proxy;
 
 
         public UserStore()
         {
-            this._proxy = new AccountServiceReference.AccountServiceClient();
+            this._proxy = new AccontServiceClient(); 
         }
 
         /// <summary>
@@ -36,10 +36,11 @@ namespace DinnergeddonWeb.Identity
             if (user == null)
                 throw new ArgumentNullException("user");
 
-            return Task.Factory.StartNew(() =>
-            {
+         
                 //delete account
-            });
+                Account account = IdentityUserToModelAccount(user);
+
+            return Task.FromResult<bool>(_proxy.DeleteAccount(account));
         }
 
         public void Dispose()
@@ -135,7 +136,7 @@ namespace DinnergeddonWeb.Identity
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentNullException("userName");
             //has to be changed to FindByName
-            Account account = _proxy.FindByName(userName);
+            Account account = _proxy.FindByUsername(userName);
 
             User user = ModelAccountToIdentityUser(account);
 

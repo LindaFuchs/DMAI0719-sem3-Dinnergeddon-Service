@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DinnergeddonUI.DinnergeddonService;
 
 namespace DinnergeddonUI
 {
@@ -19,9 +20,12 @@ namespace DinnergeddonUI
     /// </summary>
     public partial class CreateLobbyDialog : Window
     {
+        LobbyServiceClient _proxy = new LobbyServiceClient();
+
         public CreateLobbyDialog()
         {
             InitializeComponent();
+
         }
 
         private void CreateLobby(object sender, RoutedEventArgs e)
@@ -43,18 +47,17 @@ namespace DinnergeddonUI
                 string passConf = ConfirmPasswordTextBox.Password;
                if(ValidatePassword(pass, passConf))
                 {
-                    LobbyCreateTest lb = LobbyCreateTest.Instance;
-                   lb.CreateLobby(lobbyName,playerCount);
+                    _proxy.CreatePrivateLobby(lobbyName, playerCount, pass);
                     this.DialogResult = true;
 
                 }
             }
             else
             {
-               // string pass = PasswordTextBox.Password;
-               
-                    LobbyCreateTest lb = LobbyCreateTest.Instance;
-                    lb.CreateLobby(lobbyName, playerCount);
+                // string pass = PasswordTextBox.Password;
+                _proxy.CreateLobby(lobbyName, playerCount);
+                    //LobbyCreateTest lb = LobbyCreateTest.Instance;
+                    //lb.CreateLobby(lobbyName, playerCount);
 
                     this.DialogResult = true;
 

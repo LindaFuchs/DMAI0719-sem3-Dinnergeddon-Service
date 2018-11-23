@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DinnergeddonUI.DinnergeddonService;
+
 
 namespace DinnergeddonUI
 {
@@ -21,20 +23,33 @@ namespace DinnergeddonUI
     /// </summary>
     public partial class Dashboard : Window
     {
+        LobbyServiceClient _proxy = new LobbyServiceClient();
+        //private ObservableCollection<DinnergeddonService.Lobby> lobbies;
         public Dashboard()
         {
             DataContext = new AuthenticationViewModel(new AuthenticationService());
 
             InitializeComponent();
             LobbyCreateTest lb = LobbyCreateTest.Instance;
-            ObservableCollection<Lobby> items = lb.lobbies;
-            LobbiesListView.ItemsSource = items;
+            RefreshLobbies();
         }
 
         public IViewModel ViewModel
         {
             get { return DataContext as IViewModel; }
             set { DataContext = value; }
+        }
+
+        public List<DinnergeddonService.Lobby> Lobbies
+        {
+            get;
+            set;
+        }
+
+        private void RefreshLobbies()
+        {
+            var items = new ObservableCollection<DinnergeddonService.Lobby>(_proxy.GetLobbies());
+            LobbiesListView.ItemsSource = items;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -48,6 +63,8 @@ namespace DinnergeddonUI
 
 
             createLobbyDialog.ShowDialog();
+
+            RefreshLobbies();
 
         }
 

@@ -63,9 +63,11 @@ namespace DinnergeddonUI
         {
            
             string hashedPassword = HashPassword(clearTextPassword);
-            Account account = _proxy.FindByEmail(username);
 
-            if (account == null)
+            Account account = _proxy.FindByEmail(username);
+            
+
+            if (account == null || !VerifyHashedPassword(account.PasswordHash, clearTextPassword))
                 throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
 
             return new User(account.Id, account.Username, account.Email, _proxy.GetRoles(account.Id));

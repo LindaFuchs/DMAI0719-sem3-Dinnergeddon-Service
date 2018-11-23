@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBLayer", "DBLayer\DBLayer.csproj", "{B9657908-0A19-4931-8C84-3993BA1E60B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonUI", "DinnergeddonUI\DinnergeddonUI.csproj", "{FAC869ED-9DE7-4E3F-9CD7-EC3CBF6B31F3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D6CBD052-5F9B-43D5-BCF2-FF839414025F} = {D6CBD052-5F9B-43D5-BCF2-FF839414025F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{17556139-CC1D-48DD-A770-39F33EE57A75}"
 EndProject

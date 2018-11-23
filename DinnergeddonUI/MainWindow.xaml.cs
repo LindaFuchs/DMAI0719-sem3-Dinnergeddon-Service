@@ -18,11 +18,25 @@ namespace DinnergeddonUI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IView
     {
         public MainWindow()
         {
+            DataContext = new AuthenticationViewModel(new AuthenticationService());
+            Loaded += (s, e) =>
+            {
+                if (DataContext is ICloseable)
+                {
+                    (DataContext as ICloseable).RequestClose += (_, __) => this.Close();
+                }
+            };
             InitializeComponent();
+        }
+
+        public IViewModel ViewModel
+        {
+            get { return DataContext as IViewModel; }
+            set { DataContext = value; }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -33,11 +47,15 @@ namespace DinnergeddonUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            UsernameTextBox.Text = "Log in button pressed";
-            Dashboard dashboard = new Dashboard();
-            dashboard.Show();
-            this.Close();
+            //AuthenticationViewModel viewModel = new AuthenticationViewModel(new AuthenticationService());
+
+            //UsernameTextBox.Text = "Log in button pressed";
+            //Dashboard dashboard = new Dashboard(viewModel);
+            //dashboard.Show();
+            //this.Close();
         }
+
+
     }
 
     public class PasswordBoxMonitor : DependencyObject

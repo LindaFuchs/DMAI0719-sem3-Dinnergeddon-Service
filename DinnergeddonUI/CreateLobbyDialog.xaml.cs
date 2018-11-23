@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DinnergeddonUI.DinnergeddonService;
 
 namespace DinnergeddonUI
 {
@@ -19,39 +20,65 @@ namespace DinnergeddonUI
     /// </summary>
     public partial class CreateLobbyDialog : Window
     {
+        LobbyServiceClient _proxy = new LobbyServiceClient();
+
         public CreateLobbyDialog()
         {
             InitializeComponent();
+
         }
 
         private void CreateLobby(object sender, RoutedEventArgs e)
         {
+            LobbyNameBorder.BorderBrush = (Brush)FindResource("InputFormColor");
+            PasswordBorder.BorderBrush= (Brush)FindResource("InputFormColor");
+            ConfirmPasswordBorder.BorderBrush = (Brush)FindResource("InputFormColor");
 
+            string lobbyName = LobbyNameTextBox.Text;
             int playerCount = GetPlayerCount();
-            if (string.IsNullOrEmpty(LobbyNameTextBox.Text) || LobbyNameTextBox.Text.Length < 4)
+            if (string.IsNullOrEmpty(lobbyName) || lobbyName.Length < 3)
             {
             LobbyNameBorder.BorderBrush = (Brush)FindResource("IncorrectColor");
-
+                return;
             }
             if(PasswordCheckbox.IsChecked == true)
             {
-                ValidatePassword();
+                string pass = PasswordTextBox.Password;
+                string passConf = ConfirmPasswordTextBox.Password;
+               if(ValidatePassword(pass, passConf))
+                {
+                    _proxy.CreatePrivateLobby(lobbyName, playerCount, pass);
+                    this.DialogResult = true;
+
+                }
             }
+            else
+            {
+                // string pass = PasswordTextBox.Password;
+                _proxy.CreateLobby(lobbyName, playerCount);
+                    //LobbyCreateTest lb = LobbyCreateTest.Instance;
+                    //lb.CreateLobby(lobbyName, playerCount);
+
+                    this.DialogResult = true;
+
+                
+            }
+            
         }
 
-        private bool ValidatePassword()
+        private bool ValidatePassword(String pass, String passConf)
         {
-            string pass = PasswordTextBox.Password;
-            string passConf = ConfirmPasswordTextBox.Password;
+            
 
             if (string.IsNullOrEmpty(pass) || pass.Length<4)
             {
                 PasswordBorder.BorderBrush = (Brush)FindResource("IncorrectColor");
                 ConfirmPasswordBorder.BorderBrush = (Brush)FindResource("IncorrectColor");
+                
 
             }
 
-            if (PasswordTextBox.Password != ConfirmPasswordTextBox.Password)
+            if (string.IsNullOrEmpty(passConf) || PasswordTextBox.Password != ConfirmPasswordTextBox.Password)
             {
                 ConfirmPasswordBorder.BorderBrush = (Brush)FindResource("IncorrectColor");
                 return false;

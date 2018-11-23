@@ -10,10 +10,12 @@ namespace DinnergeddonService
     public class DinnergeddonService : IAccontService, ILobbyService
     {
         private readonly IAccountController accountController;
+        private readonly ILobbyController lobbyController;
 
         public DinnergeddonService()
         {
             accountController = new AccountController();
+            lobbyController = new LobbyController(LobbyContainer.GetInstance());
         }
 
         /// <summary>
@@ -120,24 +122,22 @@ namespace DinnergeddonService
             return accountController.DeleteAccount(account);
         }
 
-        //TODO: implement and document
+        //TODO: document
         public Lobby CreateLobby(string name, int playerLimit)
         {
-            throw new NotImplementedException();
+            return lobbyController.CreateLobby(name, playerLimit);
         }
 
-        //TODO: implement and document
-        public IEnumerable<Lobby> GetLobbies()
-        {
-            throw new NotImplementedException();
-        }
-
-        //TODO: implement and document
+        //TODO: document
         public Lobby CreatePrivateLobby(string name, int playerLimit, string password)
         {
-            throw new NotImplementedException();
+            return lobbyController.CreateLobby(name, playerLimit, password);
         }
 
-
+        //TODO: document
+        public IEnumerable<Lobby> GetLobbies()
+        {
+            return lobbyController.GetLobbies();
+        }
     }
 }

@@ -20,10 +20,16 @@ namespace DinnergeddonUI
     /// </summary>
     public partial class MainWindow : Window, IView
     {
-        public MainWindow(AuthenticationViewModel viewModel)
+        public MainWindow()
         {
-            ViewModel = viewModel;
-
+            DataContext = new AuthenticationViewModel(new AuthenticationService());
+            Loaded += (s, e) =>
+            {
+                if (DataContext is ICloseable)
+                {
+                    (DataContext as ICloseable).RequestClose += (_, __) => this.Close();
+                }
+            };
             InitializeComponent();
         }
 
@@ -41,11 +47,15 @@ namespace DinnergeddonUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            UsernameTextBox.Text = "Log in button pressed";
-            Dashboard dashboard = new Dashboard();
-            dashboard.Show();
-            this.Close();
+            //AuthenticationViewModel viewModel = new AuthenticationViewModel(new AuthenticationService());
+
+            //UsernameTextBox.Text = "Log in button pressed";
+            //Dashboard dashboard = new Dashboard(viewModel);
+            //dashboard.Show();
+            //this.Close();
         }
+
+
     }
 
     public class PasswordBoxMonitor : DependencyObject

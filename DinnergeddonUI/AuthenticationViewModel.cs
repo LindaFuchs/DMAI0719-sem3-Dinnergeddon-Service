@@ -3,18 +3,24 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows.Controls;
 using System.Security;
-
+using System.Windows;
+using System.Windows.Input;
 
 namespace DinnergeddonUI
 {
     public interface IViewModel { }
+    interface ICloseable
+    {
+        event EventHandler<EventArgs> RequestClose;
+    }
 
-    public class AuthenticationViewModel : IViewModel, INotifyPropertyChanged
+    public class AuthenticationViewModel : IViewModel, INotifyPropertyChanged, ICloseable
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly DelegateCommand _loginCommand;
         private readonly DelegateCommand _logoutCommand;
         private readonly DelegateCommand _showViewCommand;
+        private readonly DelegateCommand _closeWindowCommand;
         private string _username;
         private string _status;
 
@@ -24,6 +30,9 @@ namespace DinnergeddonUI
             _loginCommand = new DelegateCommand(Login, CanLogin);
             _logoutCommand = new DelegateCommand(Logout, CanLogout);
             _showViewCommand = new DelegateCommand(ShowView, null);
+            _closeWindowCommand = new DelegateCommand(CloseWindow, CanLogin);
+
+          
         }
 
         #region Properties
@@ -40,7 +49,7 @@ namespace DinnergeddonUI
                 if (IsAuthenticated)
                     return string.Format("Signed in as {0}. {1}",
                           Thread.CurrentPrincipal.Identity.Name,
-                          Thread.CurrentPrincipal.IsInRole("Administrators") ? "You are an administrator!"
+                          Thread.CurrentPrincipal.IsInRole("admin") ? "You are an administrator!"
                               : "You are NOT a member of the administrators group.");
 
                 return "Not authenticated!";
@@ -56,11 +65,26 @@ namespace DinnergeddonUI
 
         #region Commands
         public DelegateCommand LoginCommand { get { return _loginCommand; } }
+        public ICommand CloseCommand { get; private set; }
+
 
         public DelegateCommand LogoutCommand { get { return _logoutCommand; } }
 
         public DelegateCommand ShowViewCommand { get { return _showViewCommand; } }
+
+        public DelegateCommand CloseWindowCommand { get { return _closeWindowCommand; } }
+
         #endregion
+
+        private void CloseWindow(object window)
+        {
+            Window w = (Window)window;
+            if (w != null)
+            {
+                w.Close();
+            }
+
+        }
 
         private void Login(object parameter)
         {
@@ -87,6 +111,11 @@ namespace DinnergeddonUI
                 Username = string.Empty; //reset
                 passwordBox.Password = string.Empty; //reset
                 Status = string.Empty;
+                //  Application.Current.MainWindow.Close();
+
+                Dashboard dashboard = new Dashboard();
+                dashboard.Show();
+
             }
             catch (UnauthorizedAccessException)
             {
@@ -149,6 +178,7 @@ namespace DinnergeddonUI
 
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<EventArgs> RequestClose;
 
         private void NotifyPropertyChanged(string propertyName)
         {

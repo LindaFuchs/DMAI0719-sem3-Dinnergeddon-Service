@@ -26,6 +26,7 @@
             Foreground="White"
             Content="Create lobby" Click="Button_Click">
             </Button>
+            <TextBlock Text="{Binding AuthenticatedUser}" FontSize="15" DockPanel.Dock="Top" HorizontalAlignment="Right" Foreground="White" />
         </DockPanel>
         
         <!--Lobby text-->

@@ -51,10 +51,11 @@ namespace DinnergeddonUI
             }
             else
             {
-                string pass = PasswordTextBox.Password;
+               // string pass = PasswordTextBox.Password;
                
                     LobbyCreateTest lb = LobbyCreateTest.Instance;
                     lb.CreateLobby(lobbyName, playerCount);
+
                     this.DialogResult = true;
 
                 

@@ -22,14 +22,17 @@ namespace DinnergeddonUI
 
             base.OnStartup(e);
 
+            MainWindow loginWindow = new MainWindow();
+
             //Show the login view
             AuthenticationViewModel viewModel = new AuthenticationViewModel(new AuthenticationService());
+
+            loginWindow.DataContext = viewModel;
+            loginWindow.Show();
 
             //IView loginWindow = new LoginWindow(viewModel);
             //loginWindow.Show();
 
-            IView loginWindow = new MainWindow(viewModel);
-            loginWindow.Show();
 
         }
     }

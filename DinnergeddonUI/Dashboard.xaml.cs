@@ -23,13 +23,19 @@ namespace DinnergeddonUI
     {
         public Dashboard()
         {
+            DataContext = new AuthenticationViewModel(new AuthenticationService());
+
             InitializeComponent();
             LobbyCreateTest lb = LobbyCreateTest.Instance;
             ObservableCollection<Lobby> items = lb.lobbies;
             LobbiesListView.ItemsSource = items;
         }
 
-
+        public IViewModel ViewModel
+        {
+            get { return DataContext as IViewModel; }
+            set { DataContext = value; }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

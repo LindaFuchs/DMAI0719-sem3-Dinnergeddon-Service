@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using DinnergeddonUI.DinnergeddonService;
 
 namespace DinnergeddonUI
 {
@@ -14,6 +15,8 @@ namespace DinnergeddonUI
 
     public class AuthenticationService : IAuthenticationService
     {
+        AccontServiceClient _proxy = new AccontServiceClient();
+
         private class InternalUserData
         {
             public InternalUserData(string username, string email, string hashedPassword, string[] roles)
@@ -58,13 +61,14 @@ namespace DinnergeddonUI
 
         public User AuthenticateUser(string username, string clearTextPassword)
         {
+           
             string hashedPassword = HashPassword(clearTextPassword);
-            InternalUserData userData = _users.FirstOrDefault(u => u.Username.Equals(username)
-                && VerifyHashedPassword(u.HashedPassword, clearTextPassword));
-            if (userData == null)
+            Account account = _proxy.FindByEmail(username);
+
+            if (account == null)
                 throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
 
-            return new User(userData.Username, userData.Email, userData.Roles);
+            return new User(account.Id, account.Username, account.Email, _proxy.GetRoles(account.Id));
         }
 
         private string CalculateHash(string clearTextPassword, string salt)
@@ -153,8 +157,9 @@ namespace DinnergeddonUI
 
     public class User
     {
-        public User(string username, string email, string[] roles)
+        public User(Guid id, string username, string email, string[] roles)
         {
+            Id = id;
             Username = username;
             Email = email;
             Roles = roles;
@@ -163,6 +168,11 @@ namespace DinnergeddonUI
         {
             get;
             set;
+        }
+
+        public Guid Id
+        {
+            get;set;
         }
 
         public string Email

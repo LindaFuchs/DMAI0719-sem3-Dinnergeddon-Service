@@ -7,6 +7,8 @@ namespace Controller
     public class LobbyController : ILobbyController
     {
         private readonly ILobbyContainer container;
+        private readonly int MIN_PLAYERS = 2;
+        private readonly int MAX_PLAYERS = 4;
 
         public LobbyController(ILobbyContainer container)
         {
@@ -70,7 +72,7 @@ namespace Controller
         /// <returns>If the lobby can be created</returns>
         private bool CheckLimits(string name, int playerLimit)
         {
-            if (name == "" || playerLimit < 2 || playerLimit > 4)
+            if (name == "" || playerLimit < MIN_PLAYERS || playerLimit > MAX_PLAYERS)
                 return false;
             return true;
         }

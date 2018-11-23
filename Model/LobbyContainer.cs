@@ -2,7 +2,7 @@
 
 namespace Model
 {
-    class LobbyContainer
+    public class LobbyContainer : ILobbyContainer
     {
         private List<Lobby> lobbies;
         private static LobbyContainer instance;
@@ -19,7 +19,7 @@ namespace Model
             return instance;
         }
 
-        public IEnumerable<Lobby> GetLobbies()
+        public IEnumerable<Lobby> GetActiveLobbies()
         {
             return lobbies;
         }

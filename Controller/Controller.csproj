@@ -45,6 +45,7 @@
     <Compile Include="IAccountController.cs" />
     <Compile Include="ILobbyController.cs" />
     <Compile Include="LobbyController.cs" />
+    <Compile Include="PasswordHasher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,21 +4,97 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-    class LobbyController : ILobbyController
+    public class LobbyController : ILobbyController
     {
+        private readonly ILobbyContainer container;
+
+        public LobbyController(ILobbyContainer container)
+        {
+            this.container = container;
+        }
+        
+        /// <summary>
+        /// Creates a lobby object and stores it on the system.
+        /// The lobby created by this method will be a non-private one, so anyone will
+        /// be able to join
+        /// </summary>
+        /// <param name="name">The name of the lobby</param>
+        /// <param name="playerLimit">The player limit(minimum of 2, maximum of 4)</param>
+        /// <returns>The created lobby object</returns>
         public Lobby CreateLobby(string name, int playerLimit)
         {
-            throw new NotImplementedException();
+            if (!CheckLimits(name, playerLimit))
+                return null;
+
+            Lobby lobby = BuildLobby(name, playerLimit, "");
+
+            container.Add(lobby);
+            return lobby;
         }
 
+        /// <summary>
+        /// Creates a lobby object and stores it on the system
+        /// The lobby created by this method will be a private one and only players with
+        /// the password will be able to join
+        /// </summary>
+        /// <param name="name">The name of the lobby</param>
+        /// <param name="playerLimit">The player limit(minimum of 2, maximum of 4)</param>
+        /// <param name="password">The password that's protecting the lobby</param>
+        /// <returns>The created lobby object</returns>
         public Lobby CreateLobby(string name, int playerLimit, string password)
         {
-            throw new NotImplementedException();
+            Lobby lobby = CreateLobby(name, playerLimit);
+            if (lobby == null)
+                return null;
+            
+            string passwordHash = PasswordHasher.HashPassword(password);
+
+            lobby.PasswordHash = passwordHash;
+            return lobby;
         }
 
+        /// <summary>
+        /// Gets all the currently active lobbies
+        /// </summary>
+        /// <returns>A list of all currently active lobbies</returns>
         public IEnumerable<Lobby> GetLobbies()
         {
-            throw new NotImplementedException();
+            return container.GetActiveLobbies();
+        }
+
+        /// <summary>
+        /// This method checks if the limits of Lobby creation are met
+        /// </summary>
+        /// <param name="name">The name of the lobby</param>
+        /// <param name="playerLimit">The player limit of the lobby</param>
+        /// <returns>If the lobby can be created</returns>
+        private bool CheckLimits(string name, int playerLimit)
+        {
+            if (name == "" || playerLimit < 2 || playerLimit > 4)
+                return false;
+            return true;
+        }
+
+        /// <summary>
+        /// Builds a new Lobby object
+        /// </summary>
+        /// <param name="name">The name of the lobby</param>
+        /// <param name="limit">The limit of players</param>
+        /// <param name="passwordHash">The password hash</param>
+        /// <returns>A new lobby object with those parameters</returns>
+        private Lobby BuildLobby(string name, int limit, string passwordHash)
+        {
+            if (name == "" || name == null)
+                throw new ArgumentNullException("Name cannot be empty or null");
+
+            return new Lobby()
+            {
+                Id = Guid.NewGuid(),
+                Name = name,
+                Limit = limit,
+                Players = new List<Account>(),
+                PasswordHash = passwordHash,
+            };
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-    interface ILobbyController
+    public interface ILobbyController
     {
         Lobby CreateLobby(string name, int playerLimit);
         Lobby CreateLobby(string name, int playerLimit, string password);

@@ -7,13 +7,14 @@ namespace DBLayer
     public class DbComponents : IDbComponents
     {
         private static DbComponents instance;
-        
+
         private DbComponents()
         {
             string provider = ConfigurationManager.ConnectionStrings["auto"].ProviderName;
             string connectionString = ConfigurationManager.ConnectionStrings["auto"].ConnectionString;
 
             Factory = DbProviderFactories.GetFactory(provider);
+
             Connection = Factory.CreateConnection();
             Connection.ConnectionString = connectionString;
         }
@@ -25,8 +26,9 @@ namespace DBLayer
 
             return instance;
         }
-        
-        public IDbConnection Connection { get; private set; }
+
+        public IDbConnection Connection{ get; private set; }
+        //public IDbConnection Connection { get; private set; }
         public DbProviderFactory Factory { get; private set; }
     }
 }

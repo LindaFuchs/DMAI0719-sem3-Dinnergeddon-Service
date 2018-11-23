@@ -12,14 +12,16 @@
             <Button 
                                Background="Gray"
  FontSize="14" DockPanel.Dock="Left" Content="Back" 
-                    HorizontalAlignment="Left"  
+                    HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
                     Margin="15"  
                     Click="Button_Click_1" Style="{StaticResource RoundButtonTemplate}"></Button>
             <Button 
                 FontSize="14"
-                Margin="15"
+                Margin="0,0,30,0"
                 HorizontalAlignment="Right"
                 DockPanel.Dock="Right"
+                VerticalAlignment="Bottom"
             Style="{DynamicResource RoundButtonTemplate}"
             Foreground="White"
             Content="Create lobby" Click="Button_Click">
@@ -27,9 +29,9 @@
         </DockPanel>
         
         <!--Lobby text-->
-        <TextBlock Margin="20,0,0,0" FontSize="16" Foreground="White" Background="{StaticResource BackgroundColor}" DockPanel.Dock="Top" Text="Lobbies"></TextBlock>
+        <TextBlock Margin="20,10,0,0" FontSize="16" Foreground="White" Background="{StaticResource BackgroundColor}" DockPanel.Dock="Top" Text="Lobbies"></TextBlock>
        
-        <ListView ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="20,10,20,20" ScrollViewer.CanContentScroll="False"
+        <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="20,10,20,20" ScrollViewer.CanContentScroll="False"
              BorderThickness="0" Name="LobbiesListView" Background="{DynamicResource BackgroundColor}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -63,7 +65,44 @@
             </ListView.ItemTemplate>
             
 
-        </ListView>
+        </ListView>-->
+        <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="20,0,20,20"
+             BorderThickness="0" Name="LobbiesListView" Background="{DynamicResource BackgroundColor}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Focusable" Value="false"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border  Margin="10" BorderBrush="#362e2e" BorderThickness="2" CornerRadius="8,8,8,8">
+                            <DockPanel Background="#362e2e" >
+                                <StackPanel>
+                                    <TextBlock FontSize="13" FontWeight="Bold" Foreground="White" Margin="10,10,10,5" Text="{Binding Name}" />
+                                    <TextBlock Foreground="White" Margin="10,0,10,10" Text="{Binding Limit, StringFormat='Player limit: {0}'}"  />
+                                </StackPanel>
+                                <WrapPanel Margin="20,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                    <Button VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Background="#fff7ed" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" Content="Join"></Button>
+                                </WrapPanel>
+                            </DockPanel>
+                        </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
 
     </DockPanel>
 </Window>

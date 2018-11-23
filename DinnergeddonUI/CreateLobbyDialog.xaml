@@ -72,7 +72,7 @@
 
         <StackPanel  Margin="50,25,50,50">
 
-            <Label Content="Create a lobby" HorizontalAlignment="Left" FontSize="23" Margin="0,0,0,40"></Label>
+            <Label Content="Create a lobby" HorizontalAlignment="Center" FontSize="23" Margin="0,0,0,40"></Label>
             
             <!--Lobby name field-->
             <Border

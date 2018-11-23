@@ -70,11 +70,11 @@ namespace DinnergeddonUI
             {
                 PasswordBorder.BorderBrush = (Brush)FindResource("IncorrectColor");
                 ConfirmPasswordBorder.BorderBrush = (Brush)FindResource("IncorrectColor");
-                return false;
+                
 
             }
 
-            if (PasswordTextBox.Password != ConfirmPasswordTextBox.Password)
+            if (string.IsNullOrEmpty(passConf) || PasswordTextBox.Password != ConfirmPasswordTextBox.Password)
             {
                 ConfirmPasswordBorder.BorderBrush = (Brush)FindResource("IncorrectColor");
                 return false;

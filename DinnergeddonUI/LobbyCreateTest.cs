@@ -21,6 +21,10 @@ namespace DinnergeddonUI
             lobbies.Add(new Lobby() { Name = "ssss", Limit = 3 });
             lobbies.Add(new Lobby() { Name = "Bdddddg", Limit = 3 });
             lobbies.Add(new Lobby() { Name = "Bdffffg", Limit = 3 });
+            lobbies.Add(new Lobby() { Name = "Bdg", Limit = 3 });
+            lobbies.Add(new Lobby() { Name = "ssss", Limit = 3 });
+            lobbies.Add(new Lobby() { Name = "Bdddddg", Limit = 3 });
+            lobbies.Add(new Lobby() { Name = "Bdffffg", Limit = 3 });
 
         }
 

@@ -10,7 +10,8 @@
         ResizeMode="CanResize"
         Background="{StaticResource ResourceKey=BackgroundColor}">
     <Window.Resources>
-      
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+
         <Style x:Key="{x:Type Hyperlink}" TargetType="{x:Type Hyperlink}">
             <Setter Property="Foreground" Value="{StaticResource InputFormColor}"/>
             <Setter Property="TextDecorations" Value="none"/>
@@ -86,7 +87,7 @@
                               Fill="{StaticResource InputFormColor}" Opacity="0.7" Stretch="Fill"  />
                 </Canvas>
                 <Grid>
-                    <TextBox x:Name="UsernameTextBox" FontSize="18" Foreground="{StaticResource InputFormColor}" Background="#2A2323"  BorderThickness="0"   TextWrapping="Wrap"  />
+                        <TextBox Text="{Binding Username}" x:Name="UsernameTextBox" FontSize="18" Foreground="{StaticResource InputFormColor}" Background="#2A2323"  BorderThickness="0"   TextWrapping="Wrap"  />
                     <TextBlock FontSize="18" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="Username">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
@@ -118,7 +119,7 @@
                 </Canvas>
 
                 <Grid>
-                    <PasswordBox  x:Name="PasswordTextBox"  FontSize="18" 
+                    <PasswordBox  x:Name="passwordBox"  FontSize="18" 
                                  Foreground="{StaticResource InputFormColor}"  BorderThickness="0"  
                                  Background="#2A2323" Width="Auto"  />
                     <TextBlock FontSize="18" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="Password">
@@ -126,7 +127,7 @@
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Text, ElementName=PasswordTextBox}" Value="">
+                                    <DataTrigger Binding="{Binding Text, ElementName=passwordBox}" Value="">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -146,8 +147,11 @@
         </TextBlock>
 
 
-        <Button IsDefault="True" Style="{StaticResource RoundButtonTemplate}" Click="Button_Click"  FontSize="18" Height="40"  
-                 Foreground="White" Content="LOG IN" Margin="0,0,0,15"/>
+             <!--Command="{Binding LoginCommand, Mode=OneTime}"
+            CommandParameter="{Binding ElementName=passwordBox}"--> 
+                
+              <Button Click="Button_Click" IsDefault="True" Style="{StaticResource RoundButtonTemplate}"  FontSize="18" Height="40"  
+                 Foreground="White" Content="LOG IN" Margin="0,0,0,15"  />
 
         <TextBlock Foreground="{StaticResource InputFormColor}" FontSize="13" HorizontalAlignment="Center" >
         Don't have an account?

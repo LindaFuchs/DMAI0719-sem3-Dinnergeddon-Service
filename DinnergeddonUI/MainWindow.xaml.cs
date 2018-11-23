@@ -18,11 +18,19 @@ namespace DinnergeddonUI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IView
     {
-        public MainWindow()
+        public MainWindow(AuthenticationViewModel viewModel)
         {
+            ViewModel = viewModel;
+
             InitializeComponent();
+        }
+
+        public IViewModel ViewModel
+        {
+            get { return DataContext as IViewModel; }
+            set { DataContext = value; }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

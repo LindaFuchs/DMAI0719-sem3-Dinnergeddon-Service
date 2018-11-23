@@ -110,24 +110,34 @@ namespace DinnergeddonService
             return accountController.UpdateAccount(updatedAccount);
         }
 
+        /// <summary>
+        /// Deletes an already existing account from the system
+        /// </summary>
+        /// <param name="account">The account to be deleted</param>
+        /// <returns>If the account was deleted successfuly</returns>
+        public bool DeleteAccount(Account account)
+        {
+            return accountController.DeleteAccount(account);
+        }
+
+        //TODO: implement and document
         public Lobby CreateLobby(string name, int playerLimit)
         {
             throw new NotImplementedException();
         }
 
+        //TODO: implement and document
         public IEnumerable<Lobby> GetLobbies()
         {
             throw new NotImplementedException();
         }
 
+        //TODO: implement and document
         public Lobby CreatePrivateLobby(string name, int playerLimit, string password)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteAccount(Account account)
-        {
-            return accountController.DeleteAccount(account);
-        }
+
     }
 }

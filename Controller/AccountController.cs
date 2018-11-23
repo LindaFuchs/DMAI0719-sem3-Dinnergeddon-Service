@@ -103,10 +103,10 @@ namespace Controller
         }
 
         /// <summary>
-        /// Deletes an account from the database.
+        /// Deletes an account from the system.
         /// </summary>
-        /// <param name="account"></param>
-        /// <returns></returns>
+        /// <param name="account">The account to be deleted</param>
+        /// <returns>If the account was deleted successfuly</returns>
         public bool DeleteAccount(Account account)
         {
             return accountRepo.DeleteAccount(account) == 1;

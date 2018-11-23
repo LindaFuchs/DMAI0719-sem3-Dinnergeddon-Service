@@ -122,19 +122,33 @@ namespace DinnergeddonService
             return accountController.DeleteAccount(account);
         }
 
-        //TODO: document
+        /// <summary>
+        /// Creates a lobby that is accessible for all players that are online
+        /// </summary>
+        /// <param name="name">The name of the lobby</param>
+        /// <param name="playerLimit">The number of players that can join</param>
+        /// <returns>The new lobby that was created</returns>
         public Lobby CreateLobby(string name, int playerLimit)
         {
             return lobbyController.CreateLobby(name, playerLimit);
         }
 
-        //TODO: document
+        /// <summary>
+        /// Creates a private lobby that is accessible only for the players that have the password
+        /// </summary>
+        /// <param name="name">The name of the lobby</param>
+        /// <param name="playerLimit">The number of players that can join</param>
+        /// <param name="password">The password of the lobby</param>
+        /// <returns>The new lobby that was created</returns>
         public Lobby CreatePrivateLobby(string name, int playerLimit, string password)
         {
             return lobbyController.CreateLobby(name, playerLimit, password);
         }
 
-        //TODO: document
+        /// <summary>
+        /// Returns all lobbies that are currently active
+        /// </summary>
+        /// <returns>A list of all the active lobbies</returns>
         public IEnumerable<Lobby> GetLobbies()
         {
             return lobbyController.GetLobbies();

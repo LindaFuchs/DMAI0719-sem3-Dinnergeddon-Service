@@ -6,6 +6,7 @@ namespace DBLayer
 {
     public class DbComponents : IDbComponents
     {
+        // Using a singleton
         private static DbComponents instance;
 
         private DbComponents()
@@ -13,9 +14,9 @@ namespace DBLayer
             string provider = ConfigurationManager.ConnectionStrings["auto"].ProviderName;
             string connectionString = ConfigurationManager.ConnectionStrings["auto"].ConnectionString;
 
-            Factory = DbProviderFactories.GetFactory(provider);
+            var factory = DbProviderFactories.GetFactory(provider);
 
-            Connection = Factory.CreateConnection();
+            Connection = factory.CreateConnection();
             Connection.ConnectionString = connectionString;
         }
 
@@ -28,7 +29,5 @@ namespace DBLayer
         }
 
         public IDbConnection Connection{ get; private set; }
-        //public IDbConnection Connection { get; private set; }
-        public DbProviderFactory Factory { get; private set; }
     }
 }

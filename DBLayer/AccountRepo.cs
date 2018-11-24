@@ -7,13 +7,12 @@ namespace DBLayer
 {
     public class AccountRepo : IAccountRepo
     {
-        private readonly IDbComponents components;
+        // The connection with the database
         private readonly IDbConnection connection;
 
         public AccountRepo(IDbComponents components)
         {
-            this.components = components;
-            this.connection = components.Connection;
+            connection = components.Connection;
         }
 
         /// <summary>
@@ -22,7 +21,7 @@ namespace DBLayer
         /// <param name="accountID">The ID of the account</param>
         /// <param name="roleName">The name of the role</param>
         /// <returns>Number of rows affected</returns>
-        public int AddToRole(Guid accountID, string roleName)
+        public bool AddToRole(Guid accountID, string roleName)
         {
             int affected = 0;
             connection.Open();
@@ -59,7 +58,11 @@ namespace DBLayer
                 }
             }
             connection.Close();
-            return affected;
+            
+            if (affected < 0 || affected > 1)
+                throw new InvalidOperationException("Something went wrong with the DB");
+
+            return affected == 1;
         }
 
         /// <summary>
@@ -67,7 +70,7 @@ namespace DBLayer
         /// </summary>
         /// <param name="a">The account that's to be deleted from the database</param>
         /// <returns>The number of rows affected</returns>
-        public int DeleteAccount(Account a)
+        public bool DeleteAccount(Account a)
         {
             int affected = 0;
             connection.Open();
@@ -105,8 +108,7 @@ namespace DBLayer
                 param.ParameterName = "@securitystamp";
                 param.Value = a.SecurityStamp;
                 command.Parameters.Add(param);
-
-                // Execute query with transaction
+                
                 using (IDbTransaction transaction = connection.BeginTransaction())
                 {
                     command.Transaction = transaction;
@@ -123,7 +125,11 @@ namespace DBLayer
                 }
             }
             connection.Close();
-            return affected;
+            
+            if (affected < 0 || affected > 1)
+                throw new InvalidOperationException("Something went wrong in the database");
+
+            return affected == 1;
         }
 
         /// <summary>
@@ -298,6 +304,7 @@ namespace DBLayer
                     "join accounts as a on a.id = ar.accountid " +
                     "where a.id=@id";
 
+                // Escape SQL injection with parameters
                 IDataParameter param = command.CreateParameter();
                 param.ParameterName = "@id";
                 param.Value = accountID;
@@ -327,7 +334,7 @@ namespace DBLayer
         /// </summary>
         /// <param name="a">The account to be inserted in the database</param>
         /// <returns>The number of rows affected in the database</returns>
-        public int InsertAccount(Account a)
+        public bool InsertAccount(Account a)
         {
             int affected = 0;
             connection.Open();
@@ -363,8 +370,7 @@ namespace DBLayer
                 param.ParameterName = "@securitystamp";
                 param.Value = a.SecurityStamp;
                 command.Parameters.Add(param);
-
-                // Use transaction in an using block so that it's disposed after the query
+                
                 using (IDbTransaction transaction = connection.BeginTransaction())
                 {
                     command.Transaction = transaction;
@@ -381,7 +387,11 @@ namespace DBLayer
                 }
             }
             connection.Close();
-            return affected;
+            
+            if (affected < 0 || affected > 1)
+                throw new InvalidOperationException("Something went wrong with the query");
+
+            return affected == 1;
         }
 
         /// <summary>
@@ -394,6 +404,7 @@ namespace DBLayer
         {
             // Assume that the user doesn't have it until proven wrong
             bool hasRole = false;
+
             connection.Open();
             using (IDbCommand command = connection.CreateCommand())
             {
@@ -425,7 +436,7 @@ namespace DBLayer
         /// </summary>
         /// <param name="account">The new information of accont, ID is kept the same</param>
         /// <returns>Number of rows affected</returns>
-        public int UpdateAccount(Account account)
+        public bool UpdateAccount(Account account)
         {
             int affected = 0;
             connection.Open();
@@ -439,6 +450,7 @@ namespace DBLayer
                     "where " +
                         "id=@id";
 
+                // Escape SQL injections
                 IDataParameter param = command.CreateParameter();
                 param.ParameterName = "@id";
                 param.Value = account.Id;
@@ -480,7 +492,11 @@ namespace DBLayer
                 }
             }
             connection.Close();
-            return affected;
+            
+            if (affected < 0 || affected > 1)
+                throw new InvalidOperationException("Something went wrong with the DB");
+            
+            return affected == 1;
         }
 
         /// <summary>

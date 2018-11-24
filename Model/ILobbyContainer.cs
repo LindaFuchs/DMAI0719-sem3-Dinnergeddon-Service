@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Model
 {
     public interface ILobbyContainer
     {
-        IEnumerable<Lobby> GetActiveLobbies();
+        /// <summary>
+        /// Gets all lobbies
+        /// </summary>
+        /// <returns>A list of all lobbies</returns>
+        IEnumerable<Lobby> GetLobbies();
+
+        /// <summary>
+        /// Adds a new active lobby
+        /// </summary>
+        /// <param name="lobby">The lobby to be added</param>
         void Add(Lobby lobby);
     }
 }

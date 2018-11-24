@@ -17,7 +17,7 @@ namespace Controller
         /// <returns>If the operation was successful</returns>
         public bool AddToRole(Guid accountId, string roleName)
         {
-            return accountRepo.AddToRole(accountId, roleName) == 1;
+            return accountRepo.AddToRole(accountId, roleName);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Controller
         /// <returns>If the operation was successful</returns>
         public bool InsertAccount(Account account)
         {
-            return accountRepo.InsertAccount(account) == 1;
+            return accountRepo.InsertAccount(account);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Controller
         /// <returns>If the operation was successful</returns>
         public bool UpdateAccount(Account updatedAccount)
         {
-            return accountRepo.UpdateAccount(updatedAccount) == 1;
+            return accountRepo.UpdateAccount(updatedAccount);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Controller
         /// <returns>If the account was deleted successfuly</returns>
         public bool DeleteAccount(Account account)
         {
-            return accountRepo.DeleteAccount(account) == 1;
+            return accountRepo.DeleteAccount(account);
         }
     }
 }

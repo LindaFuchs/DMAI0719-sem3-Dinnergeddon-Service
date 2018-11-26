@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:DinnergeddonUI"
         mc:Ignorable="d"
         Background="{StaticResource BackgroundColor}"
-        Title="Lobby" Height="450" Width="800">
+        Title="Lobby" Height="450" Width="800"
+         x:Name="LobbyWindowName">
     <DockPanel>
         <TextBlock FontSize="16" Foreground="White" Margin="15" DockPanel.Dock="Top" Text="Lobby"></TextBlock>
 
-        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15" Padding="10" Content="Exit Lobby" ></Button>
+        <Button Command="{Binding LeaveLobbyCommand, Mode=OneTime}"
+                    CommandParameter="{Binding ElementName=LobbyWindowName}" DockPanel.Dock="Bottom" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15" Padding="10" Content="Exit Lobby" ></Button>
         <ListBox  Margin="15">
 
         </ListBox>

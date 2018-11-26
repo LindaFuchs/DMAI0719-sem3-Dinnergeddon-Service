@@ -10,29 +10,26 @@ using DinnergeddonUI.DinnergeddonService;
 
 namespace DinnergeddonUI
 {
-    class LobbyViewModel : INotifyPropertyChanged
+    class DashboardViewModel : INotifyPropertyChanged
     {
         private readonly IAuthenticationService _authenticationService;
         private string _username;
-        
         private readonly DelegateCommand _joinLobbyCommand;
-        private readonly DelegateCommand _leaveLobbyCommand;
+        private readonly DelegateCommand _logoutCommand;
         LobbyServiceClient _proxy = new LobbyServiceClient();
-        private Guid lobbyId;
 
 
 
-        public LobbyViewModel(IAuthenticationService authenticationService, Guid lobbyId)
+        public DashboardViewModel(IAuthenticationService authenticationService)
         {
-            this.lobbyId = lobbyId;
             _authenticationService = authenticationService;
+            _logoutCommand = new DelegateCommand(Logout, CanLogout);
             _joinLobbyCommand = new DelegateCommand(JoinLobby, CanJoin);
-            _leaveLobbyCommand = new DelegateCommand(LeaveLobby, CanLeave);
 
         }
 
         public DelegateCommand JoinLobbyCommand { get { return _joinLobbyCommand; } }
-        public DelegateCommand LeaveLobbyCommand { get { return _leaveLobbyCommand; } }
+        public DelegateCommand LogoutCommand { get { return _logoutCommand; } }
 
 
         public string Username
@@ -47,12 +44,6 @@ namespace DinnergeddonUI
         }
 
         private bool CanJoin(object parameter)
-        {
-            //implement check
-            return true;
-        }
-
-        private bool CanLeave(object parameter)
         {
             //implement check
             return true;
@@ -83,20 +74,26 @@ namespace DinnergeddonUI
             CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
             var userId = customPrincipal.Identity.Id;
             _proxy.JoinLobby(userId, lobbyId);
-           
-           Window lobby = new LobbyWindow(lobbyId);
-            lobby.Show();
-                 
-        }
 
-        private void LeaveLobby(object parameter)
+            Window lobby = new LobbyWindow(lobbyId);
+            lobby.Show();
+
+        }
+        private void Logout(object parameter)
         {
-            Window lb = parameter as Window;
+            Window dashboard = parameter as Window;
             CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-            var userId = customPrincipal.Identity.Id;
-            _proxy.LeaveLobby(userId, lobbyId);
-            lb.Close();
-            
+            if (customPrincipal != null)
+            {
+                customPrincipal.Identity = new AnonymousIdentity();
+                NotifyPropertyChanged("AuthenticatedUser");
+                NotifyPropertyChanged("IsAuthenticated");
+                // _loginCommand.RaiseCanExecuteChanged();
+                _logoutCommand.RaiseCanExecuteChanged();
+                dashboard.Close();
+                //MainWindow mw = new MainWindow();
+                //mw.Show();
+            }
         }
 
 

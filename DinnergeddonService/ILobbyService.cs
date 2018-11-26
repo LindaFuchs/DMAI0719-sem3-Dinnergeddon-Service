@@ -61,5 +61,8 @@ namespace DinnergeddonService
         [OperationContract]
         void LeaveLobby(Guid accountId, Guid lobbyId);
 
+        [OperationContract]
+        Lobby GetLobbyById(Guid lobbyId);
+
     }
 }

@@ -48,11 +48,5 @@ namespace DinnergeddonUI
         }
     }
 
-    public class Lobby
-    {
-        public string Name { get; set; }
-
-        public int Limit { get; set; }
-
-    }
+   
 }

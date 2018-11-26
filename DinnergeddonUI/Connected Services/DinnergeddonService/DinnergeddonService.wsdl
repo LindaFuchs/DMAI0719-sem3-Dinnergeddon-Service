@@ -86,6 +86,24 @@
   <wsdl:message name="ILobbyService_GetLobbies_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLobbiesResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobbyService_JoinLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinLobby" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_JoinLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_JoinPrivateLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinPrivateLobby" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_JoinPrivateLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinPrivateLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_LeaveLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveLobby" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_LeaveLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveLobbyResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAccontService">
     <wsdl:operation name="FindById">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccontService/FindById" message="tns:IAccontService_FindById_InputMessage" />
@@ -140,6 +158,18 @@
     <wsdl:operation name="GetLobbies">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/GetLobbies" message="tns:ILobbyService_GetLobbies_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/GetLobbiesResponse" message="tns:ILobbyService_GetLobbies_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JoinLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/JoinLobby" message="tns:ILobbyService_JoinLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/JoinLobbyResponse" message="tns:ILobbyService_JoinLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JoinPrivateLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/JoinPrivateLobby" message="tns:ILobbyService_JoinPrivateLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/JoinPrivateLobbyResponse" message="tns:ILobbyService_JoinPrivateLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/LeaveLobby" message="tns:ILobbyService_LeaveLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/LeaveLobbyResponse" message="tns:ILobbyService_LeaveLobby_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IAccontService" type="tns:IAccontService">
@@ -257,6 +287,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetLobbies">
       <soap:operation soapAction="http://tempuri.org/ILobbyService/GetLobbies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinLobby">
+      <soap:operation soapAction="http://tempuri.org/ILobbyService/JoinLobby" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinPrivateLobby">
+      <soap:operation soapAction="http://tempuri.org/ILobbyService/JoinPrivateLobby" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveLobby">
+      <soap:operation soapAction="http://tempuri.org/ILobbyService/LeaveLobby" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

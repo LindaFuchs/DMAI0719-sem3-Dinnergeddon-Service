@@ -19,9 +19,9 @@ namespace DinnergeddonUI
     /// </summary>
     public partial class LobbyWindow : Window
     {
-        public LobbyWindow()
+        public LobbyWindow(Guid lobbyId)
         {
-            var lobbyViewModel = new LobbyViewModel(new AuthenticationService());
+            var lobbyViewModel = new LobbyViewModel(new AuthenticationService(), lobbyId);
             DataContext = lobbyViewModel;
             InitializeComponent();
         }

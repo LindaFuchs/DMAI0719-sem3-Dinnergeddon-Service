@@ -425,6 +425,24 @@ namespace DinnergeddonUI.DinnergeddonService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetLobbies", ReplyAction="http://tempuri.org/ILobbyService/GetLobbiesResponse")]
         System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby[]> GetLobbiesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/JoinLobby", ReplyAction="http://tempuri.org/ILobbyService/JoinLobbyResponse")]
+        bool JoinLobby(System.Guid accountId, System.Guid lobbyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/JoinLobby", ReplyAction="http://tempuri.org/ILobbyService/JoinLobbyResponse")]
+        System.Threading.Tasks.Task<bool> JoinLobbyAsync(System.Guid accountId, System.Guid lobbyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/JoinPrivateLobby", ReplyAction="http://tempuri.org/ILobbyService/JoinPrivateLobbyResponse")]
+        bool JoinPrivateLobby(System.Guid accountId, System.Guid lobbyId, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/JoinPrivateLobby", ReplyAction="http://tempuri.org/ILobbyService/JoinPrivateLobbyResponse")]
+        System.Threading.Tasks.Task<bool> JoinPrivateLobbyAsync(System.Guid accountId, System.Guid lobbyId, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/LeaveLobby", ReplyAction="http://tempuri.org/ILobbyService/LeaveLobbyResponse")]
+        void LeaveLobby(System.Guid accountId, System.Guid lobbyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/LeaveLobby", ReplyAction="http://tempuri.org/ILobbyService/LeaveLobbyResponse")]
+        System.Threading.Tasks.Task LeaveLobbyAsync(System.Guid accountId, System.Guid lobbyId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -476,6 +494,30 @@ namespace DinnergeddonUI.DinnergeddonService {
         
         public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby[]> GetLobbiesAsync() {
             return base.Channel.GetLobbiesAsync();
+        }
+        
+        public bool JoinLobby(System.Guid accountId, System.Guid lobbyId) {
+            return base.Channel.JoinLobby(accountId, lobbyId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> JoinLobbyAsync(System.Guid accountId, System.Guid lobbyId) {
+            return base.Channel.JoinLobbyAsync(accountId, lobbyId);
+        }
+        
+        public bool JoinPrivateLobby(System.Guid accountId, System.Guid lobbyId, string password) {
+            return base.Channel.JoinPrivateLobby(accountId, lobbyId, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> JoinPrivateLobbyAsync(System.Guid accountId, System.Guid lobbyId, string password) {
+            return base.Channel.JoinPrivateLobbyAsync(accountId, lobbyId, password);
+        }
+        
+        public void LeaveLobby(System.Guid accountId, System.Guid lobbyId) {
+            base.Channel.LeaveLobby(accountId, lobbyId);
+        }
+        
+        public System.Threading.Tasks.Task LeaveLobbyAsync(System.Guid accountId, System.Guid lobbyId) {
+            return base.Channel.LeaveLobbyAsync(accountId, lobbyId);
         }
     }
 }

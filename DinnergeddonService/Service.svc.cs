@@ -186,5 +186,10 @@ namespace DinnergeddonService
         {
             return lobbyController.JoinLobby(accountId, lobbyId, password);
         }
+
+        public Lobby GetLobbyById(Guid lobbyId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

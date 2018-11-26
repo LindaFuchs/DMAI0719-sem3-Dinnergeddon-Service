@@ -153,5 +153,15 @@ namespace DinnergeddonService
         {
             return lobbyController.GetLobbies();
         }
+
+        public bool JoinLobby(Guid accountId, Guid lobbyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LeaveLobby(Guid accountId, Guid lobbyId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

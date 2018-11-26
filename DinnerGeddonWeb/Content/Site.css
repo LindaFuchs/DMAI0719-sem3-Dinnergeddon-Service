@@ -52,6 +52,7 @@ li.nav-item > a {
         color: white;
     }
 
-.nav-link {
+.navbar-nav .nav-link {
     padding: 1rem;
+    color: white;
 }

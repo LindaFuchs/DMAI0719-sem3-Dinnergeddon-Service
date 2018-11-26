@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ServiceModel;
 using System.Runtime.Serialization;
 
 namespace Model
@@ -17,5 +16,7 @@ namespace Model
         public string PasswordHash { get; set; }
         [DataMember]
         public string SecurityStamp { get; set; }
+        [DataMember]
+        public bool InLobby { get; set; }
     }
 }

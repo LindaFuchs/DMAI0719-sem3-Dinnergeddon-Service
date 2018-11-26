@@ -23,10 +23,5 @@ namespace Model
         /// <param name="id">The ID of the lobby</param>
         /// <returns>The lobby found or null</returns>
         Lobby GetLobbyById(Guid id);
-
-        //TODO: fix
-        bool AccountInLobby(Guid id);
-        void AccountNotInLobby(Guid id);
-        void AddAccountAsInLobby(Account a);
     }
 }

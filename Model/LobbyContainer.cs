@@ -23,23 +23,6 @@ namespace Model
             return instance;
         }
 
-        //TODO: please think this through later
-        public void AddAccountAsInLobby(Account a)
-        {
-            accountsInLobbies.Add(a.Id);
-        }
-
-        //TODO:!!!!!!
-        public bool AccountInLobby(Guid id)
-        {
-            return accountsInLobbies.Contains(id);
-        }
-
-        public void AccountNotInLobby(Guid id)
-        {
-            accountsInLobbies.Remove(id);
-        }
-
         /// <summary>
         /// TODO:
         /// </summary>

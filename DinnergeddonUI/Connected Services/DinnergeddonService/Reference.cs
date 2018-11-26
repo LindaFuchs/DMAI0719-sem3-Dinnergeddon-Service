@@ -29,6 +29,9 @@ namespace DinnergeddonUI.DinnergeddonService {
         private System.Guid IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool InLobbyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordHashField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -69,6 +72,19 @@ namespace DinnergeddonUI.DinnergeddonService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool InLobby {
+            get {
+                return this.InLobbyField;
+            }
+            set {
+                if ((this.InLobbyField.Equals(value) != true)) {
+                    this.InLobbyField = value;
+                    this.RaisePropertyChanged("InLobby");
                 }
             }
         }

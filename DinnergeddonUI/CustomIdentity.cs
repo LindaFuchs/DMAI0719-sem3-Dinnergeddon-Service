@@ -11,16 +11,17 @@ namespace DinnergeddonUI
 {
     public class CustomIdentity : IIdentity
     {
-        public CustomIdentity(string userName, string email, string[] roles)
+        public CustomIdentity(Guid id, string userName, string email, string[] roles)
         {
+            Id = id;
             Name = userName;
             Email = email;
             Roles = roles;
         }
-
         public string Name { get; private set; }
         public string Email { get; private set; }
         public string[] Roles { get; private set; }
+        public Guid Id { get; private set; }
 
         public string AuthenticationType { get { return "Custom authentication"; } }
 
@@ -31,7 +32,7 @@ namespace DinnergeddonUI
     public class AnonymousIdentity : CustomIdentity
     {
         public AnonymousIdentity()
-            : base(string.Empty, string.Empty, new string[] { })
+            : base(Guid.Empty, string.Empty, string.Empty, new string[] { })
         { }
     }
 }

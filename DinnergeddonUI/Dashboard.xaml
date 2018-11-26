@@ -96,16 +96,18 @@
                                 <WrapPanel>
                                     <TextBlock FontSize="13" FontWeight="Bold" Foreground="White" Margin="10,10,5,5" Text="{Binding Name}" />
 
-                                    <TextBlock Margin="0,10,10,5" Text="· public" Foreground="White" FontWeight="Light" FontSize="11" ></TextBlock>                                </WrapPanel>
+                                    <TextBlock Margin="0,10,10,5" Text="· public" Foreground="White" FontWeight="Light" FontSize="11" ></TextBlock>
+                                </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock Foreground="White" Margin="10,0,10,10" Text="Players  joined:"  />
                                     <TextBlock Foreground="White" Text="0/"  />
                                     <TextBlock Foreground="White"  Text="{Binding Limit}"  />
+                                    
 
                                 </WrapPanel>
                             </StackPanel>
                             <WrapPanel Margin="20,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                                <Button Command="{Binding DataContext.JoinLobbyCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}" CommandParameter="{Binding ElementName=DashboardWindow}"  VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Background="#fff7ed" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" Content="Join"></Button>
+                                <Button Command="{Binding DataContext.JoinLobbyCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}" CommandParameter="{Binding Id}"  VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Background="#fff7ed" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" Content="Join"></Button>
                             </WrapPanel>
                         </DockPanel>
                     </Border>

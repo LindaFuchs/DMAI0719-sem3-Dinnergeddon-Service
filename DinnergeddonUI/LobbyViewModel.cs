@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using DinnergeddonUI.DinnergeddonService;
 
 namespace DinnergeddonUI
 {
@@ -15,6 +16,8 @@ namespace DinnergeddonUI
         private string _username;
         private readonly DelegateCommand _joinLobbyCommand;
         private readonly DelegateCommand _logoutCommand;
+        LobbyServiceClient _proxy = new LobbyServiceClient();
+
 
 
         public LobbyViewModel(IAuthenticationService authenticationService)
@@ -67,7 +70,11 @@ namespace DinnergeddonUI
 
         private void JoinLobby(object parameter)
         {
-            Window lobby = new LobbyWindow();
+            Guid LobbyId = (Guid)parameter;
+            CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+            var userId = customPrincipal.Identity.Id;
+            _proxy.Join
+           Window lobby = new LobbyWindow();
             lobby.Show();
                  
         }

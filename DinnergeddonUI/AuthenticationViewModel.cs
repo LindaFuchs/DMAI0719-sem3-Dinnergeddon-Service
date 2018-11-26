@@ -101,7 +101,7 @@ namespace DinnergeddonUI
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
                 //Authenticate the user
-                customPrincipal.Identity = new CustomIdentity(user.Username, user.Email, user.Roles);
+                customPrincipal.Identity = new CustomIdentity(user.Id, user.Username, user.Email, user.Roles);
 
                 //Update UI
                 NotifyPropertyChanged("AuthenticatedUser");

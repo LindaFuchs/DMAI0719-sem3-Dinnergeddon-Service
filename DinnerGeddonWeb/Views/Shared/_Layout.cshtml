@@ -19,7 +19,7 @@
                     @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
                 @if(Request.IsAuthenticated && User.IsInRole("admin")) { 
-                <li class="nav-item nav-link">
+                <li class="nav-item">
                     @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })
                 </li>
                 }

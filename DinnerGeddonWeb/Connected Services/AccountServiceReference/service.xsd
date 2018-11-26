@@ -22,7 +22,6 @@
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="Limit" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PasswordHash" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfAccount" />
     </xs:sequence>
   </xs:complexType>

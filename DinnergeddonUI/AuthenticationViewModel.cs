@@ -32,7 +32,7 @@ namespace DinnergeddonUI
             _showViewCommand = new DelegateCommand(ShowView, null);
             _closeWindowCommand = new DelegateCommand(CloseWindow, CanLogin);
 
-          
+
         }
 
         #region Properties
@@ -135,6 +135,7 @@ namespace DinnergeddonUI
 
         private void Logout(object parameter)
         {
+            Window dashboard = parameter as Window;
             CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
             if (customPrincipal != null)
             {
@@ -144,6 +145,9 @@ namespace DinnergeddonUI
                 _loginCommand.RaiseCanExecuteChanged();
                 _logoutCommand.RaiseCanExecuteChanged();
                 Status = string.Empty;
+                dashboard.Close();
+                //MainWindow mw = new MainWindow();
+                //mw.Show();
             }
         }
 

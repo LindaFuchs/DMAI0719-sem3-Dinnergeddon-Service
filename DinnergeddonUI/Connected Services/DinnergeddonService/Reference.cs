@@ -141,9 +141,6 @@ namespace DinnergeddonUI.DinnergeddonService {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordHashField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private DinnergeddonUI.DinnergeddonService.Account[] PlayersField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -191,19 +188,6 @@ namespace DinnergeddonUI.DinnergeddonService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PasswordHash {
-            get {
-                return this.PasswordHashField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordHashField, value) != true)) {
-                    this.PasswordHashField = value;
-                    this.RaisePropertyChanged("PasswordHash");
                 }
             }
         }

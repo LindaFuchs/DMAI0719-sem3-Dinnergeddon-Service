@@ -27,7 +27,7 @@ namespace DinnergeddonUI
         //private ObservableCollection<DinnergeddonService.Lobby> lobbies;
         public Dashboard()
         {
-            DataContext = new AuthenticationViewModel(new AuthenticationService());
+            DataContext = new LobbyViewModel(new AuthenticationService());
 
             InitializeComponent();
             LobbyCreateTest lb = LobbyCreateTest.Instance;

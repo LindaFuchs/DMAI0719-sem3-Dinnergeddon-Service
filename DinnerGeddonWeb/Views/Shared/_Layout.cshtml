@@ -15,12 +15,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar22">
             <ul class="navbar-nav">
-                <li class="nav-item nav-link">
-                    @Html.ActionLink("Home", "Index", "Home")
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
                 @if(Request.IsAuthenticated && User.IsInRole("admin")) { 
                 <li class="nav-item nav-link">
-                    @Html.ActionLink("Admin", "Index", "Admin")
+                    @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })
                 </li>
                 }
                 @Html.Partial("_LoginPartial")

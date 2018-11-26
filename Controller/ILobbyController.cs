@@ -1,4 +1,5 @@
 ﻿using Model;
+using System;
 using System.Collections.Generic;
 
 namespace Controller
@@ -27,5 +28,22 @@ namespace Controller
         /// </summary>
         /// <returns>A list of all the lobbies currenlty in the system</returns>
         IEnumerable<Lobby> GetLobbies();
+
+        /// <summary>
+        /// Adds an account to a lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        /// <returns>If the operation was successful</returns>
+        bool JoinLobby(Guid accountId, Guid lobbyId);
+
+        bool JoinLobby(Guid accountId, Guid lobbyId, string password);
+
+        /// <summary>
+        /// Removes an account from a lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        void LeaveLobby(Guid accountId, Guid lobbyId);
     }
 }

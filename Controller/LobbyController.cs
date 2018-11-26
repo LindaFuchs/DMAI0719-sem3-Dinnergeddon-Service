@@ -7,15 +7,17 @@ namespace Controller
     public class LobbyController : ILobbyController
     {
         // A lobby container
-        private readonly ILobbyContainer container;
+        private readonly ILobbyContainer lobbyContainer;
+        private readonly IAccountController accountController;
         // The minimum amount of players in a lobby
         private readonly int MIN_PLAYERS = 2;
         // The maximum amount of players in a lobby
         private readonly int MAX_PLAYERS = 4;
 
-        public LobbyController(ILobbyContainer container)
+        public LobbyController(ILobbyContainer container, IAccountController accountController)
         {
-            this.container = container;
+            this.lobbyContainer = container;
+            this.accountController = accountController;
         }
         
         /// <summary>
@@ -33,7 +35,7 @@ namespace Controller
 
             Lobby lobby = BuildLobby(name, playerLimit, "");
 
-            container.Add(lobby);
+            lobbyContainer.Add(lobby);
             return lobby;
         }
 
@@ -64,7 +66,7 @@ namespace Controller
         /// <returns>A list of all currently active lobbies</returns>
         public IEnumerable<Lobby> GetLobbies()
         {
-            return container.GetLobbies();
+            return lobbyContainer.GetLobbies();
         }
 
         /// <summary>
@@ -100,6 +102,51 @@ namespace Controller
                 Players = new List<Account>(),
                 PasswordHash = passwordHash,
             };
+        }
+
+        /// <summary>
+        /// Adds an account to a lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        /// <returns>If the operation was successful</returns>
+        public bool JoinLobby(Guid accountId, Guid lobbyId)
+        {
+            Account account = accountController.FindById(accountId);
+            Lobby lobby = lobbyContainer.GetLobbyById(lobbyId);
+
+            // Check if the two exist, if not terminate
+            if (account == null)
+                return false;
+            if (lobby == null)
+                return false;
+
+            // Check if the lobby can accept another account
+            if (lobby.Players.Count >= lobby.Limit)
+                return false;
+
+            // Check if the account is already in the lobby
+            foreach (Account player in lobby.Players)
+                if (player.Id == account.Id)
+                    return false;
+
+            lobby.Players.Add(account);
+            return true;
+        }
+
+        /// <summary>
+        /// Removes an account from a lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        public void LeaveLobby(Guid accountId, Guid lobbyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool JoinLobby(Guid accountId, Guid lobbyId, string password)
+        {
+            throw new NotImplementedException();
         }
     }
 }

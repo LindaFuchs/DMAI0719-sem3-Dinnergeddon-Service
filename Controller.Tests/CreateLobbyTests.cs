@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace Controller.Tests
 {
     [TestClass]
-    public class LobbyControllerTests
+    public class CreateLobbyTests
     {
         private LobbyContainerMock container;
         private ILobbyController controller;
@@ -15,7 +15,7 @@ namespace Controller.Tests
         public void Setup()
         {
             container = new LobbyContainerMock();
-            controller = new LobbyController(container);
+            controller = new LobbyController(container, new AccountControllerMock());
         }
 
         [TestMethod]
@@ -181,6 +181,11 @@ namespace Controller.Tests
         }
 
         public IEnumerable<Lobby> GetLobbies()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Lobby GetLobbyById(Guid id)
         {
             throw new NotImplementedException();
         }

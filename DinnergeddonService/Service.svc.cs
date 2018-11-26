@@ -187,9 +187,14 @@ namespace DinnergeddonService
             return lobbyController.JoinLobby(accountId, lobbyId, password);
         }
 
+        /// <summary>
+        /// Gets a lobby given an ID
+        /// </summary>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        /// <returns>A lobby object with ID or null</returns>
         public Lobby GetLobbyById(Guid lobbyId)
         {
-            throw new NotImplementedException();
+            return lobbyController.GetLobbyById(lobbyId);
         }
     }
 }

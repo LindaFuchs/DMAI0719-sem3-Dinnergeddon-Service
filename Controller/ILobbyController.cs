@@ -52,5 +52,12 @@ namespace Controller
         /// <param name="accountId">The ID of the account</param>
         /// <param name="lobbyId">The ID of the lobby</param>
         void LeaveLobby(Guid accountId, Guid lobbyId);
+
+        /// <summary>
+        /// Gets a lobby given an ID
+        /// </summary>
+        /// <param name="id">The ID of the lobby</param>
+        /// <returns>A lobby with ID or null</returns>
+        Lobby GetLobbyById(Guid id);
     }
 }

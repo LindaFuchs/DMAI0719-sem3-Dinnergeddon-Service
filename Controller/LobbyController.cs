@@ -189,6 +189,11 @@ namespace Controller
             return JoinLobby(accountId, lobbyId);
         }
 
+        /// <summary>
+        /// Gets a lobby given an ID
+        /// </summary>
+        /// <param name="id">the ID of the lobby</param>
+        /// <returns></returns>
         public Lobby GetLobbyById(Guid id)
         {
             return lobbyContainer.GetLobbyById(id);

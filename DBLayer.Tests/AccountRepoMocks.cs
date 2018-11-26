@@ -24,8 +24,6 @@ namespace DBLayer.Tests
             public DbProviderFactory Factory { get; }
 
             IDbConnection IDbComponents.Connection => throw new NotImplementedException();
-
-            DbProviderFactory IDbComponents.Factory => throw new NotImplementedException();
         }
 
         public class DbConnectionMock : IDbConnection

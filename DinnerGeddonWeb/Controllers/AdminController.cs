@@ -45,8 +45,16 @@ namespace DinnergeddonWeb.Controllers
         /// List all user accounts
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(ManageMessageId? message)
         {
+            // Status message
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangeUserInfoSuccess ? "User has been updated."
+                : message == ManageMessageId.DeleteUserSuccess ? "User's Account has been deleted."
+                : message == ManageMessageId.Error ? "An error has occurred."
+                : "";
+
+
             IEnumerable<Account> accounts = _proxy.GetAccounts();
 
             // Create a list with just user accounts, not including accounts with Admin role
@@ -124,7 +132,7 @@ namespace DinnergeddonWeb.Controllers
                         if (changedUser != null && changedUser.UserName == model.UserName)
                         {
                             //Goes to the Index page upon successful validation.
-                            return RedirectToAction("Index");
+                            return RedirectToAction("Index", new { Message = ManageMessageId.ChangeUserInfoSuccess });
                         }
                     }
                 }
@@ -157,7 +165,17 @@ namespace DinnergeddonWeb.Controllers
             }
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { Message = ManageMessageId.DeleteUserSuccess });
         }
     }
+
+    /// <summary>
+    /// Status messages for actions
+    /// </summary>
+    public enum ManageMessageId {
+        ChangeUserInfoSuccess,
+        DeleteUserSuccess,
+        Error
+    }
+
 }

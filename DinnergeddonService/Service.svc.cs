@@ -153,5 +153,38 @@ namespace DinnergeddonService
         {
             return lobbyController.GetLobbies();
         }
+
+        /// <summary>
+        /// Adds an account to a lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        /// <returns>If the operation was succesful</returns>
+        public bool JoinLobby(Guid accountId, Guid lobbyId)
+        {
+            return lobbyController.JoinLobby(accountId, lobbyId);
+        }
+
+        /// <summary>
+        /// Removes an account from a lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        public void LeaveLobby(Guid accountId, Guid lobbyId)
+        {
+            lobbyController.LeaveLobby(accountId, lobbyId);
+        }
+
+        /// <summary>
+        /// TODO;
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="lobbyId"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public bool JoinPrivateLobby(Guid accountId, Guid lobbyId, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

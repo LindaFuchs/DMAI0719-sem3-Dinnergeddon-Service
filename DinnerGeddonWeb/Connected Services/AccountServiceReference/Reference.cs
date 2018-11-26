@@ -141,9 +141,6 @@ namespace DinnergeddonWeb.AccountServiceReference {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordHashField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private DinnergeddonWeb.AccountServiceReference.Account[] PlayersField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -191,19 +188,6 @@ namespace DinnergeddonWeb.AccountServiceReference {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PasswordHash {
-            get {
-                return this.PasswordHashField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordHashField, value) != true)) {
-                    this.PasswordHashField = value;
-                    this.RaisePropertyChanged("PasswordHash");
                 }
             }
         }

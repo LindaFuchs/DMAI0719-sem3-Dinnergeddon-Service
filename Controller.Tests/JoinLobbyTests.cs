@@ -127,6 +127,21 @@ namespace Controller.Tests
             Assert.IsFalse(result);
             Assert.AreEqual(expectedPlayerAmount, lobby.Players.Count);
         }
+
+        [TestMethod]
+        public void Test_JoinLobby_AccountAlreadyInAnotherLobby_Fails()
+        {
+            // Setup
+            container.AddAccountAsInLobby(account);
+            int expectedPlayerCount = lobby.Players.Count;
+
+            // Action
+            bool result = controller.JoinLobby(account.Id, lobby.Id);
+
+            // Assert
+            Assert.IsFalse(result);
+            Assert.AreEqual(expectedPlayerCount, lobby.Players.Count);
+        }
     }
 
     public class AccountControllerMock : IAccountController

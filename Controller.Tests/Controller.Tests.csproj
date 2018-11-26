@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CreateLobbyTests.cs" />
     <Compile Include="JoinLobbyTests.cs" />
+    <Compile Include="LeaveLobbyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

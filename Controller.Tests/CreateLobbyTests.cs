@@ -175,9 +175,29 @@ namespace Controller.Tests
             lobbies = new List<Lobby>();
         }
 
+        public bool AccountInLobby(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AccountNotInLobby(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Add(Lobby lobby)
         {
             lobbies.Add(lobby);
+        }
+
+        public void AddAccountAsInLobby(Account a)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Guid> GetAccountInLobbies()
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Lobby> GetLobbies()

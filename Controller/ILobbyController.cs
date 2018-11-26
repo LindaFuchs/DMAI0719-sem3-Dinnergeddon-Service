@@ -37,6 +37,13 @@ namespace Controller
         /// <returns>If the operation was successful</returns>
         bool JoinLobby(Guid accountId, Guid lobbyId);
 
+        /// <summary>
+        /// Adds an account to a private lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        /// <param name="password">The password of the lobby</param>
+        /// <returns>If the operation was successful</returns>
         bool JoinLobby(Guid accountId, Guid lobbyId, string password);
 
         /// <summary>

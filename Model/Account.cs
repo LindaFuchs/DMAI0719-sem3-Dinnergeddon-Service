@@ -17,6 +17,6 @@ namespace Model
         [DataMember]
         public string SecurityStamp { get; set; }
         [DataMember]
-        public bool InLobby { get; set; }
+        public bool InLobby { get; set; } //TODO: might not need that at all
     }
 }

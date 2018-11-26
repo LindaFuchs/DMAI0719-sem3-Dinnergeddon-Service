@@ -16,10 +16,10 @@ namespace Controller
 
         public LobbyController(ILobbyContainer container, IAccountController accountController)
         {
-            this.lobbyContainer = container;
+            lobbyContainer = container;
             this.accountController = accountController;
         }
-        
+
         /// <summary>
         /// Creates a lobby object and stores it on the system.
         /// The lobby created by this method will be a non-private one, so anyone will
@@ -53,7 +53,7 @@ namespace Controller
             Lobby lobby = CreateLobby(name, playerLimit);
             if (lobby == null)
                 return null;
-            
+
             string passwordHash = PasswordHasher.HashPassword(password);
 
             lobby.PasswordHash = passwordHash;
@@ -121,32 +121,84 @@ namespace Controller
             if (lobby == null)
                 return false;
 
-            // Check if the lobby can accept another account
-            if (lobby.Players.Count >= lobby.Limit)
+            //TODO : FIX
+            if (lobbyContainer.AccountInLobby(account.Id))
                 return false;
-
-            // Check if the account is already in the lobby
-            foreach (Account player in lobby.Players)
-                if (player.Id == account.Id)
+            
+            lock (lobby)
+            {
+                // Check if the lobby can accept another account
+                if (lobby.Players.Count >= lobby.Limit)
                     return false;
 
-            lobby.Players.Add(account);
+                // Check if the account is already in the lobby
+                foreach (Account player in lobby.Players)
+                    if (player.Id == account.Id)
+                        return false;
+
+                lobby.Players.Add(account);
+                //TODO: fix
+                lobbyContainer.AddAccountAsInLobby(account);
+            }
+
             return true;
         }
 
         /// <summary>
         /// Removes an account from a lobby
+        /// TODO: IMPORTANT - make sure to update this method if needed once the group decides on
+        /// how to solve the ownership of the lobby and what happens when they leave the lobby
         /// </summary>
         /// <param name="accountId">The ID of the account</param>
         /// <param name="lobbyId">The ID of the lobby</param>
         public void LeaveLobby(Guid accountId, Guid lobbyId)
         {
-            throw new NotImplementedException();
+            Lobby lobby = lobbyContainer.GetLobbyById(lobbyId);
+            Account account = accountController.FindById(accountId);
+
+            if (lobby == null)
+                return;
+
+            lock (lobby)
+            {
+                lobbyContainer.AccountNotInLobby(accountId);
+                int index = -1;
+                for (int i = 0; i < lobby.Players.Count; i++)
+                {
+                    if (lobby.Players[i].Id == accountId)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index == -1)
+                    return;
+
+                lobby.Players.RemoveAt(index);
+            }
         }
 
+        /// <summary>
+        /// Adds an account to a private lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        /// <param name="password">The password of the lobby</param>
+        /// <returns>If the operation was successful</returns>
         public bool JoinLobby(Guid accountId, Guid lobbyId, string password)
         {
-            throw new NotImplementedException();
+            Lobby lobby = lobbyContainer.GetLobbyById(lobbyId);
+            if (lobby == null)
+                return false;
+
+            // Check the password
+            bool pwCorrect = PasswordHasher.VerifyPassword(lobby.PasswordHash, password);
+
+            if (!pwCorrect)
+                return false;
+
+            // If password is correct, proceed to normal lobby joining
+            return JoinLobby(accountId, lobbyId);
         }
     }
 }

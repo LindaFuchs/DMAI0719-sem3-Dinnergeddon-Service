@@ -18,10 +18,14 @@
                 <li class="nav-item">
                     @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
-                @if(Request.IsAuthenticated && User.IsInRole("admin")) { 
-                <li class="nav-item">
-                    @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })
-                </li>
+                <li class="nav-item">@Html.ActionLink("About", "About", "Home", routeValues: null, htmlAttributes: new { id = "aboutLink", @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", routeValues: null, htmlAttributes: new { id = "contactLink", @class = "nav-link" })</li>
+
+                @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })
+                    </li>
                 }
                 @Html.Partial("_LoginPartial")
             </ul>
@@ -33,7 +37,7 @@
 
     <div class="container body-content">
         @RenderBody()
-
+        <h1>Dinnergeddon</h1>
     </div>
     <footer class="card-footer">
         <p>&copy; @DateTime.Now.Year - Dinnergeddon</p>

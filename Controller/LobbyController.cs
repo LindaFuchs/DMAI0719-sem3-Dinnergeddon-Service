@@ -121,24 +121,25 @@ namespace Controller
             if (lobby == null)
                 return false;
 
-            //TODO : FIX
-            if (lobbyContainer.AccountInLobby(account.Id))
-                return false;
-            
+            // Check if the account isn't already in a lobby
+            // Even if it's the same, the operation should still halt
+            foreach(Lobby l in lobbyContainer.GetLobbies())
+            {
+                foreach(Account player in l.Players)
+                {
+                    if (player.Equals(account))
+                        return false;
+                }
+            }
+
+            // Lock the lobby, prevent dirty reads
             lock (lobby)
             {
                 // Check if the lobby can accept another account
                 if (lobby.Players.Count >= lobby.Limit)
                     return false;
-
-                // Check if the account is already in the lobby
-                foreach (Account player in lobby.Players)
-                    if (player.Id == account.Id)
-                        return false;
-
+                
                 lobby.Players.Add(account);
-                //TODO: fix
-                lobbyContainer.AddAccountAsInLobby(account);
             }
 
             return true;
@@ -153,29 +154,14 @@ namespace Controller
         /// <param name="lobbyId">The ID of the lobby</param>
         public void LeaveLobby(Guid accountId, Guid lobbyId)
         {
-            Lobby lobby = lobbyContainer.GetLobbyById(lobbyId);
-            Account account = accountController.FindById(accountId);
+            Lobby lobby = GetLobbyById(lobbyId);
 
             if (lobby == null)
                 return;
 
-            lock (lobby)
-            {
-                lobbyContainer.AccountNotInLobby(accountId);
-                int index = -1;
-                for (int i = 0; i < lobby.Players.Count; i++)
-                {
-                    if (lobby.Players[i].Id == accountId)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-                if (index == -1)
-                    return;
+            Account account = lobby.Players.Find((a) => a.Id == accountId);
 
-                lobby.Players.RemoveAt(index);
-            }
+            lobby.Players.Remove(account);
         }
 
         /// <summary>
@@ -199,6 +185,11 @@ namespace Controller
 
             // If password is correct, proceed to normal lobby joining
             return JoinLobby(accountId, lobbyId);
+        }
+
+        public Lobby GetLobbyById(Guid id)
+        {
+            return lobbyContainer.GetLobbyById(id);
         }
     }
 }

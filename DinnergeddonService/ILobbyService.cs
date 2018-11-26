@@ -43,10 +43,20 @@ namespace DinnergeddonService
         bool JoinLobby(Guid accountId, Guid lobbyId);
 
         /// <summary>
+        /// TODO:
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="lobbyId"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        bool JoinPrivateLobby(Guid accountId, Guid lobbyId, string password);
+
+        /// <summary>
         /// Removes an account from a lobby
         /// </summary>
         /// <param name="accountId">The ID of the account</param>
         /// <param name="lobbyId">The ID of the lobby</param>
         void LeaveLobby(Guid accountId, Guid lobbyId);
+
     }
 }

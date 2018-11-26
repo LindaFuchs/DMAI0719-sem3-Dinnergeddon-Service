@@ -43,11 +43,11 @@ namespace DinnergeddonService
         bool JoinLobby(Guid accountId, Guid lobbyId);
 
         /// <summary>
-        /// TODO:
+        /// Adds a user to a private lobby
         /// </summary>
-        /// <param name="accountId"></param>
-        /// <param name="lobbyId"></param>
-        /// <param name="password"></param>
+        /// <param name="accountId">The account ID</param>
+        /// <param name="lobbyId">The lobby ID</param>
+        /// <param name="password">The password of the lobby</param>
         /// <returns></returns>
         bool JoinPrivateLobby(Guid accountId, Guid lobbyId, string password);
 

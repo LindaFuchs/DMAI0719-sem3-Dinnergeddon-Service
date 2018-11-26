@@ -15,7 +15,7 @@ namespace DinnergeddonService
         public DinnergeddonService()
         {
             accountController = new AccountController();
-            lobbyController = new LobbyController(LobbyContainer.GetInstance());
+            lobbyController = new LobbyController(LobbyContainer.GetInstance(), accountController);
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace DinnergeddonService
         }
 
         /// <summary>
-        /// TODO;
+        /// TODO:
         /// </summary>
         /// <param name="accountId"></param>
         /// <param name="lobbyId"></param>
@@ -184,7 +184,7 @@ namespace DinnergeddonService
         /// <returns></returns>
         public bool JoinPrivateLobby(Guid accountId, Guid lobbyId, string password)
         {
-            throw new NotImplementedException();
+            return lobbyController.JoinLobby(accountId, lobbyId, password);
         }
     }
 }

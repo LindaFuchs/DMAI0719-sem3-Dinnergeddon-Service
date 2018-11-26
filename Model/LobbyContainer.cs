@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Model
 {
@@ -20,14 +21,37 @@ namespace Model
             return instance;
         }
 
+        /// <summary>
+        /// TODO:
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Lobby> GetLobbies()
         {
             return lobbies;
         }
 
+        /// <summary>
+        /// TODO:
+        /// </summary>
+        /// <param name="lobby"></param>
         public void Add(Lobby lobby)
         {
             lobbies.Add(lobby);
+        }
+
+        /// <summary>
+        /// TODO:
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Lobby GetLobbyById(Guid id)
+        {
+            foreach (Lobby l in lobbies)
+            {
+                if (l.Id == id)
+                    return l;
+            }
+            return null;
         }
     }
 }

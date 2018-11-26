@@ -6,8 +6,11 @@ namespace Controller
 {
     public class LobbyController : ILobbyController
     {
+        // A lobby container
         private readonly ILobbyContainer container;
+        // The minimum amount of players in a lobby
         private readonly int MIN_PLAYERS = 2;
+        // The maximum amount of players in a lobby
         private readonly int MAX_PLAYERS = 4;
 
         public LobbyController(ILobbyContainer container)
@@ -61,7 +64,7 @@ namespace Controller
         /// <returns>A list of all currently active lobbies</returns>
         public IEnumerable<Lobby> GetLobbies()
         {
-            return container.GetActiveLobbies();
+            return container.GetLobbies();
         }
 
         /// <summary>

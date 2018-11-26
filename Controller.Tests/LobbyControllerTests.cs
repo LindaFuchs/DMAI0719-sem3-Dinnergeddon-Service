@@ -180,7 +180,7 @@ namespace Controller.Tests
             lobbies.Add(lobby);
         }
 
-        public IEnumerable<Lobby> GetActiveLobbies()
+        public IEnumerable<Lobby> GetLobbies()
         {
             throw new NotImplementedException();
         }

@@ -1,12 +1,12 @@
 ﻿using System.Data;
-using System.Data.Common;
 
 namespace DBLayer
 {
     public interface IDbComponents
     {
-
+        /// <summary>
+        /// A connection with the database
+        /// </summary>
         IDbConnection Connection { get; }
-        DbProviderFactory Factory { get; }
     }
 }

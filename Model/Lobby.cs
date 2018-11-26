@@ -12,10 +12,10 @@ namespace Model
         [DataMember]
         public string Name { get; set; }
         [DataMember]
-        public string PasswordHash { get; set; }
-        [DataMember]
         public List<Account> Players { get; set; }
         [DataMember]
         public int Limit { get; set; }
+
+        public string PasswordHash { get; set; }
     }
 }

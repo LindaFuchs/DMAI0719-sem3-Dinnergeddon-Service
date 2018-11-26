@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonUI", "Dinnerged
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{17556139-CC1D-48DD-A770-39F33EE57A75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonService.Tests", "DinnergeddonService.Tests\DinnergeddonService.Tests.csproj", "{AA2D6153-85F5-43C8-89B4-1D663B9D431D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnergeddonWeb", "DinnergeddonWeb\DinnergeddonWeb.csproj", "{A4704818-F962-42A1-8154-5A9489B35F0E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D6CBD052-5F9B-43D5-BCF2-FF839414025F} = {D6CBD052-5F9B-43D5-BCF2-FF839414025F}
@@ -51,10 +49,6 @@ Global
 		{17556139-CC1D-48DD-A770-39F33EE57A75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17556139-CC1D-48DD-A770-39F33EE57A75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17556139-CC1D-48DD-A770-39F33EE57A75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA2D6153-85F5-43C8-89B4-1D663B9D431D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA2D6153-85F5-43C8-89B4-1D663B9D431D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA2D6153-85F5-43C8-89B4-1D663B9D431D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA2D6153-85F5-43C8-89B4-1D663B9D431D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4704818-F962-42A1-8154-5A9489B35F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4704818-F962-42A1-8154-5A9489B35F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4704818-F962-42A1-8154-5A9489B35F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU

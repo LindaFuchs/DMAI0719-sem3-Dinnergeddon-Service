@@ -154,7 +154,7 @@
 
             <Button  CommandParameter="{Binding ElementName=passwordBox}" Command="{Binding LoginCommand, Mode=OneTime}"
      IsDefault="True" Style="{StaticResource RoundButtonTemplate}"  FontSize="18" Height="40"  
-                 Foreground="White" Content="LOG IN" Margin="0,0,0,15"  />
+                 Foreground="White" Content="LOG IN" Margin="0,0,0,15" Click="Button_Click_1"  />
 
         <TextBlock Foreground="{StaticResource InputFormColor}" FontSize="13" HorizontalAlignment="Center" >
         Don't have an account?
@@ -164,6 +164,8 @@
 
 
         </TextBlock>
+
+            <TextBlock Text="{Binding Status}"></TextBlock>
 
 </StackPanel>
 

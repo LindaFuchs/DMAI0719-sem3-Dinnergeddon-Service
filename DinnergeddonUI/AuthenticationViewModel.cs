@@ -120,6 +120,7 @@ namespace DinnergeddonUI
             catch (UnauthorizedAccessException)
             {
                 Status = "Login failed! Please provide some valid credentials.";
+                //change color of ui
             }
             catch (Exception ex)
             {

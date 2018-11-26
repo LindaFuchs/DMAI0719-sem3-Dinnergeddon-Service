@@ -123,9 +123,9 @@ namespace Controller
 
             // Check if the account isn't already in a lobby
             // Even if it's the same, the operation should still halt
-            foreach(Lobby l in lobbyContainer.GetLobbies())
+            foreach (Lobby l in lobbyContainer.GetLobbies())
             {
-                foreach(Account player in l.Players)
+                foreach (Account player in l.Players)
                 {
                     if (player.Equals(account))
                         return false;
@@ -138,7 +138,7 @@ namespace Controller
                 // Check if the lobby can accept another account
                 if (lobby.Players.Count >= lobby.Limit)
                     return false;
-                
+
                 lobby.Players.Add(account);
             }
 
@@ -159,9 +159,11 @@ namespace Controller
             if (lobby == null)
                 return;
 
-            Account account = lobby.Players.Find((a) => a.Id == accountId);
-
-            lobby.Players.Remove(account);
+            lock (lobby)
+            {
+                Account account = lobby.Players.Find((a) => a.Id == accountId);
+                lobby.Players.Remove(account);
+            }
         }
 
         /// <summary>

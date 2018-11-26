@@ -1,6 +1,7 @@
 ﻿using Model;
-using System.ServiceModel;
+using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 
 namespace DinnergeddonService
 {
@@ -32,5 +33,20 @@ namespace DinnergeddonService
         /// <returns>A list of all lobbies</returns>
         [OperationContract]
         IEnumerable<Lobby> GetLobbies();
+
+        /// <summary>
+        /// Tries to join an account to a lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        /// <returns>If the account has joined successfully</returns>
+        bool JoinLobby(Guid accountId, Guid lobbyId);
+
+        /// <summary>
+        /// Removes an account from a lobby
+        /// </summary>
+        /// <param name="accountId">The ID of the account</param>
+        /// <param name="lobbyId">The ID of the lobby</param>
+        void LeaveLobby(Guid accountId, Guid lobbyId);
     }
 }

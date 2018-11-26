@@ -132,7 +132,15 @@ namespace Controller.Tests
         public void Test_JoinLobby_AccountAlreadyInAnotherLobby_Fails()
         {
             // Setup
-            container.AddAccountAsInLobby(account);
+
+            Lobby dummy = new Lobby()
+            {
+                Id = Guid.NewGuid(),
+                Players = new List<Account>(),
+            };
+            dummy.Players.Add(account);
+            container.Add(dummy);
+
             int expectedPlayerCount = lobby.Players.Count;
 
             // Action

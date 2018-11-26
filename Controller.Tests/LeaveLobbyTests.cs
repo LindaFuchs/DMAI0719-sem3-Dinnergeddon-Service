@@ -31,7 +31,6 @@ namespace Controller.Tests
             account = new Account()
             {
                 Id = Guid.NewGuid(),
-                InLobby = true,
             };
 
             lobbyContainer.Add(lobby);
@@ -100,15 +99,18 @@ namespace Controller.Tests
         {
             // Setup
             lobby.Players.AddRange(CreateDummyPlayers(2));
+            lobby.Players.Add(account);
             int expectedPlayerCount = lobby.Players.Count - 1;
-            accountController.InsertAccount(account);
+
             // Action
             lobbyController.LeaveLobby(account.Id, lobby.Id);
 
             // Assert
-            Assert.IsFalse(lobbyContainer.AccountInLobby(account.Id));
             Assert.AreEqual(expectedPlayerCount, lobby.Players.Count);
-            Assert.IsFalse(lobby.Players.Contains(account));
+            foreach (Account player in lobby.Players)
+            {
+                Assert.IsFalse(player.Id == account.Id);
+            }
         }
     }
 }

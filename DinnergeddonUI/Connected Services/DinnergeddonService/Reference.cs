@@ -443,6 +443,12 @@ namespace DinnergeddonUI.DinnergeddonService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/LeaveLobby", ReplyAction="http://tempuri.org/ILobbyService/LeaveLobbyResponse")]
         System.Threading.Tasks.Task LeaveLobbyAsync(System.Guid accountId, System.Guid lobbyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetLobbyById", ReplyAction="http://tempuri.org/ILobbyService/GetLobbyByIdResponse")]
+        DinnergeddonUI.DinnergeddonService.Lobby GetLobbyById(System.Guid lobbyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetLobbyById", ReplyAction="http://tempuri.org/ILobbyService/GetLobbyByIdResponse")]
+        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby> GetLobbyByIdAsync(System.Guid lobbyId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -518,6 +524,14 @@ namespace DinnergeddonUI.DinnergeddonService {
         
         public System.Threading.Tasks.Task LeaveLobbyAsync(System.Guid accountId, System.Guid lobbyId) {
             return base.Channel.LeaveLobbyAsync(accountId, lobbyId);
+        }
+        
+        public DinnergeddonUI.DinnergeddonService.Lobby GetLobbyById(System.Guid lobbyId) {
+            return base.Channel.GetLobbyById(lobbyId);
+        }
+        
+        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby> GetLobbyByIdAsync(System.Guid lobbyId) {
+            return base.Channel.GetLobbyByIdAsync(lobbyId);
         }
     }
 }

@@ -27,11 +27,11 @@ namespace DinnergeddonUI
         //private ObservableCollection<DinnergeddonService.Lobby> lobbies;
         public Dashboard()
         {
-            DataContext = new DashboardViewModel(new AuthenticationService());
+            DataContext = new DashboardViewModel(new AuthenticationService(), this);
 
             InitializeComponent();
             
-            RefreshLobbies();
+            //RefreshLobbies();
         }
 
         public IViewModel ViewModel
@@ -48,8 +48,8 @@ namespace DinnergeddonUI
 
         private void RefreshLobbies()
         {
-            var items = new ObservableCollection<DinnergeddonService.Lobby>(_proxy.GetLobbies());
-            LobbiesListView.ItemsSource = items;
+          //  var items = new ObservableCollection<DinnergeddonService.Lobby>(_proxy.GetLobbies());
+           // LobbiesListView.ItemsSource = items;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

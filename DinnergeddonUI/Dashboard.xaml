@@ -8,37 +8,73 @@
         Title="Dashboard" Height="450" Width="800"
         Background="{DynamicResource BackgroundColor}"
     x:Name="DashboardWindow">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
 
+    </Window.Resources>
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top">
-            <Button Command="{Binding JoinLobbyCommand, Mode=OneTime}" CommandParameter="{Binding ElementName=DashboardWindow}"  VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Background="#fff7ed" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" Content="Join"></Button>
-
-            <Button Command="{Binding LogoutCommand, Mode=OneTime}"
-                    CommandParameter="{Binding ElementName=DashboardWindow}"
-
-                               Background="Gray"
- FontSize="14" DockPanel.Dock="Left" Content="Back" 
-                    HorizontalAlignment="Left" 
-                VerticalAlignment="Top"
-                    Margin="15"  
-                     Style="{StaticResource RoundButtonTemplate}"></Button>
-            <Button 
+        <!--Header with create lobby button and log out button-->
+        <StackPanel DockPanel.Dock="Top">
+            <DockPanel>
+                <Button 
+                Command="{Binding CreateLobbyCommand}"
                 FontSize="14"
-                Margin="0,0,30,0"
+                Margin="20"
                 HorizontalAlignment="Right"
-                DockPanel.Dock="Right"
-                VerticalAlignment="Bottom"
             Style="{DynamicResource RoundButtonTemplate}"
             Foreground="White"
-            Content="Create lobby" Click="Button_Click">
-            </Button>
-            <TextBlock Text="{Binding AuthenticatedUser}" FontSize="15" DockPanel.Dock="Top" HorizontalAlignment="Right" Foreground="White" />
-        </DockPanel>
+            Content="Create lobby" >
+                </Button>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
-        <!--Lobby text-->
-        <TextBlock Margin="20,10,0,0" FontSize="16" Foreground="White" Background="{StaticResource BackgroundColor}" DockPanel.Dock="Top" Text="Lobbies"></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Margin="15,15,0,15" Text="{Binding AuthenticatedUser}" FontSize="15" HorizontalAlignment="Right" Foreground="White" />
+                    <Button VerticalAlignment="Center" Margin="15" Command="{Binding LogoutCommand, Mode=OneTime}"
+                    CommandParameter="{Binding ElementName=DashboardWindow}"
+HorizontalAlignment="Right"
+                               Background="Gray"
+ FontSize="14" Content="Log out" 
+                     Style="{StaticResource RoundButtonTemplate}"></Button>
 
-        <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="20,10,20,20" ScrollViewer.CanContentScroll="False"
+                </StackPanel>
+            </DockPanel>
+
+            <StackPanel Visibility="{Binding Path=IsJoined, Converter={StaticResource BoolToVisConverter} }">
+                <TextBlock Text="Joined Lobby" Foreground="White" FontSize="18" Margin="20 ,0,0,0"></TextBlock>
+                <Border  Margin="20,10,20,20" BorderBrush="#362e2e" BorderThickness="2" CornerRadius="8,8,8,8">
+                    <DockPanel Background="#362e2e" >
+                        <StackPanel>
+                            <WrapPanel>
+                                <TextBlock FontSize="13" FontWeight="Bold" Foreground="White" Margin="10,10,5,5" Text="{Binding JoinedLobby.Name}" />
+
+                                <TextBlock Margin="0,10,10,5" Text="· public" Foreground="White" FontWeight="Light" FontSize="11" ></TextBlock>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Foreground="White" Margin="10,0,10,10" Text="Players  joined:"  />
+                                <TextBlock Foreground="White" Text="{Binding JoinedLobby.Players.Count}"  />
+                                <TextBlock Foreground="White" Text="/"  />
+
+                                <TextBlock Foreground="White"  Text="{Binding JoinedLobby.Limit}"  />
+
+
+                            </WrapPanel>
+                        </StackPanel>
+
+                        <WrapPanel Margin="20,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                            <Button Command="{Binding OpenLobbyCommand}" CommandParameter="{Binding JoinedLobby.Id}"  VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" 
+                            Background="#d1ffc6" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" 
+                                        Content="Open"></Button>
+                        </WrapPanel>
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+        <DockPanel>
+            
+
+            <!--Lobby text-->
+            <TextBlock Margin="20,10,0,0" FontSize="18" Foreground="White" Background="{StaticResource BackgroundColor}" DockPanel.Dock="Top" Text="Lobbies"></TextBlock>
+
+            <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="20,10,20,20" ScrollViewer.CanContentScroll="False"
              BorderThickness="0" Name="LobbiesListView" Background="{DynamicResource BackgroundColor}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -73,53 +109,57 @@
             
 
         </ListView>-->
-        <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="20,0,20,20"
-             BorderThickness="0" Name="LobbiesListView" Background="{DynamicResource BackgroundColor}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Focusable" Value="false"/>
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <ContentPresenter />
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border  Margin="10" BorderBrush="#362e2e" BorderThickness="2" CornerRadius="8,8,8,8">
-                        <DockPanel Background="#362e2e" >
-                            <StackPanel>
-                                <WrapPanel>
-                                    <TextBlock FontSize="13" FontWeight="Bold" Foreground="White" Margin="10,10,5,5" Text="{Binding Name}" />
+            <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="20,0,20,20"
+             ItemsSource="{Binding Lobbies}" BorderThickness="0" Name="LobbiesListView" Background="{DynamicResource BackgroundColor}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Focusable" Value="false"/>
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border  Margin="10" BorderBrush="#362e2e" BorderThickness="2" CornerRadius="8,8,8,8">
+                            <DockPanel Background="#362e2e" >
+                                <StackPanel>
+                                    <WrapPanel>
+                                        <TextBlock FontSize="13" FontWeight="Bold" Foreground="White" Margin="10,10,5,5" Text="{Binding Name}" />
 
-                                    <TextBlock Margin="0,10,10,5" Text="· public" Foreground="White" FontWeight="Light" FontSize="11" ></TextBlock>
+                                        <TextBlock Margin="0,10,10,5" Text="· public" Foreground="White" FontWeight="Light" FontSize="11" ></TextBlock>
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock Foreground="White" Margin="10,0,10,10" Text="Players  joined:"  />
+                                        <TextBlock Foreground="White" Text="{Binding Players.Count}"  />
+                                        <TextBlock Foreground="White" Text="/"  />
+
+                                        <TextBlock Foreground="White"  Text="{Binding Limit}"  />
+
+
+                                    </WrapPanel>
+                                </StackPanel>
+                                <WrapPanel Margin="20,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                    <Button Command="{Binding DataContext.JoinLobbyCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}" CommandParameter="{Binding Id}"  VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Background="#fff7ed" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" 
+                                        Content="Join"></Button>
                                 </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Foreground="White" Margin="10,0,10,10" Text="Players  joined:"  />
-                                    <TextBlock Foreground="White" Text="0/"  />
-                                    <TextBlock Foreground="White"  Text="{Binding Limit}"  />
-                                    
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
 
-                                </WrapPanel>
-                            </StackPanel>
-                            <WrapPanel Margin="20,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                                <Button Command="{Binding DataContext.JoinLobbyCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}" CommandParameter="{Binding Id}"  VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Background="#fff7ed" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" Content="Join"></Button>
-                            </WrapPanel>
-                        </DockPanel>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+            </ListBox>
 
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
-
+        </DockPanel>
     </DockPanel>
 </Window>

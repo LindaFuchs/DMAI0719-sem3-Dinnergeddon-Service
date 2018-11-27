@@ -9,12 +9,48 @@
         Title="Lobby" Height="450" Width="800"
          x:Name="LobbyWindowName">
     <DockPanel>
-        <TextBlock FontSize="16" Foreground="White" Margin="15" DockPanel.Dock="Top" Text="Lobby"></TextBlock>
+                <Button Background="White" Foreground="Black" Style="{StaticResource RoundButtonTemplate}" DockPanel.Dock="Bottom" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Padding="10" Content="Close" Click="Button_Click" ></Button>
+<StackPanel VerticalAlignment="Stretch">
+            <!--Header with exit lobby button and lobby name-->
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Left" FontSize="16" Foreground="White" Margin="20" Text="{Binding LobbyName}"></TextBlock>
+                <Button Style="{StaticResource RoundButtonTemplate}" Command="{Binding LeaveLobbyCommand, Mode=OneTime}"
+                    CommandParameter="{Binding ElementName=LobbyWindowName}" 
+                    DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="20" Padding="10" Content="Leave Lobby" ></Button>
 
-        <Button Command="{Binding LeaveLobbyCommand, Mode=OneTime}"
-                    CommandParameter="{Binding ElementName=LobbyWindowName}" DockPanel.Dock="Bottom" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15" Padding="10" Content="Exit Lobby" ></Button>
-        <ListBox  Margin="15">
 
-        </ListBox>
+            </DockPanel>
+
+            <TextBlock HorizontalAlignment="Left" Foreground="White" FontSize="15" Margin="20,15,15,0" DockPanel.Dock="Top" Text="Joined players"></TextBlock>
+            <ListBox Background="{DynamicResource BackgroundColor}" Name="JoinedPlayersListBox"  ItemsSource="{Binding JoinedPlayers}" Margin="20">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Focusable" Value="false"/>
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+
+                            <TextBlock FontSize="13" FontWeight="Bold" Foreground="White" Margin="10,10,5,5" Text="{Binding Username}" />
+
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+            
+
+        </StackPanel>                
+
     </DockPanel>
 </Window>

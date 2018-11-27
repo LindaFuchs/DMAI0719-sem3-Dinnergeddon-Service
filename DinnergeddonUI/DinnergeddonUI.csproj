@@ -66,6 +66,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="DashboardViewModel.cs" />
+    <Compile Include="JoinLobbyPasswordDialog.xaml.cs">
+      <DependentUpon>JoinLobbyPasswordDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LobbyViewModel.cs" />
     <Compile Include="LobbyWindow.xaml.cs">
       <DependentUpon>LobbyWindow.xaml</DependentUpon>
@@ -82,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JoinLobbyPasswordDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -11,25 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DinnergeddonUI.DinnergeddonService;
 
 namespace DinnergeddonUI
 {
     /// <summary>
-    /// Interaction logic for LobbyWindow.xaml
+    /// Interaction logic for JoinLobbyPasswordDialog.xaml
     /// </summary>
-    public partial class LobbyWindow : Window
+    public partial class JoinLobbyPasswordDialog : Window
     {
-        public LobbyWindow(Lobby lobby, Window dashboardWindow )
+        public JoinLobbyPasswordDialog()
         {
-            var lobbyViewModel = new LobbyViewModel(new AuthenticationService(), lobby, dashboardWindow);
-            DataContext = lobbyViewModel;
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

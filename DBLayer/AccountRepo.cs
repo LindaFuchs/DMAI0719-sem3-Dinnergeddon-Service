@@ -7,7 +7,6 @@ namespace DBLayer
 {
     public class AccountRepo : IAccountRepo
     {
-        // The connection with the database
         private readonly IDbConnection connection;
 
         public AccountRepo(IDbComponents components)

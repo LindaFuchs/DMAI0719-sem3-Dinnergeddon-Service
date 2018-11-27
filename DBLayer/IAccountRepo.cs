@@ -62,7 +62,19 @@ namespace DBLayer
         /// <returns>If the operation was successful</returns>
         bool AddToRole(Guid accountID, string roleName);
 
+        /// <summary>
+        /// Checks if an account is in a role
+        /// </summary>
+        /// <param name="accountID">The ID of the account</param>
+        /// <param name="roleName">The name of the role</param>
+        /// <returns>If the account has a role</returns>
         bool IsInsideRole(Guid accountID, string roleName);
+
+        /// <summary>
+        /// Gets all the roles an account has
+        /// </summary>
+        /// <param name="accountID">The ID of the account</param>
+        /// <returns>A list of all the roles an account has</returns>
         IEnumerable<string> GetRoles(Guid accountID);
     }
 }

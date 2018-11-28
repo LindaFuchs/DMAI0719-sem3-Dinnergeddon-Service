@@ -1,0 +1,58 @@
+﻿
+
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+}
+
+.btn-reg {
+    margin-top: 10px;
+    background: #c36800;
+    color: white;
+    width: inherit;
+}
+
+
+li.nav-item > a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.nav-item:hover {
+    background: white;
+}
+
+    .nav-item:hover a {
+        color: black;
+    }
+
+.card-footer {
+    background-color: #282828;
+}
+
+    .card-footer p {
+        color: white;
+    }
+
+.navbar-nav .nav-link {
+    padding: 1rem;
+    color: white;
+}

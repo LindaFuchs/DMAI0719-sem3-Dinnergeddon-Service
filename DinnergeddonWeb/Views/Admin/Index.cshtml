@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DinnergeddonWeb.Models.DisplayUserModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*Html.ActionLink("Create New", "Create")*@
+</p>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var account in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => account.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => account.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { account.Id }) |
+            @*@Html.ActionLink("Details", "Details", new { account.Id }) |*@
+            @Html.ActionLink(
+                "Delete",
+                "Delete",
+                new { account.Id },
+                new { onclick = "return confirm('Do you really want to delete this account?')" }
+                )
+        </td>
+    </tr>
+}
+
+</table>

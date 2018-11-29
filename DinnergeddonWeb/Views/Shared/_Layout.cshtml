@@ -1,36 +1,33 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dinnergeddon - The new best zombie game by BDG">
     <title>@ViewBag.Title </title>
-    <link rel="shortcut icon" href="~/images/brain_icon.ico"/>
-    @Styles.Render("~/Content/css")
+    <link rel="shortcut icon" href="~/images/brain_icon.ico" />
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
 </head>
 <body>
 
     <nav class="navbar navbar-expand-sm">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar22" aria-controls="navbar22" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="/">
+            <img src="~/images/logo.png" alt="dinnergeddon_logo" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbar22">
-            <ul class="navbar-nav">
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", routeValues: null, htmlAttributes: new { id = "aboutLink", @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", routeValues: null, htmlAttributes: new { id = "contactLink", @class = "nav-link" })</li>
-
-                @if (Request.IsAuthenticated && User.IsInRole("admin"))
-                {
-                    <li class="nav-item">
-                        @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })
-                    </li>
-                }
                 @Html.Partial("_LoginPartial")
             </ul>
-        
         </div>
     </nav>
 

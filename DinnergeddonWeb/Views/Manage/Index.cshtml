@@ -5,7 +5,14 @@
 
 <h2>@ViewBag.Title.</h2>
 
-<p class="text-success">@ViewBag.StatusMessage</p>
+@if (ViewBag.StatusMessage != "") {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @ViewBag.StatusMessage
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 <div>
     <h4>Change your account settings</h4>
     <hr />
@@ -13,12 +20,10 @@
         <dt>Password:</dt>
         <dd>
             [
-            @if (Model.HasPassword)
-            {
+            @if (Model.HasPassword) {
                 @Html.ActionLink("Change your password", "ChangePassword")
             }
-            else
-            {
+            else {
                 @Html.ActionLink("Create", "SetPassword")
             }
             ]

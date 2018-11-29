@@ -1,8 +1,8 @@
-﻿using System.ServiceModel;
-using System.Collections.Generic;
-using Controller;
-using System;
+﻿using Controller;
 using Model;
+using System;
+using System.Collections.Generic;
+using System.ServiceModel;
 
 namespace DinnergeddonService
 {
@@ -197,12 +197,14 @@ namespace DinnergeddonService
             return lobbyController.GetLobbyById(lobbyId);
         }
 
-        public bool VerifyPassword(string email,string password)
+        public bool VerifyPasswordByEmail(string email, string password)
         {
-           Account account = accountController.FindByEmail(email);
-        
-           return PasswordHasher.VerifyPassword(account.PasswordHash, password);
-            
+            return accountController.VerifyAccountByEmail(email, password);
+        }
+
+        public bool VerifyPasswordByUsername(string username, string password)
+        {
+            return accountController.VerifyAccountByUsername(username, password);
         }
 
     }

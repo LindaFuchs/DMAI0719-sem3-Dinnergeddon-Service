@@ -76,5 +76,9 @@ namespace Controller
         /// <param name="accountId">The ID of the account</param>
         /// <returns>A list of all the roles the account has</returns>
         IEnumerable<string> GetAccountRoles(Guid accountId);
+
+        bool VerifyAccountByUsername(string username, string password);
+
+        bool VerifyAccountByEmail(string email, string password);
     }
 }

@@ -92,7 +92,10 @@ namespace DinnergeddonService
         IEnumerable<string> GetRoles(Guid accountId);
 
         [OperationContract]
-        bool VerifyPassword(string email, string password);
+        bool VerifyPasswordByEmail(string email, string password);
+
+        [OperationContract]
+        bool VerifyPasswordByUsername(string username, string password);
 
     }
 }

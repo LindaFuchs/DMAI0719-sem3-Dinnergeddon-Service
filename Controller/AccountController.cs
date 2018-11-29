@@ -111,5 +111,25 @@ namespace Controller
         {
             return accountRepo.DeleteAccount(account);
         }
+
+        public bool VerifyAccountByUsername(string username, string password)
+        {
+            Account account = FindByUsername(username);
+
+            if (account == null)
+                return false;
+
+            return PasswordHasher.VerifyPassword(account.PasswordHash, password);
+        }
+
+        public bool VerifyAccountByEmail(string email, string password)
+        {
+            Account account = FindByEmail(email);
+
+            if (account == null)
+                return false;
+
+            return PasswordHasher.VerifyPassword(account.PasswordHash, password);
+        }
     }
 }

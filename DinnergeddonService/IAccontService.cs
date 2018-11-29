@@ -90,5 +90,9 @@ namespace DinnergeddonService
         /// <returns>A list of all the roles the account has</returns>
         [OperationContract]
         IEnumerable<string> GetRoles(Guid accountId);
+
+        [OperationContract]
+        bool VerifyPassword(string email, string password);
+
     }
 }

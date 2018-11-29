@@ -196,5 +196,14 @@ namespace DinnergeddonService
         {
             return lobbyController.GetLobbyById(lobbyId);
         }
+
+        public bool VerifyPassword(string email,string password)
+        {
+           Account account = accountController.FindByEmail(email);
+        
+           return PasswordHasher.VerifyPassword(account.PasswordHash, password);
+            
+        }
+
     }
 }

@@ -197,15 +197,15 @@ namespace DinnergeddonService
             return lobbyController.GetLobbyById(lobbyId);
         }
 
-        public bool VerifyPasswordByEmail(string email, string password)
+        /// <summary>
+        /// Verifies that the credentials of an account are correct
+        /// </summary>
+        /// <param name="name">The username or email of the account</param>
+        /// <param name="password">The password of the account</param>
+        /// <returns>If the credentials are valid</returns>
+        public bool VerifyCredentials(string name, string password)
         {
-            return accountController.VerifyAccountByEmail(email, password);
+            return accountController.VerifyCredentials(name, password);
         }
-
-        public bool VerifyPasswordByUsername(string username, string password)
-        {
-            return accountController.VerifyAccountByUsername(username, password);
-        }
-
     }
 }

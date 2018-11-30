@@ -112,19 +112,19 @@ namespace Controller
             return accountRepo.DeleteAccount(account);
         }
 
-        public bool VerifyAccountByUsername(string username, string password)
+        /// <summary>
+        /// Verifies that the credentials of the account are valid
+        /// </summary>
+        /// <param name="name">The username or email of the account</param>
+        /// <param name="password">The password of the account</param>
+        /// <returns>If the credentials are valid</returns>
+        public bool VerifyCredentials(string name, string password)
         {
-            Account account = FindByUsername(username);
-
-            if (account == null)
-                return false;
-
-            return PasswordHasher.VerifyPassword(account.PasswordHash, password);
-        }
-
-        public bool VerifyAccountByEmail(string email, string password)
-        {
-            Account account = FindByEmail(email);
+            Account account;
+            if (name.Contains("@"))
+                account = FindByEmail(name);
+            else
+                account = FindByUsername(name);
 
             if (account == null)
                 return false;

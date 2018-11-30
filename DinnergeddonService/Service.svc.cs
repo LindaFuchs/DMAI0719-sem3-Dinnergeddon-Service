@@ -61,7 +61,6 @@ namespace DinnergeddonService
 
         /// <summary>
         /// Gets all accounts on the system
-        /// TODO: Make this method secure without exposing all the accounts to unwanted callers
         /// </summary>
         /// <returns>A list of all accounts saved on the database</returns>
         public IEnumerable<Account> GetAccounts()

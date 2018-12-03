@@ -90,7 +90,7 @@
                     </Canvas>
                     <Grid>
                         <TextBox Text="{Binding Username}" x:Name="UsernameTextBox" FontSize="18" Foreground="{StaticResource InputFormColor}" Background="#2A2323"  BorderThickness="0"   TextWrapping="Wrap"  />
-                        <TextBlock FontSize="18" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="Username">
+                        <TextBlock FontSize="18" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="Email">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>

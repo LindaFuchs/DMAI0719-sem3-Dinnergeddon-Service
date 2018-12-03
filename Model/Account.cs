@@ -28,16 +28,5 @@ namespace Model
             
             return true;
         }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -1621603198;
-            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Id);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Username);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PasswordHash);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(SecurityStamp);
-            return hashCode;
-        }
     }
 }

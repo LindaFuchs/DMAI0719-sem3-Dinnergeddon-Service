@@ -163,6 +163,9 @@ namespace Controller
             {
                 Account account = lobby.Players.Find((a) => a.Id == accountId);
                 lobby.Players.Remove(account);
+
+                if (lobby.Players.Count == 0)
+                    lobbyContainer.Remove(lobby);
             }
         }
 

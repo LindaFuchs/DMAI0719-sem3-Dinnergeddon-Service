@@ -189,5 +189,15 @@ namespace Controller.Tests
         {
             throw new NotImplementedException();
         }
+
+        public void Remove(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Lobby lobby)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

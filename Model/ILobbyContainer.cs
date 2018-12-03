@@ -23,5 +23,17 @@ namespace Model
         /// <param name="id">The ID of the lobby</param>
         /// <returns>The lobby found or null</returns>
         Lobby GetLobbyById(Guid id);
+
+        /// <summary>
+        /// Removes a lobby given an ID
+        /// </summary>
+        /// <param name="id">The ID of the lobby</param>
+        void Remove(Guid id);
+
+        /// <summary>
+        /// Removes a lobby using the passed lobby's ID
+        /// </summary>
+        /// <param name="lobby">A lobby object with ID</param>
+        void Remove(Lobby lobby);
     }
 }

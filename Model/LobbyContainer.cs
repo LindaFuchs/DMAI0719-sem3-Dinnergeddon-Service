@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Model
 {
@@ -54,6 +55,29 @@ namespace Model
                     return l;
             }
             return null;
+        }
+
+        /// <summary>
+        /// Removes a lobby from the list given an ID
+        /// </summary>
+        /// <param name="id">The ID of the lobby</param>
+        public void Remove(Guid id)
+        {
+            // Finds an element using the ID passed
+            Lobby lobby = lobbies.SingleOrDefault(l => l.Id == id);
+
+            // If a lobby with that ID was found, it removes it
+            if (lobby != null)
+                lobbies.Remove(lobby);
+        }
+
+        /// <summary>
+        /// Removes a lobby from the list
+        /// </summary>
+        /// <param name="lobby">A lobby object to remove</param>
+        public void Remove(Lobby lobby)
+        {
+            Remove(lobby.Id);
         }
     }
 }

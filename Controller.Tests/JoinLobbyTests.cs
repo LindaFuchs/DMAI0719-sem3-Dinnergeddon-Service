@@ -213,5 +213,10 @@ namespace Controller.Tests
         {
             throw new NotImplementedException();
         }
+
+        public bool VerifyCredentials(string name, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

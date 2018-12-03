@@ -76,5 +76,13 @@ namespace Controller
         /// <param name="accountId">The ID of the account</param>
         /// <returns>A list of all the roles the account has</returns>
         IEnumerable<string> GetAccountRoles(Guid accountId);
+
+        /// <summary>
+        /// Verifies that the credentials of the account are valid
+        /// </summary>
+        /// <param name="name">The username or email of the account</param>
+        /// <param name="password">The password of the account</param>
+        /// <returns>If the credentials are valid</returns>
+        bool VerifyCredentials(string name, string password);
     }
 }

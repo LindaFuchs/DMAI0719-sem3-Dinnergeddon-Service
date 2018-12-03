@@ -1,8 +1,13 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav" }))
-    {
+@if (Request.IsAuthenticated) {
+
+    if (User.IsInRole("admin")) {
+        <li class="nav-item">
+            @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })
+        </li>
+    }
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-inline" })) {
         @Html.AntiForgeryToken()
 
         <li class="nav-item">
@@ -12,9 +17,8 @@
 
     }
 }
-else
-{
-    
+else {
+
     <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
     <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
 

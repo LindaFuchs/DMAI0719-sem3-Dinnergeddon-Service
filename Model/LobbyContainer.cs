@@ -24,28 +24,28 @@ namespace Model
         }
 
         /// <summary>
-        /// TODO:
+        /// Gets all active lobbies
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list of all active lobbies</returns>
         public IEnumerable<Lobby> GetLobbies()
         {
             return lobbies;
         }
 
         /// <summary>
-        /// TODO:
+        /// Adds a new lobby to the active lobbies
         /// </summary>
-        /// <param name="lobby"></param>
+        /// <param name="lobby">The lobby object to be added</param>
         public void Add(Lobby lobby)
         {
             lobbies.Add(lobby);
         }
 
         /// <summary>
-        /// TODO:
+        /// Gets a lobby given an ID
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The ID of the lobby</param>
+        /// <returns>The lobby that was found or null</returns>
         public Lobby GetLobbyById(Guid id)
         {
             foreach (Lobby l in lobbies)

@@ -1,8 +1,8 @@
-﻿using System.ServiceModel;
-using System.Collections.Generic;
-using Controller;
-using System;
+﻿using Controller;
 using Model;
+using System;
+using System.Collections.Generic;
+using System.ServiceModel;
 
 namespace DinnergeddonService
 {
@@ -61,7 +61,6 @@ namespace DinnergeddonService
 
         /// <summary>
         /// Gets all accounts on the system
-        /// TODO: Make this method secure without exposing all the accounts to unwanted callers
         /// </summary>
         /// <returns>A list of all accounts saved on the database</returns>
         public IEnumerable<Account> GetAccounts()
@@ -195,6 +194,17 @@ namespace DinnergeddonService
         public Lobby GetLobbyById(Guid lobbyId)
         {
             return lobbyController.GetLobbyById(lobbyId);
+        }
+
+        /// <summary>
+        /// Verifies that the credentials of an account are correct
+        /// </summary>
+        /// <param name="name">The username or email of the account</param>
+        /// <param name="password">The password of the account</param>
+        /// <returns>If the credentials are valid</returns>
+        public bool VerifyCredentials(string name, string password)
+        {
+            return accountController.VerifyCredentials(name, password);
         }
     }
 }

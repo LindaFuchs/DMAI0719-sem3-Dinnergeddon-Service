@@ -28,31 +28,40 @@ textarea {
     width: inherit;
 }
 
+/*
+    Navigation bar
+*/
 
-li.nav-item > a {
+.navbar .nav-link {
+    padding: 1rem;
     color: white;
-    text-decoration: none;
-    display: inline-block;
-    width: 100%;
+}
+
+.navbar-brand {
+    padding: 10px;
+}
+
+.navbar-brand img {
+    height: 30px;
 }
 
 .nav-item:hover {
     background: white;
 }
 
-    .nav-item:hover a {
-        color: black;
-    }
+.nav-item:hover a {
+    color: black;
+}
+
+/*
+    Footer
+*/
 
 .card-footer {
     background-color: #282828;
 }
 
-    .card-footer p {
-        color: white;
-    }
-
-.navbar-nav .nav-link {
-    padding: 1rem;
+.card-footer p {
     color: white;
+    margin: 0;
 }

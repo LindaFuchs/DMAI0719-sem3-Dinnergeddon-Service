@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using System.Web;
 
 namespace DinnergeddonService
 {
@@ -48,7 +47,7 @@ namespace DinnergeddonService
         /// <returns>If the operation was successful</returns>
         [OperationContract]
         bool UpdateAccount(Account updatedAccount);
-        
+
         /// <summary>
         /// Deletes an existing account from the system
         /// </summary>
@@ -90,5 +89,14 @@ namespace DinnergeddonService
         /// <returns>A list of all the roles the account has</returns>
         [OperationContract]
         IEnumerable<string> GetRoles(Guid accountId);
+
+        /// <summary>
+        /// Verifies that the credentials of an account are correct
+        /// </summary>
+        /// <param name="name">The username or email of the account</param>
+        /// <param name="password">The password of the account</param>
+        /// <returns>If the credentials are valid</returns>
+        [OperationContract]
+        bool VerifyCredentials(string name, string password);
     }
 }

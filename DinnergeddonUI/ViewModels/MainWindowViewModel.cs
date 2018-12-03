@@ -3,33 +3,31 @@ using DinnergeddonUI.Interfaces;
 using DinnergeddonUI.Model;
 using System;
 using System.ComponentModel;
-using System.Security;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DinnergeddonUI.ViewModel
+namespace DinnergeddonUI.ViewModels
 {
-    public class AuthenticationViewModel : IViewModel, INotifyPropertyChanged, ICloseable
+    // TODO: remove comented code after refactoring
+    public class MainWindowViewModel : IViewModel, INotifyPropertyChanged
     {
         private readonly AccountServiceClient _proxy;
 
         private readonly DelegateCommand _loginCommand;
-        private readonly DelegateCommand _logoutCommand;
-        private readonly DelegateCommand _showViewCommand;
-        private readonly DelegateCommand _closeWindowCommand;
+        //private readonly DelegateCommand _logoutCommand;
+        //private readonly DelegateCommand _closeWindowCommand;
         private string _username;
         private string _status;
 
-        public AuthenticationViewModel()
+        public MainWindowViewModel()
         {
             _proxy = new AccountServiceClient();
 
             _loginCommand = new DelegateCommand(Login, CanLogin);
-            _logoutCommand = new DelegateCommand(Logout, CanLogout);
-            _showViewCommand = new DelegateCommand(ShowView, null);
-            _closeWindowCommand = new DelegateCommand(CloseWindow, CanLogin);
+            //_logoutCommand = new DelegateCommand(Logout, CanLogout);
+            //_closeWindowCommand = new DelegateCommand(CloseWindow, CanLogin);
         }
 
         #region Properties
@@ -62,23 +60,23 @@ namespace DinnergeddonUI.ViewModel
 
         #region Commands
         public DelegateCommand LoginCommand { get { return _loginCommand; } }
-        public ICommand CloseCommand { get; private set; }
 
+        // As far as I'm aware (Nikola) these shouldn't be here. They're most likely here because of testing
 
-        public DelegateCommand LogoutCommand { get { return _logoutCommand; } }
+        //public ICommand CloseCommand { get; private set; }
+        
+        //public DelegateCommand LogoutCommand { get { return _logoutCommand; } }
 
-        public DelegateCommand ShowViewCommand { get { return _showViewCommand; } }
-
-        public DelegateCommand CloseWindowCommand { get { return _closeWindowCommand; } }
+        //public DelegateCommand CloseWindowCommand { get { return _closeWindowCommand; } }
 
         #endregion
 
-        private void CloseWindow(object w)
-        {
-            // checks if w is Window and assigns window to w
-            if (w is Window window)
-                window.Close();
-        }
+        //private void CloseWindow(object w)
+        //{
+        //    // checks if w is Window and assigns window to w
+        //    if (w is Window window)
+        //        window.Close();
+        //}
 
         /// <summary>
         /// Authenticates the user
@@ -107,7 +105,7 @@ namespace DinnergeddonUI.ViewModel
             try
             {
                 //Validate credentials through the authentication service
-                //User user = AuthenticateUser(Username, password);
+                User user = AuthenticateUser(Username, password);
 
                 //Get the current principal object
 
@@ -115,23 +113,18 @@ namespace DinnergeddonUI.ViewModel
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
                 //Authenticate the user
-                //customPrincipal.Identity = new CustomIdentity(user.Id, user.Username, user.Email, user.Roles);
-                customPrincipal.Identity = new CustomIdentity(Guid.NewGuid(), "Federlizer", "nikola@vel", new string[] { });
+                customPrincipal.Identity = new CustomIdentity(user.Id, user.Username, user.Email, user.Roles);
 
                 //Update UI
                 NotifyPropertyChanged("AuthenticatedUser");
                 NotifyPropertyChanged("IsAuthenticated");
 
                 _loginCommand.RaiseCanExecuteChanged();
-                _logoutCommand.RaiseCanExecuteChanged();
-
-                //Username = string.Empty; //reset
-                //passwordBox.Password = string.Empty; //reset
-                //Status = string.Empty;
-
+                //_logoutCommand.RaiseCanExecuteChanged();
+                
                 Dashboard dashboard = new Dashboard();
                 dashboard.Show();
-                
+
                 Application.Current.MainWindow.Close();
 
             }
@@ -151,57 +144,36 @@ namespace DinnergeddonUI.ViewModel
             return !IsAuthenticated;
         }
 
-        private void Logout(object parameter)
-        {
-            Window dashboard = parameter as Window;
-            CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-            if (customPrincipal != null)
-            {
-                customPrincipal.Identity = new AnonymousIdentity();
-                NotifyPropertyChanged("AuthenticatedUser");
-                NotifyPropertyChanged("IsAuthenticated");
-                _loginCommand.RaiseCanExecuteChanged();
-                _logoutCommand.RaiseCanExecuteChanged();
-                Status = string.Empty;
-                dashboard.Close();
-                //MainWindow mw = new MainWindow();
-                //mw.Show();
-            }
-        }
+        //private void Logout(object parameter)
+        //{
+        //    Window dashboard = parameter as Window;
+        //    CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+        //    if (customPrincipal != null)
+        //    {
+        //        customPrincipal.Identity = new AnonymousIdentity();
+        //        NotifyPropertyChanged("AuthenticatedUser");
+        //        NotifyPropertyChanged("IsAuthenticated");
+        //        _loginCommand.RaiseCanExecuteChanged();
+        //        //_logoutCommand.RaiseCanExecuteChanged();
+        //        Status = string.Empty;
+        //        dashboard.Close();
+        //        //MainWindow mw = new MainWindow();
+        //        //mw.Show();
+        //    }
+        //}
 
-        private bool CanLogout(object parameter)
-        {
-            return IsAuthenticated;
-        }
+        //private bool CanLogout(object parameter)
+        //{
+        //    return IsAuthenticated;
+        //}
 
         public bool IsAuthenticated
         {
             get { return Thread.CurrentPrincipal.Identity.IsAuthenticated; }
         }
 
-        private void ShowView(object parameter)
-        {
-            try
-            {
-                Status = string.Empty;
-                IView view;
-                if (parameter == null)
-                    view = new SecretWindow();
-                else
-                    view = new AdminWindow();
-
-                view.Show();
-            }
-            catch (SecurityException)
-            {
-                Status = "You are not authorized!";
-            }
-        }
-
-
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler<EventArgs> RequestClose;
 
         private void NotifyPropertyChanged(string propertyName)
         {

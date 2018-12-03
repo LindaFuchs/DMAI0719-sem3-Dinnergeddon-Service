@@ -1,54 +1,22 @@
 ﻿using DinnergeddonUI.Interfaces;
-using DinnergeddonUI.ViewModel;
+using DinnergeddonUI.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace DinnergeddonUI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window, IView
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            DataContext = new AuthenticationViewModel();
-            Loaded += (s, e) =>
-            {
-                if (DataContext is ICloseable)
-                {
-                    (DataContext as ICloseable).RequestClose += (_, __) => Close();
-                }
-            };
+            DataContext = new MainWindowViewModel();
             InitializeComponent();
-        }
-
-        public IViewModel ViewModel
-        {
-            get { return DataContext as IViewModel; }
-            set { DataContext = value; }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             System.Diagnostics.Process.Start(e.Uri.AbsoluteUri);
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //AuthenticationViewModel viewModel = new AuthenticationViewModel(new AuthenticationService());
-
-            //UsernameTextBox.Text = "Log in button pressed";
-            //Dashboard dashboard = new Dashboard(viewModel);
-            //dashboard.Show();
-            //this.Close();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 
@@ -66,9 +34,7 @@ namespace DinnergeddonUI
 
         public static readonly DependencyProperty IsMonitoringProperty =
             DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(PasswordBoxMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
-
-
-
+        
         public static int GetPasswordLength(DependencyObject obj)
         {
             return (int)obj.GetValue(PasswordLengthProperty);

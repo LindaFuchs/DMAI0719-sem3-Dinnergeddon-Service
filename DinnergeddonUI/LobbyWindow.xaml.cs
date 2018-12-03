@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using DinnergeddonUI.DinnergeddonService;
 
 using DinnergeddonUI.Interfaces;
-using DinnergeddonUI.ViewModel;
+using DinnergeddonUI.ViewModels;
 
 namespace DinnergeddonUI
 {

@@ -121,7 +121,7 @@ namespace Controller
         public Account VerifyCredentials(string name, string password)
         {
             Account account;
-            if (name.Contains("@"))
+            if (name.Contains(@"@"))
                 account = FindByEmail(name);
             else
                 account = FindByUsername(name);

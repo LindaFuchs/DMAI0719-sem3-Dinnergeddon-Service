@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DinnergeddonUI.Interfaces;
+using DinnergeddonUI.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DinnergeddonUI
 {
@@ -27,7 +18,7 @@ namespace DinnergeddonUI
             {
                 if (DataContext is ICloseable)
                 {
-                    (DataContext as ICloseable).RequestClose += (_, __) => this.Close();
+                    (DataContext as ICloseable).RequestClose += (_, __) => Close();
                 }
             };
             InitializeComponent();
@@ -93,7 +84,7 @@ namespace DinnergeddonUI
 
         private static void OnIsMonitoringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var pb = d as PasswordBox;
+            PasswordBox pb = d as PasswordBox;
             if (pb == null)
             {
                 return;
@@ -110,7 +101,7 @@ namespace DinnergeddonUI
 
         static void PasswordChanged(object sender, RoutedEventArgs e)
         {
-            var pb = sender as PasswordBox;
+            PasswordBox pb = sender as PasswordBox;
             if (pb == null)
             {
                 return;

@@ -1,22 +1,19 @@
-﻿using System;
+﻿using DinnergeddonUI.DinnergeddonService;
+using DinnergeddonUI.Interfaces;
+using DinnergeddonUI.Models;
+using System;
 using System.ComponentModel;
-using System.Threading;
-using System.Windows.Controls;
 using System.Security;
+using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DinnergeddonUI
+namespace DinnergeddonUI.ViewModels
 {
-    public interface IViewModel { }
-    interface ICloseable
-    {
-        event EventHandler<EventArgs> RequestClose;
-    }
-
     public class AuthenticationViewModel : IViewModel, INotifyPropertyChanged, ICloseable
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly AccountServiceClient _proxy;
         private readonly DelegateCommand _loginCommand;
         private readonly DelegateCommand _logoutCommand;
         private readonly DelegateCommand _showViewCommand;
@@ -24,15 +21,14 @@ namespace DinnergeddonUI
         private string _username;
         private string _status;
 
-        public AuthenticationViewModel(IAuthenticationService authenticationService)
+        public AuthenticationViewModel()
         {
-            _authenticationService = authenticationService;
+            _proxy = new AccountServiceClient();
+
             _loginCommand = new DelegateCommand(Login, CanLogin);
             _logoutCommand = new DelegateCommand(Logout, CanLogout);
             _showViewCommand = new DelegateCommand(ShowView, null);
             _closeWindowCommand = new DelegateCommand(CloseWindow, CanLogin);
-
-
         }
 
         #region Properties
@@ -86,6 +82,19 @@ namespace DinnergeddonUI
 
         }
 
+        private User AuthenticateUser(string email, string password)
+        {
+            Account account = _proxy.VerifyCredentials(email, password);
+
+            // Invalid credentials
+            // (either password is incorrect or account wasn't found)
+            if (account == null)
+                throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
+
+            // Valid credentials, proceed
+            return new User(account.Id, account.Username, account.Email, _proxy.GetRoles(account.Id));
+        }
+
         private void Login(object parameter)
         {
             PasswordBox passwordBox = parameter as PasswordBox;
@@ -93,7 +102,7 @@ namespace DinnergeddonUI
             try
             {
                 //Validate credentials through the authentication service
-                User user = _authenticationService.AuthenticateUser(Username, clearTextPassword);
+                User user = AuthenticateUser(Username, clearTextPassword);
 
                 //Get the current principal object
                 CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;

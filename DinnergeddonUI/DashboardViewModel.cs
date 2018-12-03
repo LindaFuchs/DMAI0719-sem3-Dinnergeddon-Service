@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using DinnergeddonUI.DinnergeddonService;
 
+using DinnergeddonUI.Interfaces;
+
 namespace DinnergeddonUI
 {
     class DashboardViewModel : INotifyPropertyChanged
@@ -19,7 +21,7 @@ namespace DinnergeddonUI
         private readonly DelegateCommand _openLobbyCommand;
         private IEnumerable<Lobby> _lobbies;
         LobbyServiceClient _proxy = new LobbyServiceClient();
-        AccontServiceClient _accountProxy = new AccontServiceClient();
+        AccountServiceClient _accountProxy = new AccountServiceClient();
         private DelegateCommand _createLobbyCommand;
         private Window _dashboardWindow;
 

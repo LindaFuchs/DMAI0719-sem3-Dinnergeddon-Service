@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using DinnergeddonUI.DinnergeddonService;
 
+using DinnergeddonUI.Interfaces;
+
 namespace DinnergeddonUI
 {
     class LobbyViewModel : INotifyPropertyChanged
@@ -123,6 +125,11 @@ namespace DinnergeddonUI
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void Lobby_Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            LeaveLobby(sender);
         }
 
     }

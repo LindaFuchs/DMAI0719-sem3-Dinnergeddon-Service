@@ -8,7 +8,7 @@
             xmlns:WpfApp1="clr-namespace:DinnergeddonUI" 
 
         mc:Ignorable="d"
-        Title="MainWindow" Height="600  " Width="500"
+        Title="Dinnergeddon Client" Height="600  " Width="500"
         ResizeMode="CanResize"
         Background="{StaticResource ResourceKey=BackgroundColor}">
     <Window.Resources>

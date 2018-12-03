@@ -143,6 +143,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="VerifyCredentials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyCredentialsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="VerifyCredentialsResult" nillable="true" type="q13:Account" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CreateLobby">
     <xs:complexType>
       <xs:sequence>
@@ -154,7 +169,7 @@
   <xs:element name="CreateLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="CreateLobbyResult" nillable="true" type="q13:Lobby" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="CreateLobbyResult" nillable="true" type="q14:Lobby" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -170,7 +185,7 @@
   <xs:element name="CreatePrivateLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="CreatePrivateLobbyResult" nillable="true" type="q14:Lobby" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="CreatePrivateLobbyResult" nillable="true" type="q15:Lobby" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -182,15 +197,15 @@
   <xs:element name="GetLobbiesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetLobbiesResult" nillable="true" type="q15:ArrayOfLobby" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetLobbiesResult" nillable="true" type="q16:ArrayOfLobby" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="JoinLobby">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q16:guid" />
-        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="lobbyId" type="q17:guid" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q17:guid" />
+        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="lobbyId" type="q18:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -204,8 +219,8 @@
   <xs:element name="JoinPrivateLobby">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q18:guid" />
-        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="lobbyId" type="q19:guid" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q19:guid" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="lobbyId" type="q20:guid" />
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -220,8 +235,8 @@
   <xs:element name="LeaveLobby">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q20:guid" />
-        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="lobbyId" type="q21:guid" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="accountId" type="q21:guid" />
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="lobbyId" type="q22:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -233,14 +248,14 @@
   <xs:element name="GetLobbyById">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="lobbyId" type="q22:guid" />
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="lobbyId" type="q23:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetLobbyByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetLobbyByIdResult" nillable="true" type="q23:Lobby" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetLobbyByIdResult" nillable="true" type="q24:Lobby" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

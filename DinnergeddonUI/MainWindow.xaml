@@ -72,18 +72,13 @@
 
     </Window.Resources>
 
-    <StackPanel >
+    <StackPanel>
         <Image Margin="45,70,45,60" Source="/images/logo.png"/>
-        <StackPanel Margin="90,0,90,0
-               ">
-            <Border
-            BorderBrush="{StaticResource InputFormColor}"
-            
-            BorderThickness="0 0 0 1"
-            Margin="0,0,0,30"
-            >
+        <StackPanel Margin="90,0,90,0">
+            <Border BorderBrush="{StaticResource InputFormColor}"
+                    BorderThickness="0 0 0 1"
+                    Margin="0,0,0,30" >
                 <DockPanel Margin="5">
-
                     <Canvas Width="16" Height="16" Margin="0,0,10,0">
                         <Path Data="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" 
                               Fill="{StaticResource InputFormColor}" Opacity="0.7" Stretch="Fill"  />
@@ -153,8 +148,11 @@
             CommandParameter="{Binding ElementName=passwordBox}"-->
             <TextBlock Margin="0,15,0,15" Text="{Binding Status}" Foreground="{StaticResource IncorrectColor}"></TextBlock>
 
-            <Button  CommandParameter="{Binding ElementName=passwordBox}" Command="{Binding LoginCommand, Mode=OneTime}"
-     IsDefault="True" Style="{StaticResource RoundButtonTemplate}"  FontSize="18" Height="40"  
+            <Button CommandParameter="{Binding ElementName=passwordBox}"
+                    Command="{Binding LoginCommand, Mode=OneTime}"
+                    IsDefault="True" 
+                    Style="{StaticResource RoundButtonTemplate}"
+                    FontSize="18" Height="40"  
                  Foreground="White" Content="LOG IN" Margin="0,0,0,15" Click="Button_Click_1"  />
 
             <TextBlock Foreground="{StaticResource InputFormColor}" FontSize="13" HorizontalAlignment="Center" >

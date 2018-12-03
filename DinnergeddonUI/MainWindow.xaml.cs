@@ -1,5 +1,5 @@
 ﻿using DinnergeddonUI.Interfaces;
-using DinnergeddonUI.ViewModels;
+using DinnergeddonUI.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -13,7 +13,7 @@ namespace DinnergeddonUI
     {
         public MainWindow()
         {
-            DataContext = new AuthenticationViewModel(new AuthenticationService());
+            DataContext = new AuthenticationViewModel();
             Loaded += (s, e) =>
             {
                 if (DataContext is ICloseable)

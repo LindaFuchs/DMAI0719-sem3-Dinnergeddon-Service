@@ -1,6 +1,6 @@
 ﻿using DinnergeddonUI.DinnergeddonService;
 using DinnergeddonUI.Interfaces;
-using DinnergeddonUI.Models;
+using DinnergeddonUI.Model;
 using System;
 using System.ComponentModel;
 using System.Security;
@@ -9,11 +9,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DinnergeddonUI.ViewModels
+namespace DinnergeddonUI.ViewModel
 {
     public class AuthenticationViewModel : IViewModel, INotifyPropertyChanged, ICloseable
     {
         private readonly AccountServiceClient _proxy;
+
         private readonly DelegateCommand _loginCommand;
         private readonly DelegateCommand _logoutCommand;
         private readonly DelegateCommand _showViewCommand;
@@ -72,16 +73,19 @@ namespace DinnergeddonUI.ViewModels
 
         #endregion
 
-        private void CloseWindow(object window)
+        private void CloseWindow(object w)
         {
-            Window w = (Window)window;
-            if (w != null)
-            {
-                w.Close();
-            }
-
+            // checks if w is Window and assigns window to w
+            if (w is Window window)
+                window.Close();
         }
 
+        /// <summary>
+        /// Authenticates the user
+        /// </summary>
+        /// <param name="email">The email of the user</param>
+        /// <param name="password">The password of the user</param>
+        /// <returns></returns>
         private User AuthenticateUser(string email, string password)
         {
             Account account = _proxy.VerifyCredentials(email, password);
@@ -98,38 +102,43 @@ namespace DinnergeddonUI.ViewModels
         private void Login(object parameter)
         {
             PasswordBox passwordBox = parameter as PasswordBox;
-            string clearTextPassword = passwordBox.Password;
+            string password = passwordBox.Password;
+
             try
             {
                 //Validate credentials through the authentication service
-                User user = AuthenticateUser(Username, clearTextPassword);
+                //User user = AuthenticateUser(Username, password);
 
                 //Get the current principal object
-                CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-                if (customPrincipal == null)
+
+                if (!(Thread.CurrentPrincipal is CustomPrincipal customPrincipal))
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
                 //Authenticate the user
-                customPrincipal.Identity = new CustomIdentity(user.Id, user.Username, user.Email, user.Roles);
+                //customPrincipal.Identity = new CustomIdentity(user.Id, user.Username, user.Email, user.Roles);
+                customPrincipal.Identity = new CustomIdentity(Guid.NewGuid(), "Federlizer", "nikola@vel", new string[] { });
 
                 //Update UI
                 NotifyPropertyChanged("AuthenticatedUser");
                 NotifyPropertyChanged("IsAuthenticated");
+
                 _loginCommand.RaiseCanExecuteChanged();
                 _logoutCommand.RaiseCanExecuteChanged();
-                Username = string.Empty; //reset
-                passwordBox.Password = string.Empty; //reset
-                Status = string.Empty;
-                //  Application.Current.MainWindow.Close();
+
+                //Username = string.Empty; //reset
+                //passwordBox.Password = string.Empty; //reset
+                //Status = string.Empty;
 
                 Dashboard dashboard = new Dashboard();
                 dashboard.Show();
+                
+                Application.Current.MainWindow.Close();
 
             }
             catch (UnauthorizedAccessException)
             {
                 Status = "Login failed! Please provide some valid credentials.";
-                //change color of ui
+                // TODO: change color of ui
             }
             catch (Exception ex)
             {
@@ -196,8 +205,7 @@ namespace DinnergeddonUI.ViewModels
 
         private void NotifyPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

@@ -14,7 +14,6 @@ namespace DinnergeddonUI
 {
     class DashboardViewModel : INotifyPropertyChanged
     {
-        private readonly IAuthenticationService _authenticationService;
         private string _username;
         private readonly DelegateCommand _joinLobbyCommand;
         private readonly DelegateCommand _logoutCommand;
@@ -25,10 +24,9 @@ namespace DinnergeddonUI
         private DelegateCommand _createLobbyCommand;
         private Window _dashboardWindow;
 
-        public DashboardViewModel(IAuthenticationService authenticationService, Window dashboardWindow)
+        public DashboardViewModel(Window dashboardWindow)
         {
             _dashboardWindow = dashboardWindow;
-            _authenticationService = authenticationService;
             _logoutCommand = new DelegateCommand(Logout, CanLogout);
             _joinLobbyCommand = new DelegateCommand(JoinLobby, CanJoin);
             _createLobbyCommand = new DelegateCommand(CreateLobby, CanJoin);

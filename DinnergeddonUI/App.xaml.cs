@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using DinnergeddonUI.ViewModels;
+using DinnergeddonUI.ViewModel;
 
 namespace DinnergeddonUI
 {
@@ -17,7 +17,7 @@ namespace DinnergeddonUI
             MainWindow loginWindow = new MainWindow();
 
             //Show the login view
-            AuthenticationViewModel viewModel = new AuthenticationViewModel(new AuthenticationService());
+            AuthenticationViewModel viewModel = new AuthenticationViewModel();
 
             loginWindow.DataContext = viewModel;
             loginWindow.Show();

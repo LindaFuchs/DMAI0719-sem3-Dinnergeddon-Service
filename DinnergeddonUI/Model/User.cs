@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DinnergeddonUI.Models
+namespace DinnergeddonUI.Model
 {
     public class User
     {

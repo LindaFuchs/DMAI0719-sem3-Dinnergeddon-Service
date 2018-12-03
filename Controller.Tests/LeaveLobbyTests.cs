@@ -1,5 +1,6 @@
 ﻿using System;
 using Model;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -110,6 +111,23 @@ namespace Controller.Tests
             foreach (Account player in lobby.Players)
             {
                 Assert.IsFalse(player.Id == account.Id);
+            }
+        }
+
+        [TestMethod]
+        public void Test_LeaveLobby_LobbyGetsRemovedAfterLastPersonLeaves_Success()
+        {
+            // Setup
+            lobby.Players.Add(account);
+
+            // Action
+            lobbyController.LeaveLobby(account.Id, lobby.Id);
+
+            // Assert
+            foreach (Lobby l in lobbyContainer.GetLobbies())
+            {
+                if (l.Id == lobby.Id)
+                    Assert.Fail("A lobby with the same ID is still in the list");
             }
         }
     }

@@ -63,10 +63,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\DashboardViewModel.cs" />
-    <Compile Include="Interfaces\IAuthenticationService.cs" />
     <Compile Include="Interfaces\ICloseable.cs" />
-    <Compile Include="Interfaces\IView.cs" />
-    <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="JoinLobbyPasswordDialog.xaml.cs">
       <DependentUpon>JoinLobbyPasswordDialog.xaml</DependentUpon>
     </Compile>

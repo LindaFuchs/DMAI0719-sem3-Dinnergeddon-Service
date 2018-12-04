@@ -1,23 +1,19 @@
 ﻿using DinnergeddonUI.DinnergeddonService;
-using DinnergeddonUI.Interfaces;
 using DinnergeddonUI.Model;
 using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace DinnergeddonUI.ViewModels
 {
     // TODO: remove comented code after refactoring
-    public class MainWindowViewModel : IViewModel, INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly AccountServiceClient _proxy;
 
         private readonly DelegateCommand _loginCommand;
-        //private readonly DelegateCommand _logoutCommand;
-        //private readonly DelegateCommand _closeWindowCommand;
         private string _username;
         private string _status;
 
@@ -26,8 +22,6 @@ namespace DinnergeddonUI.ViewModels
             _proxy = new AccountServiceClient();
 
             _loginCommand = new DelegateCommand(Login, CanLogin);
-            //_logoutCommand = new DelegateCommand(Logout, CanLogout);
-            //_closeWindowCommand = new DelegateCommand(CloseWindow, CanLogin);
         }
 
         #region Properties
@@ -57,26 +51,8 @@ namespace DinnergeddonUI.ViewModels
             set { _status = value; NotifyPropertyChanged("Status"); }
         }
         #endregion
-
-        #region Commands
-        public DelegateCommand LoginCommand { get { return _loginCommand; } }
-
-        // As far as I'm aware (Nikola) these shouldn't be here. They're most likely here because of testing
-
-        //public ICommand CloseCommand { get; private set; }
         
-        //public DelegateCommand LogoutCommand { get { return _logoutCommand; } }
-
-        //public DelegateCommand CloseWindowCommand { get { return _closeWindowCommand; } }
-
-        #endregion
-
-        //private void CloseWindow(object w)
-        //{
-        //    // checks if w is Window and assigns window to w
-        //    if (w is Window window)
-        //        window.Close();
-        //}
+        public DelegateCommand LoginCommand { get { return _loginCommand; } }
 
         /// <summary>
         /// Authenticates the user
@@ -120,7 +96,6 @@ namespace DinnergeddonUI.ViewModels
                 NotifyPropertyChanged("IsAuthenticated");
 
                 _loginCommand.RaiseCanExecuteChanged();
-                //_logoutCommand.RaiseCanExecuteChanged();
                 
                 Dashboard dashboard = new Dashboard();
                 dashboard.Show();
@@ -143,29 +118,6 @@ namespace DinnergeddonUI.ViewModels
         {
             return !IsAuthenticated;
         }
-
-        //private void Logout(object parameter)
-        //{
-        //    Window dashboard = parameter as Window;
-        //    CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-        //    if (customPrincipal != null)
-        //    {
-        //        customPrincipal.Identity = new AnonymousIdentity();
-        //        NotifyPropertyChanged("AuthenticatedUser");
-        //        NotifyPropertyChanged("IsAuthenticated");
-        //        _loginCommand.RaiseCanExecuteChanged();
-        //        //_logoutCommand.RaiseCanExecuteChanged();
-        //        Status = string.Empty;
-        //        dashboard.Close();
-        //        //MainWindow mw = new MainWindow();
-        //        //mw.Show();
-        //    }
-        //}
-
-        //private bool CanLogout(object parameter)
-        //{
-        //    return IsAuthenticated;
-        //}
 
         public bool IsAuthenticated
         {

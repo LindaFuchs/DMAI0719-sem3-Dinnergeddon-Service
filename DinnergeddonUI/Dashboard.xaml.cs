@@ -36,12 +36,6 @@ namespace DinnergeddonUI
             //RefreshLobbies();
         }
 
-        public IViewModel ViewModel
-        {
-            get { return DataContext as IViewModel; }
-            set { DataContext = value; }
-        }
-
         public List<DinnergeddonService.Lobby> Lobbies
         {
             get;

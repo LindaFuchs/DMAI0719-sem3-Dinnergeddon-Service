@@ -131,5 +131,15 @@ namespace Controller
 
             return PasswordHasher.VerifyPassword(account.PasswordHash, password);
         }
+
+        public bool GetEmailConfirmed(Account account)
+        {
+            return accountRepo.GetEmailConfirmed(account);
+        }
+
+        public void SetEmailConfirmed(Account account, bool confirmed)
+        {
+            accountRepo.SetEmailConfirmed(account, confirmed);
+        }
     }
 }

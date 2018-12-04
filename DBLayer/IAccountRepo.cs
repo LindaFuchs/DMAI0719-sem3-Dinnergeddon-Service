@@ -76,5 +76,19 @@ namespace DBLayer
         /// <param name="accountID">The ID of the account</param>
         /// <returns>A list of all the roles an account has</returns>
         IEnumerable<string> GetRoles(Guid accountID);
+
+        /// <summary>
+        /// Gets a boolean which indicates wether the account's email is confirmed or not
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns>If the account's email is confirmed</returns>
+        bool GetEmailConfirmed(Account account);
+
+        /// <summary>
+        /// Sets the EmailConfirmed field for the account
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="confirmed"></param>
+        void SetEmailConfirmed(Account account, bool confirmed);
     }
 }

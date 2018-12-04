@@ -208,12 +208,16 @@ namespace DinnergeddonWeb.Identity
 
         public Task<bool> GetEmailConfirmedAsync(User user)
         {
-            throw new NotImplementedException();
+            Account account = IdentityUserToModelAccount(user);
+            return Task.FromResult(_proxy.GetEmailConfirmed(account));
         }
 
         public Task SetEmailConfirmedAsync(User user, bool confirmed)
         {
-            throw new NotImplementedException();
+            Account account = IdentityUserToModelAccount(user);
+            _proxy.SetEmailConfirmed(account, confirmed);
+            return Task.FromResult(0);
+
         }
 
         public Task<User> FindByEmailAsync(string email)

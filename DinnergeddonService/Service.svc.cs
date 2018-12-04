@@ -206,5 +206,15 @@ namespace DinnergeddonService
         {
             return accountController.VerifyCredentials(name, password);
         }
+
+        public bool GetEmailConfirmed(Account account)
+        {
+            return accountController.GetEmailConfirmed(account);
+        }
+
+        public void SetEmailConfirmed(Account account, bool confirmed)
+        {
+            accountController.SetEmailConfirmed(account, confirmed);
+        }
     }
 }

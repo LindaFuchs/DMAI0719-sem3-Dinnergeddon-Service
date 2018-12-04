@@ -98,5 +98,11 @@ namespace DinnergeddonService
         /// <returns>If the credentials are valid</returns>
         [OperationContract]
         bool VerifyCredentials(string name, string password);
+
+        [OperationContract]
+        bool GetEmailConfirmed(Account account);
+
+        [OperationContract]
+        void SetEmailConfirmed(Account account, bool confirmed);
     }
 }

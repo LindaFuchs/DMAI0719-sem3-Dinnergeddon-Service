@@ -10,16 +10,77 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using DinnergeddonWeb.Models;
 using DinnergeddonWeb.Identity;
+using System.Configuration;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System.Diagnostics;
 
 namespace DinnergeddonWeb
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            
+                await ConfigSendGridasync(message);
+         
         }
+
+        private async Task ConfigSendGridasync(IdentityMessage message)
+        {
+            //var myMessage = new SendGridMessage();
+            //myMessage.AddTo(message.Destination);
+            //myMessage.From = new EmailAddress(
+            //                    "Joe@contoso.com", "Joe S.");
+            //myMessage.Subject = message.Subject;
+            //myMessage.PlainTextContent = message.Body;
+            //myMessage.HtmlContent = message.Body;
+
+            //var credentials = new NetworkCredential(
+            //           ConfigurationManager.AppSettings["mailAccount"],
+            //           ConfigurationManager.AppSettings["mailPassword"]
+            //           );
+
+            //// Create a Web transport for sending email.
+            //var transportWeb = new Web(credentials);
+
+            //// Send the email.
+            //if (transportWeb != null)
+            //{
+            //    return transportWeb.DeliverAsync(myMessage);
+            //}
+            //else
+            //{
+            //    return Task.FromResult(0);
+            //}
+
+
+
+            
+            string apiKey = ConfigurationManager.AppSettings["ApiKey"];//Environment.GetEnvironmentVariable("NAME_OF_THE_ENVIRONMENT_VARIABLE_FOR_YOUR_SENDGRID_KEY");
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("admin@dinnergeddon.com", "Dinnergeddon");
+            var subject = message.Subject;
+            var to = new EmailAddress(message.Destination);
+            var plainTextContent = message.Body;
+            var htmlContent = message.Body;
+
+            SendGridMessage msg = MailHelper.CreateSingleEmail(from, to, subject, null, htmlContent);
+           
+            // Send the email.
+            if (client != null)
+            {
+                await client.SendEmailAsync(msg);
+            }
+            else
+            {
+                Trace.TraceError("Failed to create Web transport.");
+                await Task.FromResult(0);
+            }
+        }
+
+
     }
 
     public class SmsService : IIdentityMessageService
@@ -79,12 +140,18 @@ namespace DinnergeddonWeb
                 BodyFormat = "Your security code is {0}"
             });
             manager.EmailService = new EmailService();
+
+
             manager.SmsService = new SmsService();
+
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider =
-                    new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
+                    new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity")) {
+                        TokenLifespan = TimeSpan.FromHours(6)
+                    };
+
             }
             return manager;
         }

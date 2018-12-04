@@ -286,6 +286,7 @@ namespace DBLayer
             return accounts;
         }
 
+
         /// <summary>
         /// This method gets all the roles an account currently has
         /// </summary>
@@ -430,6 +431,7 @@ namespace DBLayer
             return hasRole;
         }
 
+
         /// <summary>
         /// This method tries to update an account in the table.
         /// </summary>
@@ -515,6 +517,92 @@ namespace DBLayer
             };
 
             return a;
+        }
+
+        /// <summary>
+        /// Sets EmailConfirmed to the value of confirmed
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="confirmed"></param>
+        public void SetEmailConfirmed(Account account, bool confirmed)
+        {
+            connection.Open();
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "update Accounts set " +
+                        "EmailConfirmed=@confirmed " +
+                    "where " +
+                        "id=@id";
+
+                // Escape SQL injections
+                IDataParameter param = command.CreateParameter();
+                param.ParameterName = "@id";
+                param.Value = account.Id;
+                command.Parameters.Add(param);
+
+                param = command.CreateParameter();
+                param.ParameterName = "@confirmed";
+                param.Value = confirmed;
+                command.Parameters.Add(param);
+
+           
+
+                using (IDbTransaction transaction = connection.BeginTransaction(IsolationLevel.Serializable))
+                {
+                    command.Transaction = transaction;
+                    try
+                    {
+                       command.ExecuteNonQuery();
+                        transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        transaction.Rollback();
+                    }
+                }
+            }
+            connection.Close();
+
+        }
+
+        /// <summary>
+        /// Checks the EmailConfirmed field for the account
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        public bool GetEmailConfirmed(Account account)
+        {
+            // Assume that the user doesn't have it until proven wrong
+            bool emailConfirmed = false;
+
+            connection.Open();
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "select EmailConfirmed from Accounts" +
+                    " where id=@id";
+
+                IDataParameter param = command.CreateParameter();
+                param.ParameterName = "@id";
+                param.Value = account.Id;
+                command.Parameters.Add(param);
+                try
+                {
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            emailConfirmed = reader.GetBoolean(0);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            connection.Close();
+            return emailConfirmed;
         }
     }
 }

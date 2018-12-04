@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using DinnergeddonUI.DinnergeddonService;
 
+using DinnergeddonUI.Interfaces;
+
 namespace DinnergeddonUI
 {
     class LobbyViewModel : INotifyPropertyChanged
     {
-        private readonly IAuthenticationService _authenticationService;
         private static Lobby _lobby;
         private string _lobbyName;
         private IEnumerable<Account> _joinedPlayers;
@@ -26,14 +27,13 @@ namespace DinnergeddonUI
 
 
 
-        public LobbyViewModel(IAuthenticationService authenticationService, Lobby lobby, Window dashboardWindow)
+        public LobbyViewModel(Lobby lobby, Window dashboardWindow)
         {
             _dashboardWindow = dashboardWindow;
             _lobby = lobby;
 
             _lobbyName = lobby.Name;
             _joinedPlayers = _proxy.GetLobbyById(_lobby.Id).Players;
-            _authenticationService = authenticationService;
             //_joinLobbyCommand = new DelegateCommand(JoinLobby, CanJoin);
             _leaveLobbyCommand = new DelegateCommand(LeaveLobby, CanLeave);
 
@@ -111,7 +111,7 @@ namespace DinnergeddonUI
             _proxy.LeaveLobby(userId, _lobby.Id);
 
             lb.Close();
-            _dashboardWindow.DataContext = new DashboardViewModel(new AuthenticationService(), _dashboardWindow);
+            _dashboardWindow.DataContext = new DashboardViewModel(_dashboardWindow);
             
         }
 
@@ -123,6 +123,11 @@ namespace DinnergeddonUI
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void Lobby_Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            LeaveLobby(sender);
         }
 
     }

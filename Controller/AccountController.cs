@@ -118,7 +118,7 @@ namespace Controller
         /// <param name="name">The username or email of the account</param>
         /// <param name="password">The password of the account</param>
         /// <returns>If the credentials are valid</returns>
-        public bool VerifyCredentials(string name, string password)
+        public Account VerifyCredentials(string name, string password)
         {
             Account account;
             if (name.Contains(@"@"))
@@ -126,10 +126,15 @@ namespace Controller
             else
                 account = FindByUsername(name);
 
+            // Account doesn't exist, return null
             if (account == null)
-                return false;
+                return null;
 
-            return PasswordHasher.VerifyPassword(account.PasswordHash, password);
+            // Return account if password is correct, else return null
+            if (PasswordHasher.VerifyPassword(account.PasswordHash, password))
+                return account;
+            else
+                return null;
         }
     }
 }

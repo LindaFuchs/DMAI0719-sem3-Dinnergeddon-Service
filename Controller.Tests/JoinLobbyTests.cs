@@ -218,5 +218,10 @@ namespace Controller.Tests
         {
             throw new NotImplementedException();
         }
+
+        Account IAccountController.VerifyCredentials(string name, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

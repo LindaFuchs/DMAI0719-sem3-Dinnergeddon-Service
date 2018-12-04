@@ -1,63 +1,50 @@
-﻿using System;
+﻿using DinnergeddonUI.DinnergeddonService;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using DinnergeddonUI.DinnergeddonService;
 
 namespace DinnergeddonUI
 {
     class DashboardViewModel : INotifyPropertyChanged
     {
-        private readonly IAuthenticationService _authenticationService;
         private string _username;
         private readonly DelegateCommand _joinLobbyCommand;
         private readonly DelegateCommand _logoutCommand;
         private readonly DelegateCommand _openLobbyCommand;
         private IEnumerable<Lobby> _lobbies;
-        LobbyServiceClient _proxy = new LobbyServiceClient();
-        AccontServiceClient _accountProxy = new AccontServiceClient();
+
+        LobbyServiceClient _lobbyProxy = new LobbyServiceClient();
+        AccountServiceClient _accountProxy = new AccountServiceClient();
+
         private DelegateCommand _createLobbyCommand;
         private Window _dashboardWindow;
 
-        public DashboardViewModel(IAuthenticationService authenticationService, Window dashboardWindow)
+        public DashboardViewModel(Window dashboardWindow)
         {
             _dashboardWindow = dashboardWindow;
-            _authenticationService = authenticationService;
             _logoutCommand = new DelegateCommand(Logout, CanLogout);
             _joinLobbyCommand = new DelegateCommand(JoinLobby, CanJoin);
             _createLobbyCommand = new DelegateCommand(CreateLobby, CanJoin);
             _openLobbyCommand = new DelegateCommand(OpenLobby, CanJoin);
-            _lobbies = _proxy.GetLobbies();
-
-
+            _lobbies = _lobbyProxy.GetLobbies();
         }
 
         private void OpenLobby(object parameter)
         {
             Guid lobbyId = (Guid)parameter;
-            Lobby lobbyToOpen = _proxy.GetLobbyById(lobbyId);
+            Lobby lobbyToOpen = _lobbyProxy.GetLobbyById(lobbyId);
             CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-            var userId = customPrincipal.Identity.Id;
+            Guid userId = customPrincipal.Identity.Id;
             Account account = _accountProxy.FindById(userId);
-            //check if its private
-            //if (lobbyToJoin.pas)
-            //{
-            //    JoinLobbyPasswordDialog jlpd = new JoinLobbyPasswordDialog();
-            //}
+            //TODO: Check if private and do whatever from there
             if (ContainsAccount(userId, lobbyId))
             {
-
-
-
                 LobbyWindow _lobbyWindow = new LobbyWindow(lobbyToOpen, _dashboardWindow);
 
-
                 _lobbyWindow.Show();
-                Lobbies = _proxy.GetLobbies();
+                Lobbies = _lobbyProxy.GetLobbies();
 
             }
             else
@@ -76,7 +63,7 @@ namespace DinnergeddonUI
             get
             {
                 CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-                var userId = customPrincipal.Identity.Id;
+                Guid userId = customPrincipal.Identity.Id;
                 foreach (Lobby l in Lobbies)
                 {
                     if (ContainsAccount(userId, l.Id))
@@ -95,7 +82,7 @@ namespace DinnergeddonUI
             get
             {
                 CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-                var userId = customPrincipal.Identity.Id;
+                Guid userId = customPrincipal.Identity.Id;
                 foreach (Lobby l in Lobbies)
                 {
                     if (ContainsAccount(userId, l.Id))
@@ -110,7 +97,7 @@ namespace DinnergeddonUI
 
         public IEnumerable<Lobby> Lobbies
         {
-            get { _lobbies = _proxy.GetLobbies(); return _lobbies; }
+            get { _lobbies = _lobbyProxy.GetLobbies(); return _lobbies; }
             set { _lobbies = value; NotifyPropertyChanged("Lobbies"); }
         }
 
@@ -154,16 +141,16 @@ namespace DinnergeddonUI
         {
 
             Guid lobbyId = (Guid)parameter;
-            Lobby lobbyToJoin = _proxy.GetLobbyById(lobbyId);
+            Lobby lobbyToJoin = _lobbyProxy.GetLobbyById(lobbyId);
             CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-            var userId = customPrincipal.Identity.Id;
+            Guid userId = customPrincipal.Identity.Id;
             Account account = _accountProxy.FindById(userId);
             //check if its private
             //if (lobbyToJoin.pas)
             //{
             //    JoinLobbyPasswordDialog jlpd = new JoinLobbyPasswordDialog();
             //}
-            if (_proxy.JoinLobby(userId, lobbyId) || ContainsAccount(userId, lobbyId))
+            if (_lobbyProxy.JoinLobby(userId, lobbyId) || ContainsAccount(userId, lobbyId))
             {
 
 
@@ -172,7 +159,7 @@ namespace DinnergeddonUI
 
 
                 _lobbyWindow.Show();
-                Lobbies = _proxy.GetLobbies();
+                Lobbies = _lobbyProxy.GetLobbies();
                 IsJoined = true;
                 JoinedLobby = lobbyToJoin;
 
@@ -187,7 +174,7 @@ namespace DinnergeddonUI
 
         private bool ContainsAccount(Guid userId, Guid lobbyId)
         {
-            foreach (Account a in _proxy.GetLobbyById(lobbyId).Players)
+            foreach (Account a in _lobbyProxy.GetLobbyById(lobbyId).Players)
             {
                 if (a.Id == userId)
                 {
@@ -222,7 +209,7 @@ namespace DinnergeddonUI
 
             createLobbyDialog.ShowDialog();
 
-            Lobbies = _proxy.GetLobbies();
+            Lobbies = _lobbyProxy.GetLobbies();
         }
 
         private void RefreshLobbies()

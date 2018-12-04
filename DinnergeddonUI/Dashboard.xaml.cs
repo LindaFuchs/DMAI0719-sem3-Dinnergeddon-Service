@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DinnergeddonUI.DinnergeddonService;
 
+using DinnergeddonUI.Interfaces;
+
 
 namespace DinnergeddonUI
 {
@@ -27,17 +29,11 @@ namespace DinnergeddonUI
         //private ObservableCollection<DinnergeddonService.Lobby> lobbies;
         public Dashboard()
         {
-            DataContext = new DashboardViewModel(new AuthenticationService(), this);
+            DataContext = new DashboardViewModel(this);
 
             InitializeComponent();
             
             //RefreshLobbies();
-        }
-
-        public IViewModel ViewModel
-        {
-            get { return DataContext as IViewModel; }
-            set { DataContext = value; }
         }
 
         public List<DinnergeddonService.Lobby> Lobbies

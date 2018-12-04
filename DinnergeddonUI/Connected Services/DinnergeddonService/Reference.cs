@@ -29,9 +29,6 @@ namespace DinnergeddonUI.DinnergeddonService {
         private System.Guid IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool InLobbyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordHashField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -72,19 +69,6 @@ namespace DinnergeddonUI.DinnergeddonService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool InLobby {
-            get {
-                return this.InLobbyField;
-            }
-            set {
-                if ((this.InLobbyField.Equals(value) != true)) {
-                    this.InLobbyField = value;
-                    this.RaisePropertyChanged("InLobby");
                 }
             }
         }
@@ -232,94 +216,100 @@ namespace DinnergeddonUI.DinnergeddonService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DinnergeddonService.IAccontService")]
-    public interface IAccontService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DinnergeddonService.IAccountService")]
+    public interface IAccountService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/FindById", ReplyAction="http://tempuri.org/IAccontService/FindByIdResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindById", ReplyAction="http://tempuri.org/IAccountService/FindByIdResponse")]
         DinnergeddonUI.DinnergeddonService.Account FindById(System.Guid id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/FindById", ReplyAction="http://tempuri.org/IAccontService/FindByIdResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindById", ReplyAction="http://tempuri.org/IAccountService/FindByIdResponse")]
         System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> FindByIdAsync(System.Guid id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/FindByEmail", ReplyAction="http://tempuri.org/IAccontService/FindByEmailResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByEmail", ReplyAction="http://tempuri.org/IAccountService/FindByEmailResponse")]
         DinnergeddonUI.DinnergeddonService.Account FindByEmail(string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/FindByEmail", ReplyAction="http://tempuri.org/IAccontService/FindByEmailResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByEmail", ReplyAction="http://tempuri.org/IAccountService/FindByEmailResponse")]
         System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> FindByEmailAsync(string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/FindByUsername", ReplyAction="http://tempuri.org/IAccontService/FindByUsernameResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByUsername", ReplyAction="http://tempuri.org/IAccountService/FindByUsernameResponse")]
         DinnergeddonUI.DinnergeddonService.Account FindByUsername(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/FindByUsername", ReplyAction="http://tempuri.org/IAccontService/FindByUsernameResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByUsername", ReplyAction="http://tempuri.org/IAccountService/FindByUsernameResponse")]
         System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> FindByUsernameAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/InsertAccount", ReplyAction="http://tempuri.org/IAccontService/InsertAccountResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/InsertAccount", ReplyAction="http://tempuri.org/IAccountService/InsertAccountResponse")]
         bool InsertAccount(DinnergeddonUI.DinnergeddonService.Account account);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/InsertAccount", ReplyAction="http://tempuri.org/IAccontService/InsertAccountResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/InsertAccount", ReplyAction="http://tempuri.org/IAccountService/InsertAccountResponse")]
         System.Threading.Tasks.Task<bool> InsertAccountAsync(DinnergeddonUI.DinnergeddonService.Account account);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/UpdateAccount", ReplyAction="http://tempuri.org/IAccontService/UpdateAccountResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/UpdateAccount", ReplyAction="http://tempuri.org/IAccountService/UpdateAccountResponse")]
         bool UpdateAccount(DinnergeddonUI.DinnergeddonService.Account updatedAccount);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/UpdateAccount", ReplyAction="http://tempuri.org/IAccontService/UpdateAccountResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/UpdateAccount", ReplyAction="http://tempuri.org/IAccountService/UpdateAccountResponse")]
         System.Threading.Tasks.Task<bool> UpdateAccountAsync(DinnergeddonUI.DinnergeddonService.Account updatedAccount);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/DeleteAccount", ReplyAction="http://tempuri.org/IAccontService/DeleteAccountResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/DeleteAccount", ReplyAction="http://tempuri.org/IAccountService/DeleteAccountResponse")]
         bool DeleteAccount(DinnergeddonUI.DinnergeddonService.Account account);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/DeleteAccount", ReplyAction="http://tempuri.org/IAccontService/DeleteAccountResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/DeleteAccount", ReplyAction="http://tempuri.org/IAccountService/DeleteAccountResponse")]
         System.Threading.Tasks.Task<bool> DeleteAccountAsync(DinnergeddonUI.DinnergeddonService.Account account);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/GetAccounts", ReplyAction="http://tempuri.org/IAccontService/GetAccountsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetAccounts", ReplyAction="http://tempuri.org/IAccountService/GetAccountsResponse")]
         DinnergeddonUI.DinnergeddonService.Account[] GetAccounts();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/GetAccounts", ReplyAction="http://tempuri.org/IAccontService/GetAccountsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetAccounts", ReplyAction="http://tempuri.org/IAccountService/GetAccountsResponse")]
         System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account[]> GetAccountsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/IsInRole", ReplyAction="http://tempuri.org/IAccontService/IsInRoleResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/IsInRole", ReplyAction="http://tempuri.org/IAccountService/IsInRoleResponse")]
         bool IsInRole(System.Guid accountId, string roleName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/IsInRole", ReplyAction="http://tempuri.org/IAccontService/IsInRoleResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/IsInRole", ReplyAction="http://tempuri.org/IAccountService/IsInRoleResponse")]
         System.Threading.Tasks.Task<bool> IsInRoleAsync(System.Guid accountId, string roleName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/AddToRole", ReplyAction="http://tempuri.org/IAccontService/AddToRoleResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/AddToRole", ReplyAction="http://tempuri.org/IAccountService/AddToRoleResponse")]
         bool AddToRole(System.Guid accountId, string roleName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/AddToRole", ReplyAction="http://tempuri.org/IAccontService/AddToRoleResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/AddToRole", ReplyAction="http://tempuri.org/IAccountService/AddToRoleResponse")]
         System.Threading.Tasks.Task<bool> AddToRoleAsync(System.Guid accountId, string roleName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/GetRoles", ReplyAction="http://tempuri.org/IAccontService/GetRolesResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetRoles", ReplyAction="http://tempuri.org/IAccountService/GetRolesResponse")]
         string[] GetRoles(System.Guid accountId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccontService/GetRoles", ReplyAction="http://tempuri.org/IAccontService/GetRolesResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetRoles", ReplyAction="http://tempuri.org/IAccountService/GetRolesResponse")]
         System.Threading.Tasks.Task<string[]> GetRolesAsync(System.Guid accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/VerifyCredentials", ReplyAction="http://tempuri.org/IAccountService/VerifyCredentialsResponse")]
+        DinnergeddonUI.DinnergeddonService.Account VerifyCredentials(string name, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/VerifyCredentials", ReplyAction="http://tempuri.org/IAccountService/VerifyCredentialsResponse")]
+        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> VerifyCredentialsAsync(string name, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IAccontServiceChannel : DinnergeddonUI.DinnergeddonService.IAccontService, System.ServiceModel.IClientChannel {
+    public interface IAccountServiceChannel : DinnergeddonUI.DinnergeddonService.IAccountService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class AccontServiceClient : System.ServiceModel.ClientBase<DinnergeddonUI.DinnergeddonService.IAccontService>, DinnergeddonUI.DinnergeddonService.IAccontService {
+    public partial class AccountServiceClient : System.ServiceModel.ClientBase<DinnergeddonUI.DinnergeddonService.IAccountService>, DinnergeddonUI.DinnergeddonService.IAccountService {
         
-        public AccontServiceClient() {
+        public AccountServiceClient() {
         }
         
-        public AccontServiceClient(string endpointConfigurationName) : 
+        public AccountServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public AccontServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public AccountServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public AccontServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public AccountServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public AccontServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public AccountServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -401,6 +391,14 @@ namespace DinnergeddonUI.DinnergeddonService {
         
         public System.Threading.Tasks.Task<string[]> GetRolesAsync(System.Guid accountId) {
             return base.Channel.GetRolesAsync(accountId);
+        }
+        
+        public DinnergeddonUI.DinnergeddonService.Account VerifyCredentials(string name, string password) {
+            return base.Channel.VerifyCredentials(name, password);
+        }
+        
+        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> VerifyCredentialsAsync(string name, string password) {
+            return base.Channel.VerifyCredentialsAsync(name, password);
         }
     }
     

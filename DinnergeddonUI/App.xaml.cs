@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using DinnergeddonUI.ViewModels;
 
 namespace DinnergeddonUI
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-
             //Create a custom principal with an anonymous identity at startup
             CustomPrincipal customPrincipal = new CustomPrincipal();
             AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
@@ -25,15 +17,10 @@ namespace DinnergeddonUI
             MainWindow loginWindow = new MainWindow();
 
             //Show the login view
-            AuthenticationViewModel viewModel = new AuthenticationViewModel(new AuthenticationService());
+            MainWindowViewModel viewModel = new MainWindowViewModel();
 
             loginWindow.DataContext = viewModel;
             loginWindow.Show();
-
-            //IView loginWindow = new LoginWindow(viewModel);
-            //loginWindow.Show();
-
-
         }
     }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Background="{StaticResource BackgroundColor}"
         Title="Lobby" Height="450" Width="800"
-         x:Name="LobbyWindowName">
+         x:Name="LobbyWindowName" >
     <DockPanel>
                 <Button Background="White" Foreground="Black" Style="{StaticResource RoundButtonTemplate}" DockPanel.Dock="Bottom" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Padding="10" Content="Close" Click="Button_Click" ></Button>
 <StackPanel VerticalAlignment="Stretch">

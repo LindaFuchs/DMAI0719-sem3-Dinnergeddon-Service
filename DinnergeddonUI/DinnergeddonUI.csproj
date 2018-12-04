@@ -57,29 +57,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdminWindow.xaml.cs">
-      <DependentUpon>AdminWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Connected Services\DinnergeddonService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="DashboardViewModel.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="Interfaces\ICloseable.cs" />
     <Compile Include="JoinLobbyPasswordDialog.xaml.cs">
       <DependentUpon>JoinLobbyPasswordDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LobbyViewModel.cs" />
+    <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="LobbyWindow.xaml.cs">
       <DependentUpon>LobbyWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SecretWindow.xaml.cs">
-      <DependentUpon>SecretWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="AdminWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="Model\User.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="CreateLobbyDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,10 +89,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,8 +101,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AuthentationService.cs" />
-    <Compile Include="AuthenticationViewModel.cs" />
     <Compile Include="CreateLobbyDialog.xaml.cs">
       <DependentUpon>CreateLobbyDialog.xaml</DependentUpon>
     </Compile>
@@ -123,17 +110,10 @@
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="DelegateCommand.cs" />
-    <Compile Include="LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SecretWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -204,5 +184,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

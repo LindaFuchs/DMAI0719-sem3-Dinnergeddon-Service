@@ -7,7 +7,7 @@ using System.ServiceModel;
 namespace DinnergeddonService
 {
     [ServiceBehavior]
-    public class DinnergeddonService : IAccontService, ILobbyService
+    public class DinnergeddonService : IAccountService, ILobbyService
     {
         private readonly IAccountController accountController;
         private readonly ILobbyController lobbyController;
@@ -201,8 +201,8 @@ namespace DinnergeddonService
         /// </summary>
         /// <param name="name">The username or email of the account</param>
         /// <param name="password">The password of the account</param>
-        /// <returns>If the credentials are valid</returns>
-        public bool VerifyCredentials(string name, string password)
+        /// <returns>The accout that was authenticated</returns>
+        public Account VerifyCredentials(string name, string password)
         {
             return accountController.VerifyCredentials(name, password);
         }

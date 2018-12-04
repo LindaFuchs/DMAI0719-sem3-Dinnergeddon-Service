@@ -95,9 +95,9 @@ namespace DinnergeddonService
         /// </summary>
         /// <param name="name">The username or email of the account</param>
         /// <param name="password">The password of the account</param>
-        /// <returns>If the credentials are valid</returns>
+        /// <returns>The account that was authenticated or null if it wasn't</returns>
         [OperationContract]
-        bool VerifyCredentials(string name, string password);
+        Account VerifyCredentials(string name, string password);
 
         [OperationContract]
         bool GetEmailConfirmed(Account account);

@@ -83,7 +83,7 @@ namespace Controller
         /// <param name="name">The username or email of the account</param>
         /// <param name="password">The password of the account</param>
         /// <returns>If the credentials are valid</returns>
-        bool VerifyCredentials(string name, string password);
+        Account VerifyCredentials(string name, string password);
 
         bool GetEmailConfirmed(Account account);
 

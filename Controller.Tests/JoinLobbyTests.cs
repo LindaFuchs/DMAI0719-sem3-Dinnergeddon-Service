@@ -198,6 +198,11 @@ namespace Controller.Tests
             throw new NotImplementedException();
         }
 
+        public bool GetEmailConfirmed(Account account)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool InsertAccount(Account account)
         {
             accounts.Add(account);
@@ -205,6 +210,11 @@ namespace Controller.Tests
         }
 
         public bool IsInRole(Guid accountId, string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetEmailConfirmed(Account account, bool confirmed)
         {
             throw new NotImplementedException();
         }

@@ -9,12 +9,12 @@ namespace DinnergeddonWeb.Identity
 {
     public class UserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>,IUserEmailStore<User>, IRoleStore<IdentityRole>, IUserRoleStore<User>
     {
-        private readonly AccountServiceClient _proxy;
+        private readonly AccontServiceClient _proxy;
 
 
         public UserStore()
         {
-            this._proxy = new AccountServiceClient(); 
+            this._proxy = new AccontServiceClient(); 
         }
 
         /// <summary>

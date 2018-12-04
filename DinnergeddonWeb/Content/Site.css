@@ -22,10 +22,8 @@ textarea {
 }
 
 .btn-reg {
-    margin-top: 10px;
     background: #c36800;
     color: white;
-    width: inherit;
 }
 
 /*
@@ -65,3 +63,22 @@ textarea {
     color: white;
     margin: 0;
 }
+.contact-form {
+    background: #fff;
+    margin-bottom: 5%;
+    padding: 10px;
+    width: 60%;
+}
+    .contact-form h3 {
+        margin-top:5%;
+        margin-bottom:5%;
+        text-align: center;
+    }
+    .contact-form .col-md-7{
+        padding-left:0;
+        padding-right:0;
+    }
+    .contact-form .col-md-5 {
+        padding-left: 0;
+        padding-right: 0;
+    }

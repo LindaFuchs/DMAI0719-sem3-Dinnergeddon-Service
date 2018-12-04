@@ -6,7 +6,7 @@ using System.ServiceModel;
 namespace DinnergeddonService
 {
     [ServiceContract]
-    public interface IAccontService
+    public interface IAccountService
     {
         /// <summary>
         /// Finds an account given an ID

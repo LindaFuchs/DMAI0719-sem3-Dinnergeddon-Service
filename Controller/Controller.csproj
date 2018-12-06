@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountController.cs" />
+    <Compile Include="HighscoreController.cs" />
     <Compile Include="IAccountController.cs" />
+    <Compile Include="IHighscoreController.cs" />
     <Compile Include="ILobbyController.cs" />
     <Compile Include="LobbyController.cs" />
     <Compile Include="PasswordHasher.cs" />

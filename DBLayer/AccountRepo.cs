@@ -412,6 +412,18 @@ namespace DBLayer
                     "join AccountRoles as ar on r.id = ar.roleid " +
                     "join Accounts as a on ar.accountid = a.ID " +
                     "where a.id=@id and r.name=@rolename";
+
+                // Create and add parameters for the SQL query
+                IDbDataParameter param = command.CreateParameter();
+                param.ParameterName = "@id";
+                param.Value = accountID;
+                command.Parameters.Add(param);
+
+                param = command.CreateParameter();
+                param.ParameterName = "@rolename";
+                param.Value = roleName;
+                command.Parameters.Add(param);
+
                 try
                 {
                     using (IDataReader reader = command.ExecuteReader())

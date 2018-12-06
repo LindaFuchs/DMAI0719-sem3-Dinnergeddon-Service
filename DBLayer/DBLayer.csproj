@@ -44,8 +44,10 @@
   <ItemGroup>
     <Compile Include="AccountRepo.cs" />
     <Compile Include="DbComponents.cs" />
+    <Compile Include="HighscoreRepo.cs" />
     <Compile Include="IAccountRepo.cs" />
     <Compile Include="IDbComponents.cs" />
+    <Compile Include="IHighscoreRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

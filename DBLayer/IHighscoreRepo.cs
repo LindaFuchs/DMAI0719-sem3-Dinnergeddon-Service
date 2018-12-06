@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DBLayer
 {
-    interface IHighscoreRepo
+    public interface IHighscoreRepo
     {
         /// <summary>
         /// Gets the highscore of a single account given it's ID
@@ -18,7 +18,7 @@ namespace DBLayer
         /// </summary>
         /// <param name="n">The number of highscores to be returned</param>
         /// <returns>A list of highscores and their respective account IDs</returns>
-        IDictionary<Guid, int> TopHighscore(int n);
+        IDictionary<Guid, int> GetHighscores(int n);
 
         /// <summary>
         /// Gets all the highscore values

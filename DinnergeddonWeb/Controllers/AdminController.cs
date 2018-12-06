@@ -52,6 +52,8 @@ namespace DinnergeddonWeb.Controllers
                 message == ManageMessageId.ChangeUserInfoSuccess ? "User has been updated."
                 : message == ManageMessageId.DeleteUserSuccess ? "User's Account has been deleted."
                 : message == ManageMessageId.Error ? "An error has occurred."
+                : message == ManageMessageId.SetAsAdminSuccess ? "User set as Admin."
+                : message == ManageMessageId.RemoveAsAdminSuccess ? "Admin role has been removed"
                 : "";
 
 
@@ -61,7 +63,8 @@ namespace DinnergeddonWeb.Controllers
             ICollection<DisplayUserModel> displayUserModels = new List<DisplayUserModel>();
             foreach (Account account in accounts)
             {
-                    displayUserModels.Add(new DisplayUserModel { Id = account.Id, Email = account.Email, UserName = account.Username });
+                    bool isAdmin = _proxy.IsInRole(account.Id, "admin");
+                    displayUserModels.Add(new DisplayUserModel { Id = account.Id, Email = account.Email, UserName = account.Username ,IsAdmin = isAdmin });
             }
             return View(displayUserModels);
         }
@@ -167,7 +170,50 @@ namespace DinnergeddonWeb.Controllers
 
             return RedirectToAction("Index", new { Message = ManageMessageId.DeleteUserSuccess });
         }
+
+        public async Task<ActionResult> SetAdminRole(Guid? id)
+        {
+            if(id == null)
+            {
+                ViewBag.Message = "Error finding user, please try again.";
+                return View();
+            }
+
+            id = (Guid)id;
+
+            User user = await UserManager.FindByIdAsync(id.ToString());
+            if(user != null)
+            {
+                await UserManager.AddToRoleAsync(id.ToString(), "admin");
+                
+            }
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.SetAsAdminSuccess });
+        }
+
+        public async Task<ActionResult> RemoveAdminRole(Guid? id)
+        {
+            if (id == null)
+            {
+                ViewBag.Message = "Error finding user, please try again.";
+                return View();
+            }
+
+            id = (Guid)id;
+
+            User user = await UserManager.FindByIdAsync(id.ToString());
+            if (user != null)
+            {
+                await UserManager.RemoveFromRoleAsync(id.ToString(), "admin");
+
+            }
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.RemoveAsAdminSuccess });
+        }
+
     }
+
+  
 
     /// <summary>
     /// Status messages for actions
@@ -175,6 +221,8 @@ namespace DinnergeddonWeb.Controllers
     public enum ManageMessageId {
         ChangeUserInfoSuccess,
         DeleteUserSuccess,
+        SetAsAdminSuccess,
+        RemoveAsAdminSuccess,
         Error
     }
 

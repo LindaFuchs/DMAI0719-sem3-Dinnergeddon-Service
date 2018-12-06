@@ -12,6 +12,7 @@ namespace DinnergeddonWeb.Models
         public Guid Id { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
+        public bool IsAdmin { get; set; }
     }
 
     public class EditUserModel

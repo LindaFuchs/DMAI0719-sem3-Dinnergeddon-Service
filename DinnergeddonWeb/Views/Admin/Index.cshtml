@@ -47,7 +47,17 @@
                     "Delete",
                     new { account.Id },
                     new { onclick = "return confirm('Do you really want to delete this account?')" }
-                    )
+                    ) |
+                @if (!account.IsAdmin)
+                {
+                    @Html.ActionLink("Set as Admin", "SetAdminRole", new { account.Id }, new { onclick = "return confirm('Set as admin?')" })
+
+                }
+                else
+                {
+                    @Html.ActionLink("Remove Admin role", "RemoveAdminRole", new { account.Id }, new { onclick = "return confirm('Reove admin role?')" })
+
+                }
             </td>
         </tr>
     }

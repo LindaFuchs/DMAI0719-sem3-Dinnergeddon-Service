@@ -17,7 +17,7 @@ namespace DBLayer
         /// Gets the top N highscores
         /// </summary>
         /// <param name="n">The number of highscores to be returned</param>
-        /// <returns>A list of highscores and their respective accounts</returns>
-        IDictionary<Account, int> TopHighscore(int n);
+        /// <returns>A list of highscores and their respective account IDs</returns>
+        IDictionary<Guid, int> TopHighscore(int n);
     }
 }

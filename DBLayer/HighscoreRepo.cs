@@ -4,7 +4,7 @@ using System.Data;
 
 namespace DBLayer
 {
-    class HighscoreRepo : IHighscoreRepo
+    public class HighscoreRepo : IHighscoreRepo
     {
         private readonly IDbConnection connection;
 
@@ -86,7 +86,7 @@ namespace DBLayer
         /// </summary>
         /// <param name="n">The number of highscores to select</param>
         /// <returns>A dictionary with the account and it's respective highscore</returns>
-        public IDictionary<Guid, int> TopHighscore(int n)
+        public IDictionary<Guid, int> GetHighscores(int n)
         {
             IDictionary<Guid, int> scores = new Dictionary<Guid, int>();
 

@@ -1,10 +1,12 @@
-﻿using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DBLayer
+namespace Controller
 {
-    public interface IHighscoreRepo
+    public interface IHighscoreController
     {
         /// <summary>
         /// Gets the highscore of a single account given it's ID

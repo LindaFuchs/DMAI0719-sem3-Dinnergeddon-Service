@@ -7,15 +7,17 @@ using System.ServiceModel;
 namespace DinnergeddonService
 {
     [ServiceBehavior]
-    public class DinnergeddonService : IAccountService, ILobbyService
+    public class DinnergeddonService : IAccountService, ILobbyService, IHighscoreService
     {
         private readonly IAccountController accountController;
         private readonly ILobbyController lobbyController;
+        private readonly IHighscoreController highscoreController;
 
         public DinnergeddonService()
         {
             accountController = new AccountController();
             lobbyController = new LobbyController(LobbyContainer.GetInstance(), accountController);
+            highscoreController = new HighscoreController();
         }
 
         /// <summary>
@@ -215,6 +217,21 @@ namespace DinnergeddonService
         public void SetEmailConfirmed(Account account, bool confirmed)
         {
             accountController.SetEmailConfirmed(account, confirmed);
+        }
+
+        public int GetHighscore(Guid accountId)
+        {
+            return highscoreController.GetHighscore(accountId);
+        }
+
+        public IDictionary<Guid, int> GetHighscores()
+        {
+            return highscoreController.GetHighscores();
+        }
+
+        public IDictionary<Guid, int> GetTopNHighscores(int n)
+        {
+            return highscoreController.GetHighscores(n);
         }
     }
 }

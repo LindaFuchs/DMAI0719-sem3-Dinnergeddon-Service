@@ -1,5 +1,6 @@
 ﻿using DinnergeddonWeb.AccountServiceReference;
 using DinnergeddonWeb.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
@@ -63,8 +64,12 @@ namespace DinnergeddonWeb.Controllers
             ICollection<DisplayUserModel> displayUserModels = new List<DisplayUserModel>();
             foreach (Account account in accounts)
             {
-                    bool isAdmin = _proxy.IsInRole(account.Id, "admin");
-                    displayUserModels.Add(new DisplayUserModel { Id = account.Id, Email = account.Email, UserName = account.Username ,IsAdmin = isAdmin });
+                bool isAdmin = _proxy.IsInRole(account.Id, "admin");
+                if (account.Id.ToString() != User.Identity.GetUserId())
+                {
+                    displayUserModels.Add(new DisplayUserModel { Id = account.Id, Email = account.Email, UserName = account.Username, IsAdmin = isAdmin });
+
+                }
             }
             return View(displayUserModels);
         }
@@ -85,8 +90,8 @@ namespace DinnergeddonWeb.Controllers
             }
 
             //Safely casts the id to a non-nullable Guid after the check.
-            id = (Guid) id;
-            
+            id = (Guid)id;
+
             //Finds the user by id and stores it in an object instance.
             User user = await UserManager.FindByIdAsync(id.ToString());
 
@@ -99,7 +104,7 @@ namespace DinnergeddonWeb.Controllers
             }
 
             //Creates a page with the found user information.
-            EditUserModel editUserModel = new EditUserModel { Id = user.UserId, Email = user.Email, UserName = user.UserName};
+            EditUserModel editUserModel = new EditUserModel { Id = user.UserId, Email = user.Email, UserName = user.UserName };
 
             return View(editUserModel);
         }
@@ -126,7 +131,7 @@ namespace DinnergeddonWeb.Controllers
 
                     //Updates the user information in the database.
                     var result = await UserManager.UpdateAsync(dbUser);
-                    
+
                     //Checks that the update was successful.
                     if (result.Succeeded)
                     {
@@ -143,7 +148,7 @@ namespace DinnergeddonWeb.Controllers
             //When an error or unexpected thing occurs it redisplays the page.
             return View(model);
         }
-        
+
         public async Task<ActionResult> Delete(Guid? id)
         {
             //Checks if the id is null and checks for an error if it is.
@@ -173,7 +178,7 @@ namespace DinnergeddonWeb.Controllers
 
         public async Task<ActionResult> SetAdminRole(Guid? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 ViewBag.Message = "Error finding user, please try again.";
                 return View();
@@ -182,10 +187,10 @@ namespace DinnergeddonWeb.Controllers
             id = (Guid)id;
 
             User user = await UserManager.FindByIdAsync(id.ToString());
-            if(user != null)
+            if (user != null)
             {
                 await UserManager.AddToRoleAsync(id.ToString(), "admin");
-                
+
             }
 
             return RedirectToAction("Index", new { Message = ManageMessageId.SetAsAdminSuccess });
@@ -213,12 +218,13 @@ namespace DinnergeddonWeb.Controllers
 
     }
 
-  
+
 
     /// <summary>
     /// Status messages for actions
     /// </summary>
-    public enum ManageMessageId {
+    public enum ManageMessageId
+    {
         ChangeUserInfoSuccess,
         DeleteUserSuccess,
         SetAsAdminSuccess,

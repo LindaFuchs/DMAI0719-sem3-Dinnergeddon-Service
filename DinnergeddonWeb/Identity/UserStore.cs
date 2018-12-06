@@ -274,7 +274,7 @@ namespace DinnergeddonWeb.Identity
         public Task RemoveFromRoleAsync(User user, string roleName)
         {
             Guid userId = user.UserId;
-            //_proxy.RemoveFromRole(userId, roleName);
+            _proxy.RemoveFromRole(userId, roleName);
             return Task.FromResult(0);
         }
 

@@ -104,5 +104,8 @@ namespace DinnergeddonService
 
         [OperationContract]
         void SetEmailConfirmed(Account account, bool confirmed);
+
+        [OperationContract]
+        bool RemoveFromRole(Guid accountId, string roleName);
     }
 }

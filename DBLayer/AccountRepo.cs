@@ -57,7 +57,7 @@ namespace DBLayer
                 }
             }
             connection.Close();
-            
+
             if (affected < 0 || affected > 1)
                 throw new InvalidOperationException("Something went wrong with the DB");
 
@@ -107,7 +107,7 @@ namespace DBLayer
                 param.ParameterName = "@securitystamp";
                 param.Value = a.SecurityStamp;
                 command.Parameters.Add(param);
-                
+
                 using (IDbTransaction transaction = connection.BeginTransaction())
                 {
                     command.Transaction = transaction;
@@ -124,7 +124,7 @@ namespace DBLayer
                 }
             }
             connection.Close();
-            
+
             if (affected < 0 || affected > 1)
                 throw new InvalidOperationException("Something went wrong in the database");
 
@@ -370,7 +370,7 @@ namespace DBLayer
                 param.ParameterName = "@securitystamp";
                 param.Value = a.SecurityStamp;
                 command.Parameters.Add(param);
-                
+
                 using (IDbTransaction transaction = connection.BeginTransaction())
                 {
                     command.Transaction = transaction;
@@ -387,7 +387,7 @@ namespace DBLayer
                 }
             }
             connection.Close();
-            
+
             if (affected < 0 || affected > 1)
                 throw new InvalidOperationException("Something went wrong with the query");
 
@@ -505,10 +505,10 @@ namespace DBLayer
                 }
             }
             connection.Close();
-            
+
             if (affected < 0 || affected > 1)
                 throw new InvalidOperationException("Something went wrong with the DB");
-            
+
             return affected == 1;
         }
 
@@ -557,14 +557,14 @@ namespace DBLayer
                 param.Value = confirmed;
                 command.Parameters.Add(param);
 
-           
+
 
                 using (IDbTransaction transaction = connection.BeginTransaction(IsolationLevel.Serializable))
                 {
                     command.Transaction = transaction;
                     try
                     {
-                       command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
                         transaction.Commit();
                     }
                     catch (Exception e)
@@ -591,13 +591,14 @@ namespace DBLayer
             connection.Open();
             using (IDbCommand command = connection.CreateCommand())
             {
-                command.CommandText = "select EmailConfirmed from Accounts" +
-                    " where id=@id";
+                command.CommandText = "select EmailConfirmed from Accounts " +
+                    "where id=@id";
 
                 IDataParameter param = command.CreateParameter();
                 param.ParameterName = "@id";
                 param.Value = account.Id;
                 command.Parameters.Add(param);
+
                 try
                 {
                     using (IDataReader reader = command.ExecuteReader())
@@ -615,6 +616,51 @@ namespace DBLayer
             }
             connection.Close();
             return emailConfirmed;
+        }
+
+        public bool RemoveFromRole(Guid accountId, string roleName)
+        {
+            connection.Open();
+            int affected = 0;
+            using (IDbCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "delete from AccountRoles " +
+                    "where AccountId=@id and " +
+                    "RoleId=(select id from roles where name=@rolename)";
+
+                // Escape SQL injection possibilities
+                IDataParameter param = command.CreateParameter();
+                param.ParameterName = "@id";
+                param.Value = accountId;
+                command.Parameters.Add(param);
+
+                param = command.CreateParameter();
+                param.ParameterName = "@rolename";
+                param.Value = roleName;
+                command.Parameters.Add(param);
+
+                using (IDbTransaction transaction = connection.BeginTransaction(IsolationLevel.Serializable))
+                {
+                    command.Transaction = transaction;
+                    try
+                    {
+                        affected = command.ExecuteNonQuery();
+                        transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        transaction.Rollback();
+                    }
+                }
+            }
+
+            connection.Close();
+
+            if (affected < 0 || affected > 1)
+                throw new InvalidOperationException("Something went wrong with the DB");
+
+            return affected == 1;
         }
     }
 }

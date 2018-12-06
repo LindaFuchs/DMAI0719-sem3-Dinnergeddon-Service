@@ -146,5 +146,10 @@ namespace Controller
         {
             accountRepo.SetEmailConfirmed(account, confirmed);
         }
+
+        public bool RemoveFromRole(Guid accountId, string roleName)
+        {
+            return accountRepo.RemoveFromRole(accountId, roleName);
+        }
     }
 }

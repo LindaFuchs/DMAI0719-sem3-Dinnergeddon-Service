@@ -88,5 +88,7 @@ namespace Controller
         bool GetEmailConfirmed(Account account);
 
         void SetEmailConfirmed(Account account, bool confirmed);
+
+        bool RemoveFromRole(Guid accountId, string roleName);
     }
 }

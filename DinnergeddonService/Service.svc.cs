@@ -233,5 +233,10 @@ namespace DinnergeddonService
         {
             return highscoreController.GetHighscores(n);
         }
+
+        public bool RemoveFromRole(Guid accountId, string roleName)
+        {
+            return accountController.RemoveFromRole(accountId, roleName);
+        }
     }
 }

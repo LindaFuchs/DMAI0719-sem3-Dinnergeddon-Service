@@ -90,5 +90,7 @@ namespace DBLayer
         /// <param name="account"></param>
         /// <param name="confirmed"></param>
         void SetEmailConfirmed(Account account, bool confirmed);
+
+        bool RemoveFromRole(Guid accountId, string roleName);
     }
 }

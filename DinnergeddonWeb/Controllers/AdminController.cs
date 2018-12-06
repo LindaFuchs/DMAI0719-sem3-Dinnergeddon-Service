@@ -46,16 +46,16 @@ namespace DinnergeddonWeb.Controllers
         /// List all user accounts
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(ManageMessageId? message)
+        public ActionResult Index()
         {
             // Status message
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangeUserInfoSuccess ? "User has been updated."
-                : message == ManageMessageId.DeleteUserSuccess ? "User's Account has been deleted."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.SetAsAdminSuccess ? "User set as Admin."
-                : message == ManageMessageId.RemoveAsAdminSuccess ? "Admin role has been removed"
-                : "";
+            //ViewBag.StatusMessage =
+            //    message == ManageMessageId.ChangeUserInfoSuccess ? "User has been updated."
+            //    : message == ManageMessageId.DeleteUserSuccess ? "User's Account has been deleted."
+            //    : message == ManageMessageId.Error ? "An error has occurred."
+            //    : message == ManageMessageId.SetAsAdminSuccess ? "User set as Admin."
+            //    : message == ManageMessageId.RemoveAsAdminSuccess ? "Admin role has been removed"
+            //    : "";
 
 
             IEnumerable<Account> accounts = _proxy.GetAccounts();
@@ -86,6 +86,8 @@ namespace DinnergeddonWeb.Controllers
             {
                 // TODO: Show error as opposed to returning to Index. Possibly implemented, no idea how to test practically.
                 ViewBag.Message = "Error finding user, please try again.";
+                TempData["UserMessage"] = "Error finding user, please try again.";
+
                 return View();
             }
 
@@ -99,7 +101,8 @@ namespace DinnergeddonWeb.Controllers
             if (user == null)
             {
                 // TODO: Show error as opposed to returning to Index. Possibly implemented, no idea how to test practically.
-                ViewBag.Message = "Error finding user. Refresh the page and try again.";
+                TempData["UserMessage"] = "Error finding user, please try again.";
+
                 return View();
             }
 
@@ -140,7 +143,9 @@ namespace DinnergeddonWeb.Controllers
                         if (changedUser != null && changedUser.UserName == model.UserName)
                         {
                             //Goes to the Index page upon successful validation.
-                            return RedirectToAction("Index", new { Message = ManageMessageId.ChangeUserInfoSuccess });
+                            TempData["UserMessage"] = "User has been updated";
+
+                            return RedirectToAction("Index");
                         }
                     }
                 }
@@ -155,7 +160,8 @@ namespace DinnergeddonWeb.Controllers
             if (id == null)
             {
                 // TODO: Show error as opposed to returning to Index. Possibly implemented, no idea how to test practically.
-                ViewBag.Message = "Error finding user, please try again.";
+                TempData["UserMessage"] = "Error finding user, please try again.";
+
                 return View();
             }
 
@@ -170,17 +176,20 @@ namespace DinnergeddonWeb.Controllers
             {
                 //Deletes the user.
                 await UserManager.DeleteAsync(user);
+                TempData["UserMessage"] = "User has been deleted";
+
             }
 
 
-            return RedirectToAction("Index", new { Message = ManageMessageId.DeleteUserSuccess });
+            return RedirectToAction("Index");
         }
 
         public async Task<ActionResult> SetAdminRole(Guid? id)
         {
             if (id == null)
             {
-                ViewBag.Message = "Error finding user, please try again.";
+                TempData["UserMessage"] = "Error finding user, please try again.";
+
                 return View();
             }
 
@@ -190,17 +199,19 @@ namespace DinnergeddonWeb.Controllers
             if (user != null)
             {
                 await UserManager.AddToRoleAsync(id.ToString(), "admin");
+                TempData["UserMessage"] = user.UserName + " is an admin now!";
+                
 
             }
 
-            return RedirectToAction("Index", new { Message = ManageMessageId.SetAsAdminSuccess });
+            return RedirectToAction("Index");
         }
 
         public async Task<ActionResult> RemoveAdminRole(Guid? id)
         {
             if (id == null)
             {
-                ViewBag.Message = "Error finding user, please try again.";
+                TempData["UserMessage"] = "Error finding user, please try again.";
                 return View();
             }
 
@@ -210,10 +221,12 @@ namespace DinnergeddonWeb.Controllers
             if (user != null)
             {
                 await UserManager.RemoveFromRoleAsync(id.ToString(), "admin");
+                TempData["UserMessage"] = user.UserName + " is not an Admin anymore!";
+
 
             }
 
-            return RedirectToAction("Index", new { Message = ManageMessageId.RemoveAsAdminSuccess });
+            return RedirectToAction("Index");
         }
 
     }

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-sm">
+    <nav class="navbar navbar-expand-md">
         <a class="navbar-brand" href="/">
             <img src="~/images/logo.png" alt="dinnergeddon_logo" />
         </a>
@@ -24,9 +24,11 @@
                 <li class="nav-item">
                     @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
+                <li class="nav-item">@Html.ActionLink("Highscores", "Highscores", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", routeValues: null, htmlAttributes: new { id = "aboutLink", @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Contact", "Index", "Contact", routeValues: null, htmlAttributes: new { id = "contactLink", @class = "nav-link" })</li>
-                
+
+                <li class="nav-item">@Html.ActionLink("Contact us", "Index", "Contact", routeValues: null, htmlAttributes: new { id = "contactLink", @class = "nav-link" })</li>
+
             </ul>
             <ul class="navbar-nav">
                 @Html.Partial("_LoginPartial")
@@ -36,11 +38,17 @@
 
 
 
-    <div class="container body-content">
+    <div>
         @RenderBody()
     </div>
-    <footer class="card-footer">
-        <p>&copy; @DateTime.Now.Year - Dinnergeddon</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year - Dinnergeddon</p>
+
+        </div>
+          
+        
+       
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

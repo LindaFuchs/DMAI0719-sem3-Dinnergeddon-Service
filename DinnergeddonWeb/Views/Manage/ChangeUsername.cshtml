@@ -4,25 +4,26 @@
     ViewBag.Title = "Change username";
 }
 
-<h2>@ViewBag.Title</h2>
-<p class="text-danger">
-    @TempData["UserNameTaken"]
-</p>
-@using (Html.BeginForm("ChangeUsername", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        <div class="col-md-6">
-            @Html.TextBoxFor(m => m.NewUserName, new { @class = "form-control", placeholder = Model.CurrentUserName })
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <p class="text-danger">
+        @TempData["UserNameTaken"]
+    </p>
+    @using (Html.BeginForm("ChangeUsername", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.NewUserName, new { @class = "form-control", placeholder = Model.CurrentUserName})
+            </div>
         </div>
-    </div>
-   
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-6">
-            <input type="submit" value="Change username" class="btn btn-default btn-reg" />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input type="submit" value="Change username" class="btn btn-default btn-reg" />
+            </div>
         </div>
-    </div>
-}
+    }</div>
 

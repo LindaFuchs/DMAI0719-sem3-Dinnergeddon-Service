@@ -1,5 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Dinnergeddon";
 }
+<div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+        <h1 class="display-4">Dinnergeddon</h1>
+        <p class="lead">Donec ante leo, accumsan et risus in, tincidunt venenatis sapien.</p>
+        <button class="btn btn-info btn-lg">Download</button>
+        @if (!Request.IsAuthenticated)
+        {
+            <a class=" btn btn-lg btn-outline-danger" href="@Url.Action("Register", "Account")">Register now</a>
+        }
+    </div>
+</div>
 
-<img class="img-fluid" src="~/images/logo.png" alt="A_CAT"/>
+

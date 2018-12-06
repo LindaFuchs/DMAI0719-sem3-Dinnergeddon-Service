@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DinnergeddonWeb.Models.HighScoreModel>
+
+@{
+    ViewBag.Title = "Highscores";
+}
+    
+<div class="container">
+    <h2 class="text-center" style="margin:25px">Highscores</h2>
+
+    
+    <table class="table table-striped">
+        <thead class="thead-dark">
+
+
+            <tr>
+                <th>
+                    Rank
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HighScore)
+                </th>
+
+            </tr>
+
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            if (item.UserName == User.Identity.Name)
+            {
+                <tr class="color-primary-brown">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rank)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HighScore)
+                    </td>
+
+                </tr>
+            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rank)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HighScore)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>

@@ -15,14 +15,24 @@
     white-space: normal;
 }
 
-
-
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+    padding-top:15px;
+}
 
 .btn-reg {
     background: #c36800;
     color: white;
 }
-
+.color-primary-brown {
+    background: #c36800;
+    color:white;
+}
 /*
     Navigation bar
 */
@@ -30,6 +40,11 @@
 .navbar .nav-link {
     padding: 1rem;
     color: white;
+}
+
+.navbar-expand-md .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
 .navbar-brand {
@@ -41,11 +56,11 @@
 }
 
 .nav-item:hover {
-    background: white;
+    background: #101010;
 }
 
 .nav-item:hover a {
-    color: black;
+    /*color: black;*/
 }
 
 /*

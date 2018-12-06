@@ -273,7 +273,9 @@ namespace DinnergeddonWeb.Identity
 
         public Task RemoveFromRoleAsync(User user, string roleName)
         {
-            throw new NotImplementedException();
+            Guid userId = user.UserId;
+            //_proxy.RemoveFromRole(userId, roleName);
+            return Task.FromResult(0);
         }
 
         public Task<IList<string>> GetRolesAsync(User user)
@@ -286,7 +288,10 @@ namespace DinnergeddonWeb.Identity
 
         public Task<bool> IsInRoleAsync(User user, string roleName)
         {
-            throw new NotImplementedException();
+            Guid userID = user.UserId;
+            bool isInRole = _proxy.IsInRole(userID, roleName);
+
+            return Task.FromResult<bool>(isInRole);
 
         }
     }

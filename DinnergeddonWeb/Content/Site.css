@@ -30,12 +30,15 @@
     color: white;
 }
 .color-primary-brown {
-    background: #c36800;
-    color:white;
+    background: #c36800!important;
+    color:white!important;
 }
 /*
     Navigation bar
 */
+.footer p{
+    margin-bottom:0px;
+}
 
 .navbar .nav-link {
     padding: 1rem;

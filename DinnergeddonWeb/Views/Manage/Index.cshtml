@@ -4,7 +4,6 @@
 }
 
 <div class="container">
-    <h2>@ViewBag.Title</h2>
 
     @if (ViewBag.StatusMessage != "")
     {
@@ -15,27 +14,22 @@
             </button>
         </div>
     }
-    <div>
-        <h4>Change your account settings</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Password:</dt>
-            <dd>
-                [
-                @if (Model.HasPassword)
-                {
-                    @Html.ActionLink("Change your password", "ChangePassword")
-                }
-                else
-                {
-                    @Html.ActionLink("Create", "SetPassword")
-                }
-                ]
-            </dd>
-            <dt>Username:</dt>
-            <dd>
-                [  @Html.ActionLink("Change your username", "ChangeUsername") ]
-            </dd>
-        </dl>
+    <div class="row">
+        <div class="col-7">
+            <h2>Change your account settings</h2>
+            <hr />
+            <a class="btn btn-secondary " href="@Url.Action("ChangeUsername")">
+                <span class="glyphicon glyphicon-user"></span>
+                Change your username
+            </a>
+            <br />
+
+            <a class="btn btn-primary " href="@Url.Action("ChangePassword")">
+                <span class="glyphicon glyphicon-lock"></span>
+                Change your password
+            </a>
+        </div class="col-7">
+
+
     </div>
 </div>

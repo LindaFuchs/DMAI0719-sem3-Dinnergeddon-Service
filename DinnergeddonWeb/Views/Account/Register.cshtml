@@ -3,49 +3,77 @@
     ViewBag.Title = "Register";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-xl-4 col-lg-5 col-md-6 col-sm-9 align-self-center">
-                    <h2 class="text-center">Registration</h2>
 
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group ">
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
-                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                        
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="margin-top:1.5rem;">
+        <div class="col-12 col-xl-4 col-lg-5 col-md-6 col-sm-9 shadow " style="background:#f5f5f5;padding:20px;">
+            <h2 class="text-center">Registration</h2>
+
+            <hr />
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group ">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="glyphicon glyphicon-user "></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
+
                     </div>
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
 
-
-                    <div class="form-group">
-                        
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail" } })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                        
-                    </div>
-
-                    <div class="form-group">
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                        
-                    </div>
-
-                    <div class="form-group">
-                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Confirm password" } })
-                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="form-group">
-                        <div>
-                            <input type = "submit" value="Register" class="btn btn-default btn-reg btn-block" />
-                        </div> </div>
                 </div>
-            </div>
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="glyphicon glyphicon-envelope "></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail" } })
+
+                    </div>
+
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="glyphicon glyphicon-lock "></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="glyphicon glyphicon-lock "></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Confirm password" } })
+
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="Register" class="btn btn-default btn-reg btn-block" />
+                    </div>
+                </div>
+            }
         </div>
-}
+    </div>
+</div>
+
 
 
 

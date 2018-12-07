@@ -46,19 +46,23 @@
 
                 </tr>
             }
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rank)
+            else
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rank)
 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HighScore)
-                </td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HighScore)
+                    </td>
 
-            </tr>
+                </tr>
+            }
+
         }
 
     </table>

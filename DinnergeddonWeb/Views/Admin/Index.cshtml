@@ -45,42 +45,57 @@
                     @Html.DisplayFor(modelItem => account.UserName)
                 </td>
                 <td>
-                    <a class="btn btn-info" href="@Url.Action("Edit","Admin",new { account.Id})">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        Edit
-                    </a>
+                    <div class="row justify-content-start">
+                        <div class="col">
+                            <a class="btn btn-info btn-block" href="@Url.Action("Edit","Admin",new { account.Id})">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                Edit
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-danger btn-block" onclick="return confirm('Do you really want to delete this account?')" href="@Url.Action("Delete","Admin",new { account.Id})">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Delete
+                            </a>
+                        </div>
 
-                    <a class="btn btn-danger" onclick="return confirm('Do you really want to delete this account?')" href="@Url.Action("Delete","Admin",new { account.Id})">
-                        <span class="glyphicon glyphicon-remove"></span>
-                        Delete
-                    </a>
+                        @if (!account.IsAdmin)
+                        {
+                        <div class="col">
+                            <a class="btn btn-primary btn-block" href="@Url.Action("SetAdminRole","Admin",new { account.Id})">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Set as admin
+                            </a>
+                        </div>
+                         
+
+
+
+
+                        }
+                        else
+                        {
+
+                        <div class="col">
+                            <a class="btn btn-warning btn-block" onclick="return confirm('Remove admin role?')" href="@Url.Action("RemoveAdminRole","Admin",new { account.Id})">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Remove admin role
+                            </a>
+                        </div>
+                           
+
+                        }
+                    </div>
+                    
+
+                   
 
                     @*@Html.ActionLink("Details", "Details", new { account.Id }) |*@
 
 
 
 
-                    @if (!account.IsAdmin)
-                    {
-                        <a class="btn btn-primary" href="@Url.Action("SetAdminRole","Admin",new { account.Id})">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            Set as admin
-                        </a>
-
-
-
-
-                    }
-                    else
-                    {
-
-
-                        <a class="btn btn-warning" onclick="return confirm('Remove admin role?')" href="@Url.Action("RemoveAdminRole","Admin",new { account.Id})">
-                            <span class="glyphicon glyphicon-remove"></span>
-                            Remove admin role
-                        </a>
-
-                    }
+                  
                 </td>
             </tr>
         }

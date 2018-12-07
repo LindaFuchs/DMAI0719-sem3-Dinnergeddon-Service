@@ -66,17 +66,17 @@ namespace DinnergeddonWeb.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Username is required ")]
         [StringLength(30, MinimumLength = 3)]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email is required ")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -86,7 +86,7 @@ namespace DinnergeddonWeb.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Password doesn't match")]
         public string ConfirmPassword { get; set; }
     }
 

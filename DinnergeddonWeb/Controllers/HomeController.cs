@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DinnergeddonWeb.AccountServiceReference;
 using DinnergeddonWeb.Models;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace DinnergeddonWeb.Controllers
 {
@@ -29,12 +32,7 @@ namespace DinnergeddonWeb.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+    
 
         public ActionResult HighScores()
         {
@@ -62,5 +60,55 @@ namespace DinnergeddonWeb.Controllers
             }
             return View(highScoreModels);
         }
+
+        public ActionResult Download()
+        {
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(ContactViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    string apiKey = ConfigurationManager.AppSettings["ApiKey"];//Environment.GetEnvironmentVariable("NAME_OF_THE_ENVIRONMENT_VARIABLE_FOR_YOUR_SENDGRID_KEY");
+                    var client = new SendGridClient(apiKey);
+                    var from = new EmailAddress(vm.Email);
+                    var subject = "contact form";
+                    var to = new EmailAddress(ConfigurationManager.AppSettings["Receiver"]);
+                    var message = vm.Message;
+
+                    SendGridMessage msg = MailHelper.CreateSingleEmail(from, to, subject, message, message);
+
+                    // Send the email.
+                    if (client != null)
+                    {
+                        client.SendEmailAsync(msg);
+                    }
+
+
+
+                    ModelState.Clear();
+                    ViewBag.Message = "Thank you for getting in touch! We will get back to you as soon as possible. ";
+                }
+                catch (Exception ex)
+                {
+                    ModelState.Clear();
+                    ViewBag.Message = $" Sorry we are facing a problem here {ex.Message}";
+                }
+            }
+
+            return View();
+        }
+
     }
+
 }

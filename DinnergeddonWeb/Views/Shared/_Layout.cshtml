@@ -25,7 +25,9 @@
                     @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">@Html.ActionLink("Highscores", "Highscores", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("About", "About", "Home", routeValues: null, htmlAttributes: new { id = "aboutLink", @class = "nav-link" })</li>
+                <li class="nav-item">
+                @Html.ActionLink("About", "About", routeValues: null, htmlAttributes: new { id = "aboutLink", @class = "nav-link" })
+                </li>
 
                 <li class="nav-item">@Html.ActionLink("Contact us", "Index", "Contact", routeValues: null, htmlAttributes: new { id = "contactLink", @class = "nav-link" })</li>
 
@@ -41,11 +43,14 @@
     <div>
         @RenderBody()
     </div>
-    <footer class="footer">
+    <footer class="footer row align-items-center">
         <div class="container">
             <p>&copy; @DateTime.Now.Year - Dinnergeddon</p>
 
         </div>
+                
+
+
           
         
        

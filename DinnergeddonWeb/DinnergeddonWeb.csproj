@@ -254,9 +254,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="images\brain_icon.ico" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
-    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\Contact.cshtml" />
     <Content Include="Views\Shared\_LoginFormPartial.cshtml" />
     <Content Include="Views\Home\HighScores.cshtml" />
+    <Content Include="Views\Home\Download.cshtml" />
     <Resource Include="images\logo.png" />
     <Content Include="Properties\DataSources\Model.Account.datasource" />
     <None Include="Connected Services\AccountServiceReference\DinnergeddonService.wsdl" />

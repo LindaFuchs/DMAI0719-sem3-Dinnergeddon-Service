@@ -24,83 +24,87 @@
         </div>
     }
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th></th>
-        </tr>
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th></th>
+                </tr>
 
-        @foreach (var account in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => account.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => account.UserName)
-                </td>
-                <td>
-                    <div class="row justify-content-start">
-                        <div class="col">
-                            <a class="btn btn-info btn-block" href="@Url.Action("Edit","Admin",new { account.Id})">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                Edit
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a class="btn btn-danger btn-block" onclick="return confirm('Do you really want to delete this account?')" href="@Url.Action("Delete","Admin",new { account.Id})">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                Delete
-                            </a>
-                        </div>
+                @foreach (var account in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => account.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => account.UserName)
+                        </td>
+                        <td>
+                            <div class="row justify-content-start">
+                                <div class="col">
+                                    <a class="btn btn-info btn-block" href="@Url.Action("Edit","Admin",new { account.Id})">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                        Edit
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="btn btn-danger btn-block" onclick="return confirm('Do you really want to delete this account?')" href="@Url.Action("Delete","Admin",new { account.Id})">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        Delete
+                                    </a>
+                                </div>
 
-                        @if (!account.IsAdmin)
-                        {
-                        <div class="col">
-                            <a class="btn btn-primary btn-block" href="@Url.Action("SetAdminRole","Admin",new { account.Id})">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                Set as admin
-                            </a>
-                        </div>
-                         
-
-
-
-
-                        }
-                        else
-                        {
-
-                        <div class="col">
-                            <a class="btn btn-warning btn-block" onclick="return confirm('Remove admin role?')" href="@Url.Action("RemoveAdminRole","Admin",new { account.Id})">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                Remove admin role
-                            </a>
-                        </div>
-                           
-
-                        }
-                    </div>
-                    
-
-                   
-
-                    @*@Html.ActionLink("Details", "Details", new { account.Id }) |*@
+                                @if (!account.IsAdmin)
+                                {
+                                    <div class="col">
+                                        <a class="btn btn-primary btn-block" href="@Url.Action("SetAdminRole","Admin",new { account.Id})">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            Set as admin
+                                        </a>
+                                    </div>
 
 
 
 
-                  
-                </td>
-            </tr>
-        }
 
-</div></table>
+                                }
+                                else
+                                {
+
+                                    <div class="col">
+                                        <a class="btn btn-warning btn-block" onclick="return confirm('Remove admin role?')" href="@Url.Action("RemoveAdminRole","Admin",new { account.Id})">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                            Remove admin role
+                                        </a>
+                                    </div>
+
+
+                                }
+                            </div>
+
+
+
+
+                            @*@Html.ActionLink("Details", "Details", new { account.Id }) |*@
+
+
+
+
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+</div>
+
 <script>window.setTimeout(function () {
         $(".alert").fadeTo(200, 0).slideUp(600, function () {
             $(this).remove();

@@ -129,7 +129,7 @@ namespace DinnergeddonWeb.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "invalid email or password.");
+                    ModelState.AddModelError("", "Invalid email or password.");
                 }
             }
 
@@ -343,16 +343,18 @@ public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
     var user = await UserManager.FindByEmailAsync(model.Email);
     if (user == null)
     {
-        // Don't reveal that the user does not exist
-        return RedirectToAction("ResetPasswordConfirmation", "Account");
+                // Don't reveal that the user does not exist
+                TempData["ResetPasswordMessage"] = "Invalid email. Please click on the password reset link again.";
+                return RedirectToAction("ResetPasswordConfirmation");
     }
     var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
     if (result.Succeeded)
     {
         return RedirectToAction("ResetPasswordConfirmation", "Account");
     }
+    
     AddErrors(result);
-    return View();
+            return View();
 }
 
 //

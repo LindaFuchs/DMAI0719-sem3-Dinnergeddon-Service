@@ -11,6 +11,8 @@ namespace DinnergeddonWeb.Models
 
         public Guid Id { get; set; }
         public string Email { get; set; }
+
+        [Display(Name ="Username")]
         public string UserName { get; set; }
         public bool IsAdmin { get; set; }
     }

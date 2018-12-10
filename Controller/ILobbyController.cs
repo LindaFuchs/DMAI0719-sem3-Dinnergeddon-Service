@@ -30,14 +30,6 @@ namespace Controller
         IEnumerable<Lobby> GetLobbies();
 
         /// <summary>
-        /// Adds an account to a lobby
-        /// </summary>
-        /// <param name="accountId">The ID of the account</param>
-        /// <param name="lobbyId">The ID of the lobby</param>
-        /// <returns>If the operation was successful</returns>
-        bool JoinLobby(Guid accountId, Guid lobbyId);
-
-        /// <summary>
         /// Adds an account to a private lobby
         /// </summary>
         /// <param name="accountId">The ID of the account</param>

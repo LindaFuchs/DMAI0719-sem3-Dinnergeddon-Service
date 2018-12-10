@@ -105,47 +105,6 @@ namespace Controller
         }
 
         /// <summary>
-        /// Adds an account to a lobby
-        /// </summary>
-        /// <param name="accountId">The ID of the account</param>
-        /// <param name="lobbyId">The ID of the lobby</param>
-        /// <returns>If the operation was successful</returns>
-        public bool JoinLobby(Guid accountId, Guid lobbyId)
-        {
-            Account account = accountController.FindById(accountId);
-            Lobby lobby = lobbyContainer.GetLobbyById(lobbyId);
-
-            // Check if the two exist, if not terminate
-            if (account == null)
-                return false;
-            if (lobby == null)
-                return false;
-
-            // Check if the account isn't already in a lobby
-            // Even if it's the same, the operation should still halt
-            foreach (Lobby l in lobbyContainer.GetLobbies())
-            {
-                foreach (Account player in l.Players)
-                {
-                    if (player.Equals(account))
-                        return false;
-                }
-            }
-
-            // Lock the lobby, prevent dirty reads
-            lock (lobby)
-            {
-                // Check if the lobby can accept another account
-                if (lobby.Players.Count >= lobby.Limit)
-                    return false;
-
-                lobby.Players.Add(account);
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// Removes an account from a lobby
         /// TODO: IMPORTANT - make sure to update this method if needed once the group decides on
         /// how to solve the ownership of the lobby and what happens when they leave the lobby
@@ -169,19 +128,50 @@ namespace Controller
             }
         }
 
-        /// <summary>
-        /// Adds an account to a private lobby
-        /// </summary>
-        /// <param name="accountId">The ID of the account</param>
-        /// <param name="lobbyId">The ID of the lobby</param>
-        /// <param name="password">The password of the lobby</param>
-        /// <returns>If the operation was successful</returns>
         public bool JoinLobby(Guid accountId, Guid lobbyId, string password)
         {
-            Lobby lobby = lobbyContainer.GetLobbyById(lobbyId);
-            if (lobby == null)
+            Account account = accountController.FindById(accountId);
+            Lobby lobby = GetLobbyById(lobbyId);
+
+            // Check if both account and lobby actually exist
+            if (account == null || lobby == null)
                 return false;
 
+            // Check if the account isn't already in another lobby
+            foreach(Lobby l in GetLobbies())
+                foreach(Account player in l.Players)
+                    if (player.Equals(account))
+                        return false;
+
+            // If lobby is password protected
+            if (lobby.PasswordHash != null || lobby.PasswordHash != "" || lobby.PasswordHash != string.Empty)
+            {
+                // If no password was passed to the method
+                if (password == "" || password == null || password == string.Empty)
+                {
+                    return false;
+                }
+                return JoinLobby(account, lobby, password);
+            }
+            return JoinLobby(account, lobby);
+        }
+        
+        private bool JoinLobby(Account account, Lobby lobby)
+        {
+            // Lock the lobby, prevent dirty reads
+            lock (lobby)
+            {
+                // Check if the lobby can accept another account
+                if (lobby.Players.Count >= lobby.Limit)
+                    return false;
+
+                lobby.Players.Add(account);
+            }
+            return true;
+        }
+        
+        private bool JoinLobby(Account account, Lobby lobby, string password)
+        {
             // Check the password
             bool pwCorrect = PasswordHasher.VerifyPassword(lobby.PasswordHash, password);
 
@@ -189,7 +179,7 @@ namespace Controller
                 return false;
 
             // If password is correct, proceed to normal lobby joining
-            return JoinLobby(accountId, lobbyId);
+            return JoinLobby(account, lobby);
         }
 
         /// <summary>

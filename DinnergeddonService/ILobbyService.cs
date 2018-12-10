@@ -40,7 +40,7 @@ namespace DinnergeddonService
         /// <param name="accountId">The ID of the account</param>
         /// <param name="lobbyId">The ID of the lobby</param>
         /// <returns>If the account has joined successfully</returns>
-         [OperationContract]
+        [OperationContract]
         bool JoinLobby(Guid accountId, Guid lobbyId);
 
         /// <summary>
@@ -63,6 +63,5 @@ namespace DinnergeddonService
 
         [OperationContract]
         Lobby GetLobbyById(Guid lobbyId);
-
     }
 }

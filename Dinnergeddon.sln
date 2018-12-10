@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller.Tests", "Controller.Tests\Controller.Tests.csproj", "{6EF254CA-E8AE-41CD-BDDC-42ED7F51C16B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR", "SignalR\SignalR.csproj", "{158E91A2-3B66-446B-8268-BB3BA328B388}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRTestClient", "SignalRTestClient\SignalRTestClient.csproj", "{7D4DDFB5-435B-4883-82B7-AD72AA046257}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{6EF254CA-E8AE-41CD-BDDC-42ED7F51C16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EF254CA-E8AE-41CD-BDDC-42ED7F51C16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EF254CA-E8AE-41CD-BDDC-42ED7F51C16B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{158E91A2-3B66-446B-8268-BB3BA328B388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{158E91A2-3B66-446B-8268-BB3BA328B388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{158E91A2-3B66-446B-8268-BB3BA328B388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{158E91A2-3B66-446B-8268-BB3BA328B388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D4DDFB5-435B-4883-82B7-AD72AA046257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4DDFB5-435B-4883-82B7-AD72AA046257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4DDFB5-435B-4883-82B7-AD72AA046257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4DDFB5-435B-4883-82B7-AD72AA046257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

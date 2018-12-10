@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DinnergeddonUI.DinnergeddonService {
+namespace DinnergeddonUI.LobbyServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -141,7 +141,7 @@ namespace DinnergeddonUI.DinnergeddonService {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private DinnergeddonUI.DinnergeddonService.Account[] PlayersField;
+        private DinnergeddonUI.LobbyServiceReference.Account[] PlayersField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -193,7 +193,7 @@ namespace DinnergeddonUI.DinnergeddonService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public DinnergeddonUI.DinnergeddonService.Account[] Players {
+        public DinnergeddonUI.LobbyServiceReference.Account[] Players {
             get {
                 return this.PlayersField;
             }
@@ -216,50 +216,50 @@ namespace DinnergeddonUI.DinnergeddonService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DinnergeddonService.IAccountService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LobbyServiceReference.IAccountService")]
     public interface IAccountService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindById", ReplyAction="http://tempuri.org/IAccountService/FindByIdResponse")]
-        DinnergeddonUI.DinnergeddonService.Account FindById(System.Guid id);
+        DinnergeddonUI.LobbyServiceReference.Account FindById(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindById", ReplyAction="http://tempuri.org/IAccountService/FindByIdResponse")]
-        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> FindByIdAsync(System.Guid id);
+        System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account> FindByIdAsync(System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByEmail", ReplyAction="http://tempuri.org/IAccountService/FindByEmailResponse")]
-        DinnergeddonUI.DinnergeddonService.Account FindByEmail(string email);
+        DinnergeddonUI.LobbyServiceReference.Account FindByEmail(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByEmail", ReplyAction="http://tempuri.org/IAccountService/FindByEmailResponse")]
-        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> FindByEmailAsync(string email);
+        System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account> FindByEmailAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByUsername", ReplyAction="http://tempuri.org/IAccountService/FindByUsernameResponse")]
-        DinnergeddonUI.DinnergeddonService.Account FindByUsername(string username);
+        DinnergeddonUI.LobbyServiceReference.Account FindByUsername(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/FindByUsername", ReplyAction="http://tempuri.org/IAccountService/FindByUsernameResponse")]
-        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> FindByUsernameAsync(string username);
+        System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account> FindByUsernameAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/InsertAccount", ReplyAction="http://tempuri.org/IAccountService/InsertAccountResponse")]
-        bool InsertAccount(DinnergeddonUI.DinnergeddonService.Account account);
+        bool InsertAccount(DinnergeddonUI.LobbyServiceReference.Account account);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/InsertAccount", ReplyAction="http://tempuri.org/IAccountService/InsertAccountResponse")]
-        System.Threading.Tasks.Task<bool> InsertAccountAsync(DinnergeddonUI.DinnergeddonService.Account account);
+        System.Threading.Tasks.Task<bool> InsertAccountAsync(DinnergeddonUI.LobbyServiceReference.Account account);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/UpdateAccount", ReplyAction="http://tempuri.org/IAccountService/UpdateAccountResponse")]
-        bool UpdateAccount(DinnergeddonUI.DinnergeddonService.Account updatedAccount);
+        bool UpdateAccount(DinnergeddonUI.LobbyServiceReference.Account updatedAccount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/UpdateAccount", ReplyAction="http://tempuri.org/IAccountService/UpdateAccountResponse")]
-        System.Threading.Tasks.Task<bool> UpdateAccountAsync(DinnergeddonUI.DinnergeddonService.Account updatedAccount);
+        System.Threading.Tasks.Task<bool> UpdateAccountAsync(DinnergeddonUI.LobbyServiceReference.Account updatedAccount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/DeleteAccount", ReplyAction="http://tempuri.org/IAccountService/DeleteAccountResponse")]
-        bool DeleteAccount(DinnergeddonUI.DinnergeddonService.Account account);
+        bool DeleteAccount(DinnergeddonUI.LobbyServiceReference.Account account);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/DeleteAccount", ReplyAction="http://tempuri.org/IAccountService/DeleteAccountResponse")]
-        System.Threading.Tasks.Task<bool> DeleteAccountAsync(DinnergeddonUI.DinnergeddonService.Account account);
+        System.Threading.Tasks.Task<bool> DeleteAccountAsync(DinnergeddonUI.LobbyServiceReference.Account account);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetAccounts", ReplyAction="http://tempuri.org/IAccountService/GetAccountsResponse")]
-        DinnergeddonUI.DinnergeddonService.Account[] GetAccounts();
+        DinnergeddonUI.LobbyServiceReference.Account[] GetAccounts();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetAccounts", ReplyAction="http://tempuri.org/IAccountService/GetAccountsResponse")]
-        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account[]> GetAccountsAsync();
+        System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account[]> GetAccountsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/IsInRole", ReplyAction="http://tempuri.org/IAccountService/IsInRoleResponse")]
         bool IsInRole(System.Guid accountId, string roleName);
@@ -280,19 +280,37 @@ namespace DinnergeddonUI.DinnergeddonService {
         System.Threading.Tasks.Task<string[]> GetRolesAsync(System.Guid accountId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/VerifyCredentials", ReplyAction="http://tempuri.org/IAccountService/VerifyCredentialsResponse")]
-        DinnergeddonUI.DinnergeddonService.Account VerifyCredentials(string name, string password);
+        DinnergeddonUI.LobbyServiceReference.Account VerifyCredentials(string name, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/VerifyCredentials", ReplyAction="http://tempuri.org/IAccountService/VerifyCredentialsResponse")]
-        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> VerifyCredentialsAsync(string name, string password);
+        System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account> VerifyCredentialsAsync(string name, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetEmailConfirmed", ReplyAction="http://tempuri.org/IAccountService/GetEmailConfirmedResponse")]
+        bool GetEmailConfirmed(DinnergeddonUI.LobbyServiceReference.Account account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/GetEmailConfirmed", ReplyAction="http://tempuri.org/IAccountService/GetEmailConfirmedResponse")]
+        System.Threading.Tasks.Task<bool> GetEmailConfirmedAsync(DinnergeddonUI.LobbyServiceReference.Account account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/SetEmailConfirmed", ReplyAction="http://tempuri.org/IAccountService/SetEmailConfirmedResponse")]
+        void SetEmailConfirmed(DinnergeddonUI.LobbyServiceReference.Account account, bool confirmed);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/SetEmailConfirmed", ReplyAction="http://tempuri.org/IAccountService/SetEmailConfirmedResponse")]
+        System.Threading.Tasks.Task SetEmailConfirmedAsync(DinnergeddonUI.LobbyServiceReference.Account account, bool confirmed);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/RemoveFromRole", ReplyAction="http://tempuri.org/IAccountService/RemoveFromRoleResponse")]
+        bool RemoveFromRole(System.Guid accountId, string roleName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountService/RemoveFromRole", ReplyAction="http://tempuri.org/IAccountService/RemoveFromRoleResponse")]
+        System.Threading.Tasks.Task<bool> RemoveFromRoleAsync(System.Guid accountId, string roleName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IAccountServiceChannel : DinnergeddonUI.DinnergeddonService.IAccountService, System.ServiceModel.IClientChannel {
+    public interface IAccountServiceChannel : DinnergeddonUI.LobbyServiceReference.IAccountService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class AccountServiceClient : System.ServiceModel.ClientBase<DinnergeddonUI.DinnergeddonService.IAccountService>, DinnergeddonUI.DinnergeddonService.IAccountService {
+    public partial class AccountServiceClient : System.ServiceModel.ClientBase<DinnergeddonUI.LobbyServiceReference.IAccountService>, DinnergeddonUI.LobbyServiceReference.IAccountService {
         
         public AccountServiceClient() {
         }
@@ -313,59 +331,59 @@ namespace DinnergeddonUI.DinnergeddonService {
                 base(binding, remoteAddress) {
         }
         
-        public DinnergeddonUI.DinnergeddonService.Account FindById(System.Guid id) {
+        public DinnergeddonUI.LobbyServiceReference.Account FindById(System.Guid id) {
             return base.Channel.FindById(id);
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> FindByIdAsync(System.Guid id) {
+        public System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account> FindByIdAsync(System.Guid id) {
             return base.Channel.FindByIdAsync(id);
         }
         
-        public DinnergeddonUI.DinnergeddonService.Account FindByEmail(string email) {
+        public DinnergeddonUI.LobbyServiceReference.Account FindByEmail(string email) {
             return base.Channel.FindByEmail(email);
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> FindByEmailAsync(string email) {
+        public System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account> FindByEmailAsync(string email) {
             return base.Channel.FindByEmailAsync(email);
         }
         
-        public DinnergeddonUI.DinnergeddonService.Account FindByUsername(string username) {
+        public DinnergeddonUI.LobbyServiceReference.Account FindByUsername(string username) {
             return base.Channel.FindByUsername(username);
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> FindByUsernameAsync(string username) {
+        public System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account> FindByUsernameAsync(string username) {
             return base.Channel.FindByUsernameAsync(username);
         }
         
-        public bool InsertAccount(DinnergeddonUI.DinnergeddonService.Account account) {
+        public bool InsertAccount(DinnergeddonUI.LobbyServiceReference.Account account) {
             return base.Channel.InsertAccount(account);
         }
         
-        public System.Threading.Tasks.Task<bool> InsertAccountAsync(DinnergeddonUI.DinnergeddonService.Account account) {
+        public System.Threading.Tasks.Task<bool> InsertAccountAsync(DinnergeddonUI.LobbyServiceReference.Account account) {
             return base.Channel.InsertAccountAsync(account);
         }
         
-        public bool UpdateAccount(DinnergeddonUI.DinnergeddonService.Account updatedAccount) {
+        public bool UpdateAccount(DinnergeddonUI.LobbyServiceReference.Account updatedAccount) {
             return base.Channel.UpdateAccount(updatedAccount);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateAccountAsync(DinnergeddonUI.DinnergeddonService.Account updatedAccount) {
+        public System.Threading.Tasks.Task<bool> UpdateAccountAsync(DinnergeddonUI.LobbyServiceReference.Account updatedAccount) {
             return base.Channel.UpdateAccountAsync(updatedAccount);
         }
         
-        public bool DeleteAccount(DinnergeddonUI.DinnergeddonService.Account account) {
+        public bool DeleteAccount(DinnergeddonUI.LobbyServiceReference.Account account) {
             return base.Channel.DeleteAccount(account);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteAccountAsync(DinnergeddonUI.DinnergeddonService.Account account) {
+        public System.Threading.Tasks.Task<bool> DeleteAccountAsync(DinnergeddonUI.LobbyServiceReference.Account account) {
             return base.Channel.DeleteAccountAsync(account);
         }
         
-        public DinnergeddonUI.DinnergeddonService.Account[] GetAccounts() {
+        public DinnergeddonUI.LobbyServiceReference.Account[] GetAccounts() {
             return base.Channel.GetAccounts();
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account[]> GetAccountsAsync() {
+        public System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account[]> GetAccountsAsync() {
             return base.Channel.GetAccountsAsync();
         }
         
@@ -393,36 +411,60 @@ namespace DinnergeddonUI.DinnergeddonService {
             return base.Channel.GetRolesAsync(accountId);
         }
         
-        public DinnergeddonUI.DinnergeddonService.Account VerifyCredentials(string name, string password) {
+        public DinnergeddonUI.LobbyServiceReference.Account VerifyCredentials(string name, string password) {
             return base.Channel.VerifyCredentials(name, password);
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Account> VerifyCredentialsAsync(string name, string password) {
+        public System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Account> VerifyCredentialsAsync(string name, string password) {
             return base.Channel.VerifyCredentialsAsync(name, password);
+        }
+        
+        public bool GetEmailConfirmed(DinnergeddonUI.LobbyServiceReference.Account account) {
+            return base.Channel.GetEmailConfirmed(account);
+        }
+        
+        public System.Threading.Tasks.Task<bool> GetEmailConfirmedAsync(DinnergeddonUI.LobbyServiceReference.Account account) {
+            return base.Channel.GetEmailConfirmedAsync(account);
+        }
+        
+        public void SetEmailConfirmed(DinnergeddonUI.LobbyServiceReference.Account account, bool confirmed) {
+            base.Channel.SetEmailConfirmed(account, confirmed);
+        }
+        
+        public System.Threading.Tasks.Task SetEmailConfirmedAsync(DinnergeddonUI.LobbyServiceReference.Account account, bool confirmed) {
+            return base.Channel.SetEmailConfirmedAsync(account, confirmed);
+        }
+        
+        public bool RemoveFromRole(System.Guid accountId, string roleName) {
+            return base.Channel.RemoveFromRole(accountId, roleName);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RemoveFromRoleAsync(System.Guid accountId, string roleName) {
+            return base.Channel.RemoveFromRoleAsync(accountId, roleName);
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DinnergeddonService.ILobbyService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LobbyServiceReference.ILobbyService")]
     public interface ILobbyService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/CreateLobby", ReplyAction="http://tempuri.org/ILobbyService/CreateLobbyResponse")]
-        DinnergeddonUI.DinnergeddonService.Lobby CreateLobby(string name, int playerLimit);
+        DinnergeddonUI.LobbyServiceReference.Lobby CreateLobby(string name, int playerLimit);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/CreateLobby", ReplyAction="http://tempuri.org/ILobbyService/CreateLobbyResponse")]
-        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby> CreateLobbyAsync(string name, int playerLimit);
+        System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Lobby> CreateLobbyAsync(string name, int playerLimit);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/CreatePrivateLobby", ReplyAction="http://tempuri.org/ILobbyService/CreatePrivateLobbyResponse")]
-        DinnergeddonUI.DinnergeddonService.Lobby CreatePrivateLobby(string name, int playerLimit, string password);
+        DinnergeddonUI.LobbyServiceReference.Lobby CreatePrivateLobby(string name, int playerLimit, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/CreatePrivateLobby", ReplyAction="http://tempuri.org/ILobbyService/CreatePrivateLobbyResponse")]
-        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby> CreatePrivateLobbyAsync(string name, int playerLimit, string password);
+        System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Lobby> CreatePrivateLobbyAsync(string name, int playerLimit, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetLobbies", ReplyAction="http://tempuri.org/ILobbyService/GetLobbiesResponse")]
-        DinnergeddonUI.DinnergeddonService.Lobby[] GetLobbies();
+        DinnergeddonUI.LobbyServiceReference.Lobby[] GetLobbies();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetLobbies", ReplyAction="http://tempuri.org/ILobbyService/GetLobbiesResponse")]
-        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby[]> GetLobbiesAsync();
+        System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Lobby[]> GetLobbiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/JoinLobby", ReplyAction="http://tempuri.org/ILobbyService/JoinLobbyResponse")]
         bool JoinLobby(System.Guid accountId, System.Guid lobbyId);
@@ -443,19 +485,19 @@ namespace DinnergeddonUI.DinnergeddonService {
         System.Threading.Tasks.Task LeaveLobbyAsync(System.Guid accountId, System.Guid lobbyId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetLobbyById", ReplyAction="http://tempuri.org/ILobbyService/GetLobbyByIdResponse")]
-        DinnergeddonUI.DinnergeddonService.Lobby GetLobbyById(System.Guid lobbyId);
+        DinnergeddonUI.LobbyServiceReference.Lobby GetLobbyById(System.Guid lobbyId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetLobbyById", ReplyAction="http://tempuri.org/ILobbyService/GetLobbyByIdResponse")]
-        System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby> GetLobbyByIdAsync(System.Guid lobbyId);
+        System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Lobby> GetLobbyByIdAsync(System.Guid lobbyId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ILobbyServiceChannel : DinnergeddonUI.DinnergeddonService.ILobbyService, System.ServiceModel.IClientChannel {
+    public interface ILobbyServiceChannel : DinnergeddonUI.LobbyServiceReference.ILobbyService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LobbyServiceClient : System.ServiceModel.ClientBase<DinnergeddonUI.DinnergeddonService.ILobbyService>, DinnergeddonUI.DinnergeddonService.ILobbyService {
+    public partial class LobbyServiceClient : System.ServiceModel.ClientBase<DinnergeddonUI.LobbyServiceReference.ILobbyService>, DinnergeddonUI.LobbyServiceReference.ILobbyService {
         
         public LobbyServiceClient() {
         }
@@ -476,27 +518,27 @@ namespace DinnergeddonUI.DinnergeddonService {
                 base(binding, remoteAddress) {
         }
         
-        public DinnergeddonUI.DinnergeddonService.Lobby CreateLobby(string name, int playerLimit) {
+        public DinnergeddonUI.LobbyServiceReference.Lobby CreateLobby(string name, int playerLimit) {
             return base.Channel.CreateLobby(name, playerLimit);
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby> CreateLobbyAsync(string name, int playerLimit) {
+        public System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Lobby> CreateLobbyAsync(string name, int playerLimit) {
             return base.Channel.CreateLobbyAsync(name, playerLimit);
         }
         
-        public DinnergeddonUI.DinnergeddonService.Lobby CreatePrivateLobby(string name, int playerLimit, string password) {
+        public DinnergeddonUI.LobbyServiceReference.Lobby CreatePrivateLobby(string name, int playerLimit, string password) {
             return base.Channel.CreatePrivateLobby(name, playerLimit, password);
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby> CreatePrivateLobbyAsync(string name, int playerLimit, string password) {
+        public System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Lobby> CreatePrivateLobbyAsync(string name, int playerLimit, string password) {
             return base.Channel.CreatePrivateLobbyAsync(name, playerLimit, password);
         }
         
-        public DinnergeddonUI.DinnergeddonService.Lobby[] GetLobbies() {
+        public DinnergeddonUI.LobbyServiceReference.Lobby[] GetLobbies() {
             return base.Channel.GetLobbies();
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby[]> GetLobbiesAsync() {
+        public System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Lobby[]> GetLobbiesAsync() {
             return base.Channel.GetLobbiesAsync();
         }
         
@@ -524,12 +566,87 @@ namespace DinnergeddonUI.DinnergeddonService {
             return base.Channel.LeaveLobbyAsync(accountId, lobbyId);
         }
         
-        public DinnergeddonUI.DinnergeddonService.Lobby GetLobbyById(System.Guid lobbyId) {
+        public DinnergeddonUI.LobbyServiceReference.Lobby GetLobbyById(System.Guid lobbyId) {
             return base.Channel.GetLobbyById(lobbyId);
         }
         
-        public System.Threading.Tasks.Task<DinnergeddonUI.DinnergeddonService.Lobby> GetLobbyByIdAsync(System.Guid lobbyId) {
+        public System.Threading.Tasks.Task<DinnergeddonUI.LobbyServiceReference.Lobby> GetLobbyByIdAsync(System.Guid lobbyId) {
             return base.Channel.GetLobbyByIdAsync(lobbyId);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LobbyServiceReference.IHighscoreService")]
+    public interface IHighscoreService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetHighscore", ReplyAction="http://tempuri.org/IHighscoreService/GetHighscoreResponse")]
+        int GetHighscore(System.Guid accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetHighscore", ReplyAction="http://tempuri.org/IHighscoreService/GetHighscoreResponse")]
+        System.Threading.Tasks.Task<int> GetHighscoreAsync(System.Guid accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetHighscores", ReplyAction="http://tempuri.org/IHighscoreService/GetHighscoresResponse")]
+        System.Collections.Generic.Dictionary<System.Guid, int> GetHighscores();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetHighscores", ReplyAction="http://tempuri.org/IHighscoreService/GetHighscoresResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.Guid, int>> GetHighscoresAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetTopNHighscores", ReplyAction="http://tempuri.org/IHighscoreService/GetTopNHighscoresResponse")]
+        System.Collections.Generic.Dictionary<System.Guid, int> GetTopNHighscores(int n);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetTopNHighscores", ReplyAction="http://tempuri.org/IHighscoreService/GetTopNHighscoresResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.Guid, int>> GetTopNHighscoresAsync(int n);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IHighscoreServiceChannel : DinnergeddonUI.LobbyServiceReference.IHighscoreService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class HighscoreServiceClient : System.ServiceModel.ClientBase<DinnergeddonUI.LobbyServiceReference.IHighscoreService>, DinnergeddonUI.LobbyServiceReference.IHighscoreService {
+        
+        public HighscoreServiceClient() {
+        }
+        
+        public HighscoreServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public HighscoreServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public HighscoreServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public HighscoreServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public int GetHighscore(System.Guid accountId) {
+            return base.Channel.GetHighscore(accountId);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetHighscoreAsync(System.Guid accountId) {
+            return base.Channel.GetHighscoreAsync(accountId);
+        }
+        
+        public System.Collections.Generic.Dictionary<System.Guid, int> GetHighscores() {
+            return base.Channel.GetHighscores();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.Guid, int>> GetHighscoresAsync() {
+            return base.Channel.GetHighscoresAsync();
+        }
+        
+        public System.Collections.Generic.Dictionary<System.Guid, int> GetTopNHighscores(int n) {
+            return base.Channel.GetTopNHighscores(n);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.Guid, int>> GetTopNHighscoresAsync(int n) {
+            return base.Channel.GetTopNHighscoresAsync(n);
         }
     }
 }

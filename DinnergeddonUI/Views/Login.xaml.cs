@@ -1,25 +1,32 @@
-﻿using DinnergeddonUI.Interfaces;
-using DinnergeddonUI.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace DinnergeddonUI
+namespace DinnergeddonUI.Views
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for Login.xaml
+    /// </summary>
+    public partial class Login : UserControl
     {
-        public MainWindow()
+        public Login()
         {
-            DataContext = new MainWindowViewModel();
             InitializeComponent();
         }
 
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            System.Diagnostics.Process.Start(e.Uri.AbsoluteUri);
-        }
+       
     }
-
     public class PasswordBoxMonitor : DependencyObject
     {
         public static bool GetIsMonitoring(DependencyObject obj)
@@ -34,7 +41,7 @@ namespace DinnergeddonUI
 
         public static readonly DependencyProperty IsMonitoringProperty =
             DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(PasswordBoxMonitor), new UIPropertyMetadata(false, OnIsMonitoringChanged));
-        
+
         public static int GetPasswordLength(DependencyObject obj)
         {
             return (int)obj.GetValue(PasswordLengthProperty);

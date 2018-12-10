@@ -74,6 +74,24 @@
   <wsdl:message name="IAccountService_VerifyCredentials_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerifyCredentialsResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccountService_GetEmailConfirmed_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmailConfirmed" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_GetEmailConfirmed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmailConfirmedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_SetEmailConfirmed_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetEmailConfirmed" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_SetEmailConfirmed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetEmailConfirmedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_RemoveFromRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFromRole" />
+  </wsdl:message>
+  <wsdl:message name="IAccountService_RemoveFromRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFromRoleResponse" />
+  </wsdl:message>
   <wsdl:message name="ILobbyService_CreateLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateLobby" />
   </wsdl:message>
@@ -115,6 +133,24 @@
   </wsdl:message>
   <wsdl:message name="ILobbyService_GetLobbyById_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLobbyByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetHighscore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHighscore" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetHighscore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHighscoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetHighscores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHighscores" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetHighscores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHighscoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetTopNHighscores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopNHighscores" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetTopNHighscores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopNHighscoresResponse" />
   </wsdl:message>
   <wsdl:portType name="IAccountService">
     <wsdl:operation name="FindById">
@@ -161,6 +197,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/VerifyCredentials" message="tns:IAccountService_VerifyCredentials_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/VerifyCredentialsResponse" message="tns:IAccountService_VerifyCredentials_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetEmailConfirmed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/GetEmailConfirmed" message="tns:IAccountService_GetEmailConfirmed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/GetEmailConfirmedResponse" message="tns:IAccountService_GetEmailConfirmed_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetEmailConfirmed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/SetEmailConfirmed" message="tns:IAccountService_SetEmailConfirmed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/SetEmailConfirmedResponse" message="tns:IAccountService_SetEmailConfirmed_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/RemoveFromRole" message="tns:IAccountService_RemoveFromRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/RemoveFromRoleResponse" message="tns:IAccountService_RemoveFromRole_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ILobbyService">
     <wsdl:operation name="CreateLobby">
@@ -190,6 +238,20 @@
     <wsdl:operation name="GetLobbyById">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/GetLobbyById" message="tns:ILobbyService_GetLobbyById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/GetLobbyByIdResponse" message="tns:ILobbyService_GetLobbyById_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IHighscoreService">
+    <wsdl:operation name="GetHighscore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHighscoreService/GetHighscore" message="tns:IHighscoreService_GetHighscore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHighscoreService/GetHighscoreResponse" message="tns:IHighscoreService_GetHighscore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHighscores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHighscoreService/GetHighscores" message="tns:IHighscoreService_GetHighscores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHighscoreService/GetHighscoresResponse" message="tns:IHighscoreService_GetHighscores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTopNHighscores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHighscoreService/GetTopNHighscores" message="tns:IHighscoreService_GetTopNHighscores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHighscoreService/GetTopNHighscoresResponse" message="tns:IHighscoreService_GetTopNHighscores_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IAccountService" type="tns:IAccountService">
@@ -293,6 +355,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetEmailConfirmed">
+      <soap:operation soapAction="http://tempuri.org/IAccountService/GetEmailConfirmed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetEmailConfirmed">
+      <soap:operation soapAction="http://tempuri.org/IAccountService/SetEmailConfirmed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromRole">
+      <soap:operation soapAction="http://tempuri.org/IAccountService/RemoveFromRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_ILobbyService" type="tns:ILobbyService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -360,11 +449,44 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IHighscoreService" type="tns:IHighscoreService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetHighscore">
+      <soap:operation soapAction="http://tempuri.org/IHighscoreService/GetHighscore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHighscores">
+      <soap:operation soapAction="http://tempuri.org/IHighscoreService/GetHighscores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTopNHighscores">
+      <soap:operation soapAction="http://tempuri.org/IHighscoreService/GetTopNHighscores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="DinnergeddonService">
     <wsdl:port name="BasicHttpBinding_IAccountService" binding="tns:BasicHttpBinding_IAccountService">
       <soap:address location="http://localhost:52999/Service.svc" />
     </wsdl:port>
     <wsdl:port name="BasicHttpBinding_ILobbyService" binding="tns:BasicHttpBinding_ILobbyService">
+      <soap:address location="http://localhost:52999/Service.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IHighscoreService" binding="tns:BasicHttpBinding_IHighscoreService">
       <soap:address location="http://localhost:52999/Service.svc" />
     </wsdl:port>
   </wsdl:service>

@@ -70,7 +70,8 @@ namespace DinnergeddonWeb.Controllers
             byte[] fileContent = System.IO.File.ReadAllBytes(filePath);
             
             //Returns the file content along with the type for the download.
-            return File(fileContent, "application/png");
+            //TODO: REMEMBER TO CHANGE THE FILE TYPE
+            return File(fileContent, "application/png", "DinnergeddonInstaller.png");
         }
 
         public ActionResult Contact()

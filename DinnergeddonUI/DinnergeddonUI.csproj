@@ -67,6 +67,7 @@
     <Compile Include="JoinLobbyPasswordDialog.xaml.cs">
       <DependentUpon>JoinLobbyPasswordDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DummyViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="LobbyWindow.xaml.cs">
       <DependentUpon>LobbyWindow.xaml</DependentUpon>

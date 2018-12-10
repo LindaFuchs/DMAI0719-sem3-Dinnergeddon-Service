@@ -5,24 +5,26 @@
 }
 
 <div class="container">
-    <h2>Manage users</h2>
+    <div class="row">
 
-    <p>
-        @*Html.ActionLink("Create New", "Create")*@
-    </p>
+        <h2>Manage users</h2>
+
+        <p>
+            @*Html.ActionLink("Create New", "Create")*@
+        </p>
 
 
 
-    @if (TempData["UserMessage"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            @TempData["UserMessage"]
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    }
+        @if (TempData["UserMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                @TempData["UserMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
 
         <div class="table-responsive">
             <table class="table">
@@ -102,10 +104,12 @@
                 }
             </table>
         </div>
+    </div>
 
 </div>
 
-<script>window.setTimeout(function () {
+<script>
+    window.setTimeout(function () {
         $(".alert").fadeTo(200, 0).slideUp(600, function () {
             $(this).remove();
         });

@@ -5,11 +5,6 @@ using System.Collections.Generic;
 
 namespace DinnergeddonUI.Helpers
 {
-    public class LobbyEventArgs : EventArgs
-    {
-        public Lobby Lobby { get; set; }
-    }
-
     public class LobbyProxy
     {
         private readonly HubConnection connection;
@@ -33,6 +28,11 @@ namespace DinnergeddonUI.Helpers
             hubProxy.On<bool>("joined", (joined) => OnLobbyJoined(joined));
         }
 
+        public Lobby GetLobbyById(Guid id)
+        {
+            return null;
+        }
+
         #region WS Callers
 
         public void CreateLobby(string lobbyName, int playerLimit)
@@ -53,15 +53,11 @@ namespace DinnergeddonUI.Helpers
         #endregion
 
         #region Events
-        public delegate void LobbyCreatedEventHandler(object source, LobbyEventArgs args);
-        public delegate void LobbyUpdatedEventHandler(object source, LobbyEventArgs args);
-        public delegate void LobbyDeletedEventHandler(object source, LobbyEventArgs args);
-        public delegate void LobbyJoinedEventHandler(object source, bool joined);
-
-        public event LobbyCreatedEventHandler LobbyCreated;
-        public event LobbyUpdatedEventHandler LobbyUpdated;
-        public event LobbyDeletedEventHandler LobbyDeleted;
-        public event LobbyJoinedEventHandler LobbyJoined;
+        
+        public event EventHandler<LobbyEventArgs> LobbyCreated;
+        public event EventHandler<LobbyEventArgs> LobbyUpdated;
+        public event EventHandler<LobbyEventArgs> LobbyDeleted;
+        public event EventHandler<bool> LobbyJoined;
 
         protected virtual void OnLobbyCreated(Lobby newLobby)
         {
@@ -86,6 +82,7 @@ namespace DinnergeddonUI.Helpers
             if (LobbyJoined != null)
                 LobbyJoined.Invoke(this, joined);
         }
+
         #endregion
 
     }

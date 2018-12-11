@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Helpers\EventArgs.cs" />
     <Compile Include="Helpers\EventRaiser.cs" />
+    <Compile Include="Helpers\LobbyEventArgs.cs" />
     <Compile Include="Helpers\LobbyProxy.cs" />
     <Compile Include="Helpers\Mediator.cs" />
     <Compile Include="Helpers\PasswordBoxMonitor.cs" />

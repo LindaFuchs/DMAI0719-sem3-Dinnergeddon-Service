@@ -80,7 +80,8 @@ namespace DinnergeddonUI.ViewModels
             _proxy = new LobbyProxy();
             _proxy.LobbyCreated += OnLobbyCreated;
             ///Todo: change to _proxy
-            Lobbies = _lobbyProxy.GetLobbies().ToList();
+            //Lobbies = _lobbyProxy.GetLobbies().ToList();
+            Lobbies = new List<LobbyServiceReference.Lobby>();
             customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
         }
 

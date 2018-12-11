@@ -35,7 +35,8 @@ namespace DinnergeddonUI.Helpers
 
         public Lobby GetLobbyById(Guid id)
         {
-            return hubProxy.Invoke<Lobby>("GetLobbyById", new object[] { id }).Result;
+            Lobby lobby = hubProxy.Invoke<Lobby>("GetLobbyById", new object[] { id }).Result;
+            return lobby;
         }
 
         #region WS Callers

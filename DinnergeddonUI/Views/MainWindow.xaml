@@ -19,7 +19,6 @@
                 <TextBlock Padding="8" FontSize="18" Text="{Binding Username}"></TextBlock>
                 <Button Padding="8" Content="Lobbies" Command="{Binding GoToLobbies}"></Button>
                 <Button Padding="8" Content="Profile" Command="{Binding GoToProfile}"></Button>
-                <Button Padding="8" Content="dummy"></Button>
                 <Button Padding="8" Content="Log out" Command="{Binding LogoutCommand}"></Button>
             </StackPanel>
         </Border>

@@ -139,7 +139,6 @@ namespace DinnergeddonUI.ViewModels
 
         private void LobbyJoined(object parameter)
         {
-            Guid lobbyId = (Guid)parameter;
             CurrentPageViewModel = PageViewModels[2];
 
         }

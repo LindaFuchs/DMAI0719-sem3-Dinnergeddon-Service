@@ -20,7 +20,7 @@ namespace DinnergeddonUI.ViewModels
         
         private readonly DelegateCommand _joinLobbyCommand;
         private readonly DelegateCommand _leaveLobbyCommand;
-        LobbyServiceClient _proxy = new LobbyServiceClient();
+        LobbyProxy _proxy = new LobbyProxy();
 
 
 
@@ -35,8 +35,8 @@ namespace DinnergeddonUI.ViewModels
 
         private void LobbyJoined(object parameter)
         {
-            Guid lobbyId = (Guid)parameter;
-          _lobby=  _proxy.GetLobbyById(lobbyId);
+            LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById((Guid)parameter);
+            _lobby = joinedLobby;
             LobbyName = _lobby.Name;
 
         }
@@ -110,12 +110,12 @@ namespace DinnergeddonUI.ViewModels
 
         private void LeaveLobby(object parameter)
         {
-            Window lb = parameter as Window;
-            CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-            var userId = customPrincipal.Identity.Id;
-            _proxy.LeaveLobby(userId, _lobby.Id);
+            //Window lb = parameter as Window;
+            //CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+            //var userId = customPrincipal.Identity.Id;
+            //_proxy.LeaveLobby(userId, _lobby.Id);
 
-            lb.Close();
+            //lb.Close();
             
         }
 

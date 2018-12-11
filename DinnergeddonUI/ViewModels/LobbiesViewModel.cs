@@ -15,7 +15,6 @@ namespace DinnergeddonUI.ViewModels
 {
     class LobbiesViewModel : BaseViewModel, IPageViewModel
     {
-        private LobbyServiceClient _lobbyProxy = new LobbyServiceClient();
         private ObservableCollection<LobbyServiceReference.Lobby> _lobbies;
         private LobbyProxy _proxy;
         private ICommand _joinLobby;
@@ -104,7 +103,9 @@ namespace DinnergeddonUI.ViewModels
         {
 
             _proxy = new LobbyProxy();
+            _proxy.LobbyJoined += OnJoinLobby;
             _proxy.LobbyCreated += OnLobbyCreated;
+            _proxy.LobbyUpdated += OnLobbyUpdated;
             ///Todo: change to _proxy
             ///
             _lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies());
@@ -128,6 +129,15 @@ namespace DinnergeddonUI.ViewModels
 
         }
 
+        private void OnLobbyUpdated(object sender ,LobbyEventArgs args)
+        {
+            LobbyServiceReference.Lobby updatedLobby = args.Lobby;
+            LobbyServiceReference.Lobby lobbyToUpdate = _lobbies.Where(x => x.Id == updatedLobby.Id).FirstOrDefault();
+            lobbyToUpdate.Players = updatedLobby.Players;
+            lobbyToUpdate.Limit = updatedLobby.Limit;
+            OnPropertyChanged("Lobbies");
+        }
+
         private void CreateLobby(object parameter)
         {
             cld = new CreateLobbyDialog
@@ -146,14 +156,24 @@ namespace DinnergeddonUI.ViewModels
         {
             Guid lobbyId = (Guid)parameter;
             Guid userId = customPrincipal.Identity.Id;
-            if (!IsJoinedInALobby(userId, lobbyId))
+            if (!IsJoinedInALobby(userId))
             {
                 _proxy.JoinLobby(userId, lobbyId);
-                Mediator.Notify("LobbyJoined", lobbyId);
-                Mediator.Notify("OpenLobby", lobbyId);
-                IsJoined = true;
+               // LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById(lobbyId);
+                //notify the LobbyViewModel to change its properties for the current lobby
+                 IsJoined = true;
                 JoinedLobby = _proxy.GetLobbyById(lobbyId);
+                Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies().ToList());
+
+                Mediator.Notify("LobbyJoined", lobbyId);
+
+                //notify the mainWindowViewModel to change the viewmodel to the lobbyViewModel
+                Mediator.Notify("OpenLobby", lobbyId);
+               
+                //LobbyServiceReference.Lobby l = _proxy.GetLobbyById(lobbyId);
+
             }
+
 
 
             else
@@ -163,17 +183,26 @@ namespace DinnergeddonUI.ViewModels
             }
         }
 
-
-
-        private bool IsJoinedInALobby(Guid userId, Guid lobbyId)
+        private void OnJoinLobby(object s, bool result)
         {
-            foreach (Account a in _proxy.GetLobbyById(lobbyId).Players)
+            Lobbies =  new ObservableCollection<LobbyServiceReference.Lobby> ( _proxy.GetLobbies().ToList());
+        }
+
+
+        private bool IsJoinedInALobby(Guid userId)
+        {
+            Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies().ToList());
+            foreach (LobbyServiceReference.Lobby lobby in Lobbies)
             {
-                if (a.Id == userId)
+                foreach (Account a in lobby.Players)
                 {
-                    return true;
+                    if (a.Id == userId)
+                    {
+                        return true;
+                    }
                 }
             }
+
             return false;
         }
 

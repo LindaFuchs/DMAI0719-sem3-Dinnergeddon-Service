@@ -18,7 +18,7 @@ namespace DinnergeddonUI.ViewModels
         private AccountServiceClient _accountProxy;
         private string _errorMessage;
         private IPageViewModel _currentPageViewModel;
-    private ICommand _goToLobbies;
+        private ICommand _goToLobbies;
         private ICommand _goToProfile;
 
         public string ErrorMessage
@@ -70,7 +70,7 @@ namespace DinnergeddonUI.ViewModels
                 OnPropertyChanged("CurrentPageViewModel");
             }
         }
-    
+
 
         public ICommand GoToLobbies
         {
@@ -125,36 +125,55 @@ namespace DinnergeddonUI.ViewModels
             string email = _email;
             string password = pb.Password;
 
-            //Validatecredentials through the authentication service
+            if (ValidInput(email, password)){
 
-            Account account = _accountProxy.VerifyCredentials(email, password);
-            if (account != null)
-            {
-                //Get the current principal object
-                CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-                if (customPrincipal == null)
-                    throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
-                //Authenticate the user
-                customPrincipal.Identity = new CustomIdentity(account.Id, account.Username, account.Email, new string[] { "" });
 
-                //Update UI
-                OnPropertyChanged("AuthenticatedUser");
-                OnPropertyChanged("IsAuthenticated");
-                Mediator.Notify("Login", "");
+                //Validatecredentials through the authentication service
+
+                Account account = _accountProxy.VerifyCredentials(email, password);
+                if (account != null)
+                {
+                    //Get the current principal object
+                    CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+                    if (customPrincipal == null)
+                        throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
+
+                    //Authenticate the user
+                    customPrincipal.Identity = new CustomIdentity(account.Id, account.Username, account.Email, new string[] { "" });
+
+                    //Update UI
+                    OnPropertyChanged("AuthenticatedUser");
+                    OnPropertyChanged("IsAuthenticated");
+                    Mediator.Notify("Login", "");
+                }
+                else
+                {
+                    ErrorMessage = "Login failed! Please provide some valid credentials.";
+                    //OnPropertyChanged("ErrorMessage");
+                    // Status = "Login failed! Please provide some valid credentials.";
+                    // TODO: change color of ui
+                }
+
             }
             else
             {
                 ErrorMessage = "Login failed! Please provide some valid credentials.";
-                //OnPropertyChanged("ErrorMessage");
-                // Status = "Login failed! Please provide some valid credentials.";
-                // TODO: change color of ui
+
             }
 
 
-
-
         }
+
+        private bool ValidInput(string email, string password)
+        {
+            if (email == "" || password == "")
+            {
+                return false;
+            }
+            return true;
+        }
+
         public LoginViewModel()
         {
             _accountProxy = new AccountServiceClient();

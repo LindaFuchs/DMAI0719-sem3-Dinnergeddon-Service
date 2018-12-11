@@ -2,7 +2,6 @@
 using Microsoft.AspNet.SignalR.Client;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DinnergeddonUI.Helpers
 {
@@ -36,7 +35,7 @@ namespace DinnergeddonUI.Helpers
 
         public Lobby GetLobbyById(Guid id)
         {
-            return null;
+            return hubProxy.Invoke<Lobby>("GetLobbyById", new object[] { id }).Result;
         }
 
         #region WS Callers
@@ -55,11 +54,11 @@ namespace DinnergeddonUI.Helpers
         {
             JoinLobby(accountId, lobbyId, "");
         }
-        
+
         #endregion
 
         #region Events
-        
+
         public event EventHandler<LobbyEventArgs> LobbyCreated;
         public event EventHandler<LobbyEventArgs> LobbyUpdated;
         public event EventHandler<LobbyEventArgs> LobbyDeleted;

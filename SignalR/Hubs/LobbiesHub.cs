@@ -67,10 +67,11 @@ namespace SignalR.Hubs
             throw new NotImplementedException();
         }
         
-        //TODO: Implement
-        public void GetLobbyById(Guid lobbyId)
+        public Task<Lobby> GetLobbyById(Guid lobbyId)
         {
-            throw new NotImplementedException();
+            return Task<Lobby>.Factory.StartNew(
+                () => { return lobbyController.GetLobbyById(lobbyId); }
+            );
         }
     }
 }

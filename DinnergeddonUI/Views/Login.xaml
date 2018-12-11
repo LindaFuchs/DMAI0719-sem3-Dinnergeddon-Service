@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DinnergeddonUI.Views"
+             xmlns:helpers="clr-namespace:DinnergeddonUI.Helpers"
              mc:Ignorable="d" 
         Background="{StaticResource ResourceKey=BackgroundColor}">
     <UserControl.Resources>
@@ -24,7 +25,7 @@
         </Style>
 
         <Style TargetType="{x:Type PasswordBox}">
-            <Setter Property="local:PasswordBoxMonitor.IsMonitoring" Value="True"/>
+            <Setter Property="helpers:PasswordBoxMonitor.IsMonitoring" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type PasswordBox}">
@@ -53,7 +54,7 @@
                                 <Setter Property="Foreground"
                                             Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                             </Trigger>
-                            <Trigger Property="local:PasswordBoxMonitor.PasswordLength" Value="0">
+                            <Trigger Property="helpers:PasswordBoxMonitor.PasswordLength" Value="0">
                                 <Setter Property="Visibility" TargetName="txtPrompt" Value="Visible"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -132,8 +133,7 @@
 
                 </DockPanel>
             </Border>
-            <TextBlock Visibility="Collapsed" Margin="0,5,0,10"  FontSize="14" Foreground="{StaticResource IncorrectColor}">
-            Incorrect username or password. Please try again.
+            <TextBlock  Text="{Binding ErrorMessage}" Margin="0,5,0,10"  FontSize="14" Foreground="{StaticResource IncorrectColor}">
             </TextBlock>
             <TextBlock FontSize="12" HorizontalAlignment="Right" Foreground="{StaticResource InputFormColor}"  Margin="0,0,0,20">
             <!--<Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://stackoverflow.com">Forgot your password?</Hyperlink>-->

@@ -13,7 +13,8 @@ namespace DinnergeddonUI
             //Create a custom principal with an anonymous identity at startup
             //CustomPrincipal customPrincipal = new CustomPrincipal();
             //AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
-
+            CustomPrincipal customPrincipal = new CustomPrincipal();
+            AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
             base.OnStartup(e);
 
            MainWindow app = new DinnergeddonUI.Views.MainWindow();

@@ -57,6 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\AccountServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LobbyServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -65,21 +70,31 @@
     <Compile Include="Helpers\EventArgs.cs" />
     <Compile Include="Helpers\EventRaiser.cs" />
     <Compile Include="Helpers\Mediator.cs" />
+    <Compile Include="Helpers\PasswordBoxMonitor.cs" />
+    <Compile Include="Helpers\RadioBoolToIntConverter.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="JoinLobbyPasswordDialog.xaml.cs">
       <DependentUpon>JoinLobbyPasswordDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="LobbyWindow.xaml.cs">
       <DependentUpon>LobbyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\User.cs" />
     <Compile Include="ViewModels\LobbiesViewModel.cs" />
+    <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\CreateLobbyDialog.xaml.cs">
+      <DependentUpon>CreateLobbyDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Lobbies.xaml.cs">
       <DependentUpon>Lobbies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lobby.xaml.cs">
+      <DependentUpon>Lobby.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -102,7 +117,15 @@
     <Compile Include="CustomIdentity.cs" />
     <Compile Include="CustomPrincipal.cs" />
     <Compile Include="DelegateCommand.cs" />
+    <Page Include="Views\CreateLobbyDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Lobbies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Lobby.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,6 +160,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\AccountServiceReference\DinnergeddonService.wsdl" />
+    <None Include="Connected Services\AccountServiceReference\DinnergeddonUI.AccountServiceReference.Account.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\AccountServiceReference\DinnergeddonUI.AccountServiceReference.Lobby.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\AccountServiceReference\Service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AccountServiceReference\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AccountServiceReference\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AccountServiceReference\Service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\LobbyServiceReference\DinnergeddonService.wsdl" />
     <None Include="Connected Services\LobbyServiceReference\DinnergeddonUI.LobbyServiceReference.Account.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -171,6 +213,7 @@
     <Resource Include="images\logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\AccountServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\LobbyServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +227,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\LobbyServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AccountServiceReference\Service.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AccountServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AccountServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AccountServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

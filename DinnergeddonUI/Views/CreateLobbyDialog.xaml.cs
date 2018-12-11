@@ -10,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace DinnergeddonUI.Views
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for CreateLobbyDialog.xaml
     /// </summary>
-    public partial class Login : UserControl
+    public partial class CreateLobbyDialog : Window
     {
-        public Login()
+        public CreateLobbyDialog()
         {
             InitializeComponent();
         }
-
-       
     }
-  
 }

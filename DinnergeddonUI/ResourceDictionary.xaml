@@ -18,6 +18,13 @@
 >
         <v:Lobbies></v:Lobbies>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:LobbyViewModel}"
+                  >
+        <v:Lobby></v:Lobby>
+</DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CreateLobbyViewModel}">
+        <v:CreateLobbyDialog></v:CreateLobbyDialog>
+    </DataTemplate>
 
     <Style x:Key="RoundButtonTemplate" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="OverridesDefaultStyle" Value="True"/>

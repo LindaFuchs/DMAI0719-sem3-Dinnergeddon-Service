@@ -7,13 +7,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using DinnergeddonUI.DinnergeddonService;
+using DinnergeddonUI.Helpers;
+using DinnergeddonUI.LobbyServiceReference;
 
-using DinnergeddonUI.Interfaces;
-
-namespace DinnergeddonUI
+namespace DinnergeddonUI.ViewModels
 {
-    class LobbyViewModel : INotifyPropertyChanged
+    class LobbyViewModel : BaseViewModel, IPageViewModel
     {
         private static Lobby _lobby;
         private string _lobbyName;
@@ -23,19 +22,22 @@ namespace DinnergeddonUI
         private readonly DelegateCommand _leaveLobbyCommand;
         LobbyServiceClient _proxy = new LobbyServiceClient();
 
-        private Window _dashboardWindow;
 
 
 
-        public LobbyViewModel(Lobby lobby, Window dashboardWindow)
+        public LobbyViewModel()
         {
-            _dashboardWindow = dashboardWindow;
-            _lobby = lobby;
+            Mediator.Subscribe("LobbyJoined", LobbyJoined);
 
-            _lobbyName = lobby.Name;
-            _joinedPlayers = _proxy.GetLobbyById(_lobby.Id).Players;
             //_joinLobbyCommand = new DelegateCommand(JoinLobby, CanJoin);
-            _leaveLobbyCommand = new DelegateCommand(LeaveLobby, CanLeave);
+
+        }
+
+        private void LobbyJoined(object parameter)
+        {
+            Guid lobbyId = (Guid)parameter;
+          _lobby=  _proxy.GetLobbyById(lobbyId);
+            LobbyName = _lobby.Name;
 
         }
 
@@ -46,11 +48,14 @@ namespace DinnergeddonUI
       public string LobbyName
         {
             get { return _lobbyName; }
+            set { _lobbyName = value;
+                OnPropertyChanged("LobbyName");
+            }
         }
         public IEnumerable<Account> JoinedPlayers
         {
             get { _joinedPlayers = _proxy.GetLobbyById(_lobby.Id).Players; return _joinedPlayers; }
-            set { _joinedPlayers = value; NotifyPropertyChanged("JoinedUsers"); }
+            set { _joinedPlayers = value; OnPropertyChanged("JoinedUsers"); }
         }
 
         private bool CanLogout(object parameter)
@@ -111,24 +116,11 @@ namespace DinnergeddonUI
             _proxy.LeaveLobby(userId, _lobby.Id);
 
             lb.Close();
-            _dashboardWindow.DataContext = new DashboardViewModel(_dashboardWindow);
             
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler<EventArgs> RequestClose;
-
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void Lobby_Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            LeaveLobby(sender);
-        }
+        
 
     }
 }

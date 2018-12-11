@@ -11,13 +11,16 @@
 
     </Window.Resources>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Left" Background="Blue"   Visibility="{Binding Path=IsAuthenticated, Converter={StaticResource BoolToVisConverter} }">
-            <TextBlock Text="{Binding Username}"></TextBlock>
-            <Button Content="Lobbies" Command="{Binding GoToLobbies}"></Button>
-            <Button Content="Profile" Command="{Binding GoToProfile}"></Button>
-            <Button Content="dummy"></Button>
-            <Button Content="Log out" Command="{Binding LogoutCommand}"></Button>
-        </StackPanel>
+        <Border Padding="15
+                 " Background="Gray">
+            <StackPanel   DockPanel.Dock="Left"    Visibility="{Binding Path=IsAuthenticated, Converter={StaticResource BoolToVisConverter} }">
+                <TextBlock Padding="8" FontSize="18" Text="{Binding Username}"></TextBlock>
+                <Button Padding="8" Content="Lobbies" Command="{Binding GoToLobbies}"></Button>
+                <Button Padding="8" Content="Profile" Command="{Binding GoToProfile}"></Button>
+                <Button Padding="8" Content="dummy"></Button>
+                <Button Padding="8" Content="Log out" Command="{Binding LogoutCommand}"></Button>
+            </StackPanel>
+        </Border>
         <ContentControl Content="{Binding CurrentPageViewModel}" />
     </DockPanel>
 </Window>

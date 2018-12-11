@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace DinnergeddonUI.Views
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for Lobby.xaml
     /// </summary>
-    public partial class Login : UserControl
+    public partial class Lobby : UserControl
     {
-        public Login()
+        public Lobby()
         {
             InitializeComponent();
         }
-
-       
     }
-  
 }

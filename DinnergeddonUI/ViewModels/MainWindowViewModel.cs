@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -13,6 +14,20 @@ namespace DinnergeddonUI.ViewModels
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
 
+        public string Username
+        {
+            get
+            {
+                if (IsAuthenticated)
+                {
+                    return
+                                          Thread.CurrentPrincipal.Identity.Name;
+                }
+
+
+                return "Not authenticated!";
+            }
+        }
         public List<IPageViewModel> PageViewModels
         {
             get
@@ -108,15 +123,25 @@ namespace DinnergeddonUI.ViewModels
             ChangeViewModel(PageViewModels[1]);
         }
 
-        private void SetTrue(object obj)
+
+        private void LoginSuccessful(object obj)
         {
             IsAuthenticated = true;
             CurrentPageViewModel = PageViewModels[1];
+            OnPropertyChanged("Username");
         }
+
         private void Logout(object obj)
         {
             IsAuthenticated = false;
             CurrentPageViewModel = PageViewModels[0];
+        }
+
+        private void LobbyJoined(object parameter)
+        {
+            Guid lobbyId = (Guid)parameter;
+            CurrentPageViewModel = PageViewModels[2];
+
         }
 
         public MainWindowViewModel()
@@ -125,7 +150,7 @@ namespace DinnergeddonUI.ViewModels
             PageViewModels.Add(new LoginViewModel());
             PageViewModels.Add(new LobbiesViewModel());
             //PageViewModels.Add(new LobbiesViewModel());
-            //PageViewModels.Add(new LobbyViewModel());
+            PageViewModels.Add(new LobbyViewModel());
             //PageViewModels.Add(new ProfileViewModel());
 
             CurrentPageViewModel = PageViewModels[0];
@@ -133,8 +158,9 @@ namespace DinnergeddonUI.ViewModels
             Mediator.Subscribe("GoTo1Screen", OnGo1Screen);
             Mediator.Subscribe("GoTo2Screen", OnGo2Screen);
             Mediator.Subscribe("GoToLobbies", OnGoToLobbies);
-            Mediator.Subscribe("Login", SetTrue);
+            Mediator.Subscribe("Login", LoginSuccessful);
             Mediator.Subscribe("Logout", Logout);
+            Mediator.Subscribe("OpenLobby", LobbyJoined);
 
 
         }

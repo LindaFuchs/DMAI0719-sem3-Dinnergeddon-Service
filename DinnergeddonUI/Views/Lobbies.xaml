@@ -8,6 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <TextBox DockPanel.Dock="Top" Text="Lobbies"></TextBox>
+        <Button DockPanel.Dock="Top" Command="{Binding CreateLobbyCommand}" Content="Create Lobby"></Button>
         <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="20,0,20,20"
              ItemsSource="{Binding Lobbies}" BorderThickness="0" Name="LobbiesListView" Background="{DynamicResource BackgroundColor}">
             <ListBox.ItemContainerStyle>

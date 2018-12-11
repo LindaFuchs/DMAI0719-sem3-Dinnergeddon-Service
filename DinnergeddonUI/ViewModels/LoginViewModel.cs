@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using DinnergeddonUI.AccountServiceReference;
 
 namespace DinnergeddonUI.ViewModels
 {
@@ -13,11 +15,30 @@ namespace DinnergeddonUI.ViewModels
     {
         private ICommand _login;
         private string _email;
+        private AccountServiceClient _accountProxy;
+        private string _errorMessage;
+        private IPageViewModel _currentPageViewModel;
+    private ICommand _goToLobbies;
+        private ICommand _goToProfile;
 
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged("ErrorMessage");
+            }
+        }
         public string Email
         {
             get { return _email; }
-            set { _email = value;
+            set
+            {
+                _email = value;
                 OnPropertyChanged("Email");
             }
 
@@ -34,7 +55,6 @@ namespace DinnergeddonUI.ViewModels
                 return _login;
             }
         }
-        private IPageViewModel _currentPageViewModel;
 
 
 
@@ -50,8 +70,7 @@ namespace DinnergeddonUI.ViewModels
                 OnPropertyChanged("CurrentPageViewModel");
             }
         }
-        private ICommand _goToLobbies;
-        private ICommand _goToProfile;
+    
 
         public ICommand GoToLobbies
         {
@@ -105,11 +124,40 @@ namespace DinnergeddonUI.ViewModels
             PasswordBox pb = parameter as PasswordBox;
             string email = _email;
             string password = pb.Password;
-            Mediator.Notify("Login", "");
+
+            //Validatecredentials through the authentication service
+
+            Account account = _accountProxy.VerifyCredentials(email, password);
+            if (account != null)
+            {
+                //Get the current principal object
+                CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+                if (customPrincipal == null)
+                    throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
+
+                //Authenticate the user
+                customPrincipal.Identity = new CustomIdentity(account.Id, account.Username, account.Email, new string[] { "" });
+
+                //Update UI
+                OnPropertyChanged("AuthenticatedUser");
+                OnPropertyChanged("IsAuthenticated");
+                Mediator.Notify("Login", "");
+            }
+            else
+            {
+                ErrorMessage = "Login failed! Please provide some valid credentials.";
+                //OnPropertyChanged("ErrorMessage");
+                // Status = "Login failed! Please provide some valid credentials.";
+                // TODO: change color of ui
+            }
+
+
+
+
         }
         public LoginViewModel()
         {
-
+            _accountProxy = new AccountServiceClient();
 
 
 

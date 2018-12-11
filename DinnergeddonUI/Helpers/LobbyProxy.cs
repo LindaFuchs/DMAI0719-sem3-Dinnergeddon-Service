@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using DinnergeddonUI.LobbyServiceReference;
 using Microsoft.AspNet.SignalR.Client;
-using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
 namespace DinnergeddonUI.Helpers
 {
-    class LobbyProxy
+    public class LobbyEventArgs : EventArgs
+    {
+        public IEnumerable<Lobby> Lobbies { get; set; }
+    }
+
+    public class LobbyProxy
     {
         private readonly HubConnection connection;
         private readonly IHubProxy hubProxy;
 
-        public delegate void LobbyCreatedEventHandler(object source, EventArgs args);
+        public delegate void LobbyCreatedEventHandler(object source, LobbyEventArgs args);
 
         public event LobbyCreatedEventHandler LobbyCreated;
 
@@ -23,6 +26,12 @@ namespace DinnergeddonUI.Helpers
             hubProxy = connection.CreateHubProxy("LobbiesHub");
 
             connection.Start().Wait();
+            SetupListeners();
+        }
+
+        private void SetupListeners()
+        {
+            hubProxy.On<IEnumerable<Lobby>>("lobbyCreated", (lobbies) => );
         }
 
         public void CreateLobby(string lobbyName, int playerLimit)
@@ -30,10 +39,10 @@ namespace DinnergeddonUI.Helpers
             hubProxy.Invoke("CreateLobby", new object[] { lobbyName, playerLimit, "" });
         }
 
-        protected virtual void OnLobbyCreated()
+        protected virtual void OnLobbyCreated(IEnumerable<Lobby> lobbies)
         {
             if (LobbyCreated != null)
-                LobbyCreated(this, EventArgs.Empty);
+                LobbyCreated(this, new LobbyEventArgs() { Lobbies = lobbies });
         }
     }
 }

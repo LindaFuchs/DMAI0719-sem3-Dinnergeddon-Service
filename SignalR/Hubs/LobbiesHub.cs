@@ -22,8 +22,8 @@ namespace SignalR.Hubs
                 lobby = lobbyController.CreateLobby(lobbyName, playerLimit);
             else
                 lobby = lobbyController.CreateLobby(lobbyName, playerLimit, password);
-            
-            //Clients.All.addMessage("New lobby info here");
+
+            Clients.All.lobbyCreated(lobbyController.GetLobbies());
         }
 
         public void GetLobbies()

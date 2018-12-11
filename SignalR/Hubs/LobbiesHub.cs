@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNet.SignalR;
-using System;
-using Controller;
+﻿using Controller;
+using Microsoft.AspNet.SignalR;
 using Model;
-using System.Collections.Generic;
+using System;
 
 namespace SignalR.Hubs
 {
@@ -25,7 +24,7 @@ namespace SignalR.Hubs
                 lobby = lobbyController.CreateLobby(lobbyName, playerLimit, password);
 
             //TODO: figure out what you need to return here
-            //Clients.All.lobbyCreated("New lobby info here");
+            //Clients.All.addMessage("New lobby info here");
         }
 
         public void GetLobbies()

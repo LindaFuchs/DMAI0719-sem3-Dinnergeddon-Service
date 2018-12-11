@@ -20,9 +20,11 @@ namespace SignalRTestClient
             connection.Start().Wait();
 
             Console.WriteLine("Connection to the hub was made");
-            proxy.Invoke("NewLobby", "Federlizer's lobby", "Federlizer", 3);
+            proxy.Invoke("CreateLobby", "Federlizer's lobby", "Federlizer", 3);
             Console.WriteLine("method called...");
             Console.ReadLine();
+
+            proxy.Subscribe("addMessage");
         }
     }
 }

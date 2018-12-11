@@ -2,6 +2,7 @@
 using Microsoft.AspNet.SignalR.Client;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DinnergeddonUI.Helpers
 {
@@ -26,6 +27,11 @@ namespace DinnergeddonUI.Helpers
             hubProxy.On<Lobby>("lobbyUpdated", (lobby) => OnLobbyUpdated(lobby));
             hubProxy.On<Lobby>("lobbyDeleted", (lobby) => OnLobbyDeleted(lobby));
             hubProxy.On<bool>("joined", (joined) => OnLobbyJoined(joined));
+        }
+
+        public IEnumerable<Lobby> GetLobbies()
+        {
+            return hubProxy.Invoke<IEnumerable<Lobby>>("GetLobbies").Result;
         }
 
         public Lobby GetLobbyById(Guid id)

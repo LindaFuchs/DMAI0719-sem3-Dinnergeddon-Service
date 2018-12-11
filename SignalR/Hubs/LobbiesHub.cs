@@ -2,6 +2,8 @@
 using Microsoft.AspNet.SignalR;
 using Model;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SignalR.Hubs
 {
@@ -32,14 +34,15 @@ namespace SignalR.Hubs
                 lobby = lobbyController.CreateLobby(lobbyName, playerLimit);
             else
                 lobby = lobbyController.CreateLobby(lobbyName, playerLimit, password);
-
+            Console.WriteLine("New Lobby was created");
             Clients.All.lobbyCreated(lobby);
         }
         
-        //TODO: Implement
-        public void GetLobbies()
+        public Task<IEnumerable<Lobby>> GetLobbies()
         {
-            throw new NotImplementedException();
+            return Task<IEnumerable<Lobby>>.Factory.StartNew(
+                () => { return lobbyController.GetLobbies(); }
+            );
         }
 
         public void JoinLobby(Guid accountId, Guid lobbyId, string password)

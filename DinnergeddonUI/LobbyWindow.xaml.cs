@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DinnergeddonUI.DinnergeddonService;
+using DinnergeddonUI.LobbyServiceReference;
 
-using DinnergeddonUI.Interfaces;
+
 using DinnergeddonUI.ViewModels;
 
 namespace DinnergeddonUI
@@ -25,8 +25,8 @@ namespace DinnergeddonUI
     {
         public LobbyWindow(Lobby lobby, Window dashboardWindow )
         {
-            var lobbyViewModel = new LobbyViewModel(lobby, dashboardWindow);
-            DataContext = lobbyViewModel;
+            //var lobbyViewModel = new LobbyViewModel(lobby, dashboardWindow);
+            //DataContext = lobbyViewModel;
             InitializeComponent();
         }
 

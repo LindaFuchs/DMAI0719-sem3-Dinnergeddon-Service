@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:vm ="clr-namespace:DinnergeddonUI.ViewModels"
+                    xmlns:v="clr-namespace:DinnergeddonUI.Views"
+                    xmlns:local="clr-namespace:DinnergeddonUI">
+
+    <SolidColorBrush x:Key="InputFormColor">#858585</SolidColorBrush>
+    <SolidColorBrush x:Key="ButtonColor">#703913</SolidColorBrush>
+    <SolidColorBrush x:Key="PressedButtonColor">#9C5C31</SolidColorBrush>
+    <SolidColorBrush x:Key="IncorrectColor">#B41B1B</SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundColor">#2A2323</SolidColorBrush>
+
+
+    <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+        <v:Login></v:Login>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:LobbiesViewModel}"
+>
+        <v:Lobbies></v:Lobbies>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:LobbyViewModel}"
+                  >
+        <v:Lobby></v:Lobby>
+</DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CreateLobbyViewModel}">
+        <v:CreateLobbyDialog></v:CreateLobbyDialog>
+    </DataTemplate>
+
+    <Style x:Key="RoundButtonTemplate" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonColor}"></Setter>
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="6" Background="{TemplateBinding Background}" BorderThickness="0" Padding="13,10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </ContentPresenter>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource PressedButtonColor}"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="20"></Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -15,8 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DinnergeddonUI.DinnergeddonService;
 
-using DinnergeddonUI.Interfaces;
-
 
 namespace DinnergeddonUI
 {

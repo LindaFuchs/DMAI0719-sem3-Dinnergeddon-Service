@@ -214,6 +214,11 @@ namespace Controller.Tests
             throw new NotImplementedException();
         }
 
+        public bool RemoveFromRole(Guid accountId, string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetEmailConfirmed(Account account, bool confirmed)
         {
             throw new NotImplementedException();

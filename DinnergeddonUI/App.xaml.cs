@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DinnergeddonUI.ViewModels;
+using DinnergeddonUI.Views;
+using System;
 using System.Windows;
-using DinnergeddonUI.ViewModels;
+
 
 namespace DinnergeddonUI
 {
@@ -9,18 +11,18 @@ namespace DinnergeddonUI
         protected override void OnStartup(StartupEventArgs e)
         {
             //Create a custom principal with an anonymous identity at startup
+            //CustomPrincipal customPrincipal = new CustomPrincipal();
+            //AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
             CustomPrincipal customPrincipal = new CustomPrincipal();
             AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
-
             base.OnStartup(e);
 
-            MainWindow loginWindow = new MainWindow();
-
+           MainWindow app = new DinnergeddonUI.Views.MainWindow();
             //Show the login view
-            MainWindowViewModel viewModel = new MainWindowViewModel();
+            MainWindowViewModel context = new MainWindowViewModel();
 
-            loginWindow.DataContext = viewModel;
-            loginWindow.Show();
+            app.DataContext = context;
+            app.Show();
         }
     }
 }

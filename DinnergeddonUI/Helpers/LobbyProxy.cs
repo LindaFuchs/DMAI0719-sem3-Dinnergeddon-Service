@@ -31,7 +31,7 @@ namespace DinnergeddonUI.Helpers
 
         private void SetupListeners()
         {
-            hubProxy.On<IEnumerable<Lobby>>("lobbyCreated", (lobbies) => );
+            hubProxy.On<IEnumerable<Lobby>>("lobbyCreated", (lobbies) => OnLobbyCreated(lobbies));
         }
 
         public void CreateLobby(string lobbyName, int playerLimit)

@@ -5,6 +5,16 @@ using System;
 
 namespace SignalR.Hubs
 {
+    /// <summary>
+    /// 
+    /// ###Event names###
+    /// lobbyCreated - when a new lobby is created, that lobby is passed to the clients
+    /// lobbyUpdated - when a lobby is updated, that lobby is passed to the clients
+    /// lobbyDeleted - when a lobby is removed, that lobby is passed to the clients for deletion
+    /// joined       - when a client joins a lobby, whether or not that client has joined
+    /// ###Event names###
+    /// 
+    /// </summary>
     public class LobbiesHub : Hub
     {
         private readonly ILobbyController lobbyController;
@@ -23,13 +33,13 @@ namespace SignalR.Hubs
             else
                 lobby = lobbyController.CreateLobby(lobbyName, playerLimit, password);
 
-            Clients.All.lobbyCreated(lobbyController.GetLobbies());
+            Clients.All.lobbyCreated(lobby);
         }
-
+        
+        //TODO: Implement
         public void GetLobbies()
         {
-            //TODO:Figure out how to return this
-            //Clients.Caller.getLobbies("all lobbies here");
+            Clients.Caller.getLobbies(lobbyController.GetLobbies());
         }
 
         public void JoinLobby(Guid accountId, Guid lobbyId, string password)
@@ -41,10 +51,14 @@ namespace SignalR.Hubs
             else
                 success = lobbyController.JoinLobby(accountId, lobbyId, password);
 
-            //TODO:Figure out how to return this
-            //Clients.All.playerJoinedLobby("The lobby and player here");
-        }
+            Clients.Caller.joined(success);
 
+            // If the caller has joined the lobby, update all other clients
+            if (success)
+                Clients.AllExcept(Clients.Caller).lobbyUpdated(lobbyController.GetLobbyById(lobbyId));
+        }
+        
+        //TODO: Implement, and think about how to notify users for lobby deleted, lobby updated (get info from controller prolly)
         public void LeaveLobby(Guid accountid, Guid lobbyid)
         {
             lobbyController.LeaveLobby(accountid, lobbyid);
@@ -52,7 +66,8 @@ namespace SignalR.Hubs
             //TODO:Figure out how to return this
             //Clients.All.playerLeftLobby("The lobby and the player here");
         }
-
+        
+        //TODO: Implement
         public void GetLobbyById(Guid lobbyId)
         {
             //TODO:Figure out how to return this

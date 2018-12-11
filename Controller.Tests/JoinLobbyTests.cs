@@ -47,7 +47,7 @@ namespace Controller.Tests
             } while (lobby.Id == fakeID);
 
             // Action
-            bool result = controller.JoinLobby(account.Id, Guid.NewGuid());
+            bool result = controller.JoinLobby(account.Id, Guid.NewGuid(), "");
 
             // Assert
             Assert.IsFalse(result);
@@ -67,7 +67,7 @@ namespace Controller.Tests
             int expectedPlayerCount = lobby.Players.Count;
 
             // Action
-            bool result = controller.JoinLobby(fakeID, lobby.Id);
+            bool result = controller.JoinLobby(fakeID, lobby.Id, "");
 
             // Assert
             Assert.IsFalse(result);
@@ -81,7 +81,7 @@ namespace Controller.Tests
             int expectedPlayerCount = lobby.Players.Count + 1;
 
             // Action
-            bool result = controller.JoinLobby(account.Id, lobby.Id);
+            bool result = controller.JoinLobby(account.Id, lobby.Id, "");
 
             // Assert
             Assert.IsTrue(result);
@@ -106,7 +106,7 @@ namespace Controller.Tests
             int expectedPlayerAmount = lobby.Players.Count;
 
             // Action
-            bool result = controller.JoinLobby(account.Id, lobby.Id);
+            bool result = controller.JoinLobby(account.Id, lobby.Id, "");
 
             // Assert
             Assert.IsFalse(result);
@@ -121,7 +121,7 @@ namespace Controller.Tests
             int expectedPlayerAmount = lobby.Players.Count;
 
             // Action
-            bool result = controller.JoinLobby(account.Id, lobby.Id);
+            bool result = controller.JoinLobby(account.Id, lobby.Id, "");
 
             // Assert
             Assert.IsFalse(result);
@@ -144,7 +144,7 @@ namespace Controller.Tests
             int expectedPlayerCount = lobby.Players.Count;
 
             // Action
-            bool result = controller.JoinLobby(account.Id, lobby.Id);
+            bool result = controller.JoinLobby(account.Id, lobby.Id, "");
 
             // Assert
             Assert.IsFalse(result);

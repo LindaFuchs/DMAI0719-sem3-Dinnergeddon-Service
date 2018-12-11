@@ -163,7 +163,7 @@ namespace DinnergeddonService
         /// <returns>If the operation was succesful</returns>
         public bool JoinLobby(Guid accountId, Guid lobbyId)
         {
-            return lobbyController.JoinLobby(accountId, lobbyId);
+            return lobbyController.JoinLobby(accountId, lobbyId, "");
         }
 
         /// <summary>

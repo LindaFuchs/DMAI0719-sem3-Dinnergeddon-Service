@@ -17,15 +17,30 @@ namespace DinnergeddonUI.ViewModels
     {
         private LobbyServiceClient _lobbyProxy = new LobbyServiceClient();
         private List<LobbyServiceReference.Lobby> _lobbies;
+        private LobbyProxy _proxy;
         private ICommand _joinLobby;
         private ICommand _createLobby;
         private CustomPrincipal customPrincipal;
+        private CreateLobbyDialog cld;
+        private string _buttonText;
 
+        public string ButtonText
+        {
+            get
+            {
+                return _buttonText;
+            }
+            set
+            {
+                _buttonText = value;
+                OnPropertyChanged("ButtonText");
+            }
+        }
         public ICommand CreateLobbyCommand
         {
             get
             {
-                if(_createLobby == null)
+                if (_createLobby == null)
                 {
                     _createLobby = new RelayCommand(CreateLobby);
                 }
@@ -46,27 +61,46 @@ namespace DinnergeddonUI.ViewModels
         }
         public List<LobbyServiceReference.Lobby> Lobbies
         {
-            get {
+            get
+            {
 
-               
-                return _lobbies; }
-            set { _lobbies = value;
+
+                return _lobbies;
+            }
+            set
+            {
+                _lobbies = value;
                 OnPropertyChanged("Lobbies");
             }
         }
 
         public LobbiesViewModel()
         {
-            
+
+            _proxy = new LobbyProxy();
+            _proxy.LobbyCreated += OnLobbyCreated;
+            ///Todo: change to _proxy
             Lobbies = _lobbyProxy.GetLobbies().ToList();
-           customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+            customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+        }
+
+        private void OnLobbyCreated(object sender, LobbyEventArgs args)
+        {
+            Lobbies = args.Lobbies.ToList();
         }
 
         private void CreateLobby(object parameter)
         {
-            CreateLobbyDialog cld = new CreateLobbyDialog();
-            cld.DataContext = new CreateLobbyViewModel();
+            cld = new CreateLobbyDialog
+            {
+                DataContext = new CreateLobbyViewModel()
+            };
+
             cld.Show();
+            Mediator.Subscribe("LobbyCreated", new Action<object>((x) => cld.Close()));
+
+           
+
         }
 
         private void JoinLobby(object parameter)
@@ -75,8 +109,8 @@ namespace DinnergeddonUI.ViewModels
             Guid userId = customPrincipal.Identity.Id;
             if (_lobbyProxy.JoinLobby(userId, lobbyId) && !IsJoinedInALobby(userId, lobbyId))
             {
- Mediator.Notify("LobbyJoined", lobbyId);
-            Mediator.Notify("OpenLobby", lobbyId);
+                Mediator.Notify("LobbyJoined", lobbyId);
+                Mediator.Notify("OpenLobby", lobbyId);
             }
             else
             {

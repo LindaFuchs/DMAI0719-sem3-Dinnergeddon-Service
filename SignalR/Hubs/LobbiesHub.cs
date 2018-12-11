@@ -39,7 +39,7 @@ namespace SignalR.Hubs
         //TODO: Implement
         public void GetLobbies()
         {
-            Clients.Caller.getLobbies(lobbyController.GetLobbies());
+            throw new NotImplementedException();
         }
 
         public void JoinLobby(Guid accountId, Guid lobbyId, string password)
@@ -61,17 +61,13 @@ namespace SignalR.Hubs
         //TODO: Implement, and think about how to notify users for lobby deleted, lobby updated (get info from controller prolly)
         public void LeaveLobby(Guid accountid, Guid lobbyid)
         {
-            lobbyController.LeaveLobby(accountid, lobbyid);
-
-            //TODO:Figure out how to return this
-            //Clients.All.playerLeftLobby("The lobby and the player here");
+            throw new NotImplementedException();
         }
         
         //TODO: Implement
         public void GetLobbyById(Guid lobbyId)
         {
-            //TODO:Figure out how to return this
-            //Clients.Caller.getLobbyById("the lobby here");
+            throw new NotImplementedException();
         }
     }
 }

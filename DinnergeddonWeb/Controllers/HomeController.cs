@@ -61,6 +61,10 @@ namespace DinnergeddonWeb.Controllers
             return View(highScoreModels);
         }
 
+        /// <summary>
+        /// Initiates a download for the game file(s) from the website
+        /// </summary>
+        /// <returns></returns>
         public FileResult Download()
         {
             //The path to the file to download.

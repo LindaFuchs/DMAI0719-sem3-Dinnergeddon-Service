@@ -86,7 +86,9 @@ namespace DinnergeddonUI.ViewModels
 
         private void OnLobbyCreated(object sender, LobbyEventArgs args)
         {
-            Lobbies = args.Lobbies.ToList();
+            LobbyServiceReference.Lobby createdLobby = args.Lobby;
+            _lobbies.Add(createdLobby);
+            Lobbies = _lobbies;
         }
 
         private void CreateLobby(object parameter)

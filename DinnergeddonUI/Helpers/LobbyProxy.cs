@@ -15,9 +15,9 @@ namespace DinnergeddonUI.Helpers
         {
             connection = new HubConnection(url);
             hubProxy = connection.CreateHubProxy("LobbiesHub");
+            SetupListeners();
 
             connection.Start().Wait();
-            SetupListeners();
         }
 
         private void SetupListeners()

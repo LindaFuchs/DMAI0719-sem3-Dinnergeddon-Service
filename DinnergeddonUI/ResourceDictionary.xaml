@@ -9,6 +9,8 @@
     <SolidColorBrush x:Key="PressedButtonColor">#9C5C31</SolidColorBrush>
     <SolidColorBrush x:Key="IncorrectColor">#B41B1B</SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundColor">#2A2323</SolidColorBrush>
+    <SolidColorBrush x:Key="DinnerGeddonColor">#703913</SolidColorBrush>
+
 
 
     <DataTemplate DataType="{x:Type vm:LoginViewModel}">

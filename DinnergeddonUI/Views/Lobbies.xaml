@@ -5,10 +5,46 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DinnergeddonUI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{DynamicResource BackgroundColor}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+
+    </UserControl.Resources>
     <DockPanel>
-        <TextBox DockPanel.Dock="Top" Text="Lobbies"></TextBox>
-        <Button DockPanel.Dock="Top" Command="{Binding CreateLobbyCommand}" Content="Create Lobby"></Button>
+        <TextBlock Margin="15" FontSize="18" Foreground="White" DockPanel.Dock="Top" Text="Lobbies"></TextBlock>
+        <StackPanel Margin="0,0,15,0" DockPanel.Dock="Top" HorizontalAlignment="Right">
+            <Button Style="{DynamicResource RoundButtonTemplate}"  Command="{Binding CreateLobbyCommand}" Content="Create Lobby"></Button>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Visibility="{Binding Path=IsJoined, Converter={StaticResource BoolToVisConverter} }">
+            <TextBlock Text="Joined Lobby" Foreground="White" FontSize="18" Margin="20 ,0,0,0"></TextBlock>
+            <Border  Margin="20,10,20,20" BorderBrush="#362e2e" BorderThickness="2" CornerRadius="8,8,8,8">
+                <DockPanel Background="#362e2e" >
+                    <StackPanel>
+                        <WrapPanel>
+                            <TextBlock FontSize="13" FontWeight="Bold" Foreground="White" Margin="10,10,5,5" Text="{Binding JoinedLobby.Name}" />
+
+                            <TextBlock Margin="0,10,10,5" Text="· public" Foreground="White" FontWeight="Light" FontSize="11" ></TextBlock>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <TextBlock Foreground="White" Margin="10,0,10,10" Text="Players  joined:"  />
+                            <TextBlock Foreground="White" Text="{Binding JoinedLobby.Players.Count}"  />
+                            <TextBlock Foreground="White" Text="/"  />
+
+                            <TextBlock Foreground="White"  Text="{Binding JoinedLobby.Limit}"  />
+
+
+                        </WrapPanel>
+                    </StackPanel>
+
+                    <WrapPanel Margin="20,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                        <Button Command="{Binding OpenLobbyCommand}" CommandParameter="{Binding JoinedLobby.Id}"  VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" 
+                            Background="#d1ffc6" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" 
+                                        Content="Open"></Button>
+                    </WrapPanel>
+                </DockPanel>
+            </Border>
+        </StackPanel>
         <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="20,0,20,20"
              ItemsSource="{Binding Lobbies}" BorderThickness="0" Name="LobbiesListView" Background="{DynamicResource BackgroundColor}">
             <ListBox.ItemContainerStyle>

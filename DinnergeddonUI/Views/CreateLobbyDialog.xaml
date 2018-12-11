@@ -14,13 +14,14 @@
         <helpers:RadioBoolToIntConverter x:Key="radioBoolToIntConverter" />
 
         <SolidColorBrush x:Key="thisBackgroundColor">#f7f2ed</SolidColorBrush>
-     
+
+        
     </Window.Resources>
 
     <DockPanel>
 
-    <!--Create button panel-->
-    <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+        <!--Create button panel-->
+        <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Right">
             <Button    Command="{Binding CreateLobbyCommand}"  IsDefault="True"
               
                  Content="Create"
@@ -28,57 +29,52 @@
                  FontSize="18"
                        Padding="30"
                        Margin="10" ></Button>
-    </WrapPanel>
+        </WrapPanel>
 
-    <StackPanel  Margin="50,25,50,50">
+        <StackPanel  Margin="50,25,50,50">
 
-        <Label Content="Create a lobby" HorizontalAlignment="Center" FontSize="23" Margin="0,0,0,40"></Label>
+            <Label Content="Create a lobby" HorizontalAlignment="Center" FontSize="23" Margin="0,0,0,40"></Label>
 
-        <!--Lobby name field-->
-        <Border
+            <!--Lobby name field-->
+            <Border
                 Name="LobbyNameBorder"
             Margin="0,0,0,35"
                 BorderBrush="{StaticResource InputFormColor}"
             
             BorderThickness="0 0 0 1"
             >
-            <Grid Margin="5,0,0,3">
-                <TextBox Text="{Binding LobbyName}" x:Name="LobbyNameTextBox" FontSize="16" Foreground="Black" Background="{StaticResource thisBackgroundColor}"  BorderThickness="0"   TextWrapping="Wrap"  />
-                <TextBlock FontSize="16" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="Lobby name">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                            <Setter Property="Opacity" Value="0.6"></Setter>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=LobbyNameTextBox}" Value="">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
+                <Grid Margin="5,0,0,3">
+                    <TextBox Text="{Binding LobbyName}" x:Name="LobbyNameTextBox" FontSize="16" Foreground="Black" Background="{StaticResource thisBackgroundColor}"  BorderThickness="0"   TextWrapping="Wrap"  />
+                    <TextBlock FontSize="16" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="Lobby name">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Setter Property="Opacity" Value="0.6"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=LobbyNameTextBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
 
-                    </TextBlock.Style>
-                </TextBlock>
-            </Grid>
-        </Border>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </Border>
 
-        <!--Select number of players-->
-        <DockPanel Margin="0,0,0,35" >
-            <Label FontSize="15" DockPanel.Dock="Left" Content="Number of players:"></Label>
-            <WrapPanel  DockPanel.Dock="Right"  HorizontalAlignment="Right">
-                <RadioButton x:Name="fivePlayers" Padding="6" Style="{StaticResource {x:Type ToggleButton}}">5</RadioButton>
+            <!--Select number of players-->
+            <DockPanel Margin="0,0,0,35" >
+                <Label FontSize="15" DockPanel.Dock="Left" Content="Number of players:"></Label>
+                <WrapPanel  DockPanel.Dock="Right"  HorizontalAlignment="Right">
 
-
-                <RadioButton 
-                   IsChecked="{Binding Path=IsSuccess, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=2}" Content="2" Padding="6" Style="{StaticResource {x:Type ToggleButton}}">
-                    </RadioButton>
-
-                    <RadioButton IsChecked="{Binding Path=IsSuccess, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=3}" Content="3" Padding="6" Style="{StaticResource {x:Type ToggleButton}}"></RadioButton>
+                    <RadioButton  IsChecked="{Binding Path=IsSuccess, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=2}" Content="2" Padding="6" Style="{StaticResource {x:Type ToggleButton}}"></RadioButton>
+                        <RadioButton IsChecked="{Binding Path=IsSuccess, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=3}" Content="3" Padding="6" Style="{StaticResource {x:Type ToggleButton}}"></RadioButton>
                     <RadioButton  IsChecked="{Binding Path=IsSuccess, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=4}" Content="4" Padding="6" Style="{StaticResource {x:Type ToggleButton}}"></RadioButton>
-            </WrapPanel>
+                </WrapPanel>
 
-        </DockPanel>
+            </DockPanel>
 
-        <!--<DockPanel Margin="0,0,0,25" >
+            <!--<DockPanel Margin="0,0,0,25" >
                 <Label Margin="0,0,0,6
                        " FontSize="13" DockPanel.Dock="Top" Content="Number of players:" HorizontalAlignment="Center"></Label>
                 <WrapPanel Margin="5,0,0,0" DockPanel.Dock="Right"  HorizontalAlignment="Center">
@@ -92,15 +88,15 @@
                 </WrapPanel>
             </DockPanel>-->
 
-        <!--Make it private checkbox-->
-        <CheckBox Margin="0,0,0,10"
+            <!--Make it private checkbox-->
+            <CheckBox Margin="0,0,0,10"
                 Content="Make it private"
                 Name="PasswordCheckbox"
                       FontSize="13"
                       Background="{StaticResource thisBackgroundColor}">
-        </CheckBox>
+            </CheckBox>
 
-        <Border
+            <Border
                                                 Name="PasswordBorder"
 
                                         Visibility="{Binding ElementName=PasswordCheckbox, Path=IsChecked, Converter={StaticResource BoolToVis}}" 
@@ -109,17 +105,17 @@
             BorderThickness="0 0 0 1"
             Margin="0,0,0,25"
             >
-            <Grid Margin="5,0,0,3">
-                <PasswordBox  x:Name="PasswordTextBox"  FontSize="16" 
+                <Grid Margin="5,0,0,3">
+                    <PasswordBox  x:Name="PasswordTextBox"  FontSize="16" 
                                  Foreground="Black"  BorderThickness="0"  
                                  Background="{StaticResource thisBackgroundColor}" Width="Auto"  >
 
 
-                </PasswordBox>
-               
-            </Grid>
-        </Border>
-        <Border
+                    </PasswordBox>
+
+                </Grid>
+            </Border>
+            <Border
                                 Name="ConfirmPasswordBorder"
 
                         Visibility="{Binding ElementName=PasswordCheckbox, Path=IsChecked, Converter={StaticResource BoolToVis}}" 
@@ -128,29 +124,29 @@
             BorderThickness="0 0 0 1"
             Margin="0,0,0,10"
             >
-            <Grid Margin="5,0,0,3">
-                <PasswordBox   x:Name="ConfirmPasswordTextBox"  FontSize="16" 
+                <Grid Margin="5,0,0,3">
+                    <PasswordBox   x:Name="ConfirmPasswordTextBox"  FontSize="16" 
                                  Foreground="Black"  BorderThickness="0"  
                                  Background="{StaticResource thisBackgroundColor}" Width="Auto"  >
-                   
-                </PasswordBox>
-                <TextBlock FontSize="16" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="sdsdsd password">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=ConfirmPasswordTextBox}" Value="">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
 
-                    </TextBlock.Style>
-                </TextBlock>
-            </Grid>
+                    </PasswordBox>
+                    <TextBlock FontSize="16" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="sdsdsd password">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=ConfirmPasswordTextBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
 
-        </Border>
-    </StackPanel>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+            </Border>
+        </StackPanel>
 
     </DockPanel>
 

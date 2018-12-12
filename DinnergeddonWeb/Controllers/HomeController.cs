@@ -69,13 +69,13 @@ namespace DinnergeddonWeb.Controllers
         {
             //The path to the file to download.
             //TODO: Change this so it isn't a hard path and to the .exe when it's made.
-            String filePath = @"D:\anoobis\CODE N SHIT\3rd Semester Project\Dinnergeddon\DinnergeddonWeb\images\logo.png";
+            String filePath = @"D:\anoobis\CODE N SHIT\3rd Semester Project\Dinnergeddon\DinnergeddonWeb\App_Data\Dinnergeddon Installer.exe";
             //Converts the file content into an array of bytes.
             byte[] fileContent = System.IO.File.ReadAllBytes(filePath);
             
             //Returns the file content along with the type for the download.
             //TODO: REMEMBER TO CHANGE THE FILE TYPE
-            return File(fileContent, "application/png", "DinnergeddonInstaller.png");
+            return File(fileContent, "application/exe", "Dinnergeddon Installer.exe");
         }
 
         public ActionResult Contact()

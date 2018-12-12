@@ -20,6 +20,8 @@ namespace DinnergeddonUI.ViewModels
         private ObservableCollection<Account> _joinedPlayers;
         private ICommand _leaveLobby;
         private LobbyProxy _proxy;
+        private CustomPrincipal customPrincipal;
+
 
 
 
@@ -30,14 +32,30 @@ namespace DinnergeddonUI.ViewModels
             Mediator.Subscribe("LobbyJoined", LobbyJoined);
             _proxy = new LobbyProxy();
             _proxy.GetLobbyByIdResponse += OnLobbyRecieved;
+            _proxy.LobbyUpdated += OnLobbyUpdated;
+            _proxy.LobbyDeleted += OnLobbyDeleted;
+            customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+            Mediator.Subscribe("LeaveLobbyOnExit", LeaveLobby);
+
+
             //_joinLobbyCommand = new DelegateCommand(JoinLobby, CanJoin);
+
+        }
+
+        private void OnLobbyUpdated(object sender, LobbyEventArgs args)
+        {
+            _proxy.GetLobbyById(_lobby.Id);
+        }
+
+        private void OnLobbyDeleted(object sender, Guid lobbyId)
+        {
 
         }
 
         private void LobbyJoined(object parameter)
         {
             _proxy.GetLobbyById((Guid)parameter);
-          //  LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById((Guid)parameter);
+            //  LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById((Guid)parameter);
 
         }
 
@@ -59,17 +77,24 @@ namespace DinnergeddonUI.ViewModels
             {
                 if (_leaveLobby == null)
                 {
-                    _leaveLobby = new RelayCommand(LeaveLobby);
+                    _leaveLobby = new RelayCommand((x) =>
+                    {
+                        LeaveLobby(x);
+                        Mediator.Notify("GoToLobbies", "");
+                    });
+
                 }
                 return _leaveLobby;
             }
         }
 
 
-      public string LobbyName
+        public string LobbyName
         {
             get { return _lobbyName; }
-            set { _lobbyName = value;
+            set
+            {
+                _lobbyName = value;
                 OnPropertyChanged("LobbyName");
             }
         }
@@ -79,11 +104,11 @@ namespace DinnergeddonUI.ViewModels
         //    set { _joinedPlayers = value; OnPropertyChanged("JoinedUsers"); }
         //}
 
-      
 
-        
 
-        
+
+
+
 
 
 
@@ -93,32 +118,36 @@ namespace DinnergeddonUI.ViewModels
         //    CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
         //    var userId = customPrincipal.Identity.Id;
         //    _proxy.JoinLobby(userId, lobbyId);
-           
+
         //   Window lobby = new LobbyWindow(lobbyId);
         //    lobby.Show();
-                 
+
         //}
 
         private void LeaveLobby(object parameter)
         {
-            _proxy.Lea
+            Guid userId = customPrincipal.Identity.Id;
+
+            _proxy.LeaveLobby(userId, _lobby.Id);
+
+
             //Window lb = parameter as Window;
             //CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
             //var userId = customPrincipal.Identity.Id;
             //_proxy.LeaveLobby(userId, _lobby.Id);
 
             //lb.Close();
-            
+
         }
 
         private void OnLobbyRecieved(object sender, LobbyEventArgs args)
         {
             _lobby = args.Lobby;
             LobbyName = _lobby.Name;
-            
-            JoinedPlayers = new ObservableCollection<Account>( _lobby.Players.ToList());
+
+            JoinedPlayers = new ObservableCollection<Account>(_lobby.Players.ToList());
         }
-        
+
 
     }
 }

@@ -122,6 +122,7 @@ namespace DinnergeddonUI.ViewModels
             _proxy.LobbyUpdated += OnLobbyUpdated;
             _proxy.GetLobbiesResponse += OnLobbiesRecieved;
             _proxy.GetLobbyByIdResponse += OnLobbyRecieved;
+            _proxy.LobbyDeleted += OnLobbyDeleted;
 
             _proxy.GetLobbies();
             ///
@@ -129,6 +130,13 @@ namespace DinnergeddonUI.ViewModels
             //Lobbies = _lobbies;
             //_lobbies = new List<LobbyServiceReference.Lobby>();
             customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+        }
+
+        private void OnLobbyDeleted(object sender, Guid lobbyId)
+        {
+            IsJoined = false;
+            JoinedLobby = null;
+            _proxy.GetLobbies();
         }
 
         private void OnLobbiesRecieved(object sender, IEnumerable<DinnergeddonServiceReference.Lobby> lobbies)
@@ -163,34 +171,43 @@ namespace DinnergeddonUI.ViewModels
             DinnergeddonServiceReference.Lobby lobbyToUpdate = _lobbies.Where(x => x.Id == updatedLobby.Id).FirstOrDefault();
             lobbyToUpdate.Players = updatedLobby.Players;
             lobbyToUpdate.Limit = updatedLobby.Limit;
+            _proxy.GetLobbyById(updatedLobby.Id);
             OnPropertyChanged("Lobbies");
         }
 
         private void CreateLobby(object parameter)
         {
-            CreateLobbyDialog cld = new CreateLobbyDialog
+            Guid userId = customPrincipal.Identity.Id;
+
+            if (!IsJoinedInALobby(userId))
             {
-                DataContext = new CreateLobbyViewModel()
-            };
-
-            cld.Show();
-            //Mediator.Subscribe("LobbyCreated", new Action<object>((x) => {
-
-            //    JoinLobby(x);
-            //}));
-
-            Mediator.Subscribe("LobbyCreated", new Action<object>( (x) => {
-
-                App.Current.Dispatcher.Invoke((Action)delegate
+                CreateLobbyDialog cld = new CreateLobbyDialog
                 {
-                    cld.Close();
-                    JoinLobby(x);
-                });
-            }));
+                    DataContext = new CreateLobbyViewModel()
+                };
 
+                cld.Show();
+                //Mediator.Subscribe("LobbyCreated", new Action<object>((x) => {
 
+                //    JoinLobby(x);
+                //}));
 
+                Mediator.Subscribe("LobbyCreated", new Action<object>((x) =>
+                {
 
+                    App.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        cld.Close();
+                        JoinLobby(x);
+                    });
+                }));
+
+            }
+            else
+            {
+                MessageBox.Show("You already joined a lobby", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
 
 

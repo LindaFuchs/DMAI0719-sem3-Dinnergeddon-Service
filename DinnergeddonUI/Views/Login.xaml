@@ -78,7 +78,7 @@
                               Stretch="Fill"  />
                     </Canvas>
                     <Grid>
-                        <TextBox Text="{Binding Email}" x:Name="UsernameTextBox" FontSize="18" Foreground="{StaticResource InputFormColor}" Background="#2A2323"  BorderThickness="0"    TextWrapping="NoWrap"  />
+                        <TextBox Text="{Binding Email}" x:Name="UsernameTextBox" FontSize="18" Foreground="{StaticResource InputFormColor}" Background="{StaticResource BackgroundColor}"  BorderThickness="0"    TextWrapping="NoWrap"  />
                         <TextBlock FontSize="18" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="Email">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
@@ -114,7 +114,7 @@
                                      FontSize="18" 
                                      Foreground="{StaticResource InputFormColor}"
                                      BorderThickness="0"
-                                     Background="#2A2323"
+                                     Background="{StaticResource BackgroundColor}"
                                      Width="Auto" />
                         <TextBlock FontSize="18" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="Password">
                             <TextBlock.Style>

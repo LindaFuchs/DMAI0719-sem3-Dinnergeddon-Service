@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DinnergeddonUI.Views"
+             xmlns:helpers="clr-namespace:DinnergeddonUI.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="{DynamicResource BackgroundColor}">
@@ -12,19 +13,33 @@
 
     </UserControl.Resources>
     <DockPanel>
-        <TextBlock Margin="15" FontSize="18" Foreground="White" DockPanel.Dock="Top" Text="Lobbies"></TextBlock>
-        <StackPanel Margin="0,0,15,0" DockPanel.Dock="Top" HorizontalAlignment="Right">
+        <!--Title-->
+        <TextBlock Margin="30,30,0,0" FontSize="22" Foreground="White" DockPanel.Dock="Top" Text="Lobbies"></TextBlock>
+        <!--Button panel-->
+        <StackPanel Margin="40,20,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left">
             <Button Style="{DynamicResource RoundButtonTemplate}"  Command="{Binding CreateLobbyCommand}" Content="Create Lobby"></Button>
         </StackPanel>
+        <!--Joined Lobby title and panel-->
         <StackPanel DockPanel.Dock="Top" Visibility="{Binding Path=IsJoined, Converter={StaticResource BoolToVisConverter} }">
-            <TextBlock Text="Joined Lobby" Foreground="White" FontSize="18" Margin="20 ,0,0,0"></TextBlock>
-            <Border  Margin="20,10,20,20" BorderBrush="#362e2e" BorderThickness="2" CornerRadius="8,8,8,8">
+            <TextBlock Text="Joined Lobby" Foreground="White" FontSize="18" Margin="30 ,30,0,0"></TextBlock>
+            <Border  Margin="40,10,40,0" BorderBrush="#362e2e" BorderThickness="2" CornerRadius="8,8,8,8">
                 <DockPanel Background="#362e2e" >
                     <StackPanel>
                         <WrapPanel>
                             <TextBlock FontSize="13" FontWeight="Bold" Foreground="White" Margin="10,10,5,5" Text="{Binding JoinedLobby.Name}" />
 
-                            <TextBlock Margin="0,10,10,5" Text="· public" Foreground="White" FontWeight="Light" FontSize="11" ></TextBlock>
+                            <TextBlock Margin="0,10,10,5"  Foreground="White" FontWeight="Light" FontSize="11" >
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Text" Value="Public"></Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding JoinedLobby.IsPrivate}" Value="True">
+                                                <Setter Property="Text" Value="Private"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </WrapPanel>
                         <WrapPanel>
                             <TextBlock Foreground="White" Margin="10,0,10,10" Text="Players  joined:"  />
@@ -45,7 +60,10 @@
                 </DockPanel>
             </Border>
         </StackPanel>
-        <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="20,0,20,20"
+        <!--Lobby list text title-->
+        <TextBlock DockPanel.Dock="Top" Text="Lobby list" Foreground="White" FontSize="18" Margin="30,20,0,0"></TextBlock>
+        <!--Lobby list-->
+        <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="30,0,20,20"
              ItemsSource="{Binding Lobbies}" BorderThickness="0" Name="LobbiesListView" Background="{DynamicResource BackgroundColor}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
@@ -68,7 +86,18 @@
                                 <WrapPanel>
                                     <TextBlock FontSize="13" FontWeight="Bold" Foreground="White" Margin="10,10,5,5" Text="{Binding Name}" />
 
-                                    <TextBlock Margin="0,10,10,5" Text="· public" Foreground="White" FontWeight="Light" FontSize="11" ></TextBlock>
+                                    <TextBlock Margin="0,10,10,5" Foreground="White" FontWeight="Light" FontSize="11" >
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Text" Value="Public"></Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsPrivate}" Value="True">
+                                                        <Setter Property="Text" Value="Private"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock Foreground="White" Margin="10,0,10,10" Text="Players  joined:"  />

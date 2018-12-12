@@ -5,20 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DinnergeddonUI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{DynamicResource BackgroundColor}">
 
-    <StackPanel Orientation="Horizontal">
-        <ListView ItemsSource="{Binding Highscores}">
+    <DockPanel >
+        <TextBlock Margin="30,30,0,0" FontSize="20" Foreground="White" DockPanel.Dock="Top" Text="Highscores"></TextBlock>
+
+        <ListView Margin="30,30,30,0" DockPanel.Dock="Top" ItemsSource="{Binding Highscores}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Key, Mode=OneWay}"
-                                    Header="Player's name"
-                                    Width="600" />
+                                    Header="Username" Width="Auto"
+                                     />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Value, Mode=OneWay}"
-                                    Header="Score"
-                                    Width="150" />
+                                    Header="Score" Width="Auto"
+                                     />
                 </GridView>
             </ListView.View>
+            
         </ListView>
-    </StackPanel>
+        
+        <StackPanel></StackPanel>
+    </DockPanel>
 </UserControl>

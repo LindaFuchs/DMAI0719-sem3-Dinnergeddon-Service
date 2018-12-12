@@ -135,6 +135,9 @@ namespace DinnergeddonUI.DinnergeddonServiceReference {
         private System.Guid IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPrivateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int LimitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -162,6 +165,19 @@ namespace DinnergeddonUI.DinnergeddonServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPrivate {
+            get {
+                return this.IsPrivateField;
+            }
+            set {
+                if ((this.IsPrivateField.Equals(value) != true)) {
+                    this.IsPrivateField = value;
+                    this.RaisePropertyChanged("IsPrivate");
                 }
             }
         }

@@ -25,6 +25,8 @@ namespace DinnergeddonUI.ViewModels
         private string _buttonText;
         private bool _isJoined;
         private DinnergeddonServiceReference.Lobby _joinedLobby;
+        private DinnergeddonServiceReference.Lobby _currentLobby;
+        private CreateLobbyDialog cld;
 
         public bool IsJoined
         {
@@ -130,6 +132,15 @@ namespace DinnergeddonUI.ViewModels
             //Lobbies = _lobbies;
             //_lobbies = new List<LobbyServiceReference.Lobby>();
             customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+            Mediator.Subscribe("LobbyCreated", new Action<object>((x) =>
+                {
+
+                    App.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        cld.Close();
+                        //JoinLobby(x);
+                    });
+                }));
         }
 
         private void OnLobbyDeleted(object sender, Guid lobbyId)
@@ -147,6 +158,7 @@ namespace DinnergeddonUI.ViewModels
         private void OnLobbyRecieved(object sender, LobbyEventArgs args)
         {
             JoinedLobby = args.Lobby;
+            _currentLobby = args.Lobby;
 
         }
 
@@ -172,16 +184,37 @@ namespace DinnergeddonUI.ViewModels
             lobbyToUpdate.Players = updatedLobby.Players;
             lobbyToUpdate.Limit = updatedLobby.Limit;
             _proxy.GetLobbyById(updatedLobby.Id);
+            if(!IsJoinedInTheLobby( customPrincipal.Identity.Id, _currentLobby.Id)){
+                IsJoined = false;
+                JoinedLobby = null;
+            }
             OnPropertyChanged("Lobbies");
         }
 
+        private void OnJoinLobby(object s, bool result)
+        {
+            if (!result)
+            {
+                MessageBox.Show("Joining this lobby is not possible", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            else
+            {
+
+                OpenLobby(_currentLobby.Id);
+
+
+            }
+
+
+        }
         private void CreateLobby(object parameter)
         {
             Guid userId = customPrincipal.Identity.Id;
 
             if (!IsJoinedInALobby(userId))
             {
-                CreateLobbyDialog cld = new CreateLobbyDialog
+                cld = new CreateLobbyDialog
                 {
                     DataContext = new CreateLobbyViewModel()
                 };
@@ -192,15 +225,7 @@ namespace DinnergeddonUI.ViewModels
                 //    JoinLobby(x);
                 //}));
 
-                Mediator.Subscribe("LobbyCreated", new Action<object>((x) =>
-                {
 
-                    App.Current.Dispatcher.Invoke((Action)delegate
-                    {
-                        cld.Close();
-                        JoinLobby(x);
-                    });
-                }));
 
             }
             else
@@ -214,44 +239,75 @@ namespace DinnergeddonUI.ViewModels
         private void JoinLobby(object parameter)
         {
             Guid lobbyId = (Guid)parameter;
+            _proxy.GetLobbyById(lobbyId);
             Guid userId = customPrincipal.Identity.Id;
             if (!IsJoinedInALobby(userId))
             {
-                _proxy.JoinLobby(userId, lobbyId);
-                // LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById(lobbyId);
-                //notify the LobbyViewModel to change its properties for the current lobby
-                IsJoined = true;
-                // JoinedLobby = _proxy.GetLobbyById(lobbyId);
-                //  Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies().ToList());
                 _proxy.GetLobbyById(lobbyId);
-                Mediator.Notify("LobbyJoined", lobbyId);
 
-                //notify the mainWindowViewModel to change the viewmodel to the lobbyViewModel
-                Mediator.Notify("OpenLobby", lobbyId);
+                if (_currentLobby.IsPrivate)
+                {
+                    InputPasswordDialog pd = new InputPasswordDialog() { DataContext = new InputPasswordViewModel() };
+                    pd.Show();
+                    string password = "";
+                    Mediator.Subscribe("PassWordCorrect", new Action<object>((x) =>
+                    {
 
-                //LobbyServiceReference.Lobby l = _proxy.GetLobbyById(lobbyId);
+                        App.Current.Dispatcher.Invoke((Action)delegate
+                        {
+                            pd.Close();
+                            //_proxy.JoinLobby(userId, lobbyId, password);
+
+                        });
+                        password = x as String;
+                        _proxy.JoinLobby(userId, lobbyId, password);
+
+
+
+                    }));
+
+                }
+                else
+                {
+                    _proxy.JoinLobby(userId, lobbyId);
+
+                }
 
             }
-
-
 
             else
             {
-                MessageBox.Show("You already joined a lobby", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (IsJoinedInTheLobby(userId, lobbyId))
+                {
+                    // _proxy.GetLobbyById(lobbyId);
+                    OpenLobby(lobbyId);
+                }
+                else
+                {
+                    MessageBox.Show("You already joined a lobby", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
 
             }
         }
 
-        private void OnJoinLobby(object s, bool result)
-        {
-            _proxy.GetLobbies();
 
-        }
 
         private void OpenLobby(object parameter)
         {
             Guid lobbyId = (Guid)parameter;
-            Mediator.Notify("OpenLobby", lobbyId);
+              _proxy.GetLobbyById(lobbyId);
+
+            //Mediator.Notify("SendLobbyId", _currentLobby.Id);
+
+            Mediator.Notify("OpenLobby", _currentLobby.Id);
+
+            //notify LobbyView to set its lobby field
+            Mediator.Notify("LobbyJoined", _currentLobby.Id);
+
+            JoinedLobby = _currentLobby;
+
+            IsJoined = true;
 
         }
 
@@ -272,7 +328,21 @@ namespace DinnergeddonUI.ViewModels
 
             return false;
         }
+        private bool IsJoinedInTheLobby(Guid userId, Guid lobbyId)
+        {
+            _proxy.GetLobbyById(lobbyId);
+            //Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies().ToList());
 
+            foreach (Account a in _currentLobby.Players)
+            {
+                if (a.Id == userId)
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
 
 
     }

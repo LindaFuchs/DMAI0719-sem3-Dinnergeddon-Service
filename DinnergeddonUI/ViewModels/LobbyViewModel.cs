@@ -44,6 +44,7 @@ namespace DinnergeddonUI.ViewModels
 
         private void OnLobbyUpdated(object sender, LobbyEventArgs args)
         {
+            _lobby = args.Lobby;
             _proxy.GetLobbyById(_lobby.Id);
         }
 
@@ -126,10 +127,14 @@ namespace DinnergeddonUI.ViewModels
 
         private void LeaveLobby(object parameter)
         {
-            Guid userId = customPrincipal.Identity.Id;
+            if (_lobby != null)
+            {
+  Guid userId = customPrincipal.Identity.Id;
 
             _proxy.LeaveLobby(userId, _lobby.Id);
 
+            }
+          
 
             //Window lb = parameter as Window;
             //CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;

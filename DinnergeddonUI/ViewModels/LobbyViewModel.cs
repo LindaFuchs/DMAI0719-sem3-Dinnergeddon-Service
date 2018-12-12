@@ -17,7 +17,7 @@ namespace DinnergeddonUI.ViewModels
     {
         private static Lobby _lobby;
         private string _lobbyName;
-        private IEnumerable<Account> _joinedPlayers;
+        private ObservableCollection<Account> _joinedPlayers;
         private ICommand _leaveLobby;
         private LobbyProxy _proxy;
 
@@ -41,6 +41,18 @@ namespace DinnergeddonUI.ViewModels
 
         }
 
+        public ObservableCollection<Account> JoinedPlayers
+        {
+            get
+            {
+                return _joinedPlayers;
+            }
+            set
+            {
+                _joinedPlayers = value;
+                OnPropertyChanged("JoinedPlayers");
+            }
+        }
         public ICommand LeaveLobbyCommand
         {
             get
@@ -67,41 +79,11 @@ namespace DinnergeddonUI.ViewModels
         //    set { _joinedPlayers = value; OnPropertyChanged("JoinedUsers"); }
         //}
 
-        private bool CanLogout(object parameter)
-        {
-            return IsAuthenticated;
-        }
+      
 
-        private bool CanJoin(object parameter)
-        {
-            //implement check
-            return true;
-        }
+        
 
-        private bool CanLeave(object parameter)
-        {
-            //implement check
-            return true;
-        }
-
-        public string AuthenticatedUser
-        {
-            get
-            {
-                if (IsAuthenticated)
-                    return string.Format("Signed in as {0}. {1}",
-                          Thread.CurrentPrincipal.Identity.Name,
-                          Thread.CurrentPrincipal.IsInRole("admin") ? "You are an administrator!"
-                              : "You are NOT a member of the administrators group.");
-
-                return "Not authenticated!";
-            }
-        }
-
-        public bool IsAuthenticated
-        {
-            get { return Thread.CurrentPrincipal.Identity.IsAuthenticated; }
-        }
+        
 
 
 
@@ -119,7 +101,7 @@ namespace DinnergeddonUI.ViewModels
 
         private void LeaveLobby(object parameter)
         {
-            
+            _proxy.Lea
             //Window lb = parameter as Window;
             //CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
             //var userId = customPrincipal.Identity.Id;
@@ -133,6 +115,8 @@ namespace DinnergeddonUI.ViewModels
         {
             _lobby = args.Lobby;
             LobbyName = _lobby.Name;
+            
+            JoinedPlayers = new ObservableCollection<Account>( _lobby.Players.ToList());
         }
         
 

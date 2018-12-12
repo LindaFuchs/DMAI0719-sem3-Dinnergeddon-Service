@@ -49,7 +49,7 @@ namespace DinnergeddonUI.Helpers
 
         public void GetLobbies()
         {
-            hubProxy.Invoke("GetLobbies").Wait();
+            hubProxy.Invoke("GetLobbies");
         }
 
         public void GetLobbyById(Guid lobbyId)

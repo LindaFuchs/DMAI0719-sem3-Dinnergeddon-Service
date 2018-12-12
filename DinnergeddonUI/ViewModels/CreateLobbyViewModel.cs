@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using DinnergeddonUI.Helpers;
+using DinnergeddonUI.DinnergeddonServiceReference;
 
 namespace DinnergeddonUI.ViewModels
 {
@@ -103,7 +104,7 @@ namespace DinnergeddonUI.ViewModels
 
         private void OnLobbyCreated(object sender, LobbyEventArgs args)
         {
-            LobbyServiceReference.Lobby  lobby = args.Lobby;
+            Lobby  lobby = args.Lobby;
 
             Mediator.Notify("LobbyCreated",lobby.Id);
 

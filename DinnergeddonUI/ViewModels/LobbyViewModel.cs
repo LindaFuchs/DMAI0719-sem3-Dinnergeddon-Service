@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using DinnergeddonUI.Helpers;
-using DinnergeddonUI.LobbyServiceReference;
+using DinnergeddonUI.DinnergeddonServiceReference;
 
 namespace DinnergeddonUI.ViewModels
 {

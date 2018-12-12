@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="722621dc-6fad-42d4-bca4-21303f02598a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="741b195a-6974-4ee3-98ae-7ddffef13cbc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,12 +22,12 @@
     <MetadataSource Address="http://localhost:52999/Service.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="0667d30a-cdf7-41c9-9ab4-8aea4ab8a19f" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?xsd=xsd2" />
-    <MetadataFile FileName="DinnergeddonService.wsdl" MetadataType="Wsdl" ID="a016241b-0d2a-4450-8416-3339c69301cb" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?wsdl" />
-    <MetadataFile FileName="Service.disco" MetadataType="Disco" ID="27718204-6923-405e-a0cd-ae9ea18c0fea" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?disco" />
-    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="6bbf38f5-7364-40a4-8fcb-0d1f3a0b188f" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?xsd=xsd1" />
-    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="c8633759-310d-426e-babb-1f6b2b43ea7f" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?xsd=xsd3" />
-    <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="1d119e3d-a756-421b-9388-5ee47f4cb559" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="b1f61110-71f6-4a98-b438-1a69cf07f586" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?xsd=xsd2" />
+    <MetadataFile FileName="DinnergeddonService.wsdl" MetadataType="Wsdl" ID="f06eb742-642b-4721-b4ca-06bfbf8ec98f" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?wsdl" />
+    <MetadataFile FileName="Service.disco" MetadataType="Disco" ID="3fe242b2-5b4e-4d2f-9034-ea56d283acb8" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?disco" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="ae6efaee-b6c9-4fee-b014-09463a0e77b2" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="5d0855a6-7c15-4fec-913a-268544745e92" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?xsd=xsd3" />
+    <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="582c6bd7-0cd0-42f0-aea3-05a69db13124" SourceId="1" SourceUrl="http://localhost:52999/Service.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

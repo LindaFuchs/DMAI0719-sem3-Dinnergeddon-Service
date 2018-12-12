@@ -64,7 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\AccountServiceReference\Reference.cs">
+    <Compile Include="Connected Services\DinnergeddonServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -165,20 +165,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\AccountServiceReference\DinnergeddonService.wsdl" />
-    <None Include="Connected Services\AccountServiceReference\DinnergeddonUI.AccountServiceReference.Account.datasource">
+    <None Include="Connected Services\DinnergeddonServiceReference\DinnergeddonService.wsdl" />
+    <None Include="Connected Services\DinnergeddonServiceReference\DinnergeddonUI.DinnergeddonServiceReference.Account.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\AccountServiceReference\Service.xsd">
+    <None Include="Connected Services\DinnergeddonServiceReference\DinnergeddonUI.DinnergeddonServiceReference.Lobby.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DinnergeddonServiceReference\Service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountServiceReference\Service1.xsd">
+    <None Include="Connected Services\DinnergeddonServiceReference\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountServiceReference\Service2.xsd">
+    <None Include="Connected Services\DinnergeddonServiceReference\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\AccountServiceReference\Service3.xsd">
+    <None Include="Connected Services\DinnergeddonServiceReference\Service3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -197,19 +200,19 @@
     <Resource Include="images\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\AccountServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\DinnergeddonServiceReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\AccountServiceReference\Service.disco" />
+    <None Include="Connected Services\DinnergeddonServiceReference\Service.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\AccountServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\DinnergeddonServiceReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\AccountServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\DinnergeddonServiceReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\AccountServiceReference\Reference.svcmap">
+    <None Include="Connected Services\DinnergeddonServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

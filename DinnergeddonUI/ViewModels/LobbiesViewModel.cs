@@ -21,7 +21,7 @@ namespace DinnergeddonUI.ViewModels
         private ICommand _createLobby;
         private ICommand _openLobby;
         private CustomPrincipal customPrincipal;
-        private CreateLobbyDialog cld;
+        //private CreateLobbyDialog cld;
         private string _buttonText;
         private bool _isJoined;
         private LobbyServiceReference.Lobby _joinedLobby;
@@ -69,7 +69,7 @@ namespace DinnergeddonUI.ViewModels
         {
             get
             {
-                if(_openLobby == null)
+                if (_openLobby == null)
                 {
                     _openLobby = new RelayCommand(OpenLobby);
                 }
@@ -112,6 +112,7 @@ namespace DinnergeddonUI.ViewModels
             }
         }
 
+
         public LobbiesViewModel()
         {
 
@@ -129,7 +130,8 @@ namespace DinnergeddonUI.ViewModels
             //_lobbies = new List<LobbyServiceReference.Lobby>();
             customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
         }
-        private void OnLobbiesRecieved(object sender,  IEnumerable<LobbyServiceReference.Lobby> lobbies)
+
+        private void OnLobbiesRecieved(object sender, IEnumerable<LobbyServiceReference.Lobby> lobbies)
         {
             Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(lobbies);
         }
@@ -155,7 +157,7 @@ namespace DinnergeddonUI.ViewModels
 
         }
 
-        private void OnLobbyUpdated(object sender ,LobbyEventArgs args)
+        private void OnLobbyUpdated(object sender, LobbyEventArgs args)
         {
             LobbyServiceReference.Lobby updatedLobby = args.Lobby;
             LobbyServiceReference.Lobby lobbyToUpdate = _lobbies.Where(x => x.Id == updatedLobby.Id).FirstOrDefault();
@@ -166,17 +168,31 @@ namespace DinnergeddonUI.ViewModels
 
         private void CreateLobby(object parameter)
         {
-            cld = new CreateLobbyDialog
+            CreateLobbyDialog cld = new CreateLobbyDialog
             {
                 DataContext = new CreateLobbyViewModel()
             };
 
             cld.Show();
-            Mediator.Subscribe("LobbyCreated", new Action<object>((x) => cld.Close()));
+            //Mediator.Subscribe("LobbyCreated", new Action<object>((x) => {
+
+            //    JoinLobby(x);
+            //}));
+
+            Mediator.Subscribe("LobbyCreated", new Action<object>( (x) => {
+
+                App.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    cld.Close();
+                    JoinLobby(x);
+                });
+            }));
+
 
 
 
         }
+
 
         private void JoinLobby(object parameter)
         {
@@ -185,9 +201,9 @@ namespace DinnergeddonUI.ViewModels
             if (!IsJoinedInALobby(userId))
             {
                 _proxy.JoinLobby(userId, lobbyId);
-               // LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById(lobbyId);
+                // LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById(lobbyId);
                 //notify the LobbyViewModel to change its properties for the current lobby
-                 IsJoined = true;
+                IsJoined = true;
                 // JoinedLobby = _proxy.GetLobbyById(lobbyId);
                 //  Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies().ToList());
                 _proxy.GetLobbyById(lobbyId);
@@ -195,7 +211,7 @@ namespace DinnergeddonUI.ViewModels
 
                 //notify the mainWindowViewModel to change the viewmodel to the lobbyViewModel
                 Mediator.Notify("OpenLobby", lobbyId);
-               
+
                 //LobbyServiceReference.Lobby l = _proxy.GetLobbyById(lobbyId);
 
             }
@@ -212,7 +228,7 @@ namespace DinnergeddonUI.ViewModels
         private void OnJoinLobby(object s, bool result)
         {
             _proxy.GetLobbies();
-            
+
         }
 
         private void OpenLobby(object parameter)

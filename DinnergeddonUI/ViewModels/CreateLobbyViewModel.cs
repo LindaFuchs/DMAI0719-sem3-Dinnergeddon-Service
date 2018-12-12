@@ -97,8 +97,17 @@ namespace DinnergeddonUI.ViewModels
         public CreateLobbyViewModel()
         {
             _proxy = new LobbyProxy();
+            _proxy.LobbyCreated += OnLobbyCreated;
         }
 
+
+        private void OnLobbyCreated(object sender, LobbyEventArgs args)
+        {
+            LobbyServiceReference.Lobby  lobby = args.Lobby;
+
+            Mediator.Notify("LobbyCreated",lobby.Id);
+
+        }
         private void CreateLobby(object parameter)
         {
             var passwordBoxes = parameter as List<object>;
@@ -125,7 +134,6 @@ namespace DinnergeddonUI.ViewModels
                 }
                 _proxy.CreateLobby(ln, nr);
 
-                Mediator.Notify("LobbyCreated", "");
 
 
 

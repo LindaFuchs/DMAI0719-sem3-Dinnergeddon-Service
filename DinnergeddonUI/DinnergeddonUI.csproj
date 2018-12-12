@@ -83,6 +83,7 @@
       <DependentUpon>JoinLobbyPasswordDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
+    <Compile Include="ViewModels\HighscoresViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="LobbyWindow.xaml.cs">
       <DependentUpon>LobbyWindow.xaml</DependentUpon>
@@ -94,6 +95,9 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\CreateLobbyDialog.xaml.cs">
       <DependentUpon>CreateLobbyDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Highscores.xaml.cs">
+      <DependentUpon>Highscores.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Lobbies.xaml.cs">
       <DependentUpon>Lobbies.xaml</DependentUpon>
@@ -123,6 +127,10 @@
     <Compile Include="CustomPrincipal.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Page Include="Views\CreateLobbyDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Highscores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

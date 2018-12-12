@@ -103,7 +103,7 @@ namespace DinnergeddonUI.ViewModels
 
         private void OnLobbyCreated(object sender, LobbyEventArgs args)
         {
-            LobbyServiceReference.Lobby  lobby = args.Lobby;
+            DinnergeddonServiceReference.Lobby  lobby = args.Lobby;
 
             Mediator.Notify("LobbyCreated",lobby.Id);
 

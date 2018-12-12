@@ -54,6 +54,7 @@ namespace DinnergeddonUI.ViewModels
         private ICommand _goToLobbies;
         private ICommand _logout;
         private ICommand _goToProfile;
+        private ICommand _goToHighscores;
         private bool _isAuthenticated = false;
 
         public ICommand GoToLobbies
@@ -77,6 +78,18 @@ namespace DinnergeddonUI.ViewModels
                 }));
             }
         }
+        
+        public ICommand GoToHighscores
+        {
+            get
+            {
+                return _goToHighscores ?? (_goToHighscores = new RelayCommand(x =>
+                {
+                    CurrentPageViewModel = PageViewModels[3];
+                }));
+            }
+        }
+
         public ICommand LogoutCommand
         {
             get
@@ -150,6 +163,7 @@ namespace DinnergeddonUI.ViewModels
             PageViewModels.Add(new LobbiesViewModel());
             //PageViewModels.Add(new LobbiesViewModel());
             PageViewModels.Add(new LobbyViewModel());
+            PageViewModels.Add(new HighscoresViewModel());
             //PageViewModels.Add(new ProfileViewModel());
 
             CurrentPageViewModel = PageViewModels[0];

@@ -144,7 +144,7 @@ namespace Controller
                         return false;
 
             // If lobby is password protected
-            if (lobby.PasswordHash != null || lobby.PasswordHash != "" || lobby.PasswordHash != string.Empty)
+            if (lobby.PasswordHash != null && lobby.PasswordHash != "" && lobby.PasswordHash != string.Empty)
             {
                 // If no password was passed to the method
                 if (password == "" || password == null || password == string.Empty)

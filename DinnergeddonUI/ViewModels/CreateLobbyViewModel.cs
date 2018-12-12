@@ -3,31 +3,84 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using DinnergeddonUI.Helpers;
 
 namespace DinnergeddonUI.ViewModels
 {
     class CreateLobbyViewModel : BaseViewModel, IPageViewModel
     {
-        private int _isSuccess;
         private string _lobbyName;
         private ICommand _createLobby;
         private LobbyProxy _proxy;
+        private string _errorMessage;
+        private bool[] _modeArray = new bool[] { false, false, true, false, false };
+        private bool _isValid = true;
+        private bool _isPrivate;
 
-        public int IsSuccess { get { return _isSuccess; } set { _isSuccess = value; } }
+        public bool IsValid
+        {
+            get
+            {
+                return _isValid;
+            }
+            set
+            {
+                _isValid = value;
+                OnPropertyChanged("IsValid");
+            }
+        }
+
+        public bool[] ModeArray
+        {
+            get { return _modeArray; }
+        }
+
+        public int SelectedMode
+        {
+            get { return Array.IndexOf(_modeArray, true); }
+        }
+
+        public bool IsPrivate
+        {
+            get
+            {
+                return _isPrivate;
+            }
+            set
+            {
+                _isPrivate = value;
+                OnPropertyChanged("IsPrivate");
+            }
+        }
 
         public ICommand CreateLobbyCommand
         {
             get
             {
-                if(_createLobby == null)
+                if (_createLobby == null)
                 {
                     _createLobby = new RelayCommand(CreateLobby);
                 }
                 return _createLobby;
             }
         }
+
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged("ErrorMessage");
+            }
+        }
+
         public string LobbyName
         {
             get
@@ -48,10 +101,41 @@ namespace DinnergeddonUI.ViewModels
 
         private void CreateLobby(object parameter)
         {
+            var passwordBoxes = parameter as List<object>;
+            PasswordBox pb = passwordBoxes.ElementAt(0) as PasswordBox;
+            PasswordBox pb_conf = passwordBoxes.ElementAt(1) as PasswordBox;
+
+            string pw = pb.Password;
+            string pw_conf = pb_conf.Password;
             string ln = _lobbyName;
-            int nr = _isSuccess;
-            _proxy.CreateLobby(ln, nr);
-            Mediator.Notify("LobbyCreated", "");
+
+            int nr = SelectedMode;
+
+
+
+
+            if (ln != null && ln.Length > 2 && nr > 1)
+            {
+                if (IsPrivate)
+                {
+
+                }
+                else
+                {
+                }
+                _proxy.CreateLobby(ln, nr);
+
+                Mediator.Notify("LobbyCreated", "");
+
+
+
+
+
+            }
+            else
+            {
+                IsValid = false;
+            }
 
         }
 

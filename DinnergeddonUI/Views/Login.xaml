@@ -64,8 +64,8 @@
         </Style>
     </UserControl.Resources>
 
-    <StackPanel Width="434" Height="513">
-        <Image Margin="45,70,45,60" Source="/images/logo.png"/>
+    <StackPanel Width="498" Height="513">
+        <Image Margin="45,70,45,40" Source="/images/logo.png"/>
         <StackPanel Margin="90,0,90,0">
             <Border BorderBrush="{StaticResource InputFormColor}"
                     BorderThickness="0 0 0 1"
@@ -78,7 +78,7 @@
                               Stretch="Fill"  />
                     </Canvas>
                     <Grid>
-                        <TextBox Text="{Binding Email}" x:Name="UsernameTextBox" FontSize="18" Foreground="{StaticResource InputFormColor}" Background="#2A2323"  BorderThickness="0"   TextWrapping="Wrap"  />
+                        <TextBox Text="{Binding Email}" x:Name="UsernameTextBox" FontSize="18" Foreground="{StaticResource InputFormColor}" Background="#2A2323"  BorderThickness="0"    TextWrapping="NoWrap"  />
                         <TextBlock FontSize="18" Foreground="{StaticResource InputFormColor}" IsHitTestVisible="False" Text="Email">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
@@ -133,13 +133,10 @@
 
                 </DockPanel>
             </Border>
-            <TextBlock  Text="{Binding ErrorMessage}" Margin="0,5,0,10"  FontSize="14" Foreground="{StaticResource IncorrectColor}">
-            </TextBlock>
-            <TextBlock FontSize="12" HorizontalAlignment="Right" Foreground="{StaticResource InputFormColor}"  Margin="0,0,0,20">
-            <!--<Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://stackoverflow.com">Forgot your password?</Hyperlink>-->
-            </TextBlock>
+      
+            <TextBlock Margin="0,15,0,15" Text="{Binding ErrorMessage}" Foreground="{StaticResource IncorrectColor}"></TextBlock>
+ 
 
-            <TextBlock Margin="0,15,0,15" Text="{Binding Status}" Foreground="{StaticResource IncorrectColor}"></TextBlock>
 
             <Button 
                     Command="{Binding LoginCommand}"

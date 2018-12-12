@@ -15,9 +15,9 @@ namespace DinnergeddonUI.Helpers
         {
             connection = new HubConnection(url);
             hubProxy = connection.CreateHubProxy("LobbiesHub");
+            SetupListeners();
 
             connection.Start().Wait();
-            SetupListeners();
         }
 
         private void SetupListeners()
@@ -27,6 +27,7 @@ namespace DinnergeddonUI.Helpers
             hubProxy.On<Lobby>("lobbyDeleted", (lobby) => OnLobbyDeleted(lobby));
             hubProxy.On<bool>("joined", (joined) => OnLobbyJoined(joined));
             hubProxy.On<IEnumerable<Lobby>>("getLobbiesResponse", (lobbies) => OnGetLobbiesResponse(lobbies));
+            hubProxy.On<Lobby>("getLobbyByIdResponse", (lobby) => OnGetLobbyByIdResponse(lobby));
         }
 
         #region WS Callers

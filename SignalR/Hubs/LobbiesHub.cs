@@ -2,8 +2,6 @@
 using Microsoft.AspNet.SignalR;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SignalR.Hubs
 {
@@ -14,6 +12,8 @@ namespace SignalR.Hubs
     /// lobbyUpdated - when a lobby is updated, that lobby is passed to the clients
     /// lobbyDeleted - when a lobby is removed, that lobby is passed to the clients for deletion
     /// joined       - when a client joins a lobby, whether or not that client has joined
+    /// getLobbiesResponse - when a client asks for all the lobbies
+    /// getLobbyResponse - when a client asks for a specific lobby info
     /// ###Event names###
     /// 
     /// </summary>
@@ -34,15 +34,12 @@ namespace SignalR.Hubs
                 lobby = lobbyController.CreateLobby(lobbyName, playerLimit);
             else
                 lobby = lobbyController.CreateLobby(lobbyName, playerLimit, password);
-            Console.WriteLine("New Lobby was created");
             Clients.All.lobbyCreated(lobby);
         }
         
-        public Task<IEnumerable<Lobby>> GetLobbies()
+        public void GetLobbies()
         {
-            return Task<IEnumerable<Lobby>>.Factory.StartNew(
-                () => { return lobbyController.GetLobbies(); }
-            );
+            Clients.Caller.getLobbiesResponse(lobbyController.GetLobbies());
         }
 
         public void JoinLobby(Guid accountId, Guid lobbyId, string password)
@@ -58,7 +55,7 @@ namespace SignalR.Hubs
 
             // If the caller has joined the lobby, update all other clients
             if (success)
-                Clients.AllExcept(Clients.Caller).lobbyUpdated(lobbyController.GetLobbyById(lobbyId));
+                Clients.All.lobbyUpdated(lobbyController.GetLobbyById(lobbyId));
         }
         
         //TODO: Implement, and think about how to notify users for lobby deleted, lobby updated (get info from controller prolly)
@@ -67,11 +64,9 @@ namespace SignalR.Hubs
             throw new NotImplementedException();
         }
         
-        public Task<Lobby> GetLobbyById(Guid lobbyId)
+        public void GetLobbyById(Guid lobbyId)
         {
-            return Task<Lobby>.Factory.StartNew(
-                () => { return lobbyController.GetLobbyById(lobbyId); }
-            );
+            Clients.Caller.getLobbyByIdResponse(lobbyController.GetLobbyById(lobbyId));
         }
     }
 }

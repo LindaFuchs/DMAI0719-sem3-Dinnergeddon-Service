@@ -26,16 +26,7 @@ namespace DinnergeddonUI.Helpers
             hubProxy.On<Lobby>("lobbyUpdated", (lobby) => OnLobbyUpdated(lobby));
             hubProxy.On<Lobby>("lobbyDeleted", (lobby) => OnLobbyDeleted(lobby));
             hubProxy.On<bool>("joined", (joined) => OnLobbyJoined(joined));
-        }
-
-        public IEnumerable<Lobby> GetLobbies()
-        {
-            return hubProxy.Invoke<IEnumerable<Lobby>>("GetLobbies").Result;
-        }
-
-        public Lobby GetLobbyById(Guid id)
-        {
-            return hubProxy.Invoke<Lobby>("GetLobbyById", new object[] { id }).Result;
+            hubProxy.On<IEnumerable<Lobby>>("getLobbiesResponse", (lobbies) => OnGetLobbiesResponse(lobbies));
         }
 
         #region WS Callers
@@ -55,6 +46,16 @@ namespace DinnergeddonUI.Helpers
             JoinLobby(accountId, lobbyId, "");
         }
 
+        public void GetLobbies()
+        {
+            hubProxy.Invoke("GetLobbies");
+        }
+
+        public void GetLobbyById(Guid lobbyId)
+        {
+            hubProxy.Invoke<string>("GetLobbyById", new object[] { lobbyId });
+        }
+
         #endregion
 
         #region Events
@@ -63,6 +64,8 @@ namespace DinnergeddonUI.Helpers
         public event EventHandler<LobbyEventArgs> LobbyUpdated;
         public event EventHandler<LobbyEventArgs> LobbyDeleted;
         public event EventHandler<bool> LobbyJoined;
+        public event EventHandler<IEnumerable<Lobby>> GetLobbiesResponse;
+        public event EventHandler<LobbyEventArgs> GetLobbyByIdResponse;
 
         protected virtual void OnLobbyCreated(Lobby newLobby)
         {
@@ -86,6 +89,18 @@ namespace DinnergeddonUI.Helpers
         {
             if (LobbyJoined != null)
                 LobbyJoined.Invoke(this, joined);
+        }
+
+        protected virtual void OnGetLobbiesResponse(IEnumerable<Lobby> lobbies)
+        {
+            if (GetLobbiesResponse != null)
+                GetLobbiesResponse.Invoke(this, lobbies);
+        }
+
+        protected virtual void OnGetLobbyByIdResponse(Lobby lobby)
+        {
+            if (GetLobbyByIdResponse != null)
+                GetLobbyByIdResponse.Invoke(this, new LobbyEventArgs() { Lobby = lobby });
         }
 
         #endregion

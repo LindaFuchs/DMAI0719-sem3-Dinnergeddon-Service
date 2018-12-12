@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using DinnergeddonUI.Helpers;
 using DinnergeddonUI.LobbyServiceReference;
 
@@ -17,10 +18,9 @@ namespace DinnergeddonUI.ViewModels
         private static Lobby _lobby;
         private string _lobbyName;
         private IEnumerable<Account> _joinedPlayers;
-        
-        private readonly DelegateCommand _joinLobbyCommand;
-        private readonly DelegateCommand _leaveLobbyCommand;
-        LobbyProxy _proxy = new LobbyProxy();
+        private ICommand _leaveLobby;
+        private LobbyProxy _proxy;
+
 
 
 
@@ -28,21 +28,30 @@ namespace DinnergeddonUI.ViewModels
         public LobbyViewModel()
         {
             Mediator.Subscribe("LobbyJoined", LobbyJoined);
-
+            _proxy = new LobbyProxy();
+            _proxy.GetLobbyByIdResponse += OnLobbyRecieved;
             //_joinLobbyCommand = new DelegateCommand(JoinLobby, CanJoin);
 
         }
 
         private void LobbyJoined(object parameter)
         {
-            LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById((Guid)parameter);
-            _lobby = joinedLobby;
-            LobbyName = _lobby.Name;
+            _proxy.GetLobbyById((Guid)parameter);
+          //  LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById((Guid)parameter);
 
         }
 
-        public DelegateCommand JoinLobbyCommand { get { return _joinLobbyCommand; } }
-        public DelegateCommand LeaveLobbyCommand { get { return _leaveLobbyCommand; } }
+        public ICommand LeaveLobbyCommand
+        {
+            get
+            {
+                if (_leaveLobby == null)
+                {
+                    _leaveLobby = new RelayCommand(LeaveLobby);
+                }
+                return _leaveLobby;
+            }
+        }
 
 
       public string LobbyName
@@ -52,11 +61,11 @@ namespace DinnergeddonUI.ViewModels
                 OnPropertyChanged("LobbyName");
             }
         }
-        public IEnumerable<Account> JoinedPlayers
-        {
-            get { _joinedPlayers = _proxy.GetLobbyById(_lobby.Id).Players; return _joinedPlayers; }
-            set { _joinedPlayers = value; OnPropertyChanged("JoinedUsers"); }
-        }
+        //public IEnumerable<Account> JoinedPlayers
+        //{
+        //    get { _joinedPlayers = _proxy.GetLobbyById(_lobby.Id).Players; return _joinedPlayers; }
+        //    set { _joinedPlayers = value; OnPropertyChanged("JoinedUsers"); }
+        //}
 
         private bool CanLogout(object parameter)
         {
@@ -110,6 +119,7 @@ namespace DinnergeddonUI.ViewModels
 
         private void LeaveLobby(object parameter)
         {
+            
             //Window lb = parameter as Window;
             //CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
             //var userId = customPrincipal.Identity.Id;
@@ -119,7 +129,11 @@ namespace DinnergeddonUI.ViewModels
             
         }
 
-
+        private void OnLobbyRecieved(object sender, LobbyEventArgs args)
+        {
+            _lobby = args.Lobby;
+            LobbyName = _lobby.Name;
+        }
         
 
     }

@@ -16,6 +16,16 @@ namespace Model
         [DataMember]
         public int Limit { get; set; }
 
+        [DataMember]
+        public bool IsPrivate
+        {
+            get
+            {
+                return PasswordHash != null && PasswordHash != "" && PasswordHash != String.Empty;
+            }
+        }
+
+
         public string PasswordHash { get; set; }
 
         public override bool Equals(object obj)

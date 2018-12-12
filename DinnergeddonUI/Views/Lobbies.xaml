@@ -38,7 +38,7 @@
                     </StackPanel>
 
                     <WrapPanel Margin="20,0,0,0" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                        <Button VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" 
+                        <Button Command="{Binding OpenLobbyCommand}" CommandParameter="{Binding JoinedLobby.Id}" VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" 
                             Background="#d1ffc6" Style="{StaticResource RoundButtonTemplate}" Margin="10" Padding="10" 
                                         Content="Open"></Button>
                     </WrapPanel>

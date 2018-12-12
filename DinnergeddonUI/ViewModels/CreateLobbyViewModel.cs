@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using DinnergeddonUI.Helpers;
+using DinnergeddonUI.DinnergeddonServiceReference;
 
 namespace DinnergeddonUI.ViewModels
 {
@@ -97,8 +98,17 @@ namespace DinnergeddonUI.ViewModels
         public CreateLobbyViewModel()
         {
             _proxy = new LobbyProxy();
+            _proxy.LobbyCreated += OnLobbyCreated;
         }
 
+
+        private void OnLobbyCreated(object sender, LobbyEventArgs args)
+        {
+            Lobby  lobby = args.Lobby;
+
+            Mediator.Notify("LobbyCreated",lobby.Id);
+
+        }
         private void CreateLobby(object parameter)
         {
             var passwordBoxes = parameter as List<object>;
@@ -125,7 +135,6 @@ namespace DinnergeddonUI.ViewModels
                 }
                 _proxy.CreateLobby(ln, nr);
 
-                Mediator.Notify("LobbyCreated", "");
 
 
 

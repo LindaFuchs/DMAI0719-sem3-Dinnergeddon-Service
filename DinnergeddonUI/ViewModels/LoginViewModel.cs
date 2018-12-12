@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using DinnergeddonUI.AccountServiceReference;
+using DinnergeddonUI.DinnergeddonServiceReference;
 
 namespace DinnergeddonUI.ViewModels
 {
@@ -176,6 +176,7 @@ namespace DinnergeddonUI.ViewModels
 
         public LoginViewModel()
         {
+
             _accountProxy = new AccountServiceClient();
 
 

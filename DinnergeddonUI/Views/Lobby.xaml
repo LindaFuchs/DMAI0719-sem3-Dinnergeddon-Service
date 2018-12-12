@@ -6,7 +6,21 @@
              xmlns:local="clr-namespace:DinnergeddonUI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <TextBlock Text="{Binding LobbyName}"></TextBlock>
-    </StackPanel>
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="{Binding LobbyName}"></TextBlock>
+        
+        <Button DockPanel.Dock="Top" Content="Leave lobby" Command="{Binding LeaveLobbyCommand}"></Button>
+        <TextBlock Text="ASDASDSAD"></TextBlock>
+
+        <ListView  ItemsSource="{Binding JoinedPlayers}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Username}" FontWeight="Bold" />
+                        
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </DockPanel>
 </UserControl>

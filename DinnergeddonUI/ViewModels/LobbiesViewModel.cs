@@ -8,22 +8,23 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using DinnergeddonUI.Helpers;
-using DinnergeddonUI.LobbyServiceReference;
+using DinnergeddonUI.DinnergeddonServiceReference;
 using DinnergeddonUI.Views;
 
 namespace DinnergeddonUI.ViewModels
 {
     class LobbiesViewModel : BaseViewModel, IPageViewModel
     {
-        private ObservableCollection<LobbyServiceReference.Lobby> _lobbies;
+        private ObservableCollection<DinnergeddonServiceReference.Lobby> _lobbies;
         private LobbyProxy _proxy;
         private ICommand _joinLobby;
         private ICommand _createLobby;
+        private ICommand _openLobby;
         private CustomPrincipal customPrincipal;
-        private CreateLobbyDialog cld;
+        //private CreateLobbyDialog cld;
         private string _buttonText;
         private bool _isJoined;
-        private LobbyServiceReference.Lobby _joinedLobby;
+        private DinnergeddonServiceReference.Lobby _joinedLobby;
 
         public bool IsJoined
         {
@@ -38,7 +39,7 @@ namespace DinnergeddonUI.ViewModels
             }
         }
 
-        public LobbyServiceReference.Lobby JoinedLobby
+        public DinnergeddonServiceReference.Lobby JoinedLobby
         {
             get
             {
@@ -61,6 +62,18 @@ namespace DinnergeddonUI.ViewModels
             {
                 _buttonText = value;
                 OnPropertyChanged("ButtonText");
+            }
+        }
+
+        public ICommand OpenLobbyCommand
+        {
+            get
+            {
+                if (_openLobby == null)
+                {
+                    _openLobby = new RelayCommand(OpenLobby);
+                }
+                return _openLobby;
             }
         }
         public ICommand CreateLobbyCommand
@@ -86,7 +99,7 @@ namespace DinnergeddonUI.ViewModels
                 return _joinLobby;
             }
         }
-        public ObservableCollection<LobbyServiceReference.Lobby> Lobbies
+        public ObservableCollection<DinnergeddonServiceReference.Lobby> Lobbies
         {
             get
             {
@@ -99,6 +112,7 @@ namespace DinnergeddonUI.ViewModels
             }
         }
 
+
         public LobbiesViewModel()
         {
 
@@ -106,18 +120,40 @@ namespace DinnergeddonUI.ViewModels
             _proxy.LobbyJoined += OnJoinLobby;
             _proxy.LobbyCreated += OnLobbyCreated;
             _proxy.LobbyUpdated += OnLobbyUpdated;
-            ///Todo: change to _proxy
+            _proxy.GetLobbiesResponse += OnLobbiesRecieved;
+            _proxy.GetLobbyByIdResponse += OnLobbyRecieved;
+            _proxy.LobbyDeleted += OnLobbyDeleted;
+
+            _proxy.GetLobbies();
             ///
-            _lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies());
-            Lobbies = _lobbies;
+           // _lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies());
+            //Lobbies = _lobbies;
             //_lobbies = new List<LobbyServiceReference.Lobby>();
             customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+        }
+
+        private void OnLobbyDeleted(object sender, Guid lobbyId)
+        {
+            IsJoined = false;
+            JoinedLobby = null;
+            _proxy.GetLobbies();
+        }
+
+        private void OnLobbiesRecieved(object sender, IEnumerable<DinnergeddonServiceReference.Lobby> lobbies)
+        {
+            Lobbies = new ObservableCollection<DinnergeddonServiceReference.Lobby>(lobbies);
+        }
+
+        private void OnLobbyRecieved(object sender, LobbyEventArgs args)
+        {
+            JoinedLobby = args.Lobby;
+
         }
 
         private void OnLobbyCreated(object sender, LobbyEventArgs args)
         {
 
-            LobbyServiceReference.Lobby createdLobby = args.Lobby;
+            DinnergeddonServiceReference.Lobby createdLobby = args.Lobby;
 
             App.Current.Dispatcher.Invoke((Action)delegate
             {
@@ -129,28 +165,51 @@ namespace DinnergeddonUI.ViewModels
 
         }
 
-        private void OnLobbyUpdated(object sender ,LobbyEventArgs args)
+        private void OnLobbyUpdated(object sender, LobbyEventArgs args)
         {
-            LobbyServiceReference.Lobby updatedLobby = args.Lobby;
-            LobbyServiceReference.Lobby lobbyToUpdate = _lobbies.Where(x => x.Id == updatedLobby.Id).FirstOrDefault();
+            DinnergeddonServiceReference.Lobby updatedLobby = args.Lobby;
+            DinnergeddonServiceReference.Lobby lobbyToUpdate = _lobbies.Where(x => x.Id == updatedLobby.Id).FirstOrDefault();
             lobbyToUpdate.Players = updatedLobby.Players;
             lobbyToUpdate.Limit = updatedLobby.Limit;
+            _proxy.GetLobbyById(updatedLobby.Id);
             OnPropertyChanged("Lobbies");
         }
 
         private void CreateLobby(object parameter)
         {
-            cld = new CreateLobbyDialog
+            Guid userId = customPrincipal.Identity.Id;
+
+            if (!IsJoinedInALobby(userId))
             {
-                DataContext = new CreateLobbyViewModel()
-            };
+                CreateLobbyDialog cld = new CreateLobbyDialog
+                {
+                    DataContext = new CreateLobbyViewModel()
+                };
 
-            cld.Show();
-            Mediator.Subscribe("LobbyCreated", new Action<object>((x) => cld.Close()));
+                cld.Show();
+                //Mediator.Subscribe("LobbyCreated", new Action<object>((x) => {
 
+                //    JoinLobby(x);
+                //}));
 
+                Mediator.Subscribe("LobbyCreated", new Action<object>((x) =>
+                {
 
+                    App.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        cld.Close();
+                        JoinLobby(x);
+                    });
+                }));
+
+            }
+            else
+            {
+                MessageBox.Show("You already joined a lobby", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
+
 
         private void JoinLobby(object parameter)
         {
@@ -159,17 +218,17 @@ namespace DinnergeddonUI.ViewModels
             if (!IsJoinedInALobby(userId))
             {
                 _proxy.JoinLobby(userId, lobbyId);
-               // LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById(lobbyId);
+                // LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById(lobbyId);
                 //notify the LobbyViewModel to change its properties for the current lobby
-                 IsJoined = true;
-                JoinedLobby = _proxy.GetLobbyById(lobbyId);
-                Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies().ToList());
-
+                IsJoined = true;
+                // JoinedLobby = _proxy.GetLobbyById(lobbyId);
+                //  Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies().ToList());
+                _proxy.GetLobbyById(lobbyId);
                 Mediator.Notify("LobbyJoined", lobbyId);
 
                 //notify the mainWindowViewModel to change the viewmodel to the lobbyViewModel
                 Mediator.Notify("OpenLobby", lobbyId);
-               
+
                 //LobbyServiceReference.Lobby l = _proxy.GetLobbyById(lobbyId);
 
             }
@@ -185,14 +244,22 @@ namespace DinnergeddonUI.ViewModels
 
         private void OnJoinLobby(object s, bool result)
         {
-            Lobbies =  new ObservableCollection<LobbyServiceReference.Lobby> ( _proxy.GetLobbies().ToList());
+            _proxy.GetLobbies();
+
         }
 
+        private void OpenLobby(object parameter)
+        {
+            Guid lobbyId = (Guid)parameter;
+            Mediator.Notify("OpenLobby", lobbyId);
+
+        }
 
         private bool IsJoinedInALobby(Guid userId)
         {
-            Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies().ToList());
-            foreach (LobbyServiceReference.Lobby lobby in Lobbies)
+            _proxy.GetLobbies();
+            //Lobbies = new ObservableCollection<LobbyServiceReference.Lobby>(_proxy.GetLobbies().ToList());
+            foreach (DinnergeddonServiceReference.Lobby lobby in Lobbies)
             {
                 foreach (Account a in lobby.Players)
                 {

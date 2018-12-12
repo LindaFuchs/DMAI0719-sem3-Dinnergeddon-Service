@@ -7,7 +7,7 @@ using System.ServiceModel;
 namespace DinnergeddonService
 {
     [ServiceBehavior]
-    public class DinnergeddonService : IAccountService
+    public class DinnergeddonService : IAccountService, IHighscoreService
     {
         private readonly IAccountController accountController;
         private readonly ILobbyController lobbyController;
@@ -162,6 +162,11 @@ namespace DinnergeddonService
         public bool RemoveFromRole(Guid accountId, string roleName)
         {
             return accountController.RemoveFromRole(accountId, roleName);
+        }
+
+        public Lobby GetNewDummyLobby()
+        {
+            return new Lobby();
         }
     }
 }

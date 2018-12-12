@@ -1,4 +1,4 @@
-﻿using DinnergeddonUI.LobbyServiceReference;
+﻿using DinnergeddonUI.AccountServiceReference;
 using Microsoft.AspNet.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace DinnergeddonUI.Helpers
         {
             hubProxy.On<Lobby>("lobbyCreated", (lobby) => OnLobbyCreated(lobby));
             hubProxy.On<Lobby>("lobbyUpdated", (lobby) => OnLobbyUpdated(lobby));
-            hubProxy.On<Lobby>("lobbyDeleted", (lobby) => OnLobbyDeleted(lobby));
+            hubProxy.On<Guid>("lobbyDeleted", (lobbyId) => OnLobbyDeleted(lobbyId));
             hubProxy.On<bool>("joined", (joined) => OnLobbyJoined(joined));
             hubProxy.On<IEnumerable<Lobby>>("getLobbiesResponse", (lobbies) => OnGetLobbiesResponse(lobbies));
             hubProxy.On<Lobby>("getLobbyByIdResponse", (lobby) => OnGetLobbyByIdResponse(lobby));
@@ -49,7 +49,7 @@ namespace DinnergeddonUI.Helpers
 
         public void GetLobbies()
         {
-            hubProxy.Invoke("GetLobbies");
+            hubProxy.Invoke("GetLobbies").Wait();
         }
 
         public void GetLobbyById(Guid lobbyId)
@@ -63,7 +63,7 @@ namespace DinnergeddonUI.Helpers
 
         public event EventHandler<LobbyEventArgs> LobbyCreated;
         public event EventHandler<LobbyEventArgs> LobbyUpdated;
-        public event EventHandler<LobbyEventArgs> LobbyDeleted;
+        public event EventHandler<Guid> LobbyDeleted;
         public event EventHandler<bool> LobbyJoined;
         public event EventHandler<IEnumerable<Lobby>> GetLobbiesResponse;
         public event EventHandler<LobbyEventArgs> GetLobbyByIdResponse;
@@ -80,10 +80,10 @@ namespace DinnergeddonUI.Helpers
                 LobbyUpdated.Invoke(this, new LobbyEventArgs() { Lobby = updatedLobby });
         }
 
-        protected virtual void OnLobbyDeleted(Lobby deletedLobby)
+        protected virtual void OnLobbyDeleted(Guid lobbyId)
         {
             if (LobbyDeleted != null)
-                LobbyDeleted.Invoke(this, new LobbyEventArgs() { Lobby = deletedLobby });
+                LobbyDeleted.Invoke(this, lobbyId);
         }
 
         protected virtual void OnLobbyJoined(bool joined)

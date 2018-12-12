@@ -1,4 +1,4 @@
-﻿using DinnergeddonUI.LobbyServiceReference;
+﻿using DinnergeddonUI.AccountServiceReference;
 using System;
 
 namespace DinnergeddonUI.Helpers

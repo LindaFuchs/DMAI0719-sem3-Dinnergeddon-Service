@@ -59,9 +59,16 @@ namespace SignalR.Hubs
         }
         
         //TODO: Implement, and think about how to notify users for lobby deleted, lobby updated (get info from controller prolly)
-        public void LeaveLobby(Guid accountid, Guid lobbyid)
+        public void LeaveLobby(Guid accountId, Guid lobbyId)
         {
-            throw new NotImplementedException();
+            lobbyController.LeaveLobby(accountId, lobbyId);
+
+            Lobby lobby = lobbyController.GetLobbyById(lobbyId);
+
+            if (lobby == null)
+                Clients.All.lobbyDeleted(lobbyId);
+            else
+                Clients.All.lobbyUpdated(lobby);
         }
         
         public void GetLobbyById(Guid lobbyId)

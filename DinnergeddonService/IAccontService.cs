@@ -107,5 +107,8 @@ namespace DinnergeddonService
 
         [OperationContract]
         bool RemoveFromRole(Guid accountId, string roleName);
+
+        [OperationContract]
+        Lobby GetNewDummyLobby();
     }
 }

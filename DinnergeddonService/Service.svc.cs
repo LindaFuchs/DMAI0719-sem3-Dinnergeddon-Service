@@ -163,5 +163,10 @@ namespace DinnergeddonService
         {
             return accountController.RemoveFromRole(accountId, roleName);
         }
+
+        public Lobby GetNewDummyLobby()
+        {
+            return new Lobby();
+        }
     }
 }

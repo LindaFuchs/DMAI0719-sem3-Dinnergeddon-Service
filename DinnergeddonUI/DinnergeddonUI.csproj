@@ -69,11 +69,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\LobbyServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\CustomConverter.cs" />
     <Compile Include="Helpers\EventArgs.cs" />
     <Compile Include="Helpers\EventRaiser.cs" />
@@ -174,9 +169,6 @@
     <None Include="Connected Services\AccountServiceReference\DinnergeddonUI.AccountServiceReference.Account.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\AccountServiceReference\DinnergeddonUI.AccountServiceReference.Lobby.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\AccountServiceReference\Service.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -187,25 +179,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\AccountServiceReference\Service3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LobbyServiceReference\DinnergeddonService.wsdl" />
-    <None Include="Connected Services\LobbyServiceReference\DinnergeddonUI.LobbyServiceReference.Account.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\LobbyServiceReference\DinnergeddonUI.LobbyServiceReference.Lobby.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\LobbyServiceReference\Service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LobbyServiceReference\Service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LobbyServiceReference\Service2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LobbyServiceReference\Service3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -225,22 +198,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AccountServiceReference\" />
-    <WCFMetadataStorage Include="Connected Services\LobbyServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LobbyServiceReference\Service.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LobbyServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LobbyServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LobbyServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\AccountServiceReference\Service.disco" />

@@ -1,4 +1,4 @@
-﻿using DinnergeddonUI.LobbyServiceReference;
+﻿using DinnergeddonUI.DinnergeddonServiceReference;
 using Microsoft.AspNet.SignalR.Client;
 using System;
 using System.Collections.Generic;

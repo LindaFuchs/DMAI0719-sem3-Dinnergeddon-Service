@@ -457,4 +457,79 @@ namespace DinnergeddonUI.DinnergeddonServiceReference {
             return base.Channel.GetNewDummyLobbyAsync();
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DinnergeddonServiceReference.IHighscoreService")]
+    public interface IHighscoreService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetHighscore", ReplyAction="http://tempuri.org/IHighscoreService/GetHighscoreResponse")]
+        int GetHighscore(System.Guid accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetHighscore", ReplyAction="http://tempuri.org/IHighscoreService/GetHighscoreResponse")]
+        System.Threading.Tasks.Task<int> GetHighscoreAsync(System.Guid accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetHighscores", ReplyAction="http://tempuri.org/IHighscoreService/GetHighscoresResponse")]
+        System.Collections.Generic.Dictionary<System.Guid, int> GetHighscores();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetHighscores", ReplyAction="http://tempuri.org/IHighscoreService/GetHighscoresResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.Guid, int>> GetHighscoresAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetTopNHighscores", ReplyAction="http://tempuri.org/IHighscoreService/GetTopNHighscoresResponse")]
+        System.Collections.Generic.Dictionary<System.Guid, int> GetTopNHighscores(int n);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHighscoreService/GetTopNHighscores", ReplyAction="http://tempuri.org/IHighscoreService/GetTopNHighscoresResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.Guid, int>> GetTopNHighscoresAsync(int n);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IHighscoreServiceChannel : DinnergeddonUI.DinnergeddonServiceReference.IHighscoreService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class HighscoreServiceClient : System.ServiceModel.ClientBase<DinnergeddonUI.DinnergeddonServiceReference.IHighscoreService>, DinnergeddonUI.DinnergeddonServiceReference.IHighscoreService {
+        
+        public HighscoreServiceClient() {
+        }
+        
+        public HighscoreServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public HighscoreServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public HighscoreServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public HighscoreServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public int GetHighscore(System.Guid accountId) {
+            return base.Channel.GetHighscore(accountId);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetHighscoreAsync(System.Guid accountId) {
+            return base.Channel.GetHighscoreAsync(accountId);
+        }
+        
+        public System.Collections.Generic.Dictionary<System.Guid, int> GetHighscores() {
+            return base.Channel.GetHighscores();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.Guid, int>> GetHighscoresAsync() {
+            return base.Channel.GetHighscoresAsync();
+        }
+        
+        public System.Collections.Generic.Dictionary<System.Guid, int> GetTopNHighscores(int n) {
+            return base.Channel.GetTopNHighscores(n);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.Guid, int>> GetTopNHighscoresAsync(int n) {
+            return base.Channel.GetTopNHighscoresAsync(n);
+        }
+    }
 }

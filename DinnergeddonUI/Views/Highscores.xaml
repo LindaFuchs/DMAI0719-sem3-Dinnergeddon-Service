@@ -9,26 +9,16 @@
 
     <StackPanel Orientation="Horizontal">
         <ListView ItemsSource="{Binding Highscores}">
-            <ListView.Resources>
-                <GridView x:Key="name">
-                    <GridViewColumn Header="Player's name">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Path=Key, Mode=OneWay}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Key, Mode=OneWay}"
+                                    Header="Player's name"
+                                    Width="600" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Value, Mode=OneWay}"
+                                    Header="Score"
+                                    Width="150" />
                 </GridView>
-                <GridView x:Key="score">
-                    <GridViewColumn Header="Player's name">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Path=Value, Mode=OneWay}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.Resources>
+            </ListView.View>
         </ListView>
     </StackPanel>
 </UserControl>

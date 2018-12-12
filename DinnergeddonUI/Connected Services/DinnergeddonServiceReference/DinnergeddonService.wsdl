@@ -98,6 +98,24 @@
   <wsdl:message name="IAccountService_GetNewDummyLobby_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNewDummyLobbyResponse" />
   </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetHighscore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHighscore" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetHighscore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHighscoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetHighscores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHighscores" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetHighscores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHighscoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetTopNHighscores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopNHighscores" />
+  </wsdl:message>
+  <wsdl:message name="IHighscoreService_GetTopNHighscores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopNHighscoresResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAccountService">
     <wsdl:operation name="FindById">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/FindById" message="tns:IAccountService_FindById_InputMessage" />
@@ -158,6 +176,20 @@
     <wsdl:operation name="GetNewDummyLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountService/GetNewDummyLobby" message="tns:IAccountService_GetNewDummyLobby_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountService/GetNewDummyLobbyResponse" message="tns:IAccountService_GetNewDummyLobby_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IHighscoreService">
+    <wsdl:operation name="GetHighscore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHighscoreService/GetHighscore" message="tns:IHighscoreService_GetHighscore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHighscoreService/GetHighscoreResponse" message="tns:IHighscoreService_GetHighscore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHighscores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHighscoreService/GetHighscores" message="tns:IHighscoreService_GetHighscores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHighscoreService/GetHighscoresResponse" message="tns:IHighscoreService_GetHighscores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTopNHighscores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHighscoreService/GetTopNHighscores" message="tns:IHighscoreService_GetTopNHighscores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHighscoreService/GetTopNHighscoresResponse" message="tns:IHighscoreService_GetTopNHighscores_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IAccountService" type="tns:IAccountService">
@@ -298,8 +330,41 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IHighscoreService" type="tns:IHighscoreService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetHighscore">
+      <soap:operation soapAction="http://tempuri.org/IHighscoreService/GetHighscore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHighscores">
+      <soap:operation soapAction="http://tempuri.org/IHighscoreService/GetHighscores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTopNHighscores">
+      <soap:operation soapAction="http://tempuri.org/IHighscoreService/GetTopNHighscores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="DinnergeddonService">
     <wsdl:port name="BasicHttpBinding_IAccountService" binding="tns:BasicHttpBinding_IAccountService">
+      <soap:address location="http://localhost:52999/Service.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IHighscoreService" binding="tns:BasicHttpBinding_IHighscoreService">
       <soap:address location="http://localhost:52999/Service.svc" />
     </wsdl:port>
   </wsdl:service>

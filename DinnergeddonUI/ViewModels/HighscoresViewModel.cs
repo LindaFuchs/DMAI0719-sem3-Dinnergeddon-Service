@@ -1,22 +1,25 @@
 ﻿using System.Collections.Generic;
+using DinnergeddonUI.DinnergeddonServiceReference;
 
 namespace DinnergeddonUI.ViewModels
 {
     class HighscoresViewModel : BaseViewModel, IPageViewModel
     {
         private IDictionary<string, int> _highscores;
+        private readonly HighscoreServiceClient _highscoreProxy;
+        private readonly AccountServiceClient _accountProxy;
 
         public HighscoresViewModel()
         {
+            _highscoreProxy = new HighscoreServiceClient();
+            _accountProxy = new AccountServiceClient();
             _highscores = new Dictionary<string, int>();
-            _highscores.Add("Nikola", 100);
-            _highscores.Add("Alex", 200);
-            _highscores.Add("Chicken", 300);
-            _highscores.Add("Steffy", 400);
-            _highscores.Add("Stiffy", 500);
-            _highscores.Add("Linda", 600);
-        }
 
+            foreach (var kvp in _highscoreProxy.GetHighscores())
+            {
+                _highscores.Add(_accountProxy.FindById(kvp.Key).Username, kvp.Value);
+            }
+        }
 
         public IDictionary<string, int> Highscores
         {

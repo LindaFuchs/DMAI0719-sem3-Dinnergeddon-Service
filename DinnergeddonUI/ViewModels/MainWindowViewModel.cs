@@ -128,7 +128,7 @@ namespace DinnergeddonUI.ViewModels
 
         private void OnGoToLobbies(object obj)
         {
-            ChangeViewModel(PageViewModels[0]);
+            ChangeViewModel(PageViewModels[1]);
         }
 
         private void OnGo2Screen(object obj)
@@ -148,6 +148,7 @@ namespace DinnergeddonUI.ViewModels
         {
             IsAuthenticated = false;
             CurrentPageViewModel = PageViewModels[0];
+            Mediator.Notify("LeaveLobbyOnExit", "");
         }
 
         private void LobbyJoined(object parameter)
@@ -174,6 +175,7 @@ namespace DinnergeddonUI.ViewModels
             Mediator.Subscribe("Login", LoginSuccessful);
             Mediator.Subscribe("Logout", Logout);
             Mediator.Subscribe("OpenLobby", LobbyJoined);
+
 
 
         }

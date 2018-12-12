@@ -17,9 +17,11 @@ namespace DinnergeddonUI.ViewModels
     {
         private static Lobby _lobby;
         private string _lobbyName;
-        private IEnumerable<Account> _joinedPlayers;
+        private ObservableCollection<Account> _joinedPlayers;
         private ICommand _leaveLobby;
         private LobbyProxy _proxy;
+        private CustomPrincipal customPrincipal;
+
 
 
 
@@ -30,34 +32,69 @@ namespace DinnergeddonUI.ViewModels
             Mediator.Subscribe("LobbyJoined", LobbyJoined);
             _proxy = new LobbyProxy();
             _proxy.GetLobbyByIdResponse += OnLobbyRecieved;
+            _proxy.LobbyUpdated += OnLobbyUpdated;
+            _proxy.LobbyDeleted += OnLobbyDeleted;
+            customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+            Mediator.Subscribe("LeaveLobbyOnExit", LeaveLobby);
+
+
             //_joinLobbyCommand = new DelegateCommand(JoinLobby, CanJoin);
+
+        }
+
+        private void OnLobbyUpdated(object sender, LobbyEventArgs args)
+        {
+            _proxy.GetLobbyById(_lobby.Id);
+        }
+
+        private void OnLobbyDeleted(object sender, Guid lobbyId)
+        {
 
         }
 
         private void LobbyJoined(object parameter)
         {
             _proxy.GetLobbyById((Guid)parameter);
-          //  LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById((Guid)parameter);
+            //  LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById((Guid)parameter);
 
         }
 
+        public ObservableCollection<Account> JoinedPlayers
+        {
+            get
+            {
+                return _joinedPlayers;
+            }
+            set
+            {
+                _joinedPlayers = value;
+                OnPropertyChanged("JoinedPlayers");
+            }
+        }
         public ICommand LeaveLobbyCommand
         {
             get
             {
                 if (_leaveLobby == null)
                 {
-                    _leaveLobby = new RelayCommand(LeaveLobby);
+                    _leaveLobby = new RelayCommand((x) =>
+                    {
+                        LeaveLobby(x);
+                        Mediator.Notify("GoToLobbies", "");
+                    });
+
                 }
                 return _leaveLobby;
             }
         }
 
 
-      public string LobbyName
+        public string LobbyName
         {
             get { return _lobbyName; }
-            set { _lobbyName = value;
+            set
+            {
+                _lobbyName = value;
                 OnPropertyChanged("LobbyName");
             }
         }
@@ -67,41 +104,11 @@ namespace DinnergeddonUI.ViewModels
         //    set { _joinedPlayers = value; OnPropertyChanged("JoinedUsers"); }
         //}
 
-        private bool CanLogout(object parameter)
-        {
-            return IsAuthenticated;
-        }
 
-        private bool CanJoin(object parameter)
-        {
-            //implement check
-            return true;
-        }
 
-        private bool CanLeave(object parameter)
-        {
-            //implement check
-            return true;
-        }
 
-        public string AuthenticatedUser
-        {
-            get
-            {
-                if (IsAuthenticated)
-                    return string.Format("Signed in as {0}. {1}",
-                          Thread.CurrentPrincipal.Identity.Name,
-                          Thread.CurrentPrincipal.IsInRole("admin") ? "You are an administrator!"
-                              : "You are NOT a member of the administrators group.");
 
-                return "Not authenticated!";
-            }
-        }
 
-        public bool IsAuthenticated
-        {
-            get { return Thread.CurrentPrincipal.Identity.IsAuthenticated; }
-        }
 
 
 
@@ -111,30 +118,36 @@ namespace DinnergeddonUI.ViewModels
         //    CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
         //    var userId = customPrincipal.Identity.Id;
         //    _proxy.JoinLobby(userId, lobbyId);
-           
+
         //   Window lobby = new LobbyWindow(lobbyId);
         //    lobby.Show();
-                 
+
         //}
 
         private void LeaveLobby(object parameter)
         {
-            
+            Guid userId = customPrincipal.Identity.Id;
+
+            _proxy.LeaveLobby(userId, _lobby.Id);
+
+
             //Window lb = parameter as Window;
             //CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
             //var userId = customPrincipal.Identity.Id;
             //_proxy.LeaveLobby(userId, _lobby.Id);
 
             //lb.Close();
-            
+
         }
 
         private void OnLobbyRecieved(object sender, LobbyEventArgs args)
         {
             _lobby = args.Lobby;
             LobbyName = _lobby.Name;
+
+            JoinedPlayers = new ObservableCollection<Account>(_lobby.Players.ToList());
         }
-        
+
 
     }
 }

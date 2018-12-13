@@ -11,7 +11,7 @@ namespace SignalR
     {
         static void Main(string[] args)
         {
-            string url = "http://localhost:8080";
+            string url = "http://10.31.134.203:8080";
 
             using (WebApp.Start(url))
             {

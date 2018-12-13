@@ -2,6 +2,7 @@
 using Microsoft.AspNet.SignalR;
 using Model;
 using System;
+using System.Collections.Generic;
 
 namespace SignalR.Hubs
 {
@@ -11,9 +12,6 @@ namespace SignalR.Hubs
     /// lobbyCreated - when a new lobby is created, that lobby is passed to the clients
     /// lobbyUpdated - when a lobby is updated, that lobby is passed to the clients
     /// lobbyDeleted - when a lobby is removed, that lobby is passed to the clients for deletion
-    /// joined       - when a client joins a lobby, whether or not that client has joined
-    /// getLobbiesResponse - when a client asks for all the lobbies
-    /// getLobbyResponse - when a client asks for a specific lobby info
     /// ###Event names###
     /// 
     /// </summary>
@@ -37,12 +35,12 @@ namespace SignalR.Hubs
             Clients.All.lobbyCreated(lobby);
         }
         
-        public void GetLobbies()
+        public IEnumerable<Lobby> GetLobbies()
         {
-            Clients.Caller.getLobbiesResponse(lobbyController.GetLobbies());
+            return lobbyController.GetLobbies();
         }
 
-        public void JoinLobby(Guid accountId, Guid lobbyId, string password)
+        public Lobby JoinLobby(Guid accountId, Guid lobbyId, string password)
         {
             bool success = false;
 
@@ -51,14 +49,16 @@ namespace SignalR.Hubs
             else
                 success = lobbyController.JoinLobby(accountId, lobbyId, password);
 
-            Clients.Caller.joined(success);
-
-            // If the caller has joined the lobby, update all other clients
             if (success)
+            {
                 Clients.All.lobbyUpdated(lobbyController.GetLobbyById(lobbyId));
+                return lobbyController.GetLobbyById(lobbyId);
+            } else
+            {
+                return null;
+            }
         }
         
-        //TODO: Implement, and think about how to notify users for lobby deleted, lobby updated (get info from controller prolly)
         public void LeaveLobby(Guid accountId, Guid lobbyId)
         {
             lobbyController.LeaveLobby(accountId, lobbyId);
@@ -71,9 +71,9 @@ namespace SignalR.Hubs
                 Clients.All.lobbyUpdated(lobby);
         }
         
-        public void GetLobbyById(Guid lobbyId)
+        public Lobby GetLobbyById(Guid lobbyId)
         {
-            Clients.Caller.getLobbyByIdResponse(lobbyController.GetLobbyById(lobbyId));
+            return lobbyController.GetLobbyById(lobbyId);
         }
     }
 }

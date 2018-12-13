@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:DinnergeddonUI.Views"
         xmlns:helpers="clr-namespace:DinnergeddonUI.Helpers"
         mc:Ignorable="d"
-        Title="CreateLobbyDialog" Height="546" Width="800"
+        Title="CreateLobbyDialog" Height="500" Width="400"
         ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Background="{DynamicResource thisBackgroundColor}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
@@ -38,7 +39,7 @@
             </Button>
         </WrapPanel>
 
-        <StackPanel  Margin="50,25,50,50">
+        <StackPanel  Margin="50,25,50,5">
 
             <Label Content="Create a lobby" HorizontalAlignment="Center" FontSize="23" Margin="0,0,0,40"></Label>
 
@@ -176,6 +177,7 @@
                 </Grid>
 
             </Border>
+            <TextBlock Foreground="{StaticResource IncorrectColor}" Text="{Binding ErrorMessage}" ></TextBlock>
         </StackPanel>
 
     </DockPanel>

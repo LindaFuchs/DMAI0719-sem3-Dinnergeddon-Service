@@ -176,6 +176,7 @@ namespace DinnergeddonUI.ViewModels
 
         public LoginViewModel()
         {
+
             _accountProxy = new AccountServiceClient();
 
 

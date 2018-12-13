@@ -2,6 +2,7 @@
 using Microsoft.AspNet.SignalR.Client;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DinnergeddonUI.Helpers
 {
@@ -27,14 +28,21 @@ namespace DinnergeddonUI.Helpers
             hubProxy.On<Guid>("lobbyDeleted", (lobbyId) => OnLobbyDeleted(lobbyId));
             hubProxy.On<bool>("joined", (joined) => OnLobbyJoined(joined));
             hubProxy.On<IEnumerable<Lobby>>("getLobbiesResponse", (lobbies) => OnGetLobbiesResponse(lobbies));
-            hubProxy.On<Lobby>("getLobbyByIdResponse", (lobby) => OnGetLobbyByIdResponse(lobby));
+            hubProxy.On<Lobby>("getLobbyByIdResponse", (lobby) => {
+                Console.WriteLine("GetLobbyByIdResponse raised");
+                OnGetLobbyByIdResponse(lobby);
+            });
         }
 
         #region WS Callers
 
+        public void CreateLobby(string lobbyName, int playerLimit, string password)
+        {
+            hubProxy.Invoke("CreateLobby", new object[] { lobbyName, playerLimit, password });
+        }
         public void CreateLobby(string lobbyName, int playerLimit)
         {
-            hubProxy.Invoke("CreateLobby", new object[] { lobbyName, playerLimit, "" });
+            CreateLobby(lobbyName, playerLimit, "");
         }
 
         public void JoinLobby(Guid accountId, Guid lobbyId, string password)
@@ -49,12 +57,17 @@ namespace DinnergeddonUI.Helpers
 
         public void GetLobbies()
         {
-            hubProxy.Invoke("GetLobbies").Wait();
+            hubProxy.Invoke("GetLobbies");
         }
 
         public void GetLobbyById(Guid lobbyId)
         {
-            hubProxy.Invoke<string>("GetLobbyById", new object[] { lobbyId });
+             hubProxy.Invoke("GetLobbyById", new object[] { lobbyId });
+        }
+
+        public void LeaveLobby(Guid accountId, Guid lobbyId)
+        {
+            hubProxy.Invoke("LeaveLobby", new object[] { accountId, lobbyId });
         }
 
         #endregion

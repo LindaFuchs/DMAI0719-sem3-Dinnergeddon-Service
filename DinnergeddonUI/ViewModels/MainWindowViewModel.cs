@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace DinnergeddonUI.ViewModels
 {
@@ -13,6 +15,16 @@ namespace DinnergeddonUI.ViewModels
     {
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
+
+
+        private ICommand _goToLobbies;
+        private ICommand _logout;
+        private ICommand _goToProfile;
+        private ICommand _goToHighscores;
+
+        private bool _isAuthenticated = false;
+
+
 
         public string Username
         {
@@ -38,7 +50,6 @@ namespace DinnergeddonUI.ViewModels
                 return _pageViewModels;
             }
         }
-
         public IPageViewModel CurrentPageViewModel
         {
             get
@@ -51,10 +62,7 @@ namespace DinnergeddonUI.ViewModels
                 OnPropertyChanged("CurrentPageViewModel");
             }
         }
-        private ICommand _goToLobbies;
-        private ICommand _logout;
-        private ICommand _goToProfile;
-        private bool _isAuthenticated = false;
+
 
         public ICommand GoToLobbies
         {
@@ -66,14 +74,23 @@ namespace DinnergeddonUI.ViewModels
                 }));
             }
         }
-
         public ICommand GoToProfile
         {
             get
             {
                 return _goToProfile ?? (_goToProfile = new RelayCommand(x =>
                 {
-                    Mediator.Notify("GoToProfile", "");
+                    CurrentPageViewModel = PageViewModels[4];
+                }));
+            }
+        }
+        public ICommand GoToHighscores
+        {
+            get
+            {
+                return _goToHighscores ?? (_goToHighscores = new RelayCommand(x =>
+                {
+                    CurrentPageViewModel = PageViewModels[3];
                 }));
             }
         }
@@ -87,7 +104,6 @@ namespace DinnergeddonUI.ViewModels
                 }));
             }
         }
-
         public bool IsAuthenticated
         {
             get { return _isAuthenticated; }
@@ -115,7 +131,7 @@ namespace DinnergeddonUI.ViewModels
 
         private void OnGoToLobbies(object obj)
         {
-            ChangeViewModel(PageViewModels[0]);
+            ChangeViewModel(PageViewModels[1]);
         }
 
         private void OnGo2Screen(object obj)
@@ -135,6 +151,7 @@ namespace DinnergeddonUI.ViewModels
         {
             IsAuthenticated = false;
             CurrentPageViewModel = PageViewModels[0];
+            Mediator.Notify("LeaveLobbyOnExit", "");
         }
 
         private void LobbyJoined(object parameter)
@@ -145,11 +162,15 @@ namespace DinnergeddonUI.ViewModels
 
         public MainWindowViewModel()
         {
+
+
             // Add available pages and set page
             PageViewModels.Add(new LoginViewModel());
             PageViewModels.Add(new LobbiesViewModel());
             //PageViewModels.Add(new LobbiesViewModel());
             PageViewModels.Add(new LobbyViewModel());
+            PageViewModels.Add(new HighscoresViewModel());
+            PageViewModels.Add(new ProfileViewModel());
             //PageViewModels.Add(new ProfileViewModel());
 
             CurrentPageViewModel = PageViewModels[0];
@@ -160,6 +181,7 @@ namespace DinnergeddonUI.ViewModels
             Mediator.Subscribe("Login", LoginSuccessful);
             Mediator.Subscribe("Logout", Logout);
             Mediator.Subscribe("OpenLobby", LobbyJoined);
+
 
 
         }

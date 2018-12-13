@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using DinnergeddonUI.Helpers;
+using DinnergeddonUI.DinnergeddonServiceReference;
 
 namespace DinnergeddonUI.ViewModels
 {
@@ -103,13 +104,14 @@ namespace DinnergeddonUI.ViewModels
 
         private void OnLobbyCreated(object sender, LobbyEventArgs args)
         {
-            LobbyServiceReference.Lobby  lobby = args.Lobby;
+            Lobby lobby = args.Lobby;
 
-            Mediator.Notify("LobbyCreated",lobby.Id);
+            Mediator.Notify("LobbyCreated", lobby.Id);
 
         }
         private void CreateLobby(object parameter)
         {
+            ErrorMessage = "";
             var passwordBoxes = parameter as List<object>;
             PasswordBox pb = passwordBoxes.ElementAt(0) as PasswordBox;
             PasswordBox pb_conf = passwordBoxes.ElementAt(1) as PasswordBox;
@@ -122,17 +124,32 @@ namespace DinnergeddonUI.ViewModels
 
 
 
-
+            //checking the name of the lobby
             if (ln != null && ln.Length > 2 && nr > 1)
             {
+                //check if the setting private box is checked
                 if (IsPrivate)
                 {
+                    if (pw.Length < 3 || pw != pw_conf)
+                    {
+                        ErrorMessage = "Must be at least 3 characters.";
+                    }
+                    else
+                    {
 
+                        _proxy.CreateLobby(ln, nr, pw);
+
+
+
+
+                    }
                 }
+                //create public lobby
                 else
                 {
+                    _proxy.CreateLobby(ln, nr);
+
                 }
-                _proxy.CreateLobby(ln, nr);
 
 
 
@@ -140,13 +157,15 @@ namespace DinnergeddonUI.ViewModels
 
 
             }
+            //not valid name
             else
             {
                 IsValid = false;
             }
 
         }
-
-
     }
+
+
 }
+

@@ -3,6 +3,7 @@ using Microsoft.AspNet.SignalR;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SignalR.Hubs
 {
@@ -35,13 +36,24 @@ namespace SignalR.Hubs
             Clients.All.lobbyCreated(lobby);
         }
         
-        public IEnumerable<Lobby> GetLobbies()
-        {
-            return lobbyController.GetLobbies();
-        }
+        //public Task<IEnumerable<Lobby>> GetLobbies()
+        //{
+        //    Console.WriteLine("invoked the getLobbies");
+        //    return Task.Factory.StartNew<IEnumerable<Lobby>>(() => lobbyController.GetLobbies());
 
-        public Lobby JoinLobby(Guid accountId, Guid lobbyId, string password)
+        //}
+
+        public async Task GetLobbies()
         {
+            IEnumerable<Lobby> lobbies = lobbyController.GetLobbies();
+            await Clients.Caller.getLobbiesHappened(lobbies);
+        }
+            
+
+        public Task<Lobby> JoinLobby(Guid accountId, Guid lobbyId, string password)
+        {
+            Console.WriteLine("invoked the joinlobby");
+
             bool success = false;
 
             if (password == string.Empty || password == null)
@@ -51,8 +63,12 @@ namespace SignalR.Hubs
 
             if (success)
             {
+                Console.WriteLine("success");
+
                 Clients.All.lobbyUpdated(lobbyController.GetLobbyById(lobbyId));
-                return lobbyController.GetLobbyById(lobbyId);
+                Console.WriteLine("after updating");
+
+                return Task.Factory.StartNew<Lobby>(() => lobbyController.GetLobbyById(lobbyId));
             } else
             {
                 return null;
@@ -71,9 +87,11 @@ namespace SignalR.Hubs
                 Clients.All.lobbyUpdated(lobby);
         }
         
-        public Lobby GetLobbyById(Guid lobbyId)
+        public Task<Lobby> GetLobbyById(Guid lobbyId)
         {
-            return lobbyController.GetLobbyById(lobbyId);
+            Console.WriteLine("invoked the getLobbasdasdyById");
+
+            return Task.Factory.StartNew<Lobby>(() => lobbyController.GetLobbyById(lobbyId));
         }
     }
 }

@@ -35,7 +35,7 @@ namespace DinnergeddonUI.ViewModels
         {
             get
             {
-                if(_connectCommand == null)
+                if (_connectCommand == null)
                 {
                     _connectCommand = new RelayCommand(Connect);
                 }
@@ -46,7 +46,7 @@ namespace DinnergeddonUI.ViewModels
 
         public InputPasswordViewModel()
         {
-          customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+            customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
 
             _proxy = new LobbyProxy();
             //_proxy.LobbyJoined += OnJoinLobby;
@@ -54,15 +54,12 @@ namespace DinnergeddonUI.ViewModels
             //Mediator.Subscribe("SendLobbyId", SetLobby);
         }
 
-        private void SetLobby(object parameter)
+        private  void SetLobby(object parameter)
         {
-            _proxy.GetLobbyById((Guid)parameter);
+            _lobby = _proxy.GetLobbyById((Guid)parameter);
         }
 
-        private void OnLobbyRecieved(object sender, LobbyEventArgs args)
-        {
-            _lobby = args.Lobby;
-        }
+
 
         private void OnJoinLobby(object sender, bool success)
         {
@@ -76,8 +73,8 @@ namespace DinnergeddonUI.ViewModels
             PasswordBox pb = parameter as PasswordBox;
             string password = pb.Password;
 
-           // _proxy.JoinLobby(customPrincipal.Identity.Id, _lobby.Id, password);
-            Mediator.Notify("PassWordCorrect", password);
+            // _proxy.JoinLobby(customPrincipal.Identity.Id, _lobby.Id, password);
+            Mediator.Notify("PassWordCorrect",password);
 
 
         }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Security.Principal;
 
-namespace DinnergeddonUI
+namespace DinnergeddonUI.Helpers
+
 {
     public class CustomIdentity : IIdentity
     {

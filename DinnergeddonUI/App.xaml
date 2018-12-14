@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:local="clr-namespace:DinnergeddonUI"
              xmlns:views="clr-namespace:DinnergeddonUI.Views"
-             xmlns:viewmodels ="clr-namespace:DinnergeddonUI.ViewModels">
+             xmlns:viewmodels ="clr-namespace:DinnergeddonUI.ViewModels"
+             xmlns:helpers="clr-namespace:DinnergeddonUI.Helpers">
     
     <Application.Resources>
-        <ResourceDictionary Source="ResourceDictionary.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="helpers/ResourceDictionary.xaml"></ResourceDictionary>
     </Application.Resources>
 </Application>

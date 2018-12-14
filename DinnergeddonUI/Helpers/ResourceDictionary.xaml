@@ -3,7 +3,7 @@
                     xmlns:vm ="clr-namespace:DinnergeddonUI.ViewModels"
                     xmlns:helpers ="clr-namespace:DinnergeddonUI.Helpers"
                     xmlns:v="clr-namespace:DinnergeddonUI.Views"
-                    xmlns:local="clr-namespace:DinnergeddonUI">
+                    xmlns:local="clr-namespace:DinnergeddonUI.Helpers">
 
     <SolidColorBrush x:Key="InputFormColor">#858585</SolidColorBrush>
     <SolidColorBrush x:Key="ButtonColor">#703913</SolidColorBrush>

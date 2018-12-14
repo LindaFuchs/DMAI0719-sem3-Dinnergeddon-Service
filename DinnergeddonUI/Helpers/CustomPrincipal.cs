@@ -5,7 +5,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DinnergeddonUI
+namespace DinnergeddonUI.Helpers
 {
     public class CustomPrincipal : IPrincipal
     {

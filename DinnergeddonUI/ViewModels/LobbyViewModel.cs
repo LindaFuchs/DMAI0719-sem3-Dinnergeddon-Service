@@ -31,7 +31,6 @@ namespace DinnergeddonUI.ViewModels
         {
             Mediator.Subscribe("LobbyJoined", LobbyJoined);
             _proxy = new LobbyProxy();
-            _proxy.GetLobbyByIdResponse += OnLobbyRecieved;
             _proxy.LobbyUpdated += OnLobbyUpdated;
             _proxy.LobbyDeleted += OnLobbyDeleted;
             customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
@@ -45,7 +44,9 @@ namespace DinnergeddonUI.ViewModels
         private void OnLobbyUpdated(object sender, LobbyEventArgs args)
         {
             _lobby = args.Lobby;
-            _proxy.GetLobbyById(_lobby.Id);
+            LobbyName = _lobby.Name;
+            JoinedPlayers = new ObservableCollection<Account>(_lobby.Players.ToList());
+
         }
 
         private void OnLobbyDeleted(object sender, Guid lobbyId)
@@ -53,9 +54,14 @@ namespace DinnergeddonUI.ViewModels
 
         }
 
-        private void LobbyJoined(object parameter)
+        private   void LobbyJoined(object parameter)
         {
-            _proxy.GetLobbyById((Guid)parameter);
+            Guid lobbyId = (Guid)parameter;
+            DinnergeddonServiceReference.Lobby lobby =  _proxy.GetLobbyById(lobbyId);
+            _lobby = lobby;
+            LobbyName = _lobby.Name;
+
+            JoinedPlayers = new ObservableCollection<Account>(_lobby.Players.ToList());
             //  LobbyServiceReference.Lobby joinedLobby = _proxy.GetLobbyById((Guid)parameter);
 
         }
@@ -145,13 +151,6 @@ namespace DinnergeddonUI.ViewModels
 
         }
 
-        private void OnLobbyRecieved(object sender, LobbyEventArgs args)
-        {
-            _lobby = args.Lobby;
-            LobbyName = _lobby.Name;
-
-            JoinedPlayers = new ObservableCollection<Account>(_lobby.Players.ToList());
-        }
 
 
     }

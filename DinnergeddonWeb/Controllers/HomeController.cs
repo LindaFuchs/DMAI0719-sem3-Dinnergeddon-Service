@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -68,8 +69,7 @@ namespace DinnergeddonWeb.Controllers
         public FileResult Download()
         {
             //The path to the file to download.
-            //TODO: Change this so it isn't a hard path and to the .exe when it's made.
-            String filePath = @"D:\anoobis\CODE N SHIT\3rd Semester Project\Dinnergeddon\DinnergeddonWeb\App_Data\Dinnergeddon Installer.exe";
+            String filePath = Path.Combine(Server.MapPath("~/App_Data"), "Dinnergeddon_Installer.exe");
             //Converts the file content into an array of bytes.
             byte[] fileContent = System.IO.File.ReadAllBytes(filePath);
             

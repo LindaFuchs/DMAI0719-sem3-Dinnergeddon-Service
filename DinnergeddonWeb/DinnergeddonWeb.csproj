@@ -223,7 +223,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Dinnergeddon Installer.exe" />
+    <Content Include="App_Data\Dinnergeddon_Installer.exe" />
     <Content Include="Connected Services\AccountServiceReference\DinnergeddonWeb.AccountServiceReference.Account.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
